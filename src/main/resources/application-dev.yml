@@ -1,0 +1,21 @@
+spring:
+  thymeleaf:
+      cache: false
+      mode: HTML5
+      encoding: UTF-8
+      servlet:
+        content-type: text/html
+      prefix: classpath:/templates/
+      suffix: .html
+  datasource:
+    druid:
+      url: jdbc:mysql://39.106.116.74:3306/Purchase?autoReconnect=true&useUnicode=true&characterEncoding=utf8
+      username: root
+      password: wyxnb
+      driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+    type-aliases-package: net.wlgzs.purchase.entity
+logging:
+  config: classpath:logback-spring.xml
+server:
+  port: 10621
