@@ -50,7 +50,7 @@ public class CodeGenerator {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setUrl("jdbc:mysql://39.106.116.74:3306/Purchase?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("wyxnb");
         mpg.setDataSource(dsc);
@@ -108,7 +108,7 @@ public class CodeGenerator {
 //        strategy.setSuperEntityClass("com.baomidou.ant.common.BaseEntity");
 //        strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
-        strategy.setSuperControllerClass("org.wlgzs.purchase.base.BaseController");
+        strategy.setSuperControllerClass("net.wlgzs.purchase.base.BaseController");
         strategy.setInclude(scanner("表名"));
         strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
