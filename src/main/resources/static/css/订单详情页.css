@@ -1,0 +1,107 @@
+.management {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.management .content li {
+    height: 25px;
+}
+
+.classifys {
+    width: 1200px;
+}
+
+.classifys ul {
+    width: 1200px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    border-bottom: 5px solid #DF0024;
+}
+
+.classifys li {
+    font-size: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    list-style: none;
+    width: 25%;
+    float: left;
+    text-align: center;
+}
+
+.content {
+    width: 1200px;
+}
+
+.classify {
+    width: 25%;
+    display: inline-block;
+    margin-left: -5px;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 500px;
+}
+
+.order {
+    margin-left: 0px;
+}
+
+.classify ul {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    width: 40%;
+}
+
+.message {
+    width: 60%;
+}
+
+.classify li {
+    list-style: none;
+    text-align: left;
+    font-size: 12px;
+}
+
+.tole_nav {
+    overflow: hidden;
+    padding: 20px;
+}
+
+.tole {
+    display: inline;
+    float: right;
+}
+
+.zongji,
+.yes_order,
+.no_order {
+    box-sizing: border-box;
+    background-color: #DF0024;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.order_submit {
+    text-align: center;
+}
+
+.yes_order,
+.no_order {
+    border: 0px;
+    font-size: 16px;
+    margin: 5px 70px;
+    outline: none;
+    cursor: pointer;
+}
+
+.no_order {
+    background-color: #0984E0;
+}
