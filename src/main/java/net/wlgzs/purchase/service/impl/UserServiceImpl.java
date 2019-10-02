@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 胡亚星
@@ -16,5 +16,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+
+    @Override
+    public boolean insertUser(User user) {
+        return baseMapper.insert(user) == 1;
+    }
+
+    @Override
+    public boolean checkUser() {
+        return false;
+    }
 
 }
