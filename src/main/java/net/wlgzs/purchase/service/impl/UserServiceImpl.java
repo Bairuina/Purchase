@@ -1,5 +1,6 @@
 package net.wlgzs.purchase.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import net.wlgzs.purchase.entity.User;
 import net.wlgzs.purchase.mapper.UserMapper;
 import net.wlgzs.purchase.service.IUserService;
@@ -23,8 +24,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public boolean checkUser() {
-        return false;
+    public boolean checkUser(String userName,String userPhone) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.and(i -> i.eq("user_name",userName).eq("user_phone",userPhone));
+        User user = baseMapper.selectOne(queryWrapper);
+        return user != null;
     }
 
 }
