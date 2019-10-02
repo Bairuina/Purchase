@@ -1,9 +1,9 @@
 package net.wlgzs.purchase.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -19,6 +19,9 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,54 +29,67 @@ public class Product implements Serializable {
     /**
      * 商品ID
      */
-    @TableId("product_id")
+    @TableId(value = "product_id",type = IdType.AUTO)
     private Integer productId;
 
     /**
      * 商品编号
      */
+    @TableField("xhbh")
     private String xhbh;
 
     /**
      * 商品名称
      */
+    @TableField("xhmc")
     private String xhmc;
 
     /**
      * 品目编号
      */
+    @TableField("pmbh")
     private String pmbh;
 
     /**
      * 品目名称
      */
+    @TableField("pmmc")
     private String pmmc;
 
     /**
      * 品牌编号
      */
+    @TableField("ppbh")
     private String ppbh;
 
     /**
      * 品牌名称
      */
+    @TableField("ppmc")
     private String ppmc;
 
     /**
      * 类别编号
      */
-    private String ibbh;
+    @TableField("lbbh")
+    private String lbbh;
 
     /**
      * 类别名称
      */
-    @TableField("product_ibmc")
-    private String productIbmc;
+    @TableField("lbmc")
+    private String lbmc;
 
     /**
      * 商品状态
      */
-    @TableField("product_zt")
-    private String productZt;
+    @TableField("zt")
+    private String zt;
+
+    /**
+     * 商品参数
+     */
+    @TableField("parametersList")
+    private String parametersList;
 
 }
