@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:"Times New Roman",Times,serif;
+}
+a{
+    text-decoration: none;
+}
+.container{
+    height: 100%;
+    min-width: 1200px;
+}
+
+.mainPart{
+    padding-top: 30px;
+    margin-bottom: 40px;
+}
+
+.header{
+    height: 50px;
+    background: #404040;
+}
+.box{
+    width: 1200px;
+    margin: 0 auto;
+    min-height: 800px;
+}
+.footer{
+    height: 180px;
+    background: #404040;
+}

@@ -1,0 +1,128 @@
+a{
+    cursor: pointer;
+}
+select,textarea,input{
+    outline-style: none;
+}
+input:focus{
+    box-shadow: 0 0 10px #9ecaed;
+    border:none;
+
+}
+select:focus{
+    box-shadow: 0 0 10px #9ecaed;
+    border:none;
+}
+textarea:focus{
+    box-shadow: 0 0 10px #9ecaed;
+    border:none;
+
+
+}
+.contain{
+    height: 100%;
+    min-width: 1200px;
+}
+.offerTitle{
+    padding-bottom: 5px;
+    font-weight: 600;
+    padding-top: 5px;
+}
+.offerTitle>p:before{
+    border-left: 2px solid #5f79a2;
+    padding-right: 8px;
+    content: '';
+}
+.offerContent{
+    padding: 10px;
+    border: 1px solid #ededed;
+    box-shadow: 0 1px 2px 0 rgba(101,129,156,.08);
+    border-radius: 5px;
+}
+.offerContent:hover{
+    box-shadow: 0px 0px 50px 0px rgba(191, 191, 191, 0.5)
+}
+.offerFormLabel{
+    display: inline-block;
+}
+.offerInputblock{
+    display: inline-block;
+}
+.offerFormLabel{
+    width: 260px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: right;
+    padding-right: 70px;
+}
+.offerInput{
+    height: 35px;
+    line-height: 1.3;
+    line-height: 35px\9;
+    width: 265px;
+}
+
+.offerInput,.offerTextarea{
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fff;
+    border-radius: 2px;
+    padding-left: 13px;
+    border-color: #b7b7b7;
+}
+.offerTextarea{
+    height: 90px;
+    line-height: 40px;
+    width: 800px;
+    resize: none;
+}
+.offerFormItem{
+    padding-bottom: 35px;
+}
+.submitBar{
+    margin: 20px 0 0;
+    padding: 15px 10px;
+    text-align: center;
+    background: #f9f9f9;
+    box-shadow: 0 4px 7px #f0f0f0;
+}
+.cancel{
+    border: 1px solid #d6d6d6;
+    background: #f2f2f2;
+    color: #666;
+}
+.confirm{
+    background: cadetblue;
+    color: #fff;
+}
+.submitBar a{
+    display: inline-block;
+    margin: 0 7px;
+    width: 142px;
+    height: 36px;
+    text-align: center;
+    font: 16px/36px "Microsoft YaHei","\5FAE\8F6F\96C5\9ED1";
+    border-radius: 4px;
+    cursor: pointer;
+}
+.submitBar a:hover{
+    opacity:0.8;
+}
+.footer{
+    margin-top: 20px;
+}
+
+/*.option:not(:hover) {*/
+    /*background-color: transparent !important; }*/
+/*option {*/
+    /*cursor: pointer;*/
+    /*font-weight: 400;*/
+    /*line-height: 40px;*/
+    /*list-style: none;*/
+    /*min-height: 40px;*/
+    /*outline: none;*/
+    /*padding-left: 18px;*/
+    /*padding-right: 29px;*/
+    /*text-align: left;*/
+    /*-webkit-transition: all 0.2s;*/
+/*}*/
