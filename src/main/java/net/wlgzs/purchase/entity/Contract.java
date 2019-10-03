@@ -2,10 +2,6 @@ package net.wlgzs.purchase.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 
 /**
@@ -14,11 +10,8 @@ import java.io.Serializable;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-09-28
+ * @since 2019-10-03
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 public class Contract implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,10 +23,9 @@ public class Contract implements Serializable {
     private Integer contractId;
 
     /**
-     * 订单id
+     * 订单编号
      */
-    @TableField("order_id")
-    private Integer orderId;
+    private String ddbh;
 
     /**
      * 合同的地址（url）
@@ -41,4 +33,34 @@ public class Contract implements Serializable {
     @TableField("contract_url")
     private String contractUrl;
 
+    public Integer getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(Integer contractId) {
+        this.contractId = contractId;
+    }
+    public String getDdbh() {
+        return ddbh;
+    }
+
+    public void setDdbh(String ddbh) {
+        this.ddbh = ddbh;
+    }
+    public String getContractUrl() {
+        return contractUrl;
+    }
+
+    public void setContractUrl(String contractUrl) {
+        this.contractUrl = contractUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Contract{" +
+        "contractId=" + contractId +
+        ", ddbh=" + ddbh +
+        ", contractUrl=" + contractUrl +
+        "}";
+    }
 }
