@@ -10,7 +10,7 @@ import net.wlgzs.purchase.util.Result;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-09-29
+ * @since 2019-09-30
  */
 public interface IContractService extends IService<Contract> {
 
