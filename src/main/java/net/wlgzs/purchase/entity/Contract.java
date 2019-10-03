@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-09-28
+ * @since 2019-10-03
  */
 @Data
 @NoArgsConstructor
@@ -47,4 +47,36 @@ public class Contract implements Serializable {
         this.ddbh = ddbh;
         this.contractUrl = contractUrl;
     }
+
+    public Integer getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(Integer contractId) {
+        this.contractId = contractId;
+    }
+    public String getDdbh() {
+        return ddbh;
+    }
+
+    public void setDdbh(String ddbh) {
+        this.ddbh = ddbh;
+    }
+    public String getContractUrl() {
+        return contractUrl;
+    }
+
+    public void setContractUrl(String contractUrl) {
+        this.contractUrl = contractUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Contract{" +
+        "contractId=" + contractId +
+        ", ddbh=" + ddbh +
+        ", contractUrl=" + contractUrl +
+        "}";
+    }
+
 }
