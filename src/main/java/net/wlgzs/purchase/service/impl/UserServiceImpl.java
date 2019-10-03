@@ -5,6 +5,7 @@ import net.wlgzs.purchase.entity.User;
 import net.wlgzs.purchase.mapper.UserMapper;
 import net.wlgzs.purchase.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import net.wlgzs.purchase.util.Result;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,6 +30,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         queryWrapper.and(i -> i.eq("user_name",userName).eq("user_phone",userPhone));
         User user = baseMapper.selectOne(queryWrapper);
         return user != null;
+    }
+
+    @Override
+    public Result UserList(String findName, Integer current, Integer limit) {
+        return null;
     }
 
 }
