@@ -41,14 +41,14 @@ public class OrderController extends BaseController {
     @Autowired
     IRedis iRedis;
 
-    @ApiOperation("更新订单")
-    @RequestMapping("/upDataOrder")
-    @ResponseBody
-    @Scheduled(cron = "*/6 * * * * ?")
-    public Result upDataOrder() throws IOException {
-        System.out.println("++++++++++"+iOrderService.updateOrderDate("","").toString());
-        return null;
-    }
+//    @ApiOperation("更新订单")
+//    @RequestMapping("/upDataOrder")
+//    @ResponseBody
+//    @Scheduled(cron = "*/6 * * * * ?")
+//    public Result upDataOrder() throws IOException {
+//        System.out.println("++++++++++"+iOrderService.updateOrderDate("","").toString());
+//        return null;
+//    }
 
 
     @ApiOperation("查询订单")
