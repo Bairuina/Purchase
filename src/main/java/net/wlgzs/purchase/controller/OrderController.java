@@ -1,11 +1,7 @@
 
 package net.wlgzs.purchase.controller;
 
-
-
-import com.sun.deploy.net.HttpResponse;
 import io.swagger.annotations.ApiOperation;
-import net.wlgzs.purchase.entity.Order;
 import net.wlgzs.purchase.service.IRedis;
 import net.wlgzs.purchase.util.Result;
 import org.apache.ibatis.annotations.Param;
@@ -46,7 +42,7 @@ public class OrderController extends BaseController {
     @ResponseBody
 //    @Scheduled(cron = "*/6 * * * * ?")
     public Result upDataOrder() throws IOException {
-        System.out.println("++++++++++"+iOrderService.updateOrderDate("","").toString());
+        System.out.println("++++++++++"+iOrderService.updateOrderDate("","",1).toString());
         return null;
     }
 
