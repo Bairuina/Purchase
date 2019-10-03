@@ -5,8 +5,10 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.wlgzs.purchase.entity.Contract;
 import net.wlgzs.purchase.entity.OrderData;
 import net.wlgzs.purchase.mapper.OrderDataMapper;
+import net.wlgzs.purchase.service.IContractService;
 import net.wlgzs.purchase.service.IOrderDataService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import net.wlgzs.purchase.service.IRedis;
@@ -35,6 +37,9 @@ import java.util.List;
 public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData> implements IOrderDataService {
     @Autowired
     IRedis iRedis;
+
+    @Autowired
+    IContractService contractService;
 
     Logger logger = LoggerFactory.getLogger(OrderDataServiceImpl.class);
 
@@ -120,6 +125,8 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         Result result=new Result(ResultCode.SUCCESS,"查询成功",orderList,totalPageNum,pageNum);
         return result;
     }
+
+
 
     //查看订单详情
     @Override
@@ -222,6 +229,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //订单发票开始开具时间信息推送
     @Override
     public Result invoiceStaTimeSubmit(String ddbh, String username, String pwd, String fpkjsj) {
+        DateTime dateTime=new DateTime();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -230,7 +238,12 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"fpkjsj\":\""+fpkjsj+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("JSONObject jsonObject=ClientUtil.getJSONObject","execFpkjsjByOrder",jsonStr);
-        return null;
+        if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
+            logger.info("发票开具开始时间已推送！");
+            return new Result(ResultCode.SUCCESS);
+        }
+        logger.info("发票开具开始时间推送失败！");
+        return new Result(ResultCode.FAIL);
     }
 
     //订单发票开具结束时间信息推送
@@ -244,7 +257,12 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"fpsdsj\": \""+fpsdsj+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","execfpsdsjByorder",jsonStr);
-        return null;
+        if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
+            logger.info("收到发票时间信息已推送！");
+            return new Result(ResultCode.SUCCESS);
+        }
+        logger.info("收到发票时间信息推送失败！");
+        return new Result(ResultCode.FAIL);
 
     }
 
@@ -262,7 +280,13 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"sksj\": \""+sksj+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","execSkqk",jsonStr);
-        return null;
+        if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
+            logger.info("标志、收款金额、收款时间已提交！");
+            return new Result(ResultCode.SUCCESS);
+        }
+        logger.info("标志、收款金额、收款时间提交失败！");
+        return new Result(ResultCode.FAIL);
+
     }
 
 
@@ -279,7 +303,12 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"qxyy\":\""+qxyy+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","execDsZfdd",jsonStr);
-        return null;
+        if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
+            OrderData orderData=new OrderData();
+            orderData.setZt("4");
+            return upDateTwo(ddbh,orderData);
+        }
+        return new Result(ResultCode.FAIL);
     }
 
 
@@ -296,8 +325,14 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"ddbh\": \""+ddbh+"\", \n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","findYsByOrder",jsonStr);
-        return null;
+        if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
+            OrderData orderData=new OrderData();
+            orderData.setZt("5");
+            return upDateTwo(ddbh,orderData);
+        }
+        return new Result(ResultCode.FAIL);
     }
+
 
     //更新合同
     @Override
@@ -309,7 +344,10 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"ddbh\": \""+ddbh+"\", \n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","findOrderHt",jsonStr);
-        return null;
+        Contract contract=new Contract();
+        contract.setContractUrl(jsonObject.getString("url"));
+        contract.setDdbh(ddbh);
+        return contractService.addContract(contract);
     }
 
 

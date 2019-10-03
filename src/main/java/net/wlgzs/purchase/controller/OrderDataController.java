@@ -63,8 +63,18 @@ public class OrderDataController extends BaseController {
 
     @ApiOperation("查看单个订单详情")
     @ResponseBody
+    @RequestMapping("/selectOneOrder")
     public Result checkDetailedOrder(@Param("ddbh") String ddbh){
         return iOrderService.selectOneOrder(ddbh);
     }
+
+
+    @ApiOperation("订单签收时间信息推送")
+    @ResponseBody
+    @RequestMapping("/ensureOrderTimeSubmit")
+    public Result ensureOrderTimeSubmit(@Param("ddbh") String ddbh,@Param("username") String username,@Param("")String pwd,@Param("")int sfcd,String fczddbh,String shsj){
+        return iOrderService.ensureOrderTimeSubmit(ddbh,username,pwd,sfcd,fczddbh,shsj);
+    }
+
 
 }

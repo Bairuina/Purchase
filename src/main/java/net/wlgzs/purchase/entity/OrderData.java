@@ -1,6 +1,7 @@
 package net.wlgzs.purchase.entity;
 
 import java.math.BigDecimal;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.io.Serializable;
  * @author 胡亚星
  * @since 2019-10-03
  */
+@TableName("order_data")
 public class OrderData implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -113,10 +115,20 @@ public class OrderData implements Serializable {
      */
     private String shqx;
 
+    private Integer skbz;
+
     /**
      * 发票内容
      */
     private String fpnr;
+
+    private Integer fpkjsj;
+
+    private Integer fpsdsj;
+
+    private Integer sksj;
+
+    private Integer skje;
 
     public Integer getOrderId() {
         return orderId;
@@ -251,12 +263,47 @@ public class OrderData implements Serializable {
     public void setShqx(String shqx) {
         this.shqx = shqx;
     }
+    public Integer getSkbz() {
+        return skbz;
+    }
+
+    public void setSkbz(Integer skbz) {
+        this.skbz = skbz;
+    }
     public String getFpnr() {
         return fpnr;
     }
 
     public void setFpnr(String fpnr) {
         this.fpnr = fpnr;
+    }
+    public Integer getFpkjsj() {
+        return fpkjsj;
+    }
+
+    public void setFpkjsj(Integer fpkjsj) {
+        this.fpkjsj = fpkjsj;
+    }
+    public Integer getFpsdsj() {
+        return fpsdsj;
+    }
+
+    public void setFpsdsj(Integer fpsdsj) {
+        this.fpsdsj = fpsdsj;
+    }
+    public Integer getSksj() {
+        return sksj;
+    }
+
+    public void setSksj(Integer sksj) {
+        this.sksj = sksj;
+    }
+    public Integer getSkje() {
+        return skje;
+    }
+
+    public void setSkje(Integer skje) {
+        this.skje = skje;
     }
 
     @Override
@@ -281,7 +328,12 @@ public class OrderData implements Serializable {
         ", beiz=" + beiz +
         ", shsj=" + shsj +
         ", shqx=" + shqx +
+        ", skbz=" + skbz +
         ", fpnr=" + fpnr +
+        ", fpkjsj=" + fpkjsj +
+        ", fpsdsj=" + fpsdsj +
+        ", sksj=" + sksj +
+        ", skje=" + skje +
         "}";
     }
 }

@@ -132,7 +132,6 @@
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
         </dependency>
-
         <!--net.sf.json.JSONObject-->
         <dependency>
             <groupId>net.sf.json-lib</groupId>
