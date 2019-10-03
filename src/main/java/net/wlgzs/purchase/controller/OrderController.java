@@ -5,10 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import net.wlgzs.purchase.service.IRedis;
 import net.wlgzs.purchase.util.Result;
 import org.apache.ibatis.annotations.Param;
-import org.codehaus.xfire.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.ServletResponse;
 import java.io.IOException;
-import java.net.URL;
 
 
 /**

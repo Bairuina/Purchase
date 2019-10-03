@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 胡亚星
@@ -78,5 +78,4 @@ public class Contract implements Serializable {
         ", contractUrl=" + contractUrl +
         "}";
     }
-
 }

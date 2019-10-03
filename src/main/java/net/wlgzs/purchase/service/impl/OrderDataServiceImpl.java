@@ -7,6 +7,10 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Contract;
 import net.wlgzs.purchase.entity.OrderData;
+<<<<<<< HEAD
+=======
+import net.wlgzs.purchase.entity.ProductList;
+>>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
 import net.wlgzs.purchase.mapper.OrderDataMapper;
 import net.wlgzs.purchase.service.IContractService;
 import net.wlgzs.purchase.service.IOrderDataService;
@@ -80,6 +84,10 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         String flag = jsonObject.get("resultFlag").toString();
         int count = Integer.parseInt(jsonObject.get("count").toString());
         List<OrderData> orderList = null;
+<<<<<<< HEAD
+=======
+        List<ProductList> productLists=null;
+>>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
         if (jsonObject.get("orderList") != null && !jsonObject.get("orderList").toString().equals("")) {
             JSONArray jsonArray = jsonObject.getJSONArray("orderList");
             orderList = JSON.parseArray(jsonArray.toString(), OrderData.class);
@@ -92,6 +100,11 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 logger.info(order.toString());
                 baseMapper.insert(order);
             }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
             int totalPageNum = (count  + 14) / 15;
             if(totalPageNum>pageNum){
                 pageNum++;
@@ -347,7 +360,11 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         Contract contract=new Contract();
         contract.setContractUrl(jsonObject.getString("url"));
         contract.setDdbh(ddbh);
+<<<<<<< HEAD
         return contractService.addContract(contract);
+=======
+        return null;
+>>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
     }
 
 
