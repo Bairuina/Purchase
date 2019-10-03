@@ -7,6 +7,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Contract;
 import net.wlgzs.purchase.entity.OrderData;
+import net.wlgzs.purchase.entity.ProductList;
 import net.wlgzs.purchase.mapper.OrderDataMapper;
 import net.wlgzs.purchase.service.IContractService;
 import net.wlgzs.purchase.service.IOrderDataService;
@@ -80,6 +81,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         String flag = jsonObject.get("resultFlag").toString();
         int count = Integer.parseInt(jsonObject.get("count").toString());
         List<OrderData> orderList = null;
+        List<ProductList> productLists=null;
         if (jsonObject.get("orderList") != null && !jsonObject.get("orderList").toString().equals("")) {
             JSONArray jsonArray = jsonObject.getJSONArray("orderList");
             orderList = JSON.parseArray(jsonArray.toString(), OrderData.class);
@@ -92,6 +94,8 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 logger.info(order.toString());
                 baseMapper.insert(order);
             }
+
+
             int totalPageNum = (count  + 14) / 15;
             if(totalPageNum>pageNum){
                 pageNum++;
@@ -347,7 +351,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         Contract contract=new Contract();
         contract.setContractUrl(jsonObject.getString("url"));
         contract.setDdbh(ddbh);
-        return contractService.addContract(contract);
+        return null;
     }
 
 

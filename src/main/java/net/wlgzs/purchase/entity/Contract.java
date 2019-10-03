@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 胡亚星
@@ -73,10 +73,10 @@ public class Contract implements Serializable {
     @Override
     public String toString() {
         return "Contract{" +
-        "contractId=" + contractId +
-        ", ddbh=" + ddbh +
-        ", contractUrl=" + contractUrl +
-        "}";
+                "contractId=" + contractId +
+                ", ddbh=" + ddbh +
+                ", contractUrl=" + contractUrl +
+                "}";
     }
 
 }
