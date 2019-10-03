@@ -4,6 +4,8 @@ import net.wlgzs.purchase.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import net.wlgzs.purchase.util.Result;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <p>
  *  服务类
@@ -13,6 +15,11 @@ import net.wlgzs.purchase.util.Result;
  * @since 2019-09-28
  */
 public interface IUserService extends IService<User> {
+
+    //登录
+    Result login(HttpServletRequest request, String userName, String password);
+
+
     /**
      * 添加一个用户
      * @param user
@@ -35,5 +42,19 @@ public interface IUserService extends IService<User> {
      * @param limit
      * @return
      */
-    Result UserList(String findName, Integer current, Integer limit);
+    Result userList(String findName, Integer current, Integer limit);
+
+    /**
+     * 删除用户
+     * @param userId 用户id
+     * @return
+     */
+    Result deleteUser(Integer userId);
+
+    /**
+     * 修改用户
+     * @param user
+     * @return
+     */
+    Result modifyUser(User user);
 }

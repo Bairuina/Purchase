@@ -8,7 +8,7 @@ import net.wlgzs.purchase.base.BaseController;
 
 /**
  * <p>
- *  前端控制器
+ *  合同模块 前端控制器
  * </p>
  *
  * @author 胡亚星
@@ -17,5 +17,5 @@ import net.wlgzs.purchase.base.BaseController;
 @RestController
 @RequestMapping("/contract")
 public class ContractController extends BaseController {
-
+    
 }
