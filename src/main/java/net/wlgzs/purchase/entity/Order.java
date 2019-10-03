@@ -2,10 +2,6 @@ package net.wlgzs.purchase.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableId;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 
 /**
@@ -14,11 +10,8 @@ import java.io.Serializable;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-09-28
+ * @since 2019-10-02
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,7 +20,7 @@ public class Order implements Serializable {
      * 订单id
      */
     @TableId("order_id")
-    private Integer orderId;
+    private String orderId;
 
     /**
      * 送货城市
@@ -124,4 +117,170 @@ public class Order implements Serializable {
      */
     private String fpnr;
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+    public String getDeliverycity() {
+        return deliverycity;
+    }
+
+    public void setDeliverycity(String deliverycity) {
+        this.deliverycity = deliverycity;
+    }
+    public String getDeliverycounty() {
+        return deliverycounty;
+    }
+
+    public void setDeliverycounty(String deliverycounty) {
+        this.deliverycounty = deliverycounty;
+    }
+    public String getShdd() {
+        return shdd;
+    }
+
+    public void setShdd(String shdd) {
+        this.shdd = shdd;
+    }
+    public String getDdbh() {
+        return ddbh;
+    }
+
+    public void setDdbh(String ddbh) {
+        this.ddbh = ddbh;
+    }
+    public String getCgrmc() {
+        return cgrmc;
+    }
+
+    public void setCgrmc(String cgrmc) {
+        this.cgrmc = cgrmc;
+    }
+    public String getXflxrxm() {
+        return xflxrxm;
+    }
+
+    public void setXflxrxm(String xflxrxm) {
+        this.xflxrxm = xflxrxm;
+    }
+    public String getXfdh() {
+        return xfdh;
+    }
+
+    public void setXfdh(String xfdh) {
+        this.xfdh = xfdh;
+    }
+    public String getGhsmc() {
+        return ghsmc;
+    }
+
+    public void setGhsmc(String ghsmc) {
+        this.ghsmc = ghsmc;
+    }
+    public BigDecimal getDdze() {
+        return ddze;
+    }
+
+    public void setDdze(BigDecimal ddze) {
+        this.ddze = ddze;
+    }
+    public String getCjrq() {
+        return cjrq;
+    }
+
+    public void setCjrq(String cjrq) {
+        this.cjrq = cjrq;
+    }
+    public String getZt() {
+        return zt;
+    }
+
+    public void setZt(String zt) {
+        this.zt = zt;
+    }
+    public String getZffs() {
+        return zffs;
+    }
+
+    public void setZffs(String zffs) {
+        this.zffs = zffs;
+    }
+    public String getFptt() {
+        return fptt;
+    }
+
+    public void setFptt(String fptt) {
+        this.fptt = fptt;
+    }
+    public String getNsrsbh() {
+        return nsrsbh;
+    }
+
+    public void setNsrsbh(String nsrsbh) {
+        this.nsrsbh = nsrsbh;
+    }
+    public String getSfxyazfw() {
+        return sfxyazfw;
+    }
+
+    public void setSfxyazfw(String sfxyazfw) {
+        this.sfxyazfw = sfxyazfw;
+    }
+    public String getBeiz() {
+        return beiz;
+    }
+
+    public void setBeiz(String beiz) {
+        this.beiz = beiz;
+    }
+    public String getShsj() {
+        return shsj;
+    }
+
+    public void setShsj(String shsj) {
+        this.shsj = shsj;
+    }
+    public String getShqx() {
+        return shqx;
+    }
+
+    public void setShqx(String shqx) {
+        this.shqx = shqx;
+    }
+    public String getFpnr() {
+        return fpnr;
+    }
+
+    public void setFpnr(String fpnr) {
+        this.fpnr = fpnr;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+        "orderId=" + orderId +
+        ", deliverycity=" + deliverycity +
+        ", deliverycounty=" + deliverycounty +
+        ", shdd=" + shdd +
+        ", ddbh=" + ddbh +
+        ", cgrmc=" + cgrmc +
+        ", xflxrxm=" + xflxrxm +
+        ", xfdh=" + xfdh +
+        ", ghsmc=" + ghsmc +
+        ", ddze=" + ddze +
+        ", cjrq=" + cjrq +
+        ", zt=" + zt +
+        ", zffs=" + zffs +
+        ", fptt=" + fptt +
+        ", nsrsbh=" + nsrsbh +
+        ", sfxyazfw=" + sfxyazfw +
+        ", beiz=" + beiz +
+        ", shsj=" + shsj +
+        ", shqx=" + shqx +
+        ", fpnr=" + fpnr +
+        "}";
+    }
 }
