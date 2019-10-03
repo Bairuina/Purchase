@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ import java.io.Serializable;
  * @since 2019-09-28
  */
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class Contract implements Serializable {
@@ -30,10 +32,10 @@ public class Contract implements Serializable {
     private Integer contractId;
 
     /**
-     * 订单id
+     * 订单编号
      */
-    @TableField("order_id")
-    private Integer orderId;
+    @TableField("ddbh")
+    private String ddbh;
 
     /**
      * 合同的地址（url）
@@ -41,4 +43,8 @@ public class Contract implements Serializable {
     @TableField("contract_url")
     private String contractUrl;
 
+    public Contract(String ddbh, String contractUrl) {
+        this.ddbh = ddbh;
+        this.contractUrl = contractUrl;
+    }
 }

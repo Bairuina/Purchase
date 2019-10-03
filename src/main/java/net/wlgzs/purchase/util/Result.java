@@ -31,6 +31,11 @@ public class Result implements Serializable {
         this.code=resultCode.getCode();
         this.msg=msg;
     }
+    public Result(ResultCode resultCode,String msg,Object data){
+        this.code=resultCode.getCode();
+        this.msg=msg;
+        this.data=data;
+    }
     public Result(ResultCode resultCode,String msg,int count,Object data){
         this.code=resultCode.getCode();
         this.msg=msg;
