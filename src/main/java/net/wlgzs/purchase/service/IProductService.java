@@ -1,8 +1,10 @@
 package net.wlgzs.purchase.service;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import net.wlgzs.purchase.entity.Product;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 
@@ -17,5 +19,12 @@ import javax.annotation.Resource;
 
 public interface IProductService extends IService<Product> {
 
-    //录入新增的
+    /**
+     * 查询页
+     * 需要遍历lbmc，pmmc，ppmc
+     * 还有全部商品列表
+     */
+    public ModelAndView findallProduct(String lbbh,String pmbh,String ppbh,String nr);
+
+//    public ModelAndView findallProduct1(String lbbh);
 }
