@@ -52,11 +52,12 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         System.out.println(productList);
 
         ModelAndView modelAndView=new ModelAndView();
+
         try {
-            modelAndView.addObject("lbbhlist", lbbhlist);
-            modelAndView.addObject("pmbhlist", pmbhlist);
-            modelAndView.addObject("ppbhlist", ppbhlist);
-            modelAndView.addObject("productList", productList);
+            modelAndView.addObject("lbbhlist", lbbhlist);//第一大类
+            modelAndView.addObject("pmbhlist", pmbhlist);//第二大类
+            modelAndView.addObject("ppbhlist", ppbhlist);//第三大类
+            modelAndView.addObject("productList", productList);//搜索内容
             modelAndView.setViewName("detailsPage");
         }catch (Exception e){
             //返回报错页面

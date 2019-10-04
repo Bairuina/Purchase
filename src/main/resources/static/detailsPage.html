@@ -40,34 +40,9 @@
                         <div class="kindList">
                             <div class="kindListDetail">
                                 <ul>
-                                    <li>
+                                    <li th:each="lbbhlist:${lbbhlist}">
                                         <a>
-                                            <p>全部</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <p>全部</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <p>全部</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <p>全部</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <p>全部</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <p>全部</p>
+                                            <p th:text="${lbbhlist.lbmc}">全部</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -88,9 +63,9 @@
                         <div class="itemsList">
                             <div class="itemsListDetail">
                                 <ul>
-                                    <li>
+                                    <li th:each="pmbhlist:${pmbhlist}">
                                         <a>
-                                            <p>全部</p>
+                                            <p th:text="${pmbhlist.pmmc}">全部</p>
                                         </a>
                                     </li>
                                 </ul>
