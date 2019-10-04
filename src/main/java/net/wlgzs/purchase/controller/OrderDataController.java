@@ -7,6 +7,7 @@ import net.wlgzs.purchase.util.ReadProperties;
 import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
 import org.apache.ibatis.annotations.Param;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.math.BigInteger;
 
 /**
  * <p>
@@ -40,7 +42,7 @@ public class OrderDataController extends BaseController {
     @ResponseBody
     @Scheduled(cron = "0 0 0,3,6,9,12,15,18,21 * * ?")
     public Result upDataOrder() throws IOException {
-        return  iOrderService.updateOrderDate(readProperties.getUsername(),readProperties.getPwd(),1);
+        return  iOrderService.updateOrderDate(1);
     }
 
 
@@ -54,11 +56,11 @@ public class OrderDataController extends BaseController {
     }
 
 
-    @ApiOperation("确认订单")
+    @ApiOperation(" 确认或取消订单")
     @RequestMapping("/ensureORefuseOrder")
     @ResponseBody
-    public Result ensureORefuseOrder(@Param("ddbh") String ddbh, @Param("username")String username, @Param("pwd")String pwd, @Param("qrzt")int qrzt){
-        return iOrderService.ensureORefuseOrder(ddbh,username,pwd,qrzt);
+    public Result ensureORefuseOrder(@Param("ddbh") String ddbh, @Param("qrzt")int qrzt){
+        return iOrderService.ensureORefuseOrder(ddbh,qrzt);
     }
 
 
@@ -75,9 +77,33 @@ public class OrderDataController extends BaseController {
     @ApiOperation("订单签收时间信息推送")
     @ResponseBody
     @RequestMapping("/ensureOrderTimeSubmit")
-    public Result ensureOrderTimeSubmit(@Param("ddbh") String ddbh,@Param("username") String username,@Param("")String pwd,@Param("")int sfcd,String fczddbh,String shsj){
-        return iOrderService.ensureOrderTimeSubmit(ddbh,username,pwd,sfcd,fczddbh,shsj);
+    public Result ensureOrderTimeSubmit(@Param("ddbh") String ddbh,@Param("sfcd")int sfcd,@Param("fczddbh")String fczddbh,@Param("shsj") BigInteger shsj){
+        return iOrderService.ensureOrderTimeSubmit(ddbh,sfcd,fczddbh,new BigInteger(new DateTime().toString("yyyyMMddHHmmss")));
     }
+
+
+    @ApiOperation("查看采购单位对当前订单的验收情况")
+    @ResponseBody
+    @RequestMapping("/checkOrderStatus")
+    public Result checkOrderStatus(@Param("ddbh")String ddbh){
+        return iOrderService.checkOrderStatus(ddbh);
+    }
+
+
+    @ApiOperation("订单发票开始开具时间信息推送")
+    @ResponseBody
+    @RequestMapping("/invoiceStaTimeSubmit")
+    public Result invoiceStaTimeSubmit(@Param("ddbh")String ddbh){
+        return iOrderService.invoiceStaTimeSubmit(ddbh,new BigInteger(new DateTime().toString("yyyyMMddHHmmss")));
+    }
+
+    @ApiOperation("订单发票开始开具时间信息推送")
+    @ResponseBody
+    @RequestMapping("/invoiceEndTimeSubmit")
+    public Result invoiceEndTimeSubmit(@Param("ddbh")String ddbh){
+        return iOrderService.invoiceEndTimeSubmit(ddbh,new BigInteger(new DateTime().toString("yyyyMMddHHmmss")));
+    }
+
 
 
 }

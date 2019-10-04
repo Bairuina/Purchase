@@ -32,16 +32,16 @@ public interface IOrderDataService extends IService<OrderData> {
     Result ensureOrderArrive(String ddbh,int sfcd,String fczddbh,String kdgs,String kddh,String ms,String kdsj);
 
     //订单签收时间信息推送
-    Result ensureOrderTimeSubmit(String ddbh,int sfcd,String fczddbh,String shsj);
+    Result ensureOrderTimeSubmit(String ddbh,int sfcd,String fczddbh,BigInteger shsj);
 
     //订单发票开具时间信息推送
     Result invoiceStaTimeSubmit(String ddbh, BigInteger fpkjsj);
 
     //订单发票收到开具信息推送
-    Result invoiceEndTimeSubmit(String ddbh,String fpsdsj);
+    Result invoiceEndTimeSubmit(String ddbh,BigInteger fpsdsj);
 
     //电商已经收到采购单位的付款,将收款标志、收款金额、收款时间提交
-    Result getMoneyDataSubmit(String ddbh,int skbz,String skje,String sksj);
+    Result getMoneyDataSubmit(String ddbh,int skbz,Integer skje,BigInteger sksj);
 
     //取消订单(已经对进行订单确认)
     Result deletEnsureOrder(String ddbh,String qxyy);
