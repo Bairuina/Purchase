@@ -43,9 +43,24 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         queryWrapper2.eq("pmbh",pmbh).select("ppbh","ppmc");
         List<Product> ppbhlist=new ArrayList<>(new HashSet<>(productMapper.selectList(queryWrapper2)));
         QueryWrapper<Product> queryWrapper3=new QueryWrapper<>();
-        queryWrapper3.eq("lbbh",lbbh).eq("pmbh",pmbh).eq("ppbh",ppbh).like("xhmc",nr)
-        .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
-        List<Product> productList=new ArrayList<>(new HashSet<>(productMapper.selectList(queryWrapper3)));
+        List<Product> productList=new ArrayList<>();
+        if(lbbh.equals("0")){
+            queryWrapper3.like("xhmc",nr.equals("0")? "":nr)
+                    .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
+            productList=new ArrayList<>(new HashSet<>(productMapper.selectList(queryWrapper3)));
+        }else if(!lbbh.equals("0")&&pmbh.equals("0")){
+            queryWrapper3.eq("lbbh",lbbh).like("xhmc",nr.equals("0")? "":nr)
+                    .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
+            productList=new ArrayList<>(new HashSet<>(productMapper.selectList(queryWrapper3)));
+        }else if (!lbbh.equals("0")&&!pmbh.equals("0")&&ppbh.equals("0")){
+            queryWrapper3.eq("lbbh",lbbh).eq("pmbh",pmbh).like("xhmc",nr.equals("0")? "":nr)
+                    .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
+            productList=new ArrayList<>(new HashSet<>(productMapper.selectList(queryWrapper3)));
+        }else{
+            queryWrapper3.eq("lbbh",lbbh).eq("pmbh",pmbh).eq("ppbh",ppbh).like("xhmc",nr.equals("0")? "":nr)
+                    .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
+            productList=new ArrayList<>(new HashSet<>(productMapper.selectList(queryWrapper3)));
+        }
 
 
         System.out.println(lbbhlist);

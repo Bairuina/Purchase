@@ -41,45 +41,49 @@ public class ProductController extends BaseController {
     private IProductService productService;
 
 
-    //获取商品入库
-    @Test
-    public void ppp() {
-        String result = null;
-        try {
-            Client client = new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
-            String username = "7223";
-            String pwd = "ff8080814a1353ac014a139496110049";
+//    //获取商品入库
+//    @Test
+//    public void ppp() {
+//        String result = null;
+//        try {
+//            Client client = new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
+//            String username = "7223";
+//            String pwd = "ff8080814a1353ac014a139496110049";
+//            String enPwd1 = Enxi.enPwd(username, pwd);
+//            String jsonStr = "{\n\"username\":\"7223\",\n" +
+//                    "\"pwd\":\"" + enPwd1 + "\",\n" +
+//                    "\"sprkkssj\":\"20160913094809\",\n" +
+//                    "\"sprkJssj\":\"20170913094809\",\n" +
+//                    "\"pageNum\":\"1\",\n" +
+//                    "\"pageSize\":\"50\"\n}";
+//            Object[] rets = client.invoke("findSprkandParam", new Object[]{jsonStr});
+//            result = (String) rets[0];
+//            System.out.println(jsonStr);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(result);
+//        JSONObject jso1 = JSON.parseObject(result);
+//        String jsonString = jso1.getString("spList");
+//        System.out.println(jsonString);
+//        List<Product> product = JSON.parseArray(jsonString, Product.class);
+//        for (Product product1 : product) {
+//            System.out.println(product1);
+//        }
+//        System.out.println(productService);
+//        productService.saveBatch(product);
+//    }
 
-            String enPwd1 = Enxi.enPwd(username, pwd);
-            String jsonStr = "{\n\"username\":\"7223\",\n" +
-                    "\"pwd\":\"" + enPwd1 + "\",\n" +
-                    "\"sprkkssj\":\"20160913094809\",\n" +
-                    "\"sprkJssj\":\"20170913094809\",\n" +
-                    "\"pageNum\":\"1\",\n" +
-                    "\"pageSize\":\"50\"\n}";
-            Object[] rets = client.invoke("findSprkandParam", new Object[]{jsonStr});
-            result = (String) rets[0];
-            System.out.println(jsonStr);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(result);
-        JSONObject jso1 = JSON.parseObject(result);
-        String jsonString = jso1.getString("spList");
-        System.out.println(jsonString);
-        List<Product> product = JSON.parseArray(jsonString, Product.class);
-        for (Product product1 : product) {
-            System.out.println(product1);
-        }
-        System.out.println(productService);
-        productService.saveBatch(product);
-    }
+    //根据品目获取配件
+
+
 
 
 
     //获取商品春入数据库
     @Scheduled(cron = "0 0 12 * * ?")
     public void getProductList(){
+        //商品表更新
         String result =null;
         DateTime dateTime=new DateTime();
         String sprkJssj=dateTime.toString("yyyyMMddHHmmss");
@@ -114,6 +118,20 @@ public class ProductController extends BaseController {
                 System.out.println("有数据更新");
             }
         }
+
+        //配件表更新
+        try {
+            String url = "http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl";
+            String wayName = "findPjByPmbh";
+            String pmbh = "ff80808151ae339c0151b31b946c2afb";
+            Client client = new Client(new URL(url));
+            String username = "7223";
+            String pwd = "ff8080814a1353ac014a139496110049";
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
 
@@ -127,8 +145,6 @@ public class ProductController extends BaseController {
                                        @RequestParam(value = "pmbh",defaultValue = "0")String pmbh,
                                        @RequestParam(value = "ppbh",defaultValue = "0")String ppbh,
                                        @RequestParam(value = "nr",defaultValue = "0")String nr){
-
-
 
         return productService.findallProduct(lbbh,pmbh,ppbh,nr);
     }
