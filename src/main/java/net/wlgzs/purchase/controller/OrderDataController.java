@@ -51,7 +51,7 @@ public class OrderDataController extends BaseController {
     public ModelAndView selectDataOrder(@Param("pageSize")Integer pageSize,@RequestParam(value = "pageNum", defaultValue = "1")Integer pageNum){
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("订单详情页");
-        modelAndView.addObject("orderDara",iOrderService.selectAllOrder(pageSize,pageNum));
+        modelAndView.addObject("orderDara",iOrderService.selectAllOrder(15,pageNum));
         return modelAndView;
     }
 
