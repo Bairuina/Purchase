@@ -7,11 +7,15 @@ import com.alibaba.fastjson.JSONObject;
 
 
 import net.wlgzs.purchase.entity.Product;
+import net.wlgzs.purchase.mapper.ProductMapper;
 import net.wlgzs.purchase.service.IProductService;
+import net.wlgzs.purchase.service.impl.OrderDataServiceImpl;
 import org.codehaus.xfire.client.Client;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -22,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import java.net.URL;
 import java.util.List;
+
 
 /**
  * <p>
@@ -35,16 +40,21 @@ import java.util.List;
 @RequestMapping("/product")
 @RunWith(SpringRunner.class)
 @SpringBootTest
+
 public class ProductController extends BaseController {
 
     @Resource
     private IProductService productService;
 
+    @Resource
+    private ProductMapper productMapper;
 
-//    //获取商品入库
-//    @Test
-//    public void ppp() {
-//        String result = null;
+    Logger logger = LoggerFactory.getLogger(OrderDataServiceImpl.class);
+
+    //获取商品入库
+    @Test
+    public void ppp() {
+        String result = null;
 //        try {
 //            Client client = new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
 //            String username = "7223";
@@ -72,9 +82,34 @@ public class ProductController extends BaseController {
 //        }
 //        System.out.println(productService);
 //        productService.saveBatch(product);
-//    }
 
-    //根据品目获取配件
+
+
+        //根据品目获取配件
+        List<String> pmbh=productMapper.findpmbh();
+        System.out.println(pmbh);
+
+        try {
+            String url = "http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl";
+            String wayName = "findPjByPmbh";
+            Client client = new Client(new URL(url));
+            String username = "7223";
+            String pwd = "ff8080814a1353ac014a139496110049";
+            String enPwd1= Enxi.enPwd(username,pwd);
+            for (int i = 0; i < pmbh.size(); i++) {
+                String json="{\"username\":\"7223\",\"pwd\":\""+enPwd1+"\",\"pmbh\":\""+pmbh.get(i)+"\",\"pageNum\":\"1\",\"pageSize\":\"10\"}";
+                Object[] rets=client.invoke(wayName,new Object[]{json});
+                result=(String) rets[0];
+                logger.info(result+"****************************");
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 
@@ -118,20 +153,6 @@ public class ProductController extends BaseController {
                 System.out.println("有数据更新");
             }
         }
-
-        //配件表更新
-        try {
-            String url = "http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl";
-            String wayName = "findPjByPmbh";
-            String pmbh = "ff80808151ae339c0151b31b946c2afb";
-            Client client = new Client(new URL(url));
-            String username = "7223";
-            String pwd = "ff8080814a1353ac014a139496110049";
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-
     }
 
 

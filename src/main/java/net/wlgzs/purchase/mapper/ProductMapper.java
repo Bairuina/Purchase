@@ -41,9 +41,10 @@ public interface ProductMapper extends BaseMapper<Product> {
     public Set<String> findppmc();
 
     /**
-     * 根据lbmc返回pmmc和pmbh
+     * 返回全部品目编号pmbh
+     *
      */
-    @Select("SELECT pmbh,pmmc,lbbh,lbmc FROM product where lbbh=#{lbbh}")
-    public Set<Product> findpmmc(String lbbh);
+    @Select("SELECT distinct pmbh FROM `product`")
+    public List<String> findpmbh();
 
 }
