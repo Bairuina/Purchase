@@ -37,6 +37,7 @@ public class ServiceListServiceImpl extends ServiceImpl<ServiceListMapper, Servi
             logger.info("订单服务添加失败！");
             return new Result(ResultCode.FAIL);
         }
+
     }
 
     @Override
@@ -53,9 +54,9 @@ public class ServiceListServiceImpl extends ServiceImpl<ServiceListMapper, Servi
     }
 
     @Override
-    public Result delServiceByOrderId(int orderId) {
+    public  Result delServiceByOrderId(String ddbh) {
         QueryWrapper<ServiceList> queryWrapper=new QueryWrapper<>();
-        queryWrapper.eq("order_id",orderId);
+        queryWrapper.eq("ddbh",ddbh);
         int count=baseMapper.delete(queryWrapper);
         if(count>=0){
             logger.info("订单服务添加成功！");
@@ -68,17 +69,17 @@ public class ServiceListServiceImpl extends ServiceImpl<ServiceListMapper, Servi
     }
 
     @Override
-    public Result selectServiceList(int orderId) {
+    public  List<ServiceList> selectServiceList(String ddbh) {
         QueryWrapper<ServiceList> queryWrapper=new QueryWrapper<>();
-        queryWrapper.eq("order_id",orderId);
+        queryWrapper.eq("ddbh",ddbh);
         List<ServiceList> lists=baseMapper.selectList(queryWrapper);
         if(lists!=null&&lists.size()!=0) {
             logger.info("订单服务查询的成功！");
-            return new Result(ResultCode.SUCCESS,lists);
+            return lists;
         }
         else {
             logger.info("无相关查询结果！");
-            return new Result(ResultCode.FAIL,"没有相关内容！");
+            return null;
         }
     }
 

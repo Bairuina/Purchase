@@ -4,10 +4,6 @@ import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 
 /**
@@ -16,11 +12,8 @@ import java.io.Serializable;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-09-28
+ * @since 2019-10-04
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @TableName("service_list")
 public class ServiceList implements Serializable {
 
@@ -30,11 +23,12 @@ public class ServiceList implements Serializable {
      * 订单服务id
      */
     @TableId("serviceList_id")
-    private Integer servicelistId;
+    private int servicelistId;
 
     /**
      * 服务名称
      */
+    @TableField("fwMC")
     private String fwMC;
 
     /**
@@ -52,7 +46,53 @@ public class ServiceList implements Serializable {
     /**
      * 订单id
      */
-    @TableField("order_id")
-    private Integer orderId;
+    @TableField("ddbh")
+    private String ddbh;
 
+    public Integer getServicelistId() {
+        return servicelistId;
+    }
+
+    public void setServicelistId(Integer servicelistId) {
+        this.servicelistId = servicelistId;
+    }
+    public String getFwMC() {
+        return fwMC;
+    }
+
+    public void setFwMC(String fwMC) {
+        this.fwMC = fwMC;
+    }
+    public Integer getSl() {
+        return sl;
+    }
+
+    public void setSl(Integer sl) {
+        this.sl = sl;
+    }
+    public BigDecimal getFwjg() {
+        return fwjg;
+    }
+
+    public void setFwjg(BigDecimal fwjg) {
+        this.fwjg = fwjg;
+    }
+    public String getDdbh() {
+        return ddbh;
+    }
+
+    public void setDdbh(String ddbh) {
+        this.ddbh = ddbh;
+    }
+
+    @Override
+    public String toString() {
+        return "ServiceList{" +
+        "servicelistId=" + servicelistId +
+        ", fwMC=" + fwMC +
+        ", sl=" + sl +
+        ", fwjg=" + fwjg +
+        ", ddbh=" + ddbh +
+        "}";
+    }
 }

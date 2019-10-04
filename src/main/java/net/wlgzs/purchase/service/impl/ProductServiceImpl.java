@@ -64,10 +64,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             modelAndView.addObject("pmbhlist", pmbhlist);
             modelAndView.addObject("ppbhlist", ppbhlist);
             modelAndView.addObject("productList", productList);
-            modelAndView.setViewName("");
+            modelAndView.setViewName("detailsPage");
         }catch (Exception e){
             //返回报错页面
-            return new ModelAndView("");
+            return new ModelAndView("fghfghghf");
         }
         return modelAndView;
     }

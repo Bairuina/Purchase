@@ -3,6 +3,8 @@ package net.wlgzs.purchase.service.impl;
 import com.Enxi;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.*;
@@ -10,6 +12,7 @@ import net.wlgzs.purchase.mapper.OrderDataMapper;
 import net.wlgzs.purchase.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import net.wlgzs.purchase.util.ClientUtil;
+import net.wlgzs.purchase.util.ReadProperties;
 import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
 import org.codehaus.xfire.client.Client;
@@ -19,7 +22,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,16 +52,19 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     @Autowired
     IServiceListService iServiceListService;
 
+    @Autowired
+    ReadProperties properties;
+
 
     Logger logger = LoggerFactory.getLogger(OrderDataServiceImpl.class);
 
 
     //更新订单
     @Override
-    public Result updateOrderDate(String userName, String pwd,int pageNum) {
+    public Result updateOrderDate(int pageNum) {
+        String userName=properties.getUsername();
+        String pwd=properties.getPwd();
         DateTime dateTime=new DateTime();
-//        userName = "7223";
-//        pwd = "ff8080814a1353ac014a139496110049";
         String enPwd = Enxi.enPwd(userName, pwd);
         String jssj =dateTime.toString("yyyyMMddHHmmss") ;
         String kssj = dateTime.minusHours(3).toString("yyyyMMddHHmmss");
@@ -85,41 +93,64 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         }
         JSONObject jsonObject = JSONObject.fromObject(result);
         String flag = jsonObject.get("resultFlag").toString();
+        if(flag.equals("N")){
+            logger.info("没有订单信息！");
+            return new Result(ResultCode.FAIL);
+        }
         int count = Integer.parseInt(jsonObject.get("count").toString());
         List<OrderData> orderList = null;
         List<ProductList> productLists=null;
-        List<AccessoryList> accessoryList=null;
-        List<ServiceList> serviceList=null;
-        JSONObject jsonObjectOrder=jsonObject.getJSONObject("orderList");
-        JSONObject jsonProduct=jsonObjectOrder.getJSONObject("productList");
-        JSONArray jsonProductArray = jsonObject.getJSONArray("productList");
-        JSONArray jsonAccessory=jsonProduct.getJSONArray("accessoryList");
-        JSONArray jsonService=jsonProduct.getJSONArray("serviceList");
+        List<AccessoryList> accessoryLists=null;
+        List<ServiceList> serviceLists=null;
+        if(jsonObject.get("orderList")==null||jsonObject.get("orderList").equals("")){
+            logger.info("没有更新内容!");
+            return new Result(ResultCode.FAIL);
+        }
+        JSONArray orderListData = jsonObject.getJSONArray("orderList");
+        List<OrderData> orderDataList=JSON.parseArray(orderListData.toString(),OrderData.class);
+        logger.info(orderDataList.toString()+"\n\n");
+        for(OrderData orderData:orderDataList){
+            if(!checkddbh(orderData.getDdbh())){
+                logger.info("该订单已存在！");
+                return new Result(ResultCode.FAIL);
+            }
+            productLists=orderData.getProductList();
+            accessoryLists=orderData.getAccessoryList();
+            serviceLists=orderData.getServiceList();
+           if(productLists!=null){
+               for(ProductList productList:productLists){
+                productList.setDdbh(orderData.getDdbh());
+                logger.info("ProductList:"+productList.toString());
+                if(iProductListService.save(productList)){
+                    logger.info("添加成功！\n\n");
+                }
+               }
+           }
+           if(accessoryLists!=null){
+               for(AccessoryList accessoryList:accessoryLists){
+                    accessoryList.setDdbh(orderData.getDdbh());
+                   logger.info("AccessoryList:"+accessoryList.toString());
+                    if(iAccessoryListService.save(accessoryList)){
+                        logger.info("添加成功！\n\n");
+                   }
+               }
+           }
+           if(serviceLists!=null){
+               for(ServiceList serviceList:serviceLists){
+                    serviceList.setDdbh(orderData.getDdbh());
+                   logger.info("ServiceList:"+serviceList.toString());
+                    if(iServiceListService.save(serviceList)){
+                        logger.info("添加成功！\n\n");
+                    }
+               }
+           }
+        }
 
-        if(jsonProductArray!=null){
-            productLists=JSON.parseArray(jsonProductArray.toString(),ProductList.class);
-            if(productLists!=null&&productLists.size()!=0&&iProductListService.saveBatch(productLists)){
-                logger.info("订单商品信息更新完毕！");
-            }
+        int totalPageNum = (count  + 14) / 15;
+        if(totalPageNum>pageNum){
+            pageNum++;
+            updateOrderDate(pageNum);
         }
-        if(jsonAccessory!=null){
-            accessoryList=JSON.parseArray(jsonAccessory.toString(),AccessoryList.class);
-            if(accessoryList!=null&&accessoryList.size()!=0&&iAccessoryListService.saveBatch(accessoryList)){
-                logger.info("订单配件信息更新完毕！");
-            }
-        }
-        if(jsonService!=null){
-            serviceList=JSON.parseArray(jsonService.toString(),ServiceList.class);
-            if(serviceList!=null&&serviceList.size()!=0&&iServiceListService.saveBatch(serviceList)){
-                logger.info("订单服务信息更新完毕！");
-            }
-        }
-            int totalPageNum = (count  + 14) / 15;
-            if(totalPageNum>pageNum){
-                pageNum++;
-                updateOrderDate(userName,pwd,pageNum);
-            }
-
             logger.info("更新完成！");
             return new Result(ResultCode.SUCCESS);
 
@@ -128,22 +159,13 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //查询所有订单
     @Override
-    public Result selectAllOrder(int pageNum) {
-        List<OrderData> orderList = baseMapper.selectList(null);
-        if(orderList==null||orderList.size()==0){
-            return new Result(ResultCode.FAIL);
-        }
-        int count=orderList.size();
-        int totalPageNum = (count  + 14) / 15;
-        logger.info(orderList.toString());
-        if(pageNum==totalPageNum){
-            orderList=orderList.subList((pageNum - 1) * 15 - 1,orderList.size()-1);
-        }
-        else {
-            orderList = orderList.subList((pageNum - 1) * 15 - 1, pageNum * 15 - 1);
-        }
-        Result result=new Result(ResultCode.SUCCESS,"查询成功",orderList,totalPageNum,pageNum);
-        return result;
+    public Result selectAllOrder(Integer pageSize,Integer pageNum) {
+        Page page = new Page(pageNum, pageSize);
+        IPage<OrderData> iPage = null;
+        iPage = baseMapper.selectPage(page,null);
+        List<OrderData> OrderList = iPage.getRecords();
+       logger.info(OrderList.toString());
+        return new Result(ResultCode.SUCCESS, "成功！", OrderList, iPage.getPages(), iPage.getCurrent());
     }
 
 
@@ -154,12 +176,35 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         QueryWrapper<OrderData> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("ddbh", ddbh);
         OrderData orderData = baseMapper.selectOne(queryWrapper);
-        return new Result(ResultCode.SUCCESS,orderData);
+        if(orderData==null){
+            logger.info("没有该订单详情");
+            return new Result(ResultCode.FAIL);
+        }
+        String ddbhData=orderData.getDdbh();
+        List<ProductList> productLists=null;
+        List<AccessoryList> accessoryLists=null;
+        List<ServiceList> serviceLists=null;
+        productLists=iProductListService.selectProductList(ddbhData);
+        serviceLists=iServiceListService.selectServiceList(ddbhData);
+        accessoryLists=iAccessoryListService.selectAccessoryList(ddbhData);
+        List<Object> list=new ArrayList<>();
+        list.add(orderData);
+        list.add(productLists);
+        list.add(serviceLists);
+        list.add(accessoryLists);
+        return new Result(ResultCode.SUCCESS,list);
     }
+
 
     //确定或拒绝订单
     @Override
-    public Result ensureORefuseOrder(String ddbh, String username, String pwd, int qrzt) {
+    public Result ensureORefuseOrder(String ddbh, int qrzt) {
+        if(!checkZt(ddbh).equals("2")){
+            logger.info("该订单状态存在问题！");
+            return new Result(ResultCode.FAIL);
+        }
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -171,6 +216,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
             Client client=new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
             Object[] rets=client.invoke("execGysOrderQr",new Object[]{jsonStr});
             String result=rets[0].toString();
+            logger.info(result.toString());
             JSONObject jsonObject=JSONObject.fromObject(result);
             if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")){
                 String ddbhData=jsonObject.get("ddbh").toString();
@@ -196,9 +242,13 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     }
 
 
+
+
     //订单签收物流信息推送
     @Override
-    public Result ensureOrderArrive(String ddbh, String username, String pwd, int sfcd, String fczddbh, String kdgs, String kddh, String ms, String kdsj) {
+    public Result ensureOrderArrive(String ddbh, int sfcd, String fczddbh, String kdgs, String kddh, String ms, String kdsj) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -221,9 +271,16 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         return null;
     }
 
+
     //订单签收时间信息推送
     @Override
-    public Result ensureOrderTimeSubmit(String ddbh, String username, String pwd, int sfcd, String fczddbh, String shsj) {
+    public Result ensureOrderTimeSubmit(String ddbh, int sfcd, String fczddbh, BigInteger shsj) {
+        if(!checkZt(ddbh).equals("3")){
+            logger.info("该订单状态存在问题！");
+            return new Result(ResultCode.FAIL);
+        }
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -234,11 +291,15 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"fczddbh\": \""+fczddbh+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","execQssj",jsonStr);
-
         if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
             QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
             queryWrapper.eq("ddbh",ddbh);
             OrderData orderData=new OrderData();
+            orderData.setSfcd(sfcd);
+            if(sfcd==0){
+                orderData.setFczddbh(fczddbh);
+            }
+            orderData.setShsj(shsj);
             orderData.setZt("5");
             return  upDateTwo(ddbh,orderData);
         }
@@ -246,9 +307,17 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     }
 
+
+
     //订单发票开始开具时间信息推送
     @Override
-    public Result invoiceStaTimeSubmit(String ddbh, String username, String pwd, String fpkjsj) {
+    public Result invoiceStaTimeSubmit(String ddbh, BigInteger fpkjsj) {
+        if(!checkZt(ddbh).equals("5")){
+            logger.info("该订单状态存在问题！");
+            return new Result(ResultCode.FAIL);
+        }
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         DateTime dateTime=new DateTime();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
@@ -260,15 +329,24 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         JSONObject jsonObject=ClientUtil.getJSONObject("JSONObject jsonObject=ClientUtil.getJSONObject","execFpkjsjByOrder",jsonStr);
         if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
             logger.info("发票开具开始时间已推送！");
-            return new Result(ResultCode.SUCCESS);
+            OrderData orderData=new OrderData();
+            orderData.setFpkjsj(fpkjsj);
+            return upDateTwo(ddbh,orderData);
         }
         logger.info("发票开具开始时间推送失败！");
         return new Result(ResultCode.FAIL);
     }
 
+
     //订单发票开具结束时间信息推送
     @Override
-    public Result invoiceEndTimeSubmit(String ddbh, String username, String pwd, String fpsdsj) {
+    public Result invoiceEndTimeSubmit(String ddbh, BigInteger fpsdsj) {
+        if(!checkZt(ddbh).equals("5")){
+            logger.info("该订单状态存在问题！");
+            return new Result(ResultCode.FAIL);
+        }
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -279,7 +357,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","execfpsdsjByorder",jsonStr);
         if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
             logger.info("收到发票时间信息已推送！");
-            return new Result(ResultCode.SUCCESS);
+            OrderData orderData=new OrderData();
+            orderData.setFpsdsj(fpsdsj);
+            return upDateTwo(ddbh,orderData);
         }
         logger.info("收到发票时间信息推送失败！");
         return new Result(ResultCode.FAIL);
@@ -289,7 +369,13 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //电商已经收到采购单位的付款,将收款标志、收款金额、收款时间提交
     @Override
-    public Result getMoneyDataSubmit(String ddbh, String username, String pwd, int skbz, String skje, String sksj) {
+    public Result getMoneyDataSubmit(String ddbh, int skbz, Integer skje, BigInteger sksj) {
+        if(!checkZt(ddbh).equals("2")){
+            logger.info("该订单状态存在问题！");
+            return new Result(ResultCode.FAIL);
+        }
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -302,7 +388,11 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","execSkqk",jsonStr);
         if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
             logger.info("标志、收款金额、收款时间已提交！");
-            return new Result(ResultCode.SUCCESS);
+            OrderData orderData=new OrderData();
+            orderData.setSkbz(skbz);
+            orderData.setSkje(skje);
+            orderData.setSksj(sksj);
+            return upDateTwo(ddbh,orderData);
         }
         logger.info("标志、收款金额、收款时间提交失败！");
         return new Result(ResultCode.FAIL);
@@ -314,7 +404,13 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //取消订单(已经对进行订单确认)
     @Override
-    public Result deletEnsureOrder(String ddbh, String username, String pwd, String qxyy) {
+    public Result deletEnsureOrder(String ddbh, String qxyy) {
+        if(!checkZt(ddbh).equals("3")){
+            logger.info("该订单状态存在问题！");
+            return new Result(ResultCode.FAIL);
+        }
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -337,7 +433,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //查看采购单位对当前订单的验收情况(可以不存入数据库，只展示)
     @Override
-    public Result checkOrderStatus(String ddbh, String username, String pwd) {
+    public Result checkOrderStatus(String ddbh) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -356,7 +454,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //更新合同
     @Override
-    public Result contractWork(String ddbh, String username, String pwd) {
+    public Result contractWork(String ddbh) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -384,6 +484,25 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         }
     }
 
+    boolean checkddbh(String ddbh){
+        QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("ddbh",ddbh);
+        OrderData data=baseMapper.selectOne(queryWrapper);
+        if(data==null){
+            return true;
+        }
+        return false;
+    }
+
+    String checkZt(String ddbh){
+        QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("ddbh",ddbh);
+        OrderData data=baseMapper.selectOne(queryWrapper);
+        if(data==null){
+            return "4";
+        }
+        return data.getZt();
+    }
     }
 
 

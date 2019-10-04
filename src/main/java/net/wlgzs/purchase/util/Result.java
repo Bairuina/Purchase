@@ -58,6 +58,10 @@ public class Result implements Serializable {
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", data=" + data +
+                ", count=" + count +
+                ", pages=" + pages +
+                ", current=" + current +
                 '}';
     }
+
 }

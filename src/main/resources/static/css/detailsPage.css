@@ -19,7 +19,6 @@
     float: left;
     padding: 0 10px;
     line-height: 28px;
-    font-family: simsun;
     color: #999;
 }
 .homepage:hover{
@@ -33,7 +32,7 @@
     z-index: 6;
     line-height: 26px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
 }
 .current>span>img{
     width: 8px;
@@ -108,7 +107,12 @@
     z-index: 100;
     display: none;
 }
-.kindListDetail>a{
+.kindListDetailList{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.kindListDetail a{
     font-size: 14px;
     width: 100px;
     height: 15px;
@@ -116,7 +120,7 @@
     line-height: 15px;
 
 }
-.kindListDetail>a:hover{
+.kindListDetail a:hover{
     background-color: #F1F1F1;
     cursor: pointer;
 }
@@ -129,7 +133,6 @@
 }
 .brandRegion{
     border: 1px solid #ededed;
-    padding-bottom: 25px;
 }
 .brandDetail{
     padding: 10px;
@@ -155,15 +158,13 @@
     padding-left: 30px;
 }
 .brandDetailLeft>a{
-
-    padding: 3px 12px;
+    padding: 1px 7px;
     font-size: 12px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     cursor: pointer;
-    background-color: #5f79a2;
-    color: white;
+    background-color: #F1F1F1;
 }
 .brandDetailLeft>a:hover{
     opacity:0.8;
@@ -187,13 +188,21 @@
     align-content: flex-start;
 }
 .brandDetailRightContent>a{
-    padding: 7px 30px 2px 2px;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
     color: #000;
+    padding: 3px 15px 3px 15px;
+    margin: 2px;
 }
 .brandDetailRightContent>a:hover{
-    color: #a3a3a3;
+    background-color: #2D93CA;
+    cursor: pointer;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+.brandDetailRightContent>a:hover{
+    color: white;
 }
 .brandDetailRightContent{
     height: 140px;
@@ -202,7 +211,6 @@
     float: right ;
 }
 .key>a{
-    background-color: #f1f1f1;
     padding: 6px 12px;
     font-size: 12px;
     -webkit-border-radius: 2px;
@@ -212,8 +220,7 @@
 }
 
 .key>a:hover{
-    background-color: #5f79a2;
-    color: white;
+    background-color: #f1f1f1;
     border-bottom:1px dashed #c4c4c4;
 }
 
@@ -229,7 +236,6 @@
     display: inline-block;
 }
 .inputProduct{
-    width: 300px;
     border-bottom: 1px solid #46a0d5;
     float: right;
 }
@@ -267,11 +273,11 @@
     padding-top: 5px;
 }
 .items>p>span:nth-child(1){
-    font-weight: 600;
+    font-size: 14px;
 }
 .items>p{
     display: inline-block;
-    font-size: 15px;
+    font-size: 13px;
     padding-top: 10px;
     letter-spacing: 1px;
     width: 385px;

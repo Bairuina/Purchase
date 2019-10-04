@@ -16,3 +16,5 @@ $(".moreThan").on('click',function(){
 $(".inputProduct").focus(function(){
     $(this).children().children().css("");
 });
+
+//搜索时的ajax请求
