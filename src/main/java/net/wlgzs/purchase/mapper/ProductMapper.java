@@ -46,5 +46,10 @@ public interface ProductMapper extends BaseMapper<Product> {
      */
     @Select("SELECT distinct pmbh FROM `product`")
     public List<String> findpmbh();
+    /**
+     * 返回全部型号编号xhbh
+     */
+    @Select("SELECT distinct xhbh FROM `product`")
+    public List<String> findxhbh();
 
 }

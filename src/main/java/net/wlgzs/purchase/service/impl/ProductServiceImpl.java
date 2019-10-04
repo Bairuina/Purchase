@@ -1,20 +1,15 @@
 package net.wlgzs.purchase.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import net.wlgzs.purchase.entity.Product;
 import net.wlgzs.purchase.mapper.ProductMapper;
 import net.wlgzs.purchase.service.IProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import net.wlgzs.purchase.util.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * <p>
@@ -38,7 +33,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         queryWrapper2.eq("pmbh",pmbh).select("ppbh","ppmc");
         List<Product> ppbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
         QueryWrapper<Product> queryWrapper3=new QueryWrapper<>();
-        List<Product> productList=new ArrayList<>();
+        List<Product> productList;
         if(lbbh.equals("0")){
             queryWrapper3.like("xhmc",nr.equals("0")? "":nr)
                     .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
