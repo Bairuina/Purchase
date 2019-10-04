@@ -117,6 +117,8 @@ public class OrderData implements Serializable {
 
     private Integer skbz;
 
+
+
     /**
      * 发票内容
      */

@@ -5,17 +5,10 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.wlgzs.purchase.entity.Contract;
-import net.wlgzs.purchase.entity.OrderData;
-<<<<<<< HEAD
-=======
-import net.wlgzs.purchase.entity.ProductList;
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
+import net.wlgzs.purchase.entity.*;
 import net.wlgzs.purchase.mapper.OrderDataMapper;
-import net.wlgzs.purchase.service.IContractService;
-import net.wlgzs.purchase.service.IOrderDataService;
+import net.wlgzs.purchase.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import net.wlgzs.purchase.service.IRedis;
 import net.wlgzs.purchase.util.ClientUtil;
 import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
@@ -44,6 +37,16 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     @Autowired
     IContractService contractService;
+
+    @Autowired
+    IAccessoryListService iAccessoryListService;
+
+    @Autowired
+    IProductListService iProductListService;
+
+    @Autowired
+    IServiceListService iServiceListService;
+
 
     Logger logger = LoggerFactory.getLogger(OrderDataServiceImpl.class);
 
@@ -84,27 +87,33 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         String flag = jsonObject.get("resultFlag").toString();
         int count = Integer.parseInt(jsonObject.get("count").toString());
         List<OrderData> orderList = null;
-<<<<<<< HEAD
-=======
         List<ProductList> productLists=null;
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
-        if (jsonObject.get("orderList") != null && !jsonObject.get("orderList").toString().equals("")) {
-            JSONArray jsonArray = jsonObject.getJSONArray("orderList");
-            orderList = JSON.parseArray(jsonArray.toString(), OrderData.class);
-        } else {
-            logger.info("这次更新没有发现订单");
-        }
-        if (orderList != null && orderList.size() != 0 && flag.equals("Y")) {
-            for (OrderData order : orderList) {
-                order.setOrderId(1);
-                logger.info(order.toString());
-                baseMapper.insert(order);
+        List<AccessoryList> accessoryList=null;
+        List<ServiceList> serviceList=null;
+        JSONObject jsonObjectOrder=jsonObject.getJSONObject("orderList");
+        JSONObject jsonProduct=jsonObjectOrder.getJSONObject("productList");
+        JSONArray jsonProductArray = jsonObject.getJSONArray("productList");
+        JSONArray jsonAccessory=jsonProduct.getJSONArray("accessoryList");
+        JSONArray jsonService=jsonProduct.getJSONArray("serviceList");
+
+        if(jsonProductArray!=null){
+            productLists=JSON.parseArray(jsonProductArray.toString(),ProductList.class);
+            if(productLists!=null&&productLists.size()!=0&&iProductListService.saveBatch(productLists)){
+                logger.info("订单商品信息更新完毕！");
             }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
+        }
+        if(jsonAccessory!=null){
+            accessoryList=JSON.parseArray(jsonAccessory.toString(),AccessoryList.class);
+            if(accessoryList!=null&&accessoryList.size()!=0&&iAccessoryListService.saveBatch(accessoryList)){
+                logger.info("订单配件信息更新完毕！");
+            }
+        }
+        if(jsonService!=null){
+            serviceList=JSON.parseArray(jsonService.toString(),ServiceList.class);
+            if(serviceList!=null&&serviceList.size()!=0&&iServiceListService.saveBatch(serviceList)){
+                logger.info("订单服务信息更新完毕！");
+            }
+        }
             int totalPageNum = (count  + 14) / 15;
             if(totalPageNum>pageNum){
                 pageNum++;
@@ -113,9 +122,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
             logger.info("更新完成！");
             return new Result(ResultCode.SUCCESS);
-        } else {
-            return new Result(ResultCode.FAIL);
-        }
+
     }
 
 
@@ -360,27 +367,24 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         Contract contract=new Contract();
         contract.setContractUrl(jsonObject.getString("url"));
         contract.setDdbh(ddbh);
-<<<<<<< HEAD
-        return contractService.addContract(contract);
-=======
         return null;
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
     }
 
 
-    Result upDateTwo(String ddbh,OrderData orderData){
-       QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
-       queryWrapper.eq("ddbh",ddbh);
-        int data=baseMapper.update(orderData,queryWrapper);
-        if(data>=0){
+    Result upDateTwo(String ddbh,OrderData orderData) {
+        QueryWrapper<OrderData> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("ddbh", ddbh);
+        int data = baseMapper.update(orderData, queryWrapper);
+        if (data >= 0) {
             logger.info("操作订单成功！");
-            return new Result(ResultCode.SUCCESS,"操作订单成功!");
-        }
-        else {
+            return new Result(ResultCode.SUCCESS, "操作订单成功!");
+        } else {
             logger.info("本地数据库操作订单失败！");
-            return new Result(ResultCode.FAIL,"本地数据库操作订单失败！");
+            return new Result(ResultCode.FAIL, "本地数据库操作订单失败！");
         }
     }
 
+    }
 
-}
+
+

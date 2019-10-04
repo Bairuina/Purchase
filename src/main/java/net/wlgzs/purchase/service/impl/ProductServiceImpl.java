@@ -28,14 +28,12 @@ import java.util.Set;
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
     @Resource
     protected ProductMapper productMapper;
-    @Resource
-    protected Result result;
 
     @Override
     public ModelAndView findallProduct(String lbbh,String pmbh,String ppbh,String nr){
         QueryWrapper<Product> queryWrapper=new QueryWrapper<>();
         queryWrapper.select("lbbh","lbmc");
-        List<Product> lbbhlist=new ArrayList<>(new HashSet<>(productMapper.selectList(queryWrapper)));
+        List<Product> lbbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper)));
         QueryWrapper<Product> queryWrapper1=new QueryWrapper<>();
         queryWrapper1.eq("lbbh",lbbh).select("pmbh","pmmc");
         List<Product> pmbhlist=new ArrayList<>(new HashSet<>(productMapper.selectList(queryWrapper1)));

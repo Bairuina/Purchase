@@ -6,12 +6,9 @@ import net.wlgzs.purchase.mapper.ProductListMapper;
 import net.wlgzs.purchase.service.IProductListService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import net.wlgzs.purchase.util.Result;
-<<<<<<< HEAD
-=======
 import net.wlgzs.purchase.util.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,11 +26,6 @@ import java.util.List;
 @Service
 public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, ProductList> implements IProductListService {
 
-<<<<<<< HEAD
-    @Override
-    public Result addProductList(ProductList productList) {
-        return null;
-=======
     Logger logger= LoggerFactory.getLogger(ProductListServiceImpl.class);
     @Override
     public Result addProductList(ProductList productList) {
@@ -46,14 +38,10 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
             logger.info("订单商品信息添加失败！");
             return new Result(ResultCode.FAIL);
         }
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
     }
 
     @Override
     public Result delProductList(int productId) {
-<<<<<<< HEAD
-        return null;
-=======
         int count=baseMapper.deleteById(productId);
         if(count>=0){
             logger.info("订单商品信息删除完毕！");
@@ -63,14 +51,10 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
             logger.info("订单商品信息删除失败！");
             return new Result(ResultCode.FAIL);
         }
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
     }
 
     @Override
     public Result delProductListByOrderId(int orderId) {
-<<<<<<< HEAD
-        return null;
-=======
         QueryWrapper<ProductList> queryWrapper=new QueryWrapper();
         queryWrapper.eq("order_id",orderId);
         int count=baseMapper.delete(queryWrapper);
@@ -82,14 +66,10 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
             logger.info("该订单商品信息删除失败！");
             return new Result(ResultCode.FAIL);
         }
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
     }
 
     @Override
     public Result selectProductList(int orderId) {
-<<<<<<< HEAD
-        return null;
-=======
         QueryWrapper<ProductList> queryWrapper=new QueryWrapper();
         queryWrapper.eq("order_id",orderId);
         List<ProductList> lists=baseMapper.selectList(queryWrapper);
@@ -101,14 +81,10 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
             logger.info("无相关查询结果！");
             return new Result(ResultCode.FAIL,"没有相关内容！");
         }
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
     }
 
     @Override
     public Result selectProduct(int productId) {
-<<<<<<< HEAD
-        return null;
-=======
         ProductList productList=baseMapper.selectById(productId);
         if(productList!=null) {
             logger.info("订单商品查询的成功！");
@@ -118,15 +94,10 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
             logger.info("无相关查询结果！");
             return new Result(ResultCode.FAIL,"没有相关内容！");
         }
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
     }
 
     @Override
     public Result upDateProductList(ProductList productList) {
-<<<<<<< HEAD
-        return null;
-    }
-=======
         int count=baseMapper.updateById(productList);
         if(count>=0){
             logger.info("配件信息更新完毕！");
@@ -138,6 +109,4 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
         }
 
     }
-
->>>>>>> 4ae3872cb51b1e8b74f2f81504993f908b33dec9
 }

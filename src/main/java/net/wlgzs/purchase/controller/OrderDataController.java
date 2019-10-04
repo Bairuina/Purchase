@@ -35,9 +35,9 @@ public class OrderDataController extends BaseController {
     @ApiOperation("更新订单")
     @RequestMapping("/upDataOrder")
     @ResponseBody
-    @Scheduled(cron = "0 0 0,3,6,9,12,15,18,21 * * ?")
-    public Result upDataOrder() throws IOException {
-        return  iOrderService.updateOrderDate("","",1);
+//    @Scheduled(cron = "0 0 0,3,6,9,12,15,18,21 * * ?")
+    public Result upDataOrder(@Param("username")String username,@Param("pwd")String pwd) throws IOException {
+        return  iOrderService.updateOrderDate(username,pwd,1);
     }
 
 
