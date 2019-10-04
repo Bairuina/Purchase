@@ -42,7 +42,7 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         String pwd = readProperties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String json = "{\"username\": " + username + ", \"pwd\": \"" + enPwd + "\",\"ddbh\": \"" + ddbh + "\"}";
-        JSONObject jsonObject = ClientUtil.getJSONObject2(readProperties.getFindOrderHt(), json, readProperties);
+        JSONObject jsonObject = ClientUtil.getJSONObject(readProperties.getUrl(),readProperties.getFindOrderHt(), json);
         if ("Y".equals(jsonObject.getString("resultFlag"))) {
             String url = jsonObject.getString("url");
             //存入本地数据库
@@ -65,7 +65,7 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         String pwd = readProperties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String json = "{\"username\": " + username + ", \"pwd\": \"" + enPwd + "\",\"ddbh\": \"" + ddbh + "\"}";
-        JSONObject jsonObject = ClientUtil.getJSONObject2(readProperties.getFindOrderHt(), json, readProperties);
+        JSONObject jsonObject = ClientUtil.getJSONObject(readProperties.getUrl(),readProperties.getFindOrderHt(), json);
         if ("Y".equals(jsonObject.getString("resultFlag"))) {
             String url = jsonObject.getString("url");
             //存入本地数据库

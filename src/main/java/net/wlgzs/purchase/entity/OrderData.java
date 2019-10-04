@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.List;
 
 /**
  * <p>
@@ -12,10 +14,269 @@ import java.io.Serializable;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-10-03
+ * @since 2019-10-04
  */
 @TableName("order_data")
 public class OrderData implements Serializable {
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getDeliverycity() {
+        return deliverycity;
+    }
+
+    public void setDeliverycity(String deliverycity) {
+        this.deliverycity = deliverycity;
+    }
+
+    public String getDeliverycounty() {
+        return deliverycounty;
+    }
+
+    public void setDeliverycounty(String deliverycounty) {
+        this.deliverycounty = deliverycounty;
+    }
+
+    public String getShdd() {
+        return shdd;
+    }
+
+    public void setShdd(String shdd) {
+        this.shdd = shdd;
+    }
+
+    public String getDdbh() {
+        return ddbh;
+    }
+
+    public void setDdbh(String ddbh) {
+        this.ddbh = ddbh;
+    }
+
+    public String getCgrmc() {
+        return cgrmc;
+    }
+
+    public void setCgrmc(String cgrmc) {
+        this.cgrmc = cgrmc;
+    }
+
+    public String getXflxrxm() {
+        return xflxrxm;
+    }
+
+    public void setXflxrxm(String xflxrxm) {
+        this.xflxrxm = xflxrxm;
+    }
+
+    public String getXfdh() {
+        return xfdh;
+    }
+
+    public void setXfdh(String xfdh) {
+        this.xfdh = xfdh;
+    }
+
+    public String getGhsmc() {
+        return ghsmc;
+    }
+
+    public void setGhsmc(String ghsmc) {
+        this.ghsmc = ghsmc;
+    }
+
+    public BigDecimal getDdze() {
+        return ddze;
+    }
+
+    public void setDdze(BigDecimal ddze) {
+        this.ddze = ddze;
+    }
+
+    public String getCjrq() {
+        return cjrq;
+    }
+
+    public void setCjrq(String cjrq) {
+        this.cjrq = cjrq;
+    }
+
+    public String getZt() {
+        return zt;
+    }
+
+    public void setZt(String zt) {
+        this.zt = zt;
+    }
+
+    public String getZffs() {
+        return zffs;
+    }
+
+    public void setZffs(String zffs) {
+        this.zffs = zffs;
+    }
+
+    public String getFptt() {
+        return fptt;
+    }
+
+    public void setFptt(String fptt) {
+        this.fptt = fptt;
+    }
+
+    public String getNsrsbh() {
+        return nsrsbh;
+    }
+
+    public void setNsrsbh(String nsrsbh) {
+        this.nsrsbh = nsrsbh;
+    }
+
+    public String getSfxyazfw() {
+        return sfxyazfw;
+    }
+
+    public void setSfxyazfw(String sfxyazfw) {
+        this.sfxyazfw = sfxyazfw;
+    }
+
+    public String getBeiz() {
+        return beiz;
+    }
+
+    public void setBeiz(String beiz) {
+        this.beiz = beiz;
+    }
+
+    public String getShsj() {
+        return shsj;
+    }
+
+    public void setShsj(String shsj) {
+        this.shsj = shsj;
+    }
+
+    public String getShqx() {
+        return shqx;
+    }
+
+    public void setShqx(String shqx) {
+        this.shqx = shqx;
+    }
+
+    public Integer getSkbz() {
+        return skbz;
+    }
+
+    public void setSkbz(Integer skbz) {
+        this.skbz = skbz;
+    }
+
+    public String getFpnr() {
+        return fpnr;
+    }
+
+    public void setFpnr(String fpnr) {
+        this.fpnr = fpnr;
+    }
+
+    public BigInteger getFpkjsj() {
+        return fpkjsj;
+    }
+
+    public void setFpkjsj(BigInteger fpkjsj) {
+        this.fpkjsj = fpkjsj;
+    }
+
+    public BigInteger getFpsdsj() {
+        return fpsdsj;
+    }
+
+    public void setFpsdsj(BigInteger fpsdsj) {
+        this.fpsdsj = fpsdsj;
+    }
+
+    public BigInteger getSksj() {
+        return sksj;
+    }
+
+    public void setSksj(BigInteger sksj) {
+        this.sksj = sksj;
+    }
+
+    public Integer getSkje() {
+        return skje;
+    }
+
+    public void setSkje(Integer skje) {
+        this.skje = skje;
+    }
+
+    public Integer getYsbz() {
+        return ysbz;
+    }
+
+    public void setYsbz(Integer ysbz) {
+        this.ysbz = ysbz;
+    }
+
+    public BigInteger getYssj() {
+        return yssj;
+    }
+
+    public void setYssj(BigInteger yssj) {
+        this.yssj = yssj;
+    }
+
+    public Integer getSfcd() {
+        return sfcd;
+    }
+
+    public void setSfcd(Integer sfcd) {
+        this.sfcd = sfcd;
+    }
+
+    public String getFczddbh() {
+        return fczddbh;
+    }
+
+    public void setFczddbh(String fczddbh) {
+        this.fczddbh = fczddbh;
+    }
+
+    public List<ProductList> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<ProductList> productList) {
+        this.productList = productList;
+    }
+
+    public List<ServiceList> getServiceList() {
+        return serviceList;
+    }
+
+    public void setServiceList(List<ServiceList> serviceList) {
+        this.serviceList = serviceList;
+    }
+
+    public List<AccessoryList> getAccessoryList() {
+        return accessoryList;
+    }
+
+    public void setAccessoryList(List<AccessoryList> accessoryList) {
+        this.accessoryList = accessoryList;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -115,198 +376,63 @@ public class OrderData implements Serializable {
      */
     private String shqx;
 
+    /**
+     * skbz 1-正常收款，2-未收款
+     */
     private Integer skbz;
-
-
 
     /**
      * 发票内容
      */
     private String fpnr;
 
-    private Integer fpkjsj;
+    /**
+     * 发票开具时间
+     */
+    private BigInteger fpkjsj;
 
-    private Integer fpsdsj;
+    /**
+     * 收到发票时间
+     */
+    private BigInteger fpsdsj;
 
-    private Integer sksj;
+    /**
+     * 收款时间
+     */
+    private BigInteger sksj;
 
+    /**
+     * 收款金额
+     */
     private Integer skje;
 
-    public Integer getOrderId() {
-        return orderId;
-    }
+    /**
+     * 验收标志 验收标志（1-自动验收，2-人工验收）
+     */
+    private Integer ysbz;
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-    public String getDeliverycity() {
-        return deliverycity;
-    }
+    /**
+     * 验收时间
+     */
+    private BigInteger yssj;
 
-    public void setDeliverycity(String deliverycity) {
-        this.deliverycity = deliverycity;
-    }
-    public String getDeliverycounty() {
-        return deliverycounty;
-    }
+    /**
+     * 是否拆单 是否拆单（0-拆单 1-不拆单）
+     */
+    private Integer sfcd;
 
-    public void setDeliverycounty(String deliverycounty) {
-        this.deliverycounty = deliverycounty;
-    }
-    public String getShdd() {
-        return shdd;
-    }
+    /**
+     * 分拆子订单编号  子订单编号，配对一个物流信息（sfcd为0的时候需要填写分拆子订单编号，不拆单的话子订单编号参数不用加）
+     */
+    private String fczddbh;
 
-    public void setShdd(String shdd) {
-        this.shdd = shdd;
-    }
-    public String getDdbh() {
-        return ddbh;
-    }
 
-    public void setDdbh(String ddbh) {
-        this.ddbh = ddbh;
-    }
-    public String getCgrmc() {
-        return cgrmc;
-    }
+    private List<ProductList> productList;
 
-    public void setCgrmc(String cgrmc) {
-        this.cgrmc = cgrmc;
-    }
-    public String getXflxrxm() {
-        return xflxrxm;
-    }
+    private List<ServiceList> serviceList;
 
-    public void setXflxrxm(String xflxrxm) {
-        this.xflxrxm = xflxrxm;
-    }
-    public String getXfdh() {
-        return xfdh;
-    }
+    private List<AccessoryList> accessoryList;
 
-    public void setXfdh(String xfdh) {
-        this.xfdh = xfdh;
-    }
-    public String getGhsmc() {
-        return ghsmc;
-    }
-
-    public void setGhsmc(String ghsmc) {
-        this.ghsmc = ghsmc;
-    }
-    public BigDecimal getDdze() {
-        return ddze;
-    }
-
-    public void setDdze(BigDecimal ddze) {
-        this.ddze = ddze;
-    }
-    public String getCjrq() {
-        return cjrq;
-    }
-
-    public void setCjrq(String cjrq) {
-        this.cjrq = cjrq;
-    }
-    public String getZt() {
-        return zt;
-    }
-
-    public void setZt(String zt) {
-        this.zt = zt;
-    }
-    public String getZffs() {
-        return zffs;
-    }
-
-    public void setZffs(String zffs) {
-        this.zffs = zffs;
-    }
-    public String getFptt() {
-        return fptt;
-    }
-
-    public void setFptt(String fptt) {
-        this.fptt = fptt;
-    }
-    public String getNsrsbh() {
-        return nsrsbh;
-    }
-
-    public void setNsrsbh(String nsrsbh) {
-        this.nsrsbh = nsrsbh;
-    }
-    public String getSfxyazfw() {
-        return sfxyazfw;
-    }
-
-    public void setSfxyazfw(String sfxyazfw) {
-        this.sfxyazfw = sfxyazfw;
-    }
-    public String getBeiz() {
-        return beiz;
-    }
-
-    public void setBeiz(String beiz) {
-        this.beiz = beiz;
-    }
-    public String getShsj() {
-        return shsj;
-    }
-
-    public void setShsj(String shsj) {
-        this.shsj = shsj;
-    }
-    public String getShqx() {
-        return shqx;
-    }
-
-    public void setShqx(String shqx) {
-        this.shqx = shqx;
-    }
-    public Integer getSkbz() {
-        return skbz;
-    }
-
-    public void setSkbz(Integer skbz) {
-        this.skbz = skbz;
-    }
-    public String getFpnr() {
-        return fpnr;
-    }
-
-    public void setFpnr(String fpnr) {
-        this.fpnr = fpnr;
-    }
-    public Integer getFpkjsj() {
-        return fpkjsj;
-    }
-
-    public void setFpkjsj(Integer fpkjsj) {
-        this.fpkjsj = fpkjsj;
-    }
-    public Integer getFpsdsj() {
-        return fpsdsj;
-    }
-
-    public void setFpsdsj(Integer fpsdsj) {
-        this.fpsdsj = fpsdsj;
-    }
-    public Integer getSksj() {
-        return sksj;
-    }
-
-    public void setSksj(Integer sksj) {
-        this.sksj = sksj;
-    }
-    public Integer getSkje() {
-        return skje;
-    }
-
-    public void setSkje(Integer skje) {
-        this.skje = skje;
-    }
 
     @Override
     public String toString() {
@@ -336,6 +462,10 @@ public class OrderData implements Serializable {
         ", fpsdsj=" + fpsdsj +
         ", sksj=" + sksj +
         ", skje=" + skje +
+        ", ysbz=" + ysbz +
+        ", yssj=" + yssj +
+        ", sfcd=" + sfcd +
+        ", fczddbh=" + fczddbh +
         "}";
     }
 }

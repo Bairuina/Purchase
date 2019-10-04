@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import net.wlgzs.purchase.entity.OrderData;
 import net.wlgzs.purchase.util.Result;
 
+import java.math.BigInteger;
+
 /**
  * <p>
  *  服务类
@@ -18,7 +20,7 @@ public interface IOrderDataService extends IService<OrderData> {
     Result updateOrderDate(String userName, String pwd,int pageNum);
 
     //查询订单
-    Result selectAllOrder(int pageNum);
+    Result selectAllOrder(Integer pageSize,Integer pageNum);
 
     //查看单个订单详情
     Result selectOneOrder(String ddbh);
@@ -33,7 +35,7 @@ public interface IOrderDataService extends IService<OrderData> {
     Result ensureOrderTimeSubmit(String ddbh,String username,String pwd,int sfcd,String fczddbh,String shsj);
 
     //订单发票开具时间信息推送
-    Result invoiceStaTimeSubmit(String ddbh,String username,String pwd,String fpkjsj);
+    Result invoiceStaTimeSubmit(String ddbh, String username, String pwd, BigInteger fpkjsj);
 
     //订单发票收到开具信息推送
     Result invoiceEndTimeSubmit(String ddbh,String username,String pwd,String fpsdsj);
