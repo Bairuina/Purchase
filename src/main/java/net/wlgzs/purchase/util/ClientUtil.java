@@ -18,4 +18,18 @@ public class ClientUtil {
         }
         return  null;
     }
+
+    public static JSONObject getJSONObject2(String wayName,String parameter,ReadProperties readProperties){
+
+        try {
+            Client client=new Client(new URL(readProperties.getUrl()));
+            Object[] rets=client.invoke(wayName,new Object[]{parameter});
+            String result=rets[0].toString();
+            return JSONObject.fromObject(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  null;
+    }
+
 }
