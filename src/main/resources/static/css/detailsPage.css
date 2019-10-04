@@ -60,15 +60,17 @@
     justify-content:space-between;
     padding: 10px;
 }
-.itemsListDetail>a{
+.itemsListDetail>ul>li{
     cursor: pointer;
     font-size: 14px;
     width: 100px;
     height: 15px;
     padding: 10px;
     line-height: 15px;
+    display: inline-block;
+    list-style-type: none;
 }
-.itemsListDetail>a:hover{
+.itemsListDetail>ul>li:hover{
     background-color: #F1F1F1;
     cursor: pointer;
 }
@@ -107,15 +109,20 @@
     z-index: 100;
     display: none;
 }
-.kindListDetail>a{
+/*.kindListDetail>ul>li{*/
+
+
+/*}*/
+.kindListDetail>ul>li{
+    display: inline-block;
+    list-style-type: none;
     font-size: 14px;
     width: 100px;
     height: 15px;
     padding: 10px;
     line-height: 15px;
-
 }
-.kindListDetail>a:hover{
+.kindListDetail>ul>li:hover{
     background-color: #F1F1F1;
     cursor: pointer;
 }
@@ -182,21 +189,23 @@
     justify-content: flex-start;
     align-content: flex-start;
 }
-.brandDetailRightContent>a{
+.brandDetailRightContent>ul>li{
     font-size: 13px;
     cursor: pointer;
     color: #000;
     padding: 3px 15px 3px 15px;
     margin: 2px;
+    display: inline-block;
+    list-style-type: none;
 }
-.brandDetailRightContent>a:hover{
+.brandDetailRightContent>ul>li:hover{
     background-color: #2D93CA;
     cursor: pointer;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
-.brandDetailRightContent>a:hover{
+.brandDetailRightContent>ul>li:hover{
     color: white;
 }
 .brandDetailRightContent{
