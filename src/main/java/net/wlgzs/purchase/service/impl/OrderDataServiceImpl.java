@@ -12,6 +12,7 @@ import net.wlgzs.purchase.mapper.OrderDataMapper;
 import net.wlgzs.purchase.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import net.wlgzs.purchase.util.ClientUtil;
+import net.wlgzs.purchase.util.ReadProperties;
 import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
 import org.codehaus.xfire.client.Client;
@@ -51,13 +52,18 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     @Autowired
     IServiceListService iServiceListService;
 
+    @Autowired
+    ReadProperties properties;
+
 
     Logger logger = LoggerFactory.getLogger(OrderDataServiceImpl.class);
 
 
     //更新订单
     @Override
-    public Result updateOrderDate(String userName, String pwd,int pageNum) {
+    public Result updateOrderDate(int pageNum) {
+        String userName=properties.getUsername();
+        String pwd=properties.getPwd();
         DateTime dateTime=new DateTime();
         String enPwd = Enxi.enPwd(userName, pwd);
         String jssj =dateTime.toString("yyyyMMddHHmmss") ;
@@ -143,7 +149,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         int totalPageNum = (count  + 14) / 15;
         if(totalPageNum>pageNum){
             pageNum++;
-            updateOrderDate(userName,pwd,pageNum);
+            updateOrderDate(pageNum);
         }
             logger.info("更新完成！");
             return new Result(ResultCode.SUCCESS);
@@ -191,7 +197,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //确定或拒绝订单
     @Override
-    public Result ensureORefuseOrder(String ddbh, String username, String pwd, int qrzt) {
+    public Result ensureORefuseOrder(String ddbh, int qrzt) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -204,8 +212,6 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
             Object[] rets=client.invoke("execGysOrderQr",new Object[]{jsonStr});
             String result=rets[0].toString();
             JSONObject jsonObject=JSONObject.fromObject(result);
-
-
             if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")){
                 String ddbhData=jsonObject.get("ddbh").toString();
                 OrderData orderData=new OrderData();
@@ -232,7 +238,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //订单签收物流信息推送
     @Override
-    public Result ensureOrderArrive(String ddbh, String username, String pwd, int sfcd, String fczddbh, String kdgs, String kddh, String ms, String kdsj) {
+    public Result ensureOrderArrive(String ddbh, int sfcd, String fczddbh, String kdgs, String kddh, String ms, String kdsj) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -270,7 +278,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //订单签收时间信息推送
     @Override
-    public Result ensureOrderTimeSubmit(String ddbh, String username, String pwd, int sfcd, String fczddbh, String shsj) {
+    public Result ensureOrderTimeSubmit(String ddbh, int sfcd, String fczddbh, String shsj) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -297,7 +307,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //订单发票开始开具时间信息推送
     @Override
-    public Result invoiceStaTimeSubmit(String ddbh, String username, String pwd, BigInteger fpkjsj) {
+    public Result invoiceStaTimeSubmit(String ddbh, BigInteger fpkjsj) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         DateTime dateTime=new DateTime();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
@@ -322,7 +334,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //订单发票开具结束时间信息推送
     @Override
-    public Result invoiceEndTimeSubmit(String ddbh, String username, String pwd, String fpsdsj) {
+    public Result invoiceEndTimeSubmit(String ddbh, String fpsdsj) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -343,7 +357,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //电商已经收到采购单位的付款,将收款标志、收款金额、收款时间提交
     @Override
-    public Result getMoneyDataSubmit(String ddbh, String username, String pwd, int skbz, String skje, String sksj) {
+    public Result getMoneyDataSubmit(String ddbh, int skbz, String skje, String sksj) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -368,7 +384,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //取消订单(已经对进行订单确认)
     @Override
-    public Result deletEnsureOrder(String ddbh, String username, String pwd, String qxyy) {
+    public Result deletEnsureOrder(String ddbh, String qxyy) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -391,7 +409,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //查看采购单位对当前订单的验收情况(可以不存入数据库，只展示)
     @Override
-    public Result checkOrderStatus(String ddbh, String username, String pwd) {
+    public Result checkOrderStatus(String ddbh) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
@@ -401,7 +421,6 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","findYsByOrder",jsonStr);
         if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
             OrderData orderData=new OrderData();
-//
             orderData.setZt("5");
             return upDateTwo(ddbh,orderData);
         }
@@ -411,7 +430,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //更新合同
     @Override
-    public Result contractWork(String ddbh, String username, String pwd) {
+    public Result contractWork(String ddbh) {
+        String username=properties.getUsername();
+        String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         String jsonStr="{\n" +
                 "\"username\": \""+username+"\", \n" +
