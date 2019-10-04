@@ -2,6 +2,7 @@ package net.wlgzs.purchase.util;
 
 import com.Enxi;
 import org.codehaus.xfire.client.Client;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URL;
 
@@ -11,16 +12,16 @@ import java.net.URL;
  */
 public class GeneralMethod {
 
-    public static String queryContract(String ddbh){
+    public static String queryContract(String ddbh,ReadProperties readProperties){
         //本地不存在的时候
         String result = "";
-        String username = "7223";
-        String pwd = "ff8080814a1353ac014a139496110049";
+        String username = readProperties.getUsername();
+        String pwd = readProperties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
         try {
-            Client client = new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
-            String json = "{\"username\": 7223, \"pwd\": \"" + enPwd + "\",\"ddbh\": \"" + ddbh + "}";
-            Object[] rets = client.invoke("findSprkandParam", new Object[]{json});
+            Client client = new Client(new URL(readProperties.getUrl()));
+            String json = "{\"username\": 7223, \"pwd\": \"" + enPwd + "\",\"ddbh\": \"" + ddbh + "\"}";
+            Object[] rets = client.invoke(readProperties.getFindOrderHt(), new Object[]{json});
             result = (String) rets[0];
             System.out.println(result);
         } catch (Exception e) {
