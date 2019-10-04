@@ -151,6 +151,12 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.61</version>
         </dependency>
+<!-- thymself-->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
     </dependencies>
 
     <build>
