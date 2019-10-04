@@ -38,9 +38,8 @@ public class OrderDataController extends BaseController {
     @ApiOperation("更新订单")
     @RequestMapping("/upDataOrder")
     @ResponseBody
-//    @Scheduled(cron = "0 0 0,3,6,9,12,15,18,21 * * ?")
+    @Scheduled(cron = "0 0 0,3,6,9,12,15,18,21 * * ?")
     public Result upDataOrder() throws IOException {
-
         return  iOrderService.updateOrderDate(readProperties.getUsername(),readProperties.getPwd(),1);
     }
 
@@ -64,10 +63,12 @@ public class OrderDataController extends BaseController {
 
 
     @ApiOperation("查看单个订单详情")
-    @ResponseBody
     @RequestMapping("/selectOneOrder")
-    public Result checkDetailedOrder(@Param("ddbh") String ddbh){
-        return iOrderService.selectOneOrder(ddbh);
+    public ModelAndView checkDetailedOrder(@Param("ddbh") String ddbh){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("订单详情页");
+        modelAndView.addObject("allData",iOrderService.selectOneOrder(ddbh));
+        return modelAndView;
     }
 
 
