@@ -72,7 +72,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         queryWrapper.like("user_name", findName).or().eq("user_phone", findName);
         iPage = baseMapper.selectPage(page, queryWrapper);
         List<User> userList = iPage.getRecords();
-        return new Result(ResultCode.SUCCESS, findName, userList, iPage.getPages(), iPage.getCurrent());
+        return new Result(ResultCode.SUCCESS, findName, userList, iPage.getPages(),iPage.getCurrent());
     }
 
     @Override

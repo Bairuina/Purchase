@@ -1,8 +1,10 @@
 package net.wlgzs.purchase.service;
 
-import net.wlgzs.purchase.entity.ProductList;
 import com.baomidou.mybatisplus.extension.service.IService;
+import net.wlgzs.purchase.entity.ProductList;
 import net.wlgzs.purchase.util.Result;
+
+import java.util.List;
 
 /**
  * <p>
@@ -18,9 +20,9 @@ public interface IProductListService extends IService<ProductList> {
     //删除订单商品
     Result delProductList(int productId);
     //根据订单删除订单商品
-    Result delProductListByOrderId(int orderId);
+    Result delProductListByOrderId(String ddbh);
     //查询订单商品列表
-    Result selectProductList(int orderId);
+    List<ProductList> selectProductList(String ddbh);
     //查询单个订单商品
     Result selectProduct(int productId);
     //更新订单商品

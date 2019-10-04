@@ -1,13 +1,9 @@
 package net.wlgzs.purchase.entity;
 
 import java.math.BigDecimal;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 
 /**
@@ -16,11 +12,8 @@ import java.io.Serializable;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-09-28
+ * @since 2019-10-04
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @TableName("accessory_list")
 public class AccessoryList implements Serializable {
 
@@ -30,7 +23,7 @@ public class AccessoryList implements Serializable {
      * 订单配件id
      */
     @TableId("accessoryList_id")
-    private Integer accessorylistId;
+    private int accessorylistId;
 
     /**
      * 配件名称
@@ -53,7 +46,52 @@ public class AccessoryList implements Serializable {
     /**
      * 订单id
      */
-    @TableField("order_id")
-    private Integer orderId;
+    private String ddbh;
 
+    public Integer getAccessorylistId() {
+        return accessorylistId;
+    }
+
+    public void setAccessorylistId(Integer accessorylistId) {
+        this.accessorylistId = accessorylistId;
+    }
+    public String getPjmc() {
+        return pjmc;
+    }
+
+    public void setPjmc(String pjmc) {
+        this.pjmc = pjmc;
+    }
+    public Integer getSl() {
+        return sl;
+    }
+
+    public void setSl(Integer sl) {
+        this.sl = sl;
+    }
+    public BigDecimal getPjjg() {
+        return pjjg;
+    }
+
+    public void setPjjg(BigDecimal pjjg) {
+        this.pjjg = pjjg;
+    }
+    public String getDdbh() {
+        return ddbh;
+    }
+
+    public void setDdbh(String ddbh) {
+        this.ddbh = ddbh;
+    }
+
+    @Override
+    public String toString() {
+        return "AccessoryList{" +
+        "accessorylistId=" + accessorylistId +
+        ", pjmc=" + pjmc +
+        ", sl=" + sl +
+        ", pjjg=" + pjjg +
+        ", ddbh=" + ddbh +
+        "}";
+    }
 }

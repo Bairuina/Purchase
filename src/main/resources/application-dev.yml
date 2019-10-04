@@ -1,6 +1,16 @@
 server:
   port: 10508
+
 spring:
+  thymeleaf:
+    prefix: classpath:/static/
+    suffix: .html
+    mode: HTML
+    encoding: utf-8
+    servlet:
+      content-type: text/html
+    cache: false
+
   datasource:
     name: mysql
     type: com.alibaba.druid.pool.DruidDataSource

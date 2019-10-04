@@ -5,7 +5,7 @@ import net.wlgzs.purchase.entity.AccessoryList;
 import net.wlgzs.purchase.mapper.AccessoryListMapper;
 import net.wlgzs.purchase.service.IAccessoryListService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import net.wlgzs.purchase.service.IOrderDataService;
+//import net.wlgzs.purchase.service.IOrderDataService;
 import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
 import org.slf4j.Logger;
@@ -26,8 +26,8 @@ import java.util.List;
 @Service
 public class AccessoryListServiceImpl extends ServiceImpl<AccessoryListMapper, AccessoryList> implements IAccessoryListService {
 
-    @Autowired
-    IOrderDataService orderDataService;
+//    @Autowired
+//    IOrderDataService orderDataService;
 
 
     Logger logger= LoggerFactory.getLogger(AccessoryListServiceImpl.class);
@@ -46,9 +46,9 @@ public class AccessoryListServiceImpl extends ServiceImpl<AccessoryListMapper, A
     }
 
     @Override
-    public Result delAccessoryList(int orderId) {
+    public Result delAccessoryList(String ddbh) {
         QueryWrapper<AccessoryList> queryWrapper=new QueryWrapper();
-        queryWrapper.eq("order_id",orderId);
+        queryWrapper.eq("ddbh",ddbh);
         int count=baseMapper.delete(queryWrapper);
         if(count>=0){
             logger.info("该订单配件信息删除完毕！");
@@ -74,17 +74,17 @@ public class AccessoryListServiceImpl extends ServiceImpl<AccessoryListMapper, A
     }
 
     @Override
-    public Result selectAccessoryList(int orderId) {
+    public List<AccessoryList> selectAccessoryList(String ddbh) {
         QueryWrapper<AccessoryList> queryWrapper=new QueryWrapper();
-        queryWrapper.eq("order_id",orderId);
+        queryWrapper.eq("ddbh",ddbh);
         List<AccessoryList> lists=baseMapper.selectList(queryWrapper);
         if(lists!=null&&lists.size()!=0) {
             logger.info("查询的成功！");
-            return new Result(ResultCode.SUCCESS,lists);
+            return lists;
         }
         else {
             logger.info("无相关查询结果！");
-            return new Result(ResultCode.FAIL,"没有相关内容！");
+            return null;
         }
     }
 
