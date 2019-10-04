@@ -5,6 +5,7 @@ import com.Enxi;
 
 
 import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Parts;
 import net.wlgzs.purchase.entity.Product;
@@ -212,12 +213,9 @@ public class ProductController extends BaseController {
      * 需要遍历lbmc，pmmc，ppmc
      * 还有全部商品列表
      */
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView findallProduct(@RequestParam(value = "lbbh",defaultValue = "0")String lbbh,
-                                       @RequestParam(value = "pmbh",defaultValue = "0")String pmbh,
-                                       @RequestParam(value = "ppbh",defaultValue = "0")String ppbh,
-                                       @RequestParam(value = "nr",defaultValue = "0")String nr){
-
+    @RequestMapping(value = "/{lbbh}/{pmbh}/{ppbh}/{nr}",method = RequestMethod.GET)
+    @ApiOperation(value = "多条件查询",httpMethod = "GET")
+    public ModelAndView findallProduct(@PathVariable("lbbh") String lbbh,@PathVariable("pmbh") String pmbh,@PathVariable("ppbh") String ppbh,@PathVariable("nr") String nr){
         return productService.findallProduct(lbbh,pmbh,ppbh,nr);
     }
 
