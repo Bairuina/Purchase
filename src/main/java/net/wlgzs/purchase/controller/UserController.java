@@ -2,6 +2,7 @@ package net.wlgzs.purchase.controller;
 
 
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import net.wlgzs.purchase.entity.User;
 import net.wlgzs.purchase.util.Result;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -27,6 +29,42 @@ import java.util.List;
 public class UserController extends BaseController {
 
     /**
+     * 去登录
+     * @return
+     */
+    @ApiOperation(value = "去登录")
+    @RequestMapping(value = "/toLogin")
+    public ModelAndView toLogin() {
+        return new ModelAndView("login");
+    }
+
+    /**
+     * 登录
+     * @param model model
+     * @param request
+     * @param userName 用户名或手机号
+     * @param password 密码
+     * @return
+     */
+    @ApiOperation(value = "登录(登录失败返回页面login)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userName",value = "用户名或手机号"),
+            @ApiImplicitParam(name = "password",value = "密码")
+    })
+    @RequestMapping(value = "userLogin",method = RequestMethod.POST)
+    public ModelAndView userLogin(Model model, HttpServletRequest request, String userName, String password) {
+        Result result = iUserService.login(request, userName, password);
+        int code = result.getCode();
+        if (code == 0) {
+            //登录成功
+            return new ModelAndView("");
+        } else {//登录失败
+            model.addAttribute("msg", "账号或密码错误");
+            return new ModelAndView("login");
+        }
+    }
+
+    /**
      * 添加一个用户
      *
      * @param user 用户实体类
@@ -34,7 +72,7 @@ public class UserController extends BaseController {
      */
     @ApiOperation(value = "添加一个用户")
     @ApiImplicitParam(name = "user", value = "用户实体类", required = true)
-    @RequestMapping(value = "/insertUser")
+    @RequestMapping(value = "/insertUser", method = RequestMethod.PUT)
     public Result insertUser(User user) {
         if (iUserService.checkUser(user.getUserName(), user.getUserPhone())) {
             if (iUserService.insertUser(user)) {
@@ -45,20 +83,57 @@ public class UserController extends BaseController {
         return new Result(ResultCode.FAIL, "用户名或手机号重复！");
     }
 
-    //后台查询所有用户(搜索)
-    @GetMapping("/UserList/{current}")
-    public ModelAndView UserList(Model model,
+    /**
+     * 查询所有用户(搜索userList)
+     *
+     * @param model
+     * @param findName 用户名
+     * @param current  当前页
+     * @param limit    每页的条数
+     * @return
+     */
+    @ApiOperation(value = "查询所有用户(搜索)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "findName", value = "用户名"),
+            @ApiImplicitParam(paramType = "path", name = "current",
+                    value = "当前页(跟在地址后面)", required = true),
+            @ApiImplicitParam(name = "limit", value = "每页的条数(默认为8)")
+    })
+    @GetMapping("/userList/{current}")
+    public ModelAndView userList(Model model,
                                  @RequestParam(value = "findName", defaultValue = "") String findName,
                                  @PathVariable("current") Integer current,
                                  @RequestParam(value = "limit", defaultValue = "8") Integer limit) {
-        Result result = iUserService.UserList(findName, current, limit);
+        Result result = iUserService.userList(findName, current, limit);
         List<User> userList = (List<User>) result.getData();
 
-        model.addAttribute("TotalPages", result.getPages());//总页数
-        model.addAttribute("Number", result.getCurrent());//当前页数
+        //总页数
+        model.addAttribute("TotalPages", result.getPages());
+        //当前页数
+        model.addAttribute("Number", result.getCurrent());
         model.addAttribute("userList", userList);
         model.addAttribute("findName", findName);
-        return new ModelAndView("admin/adminUser");
+        return new ModelAndView("userList");
+    }
+
+    /**
+     * 按id删除用户
+     *
+     * @param userId
+     * @return
+     */
+    @ApiOperation(value = "按id删除用户")
+    @ApiImplicitParam(paramType = "path", name = "userId",
+            value = "用户id", required = true)
+    @RequestMapping(value = "deleteUser/{userId}", method = RequestMethod.DELETE)
+    public Result deleteUser(@PathVariable("userId") Integer userId) {
+        Result result = iUserService.deleteUser(userId);
+        return result;
+    }
+
+    public Result modifyUser(User user) {
+        Result result = iUserService.modifyUser(user);
+        return result;
     }
 
 }

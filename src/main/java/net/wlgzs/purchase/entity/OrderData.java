@@ -1,6 +1,8 @@
 package net.wlgzs.purchase.entity;
 
 import java.math.BigDecimal;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 
@@ -10,17 +12,18 @@ import java.io.Serializable;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-10-02
+ * @since 2019-10-03
  */
-public class Order implements Serializable {
+@TableName("order_data")
+public class OrderData implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 订单id
      */
-    @TableId("order_id")
-    private String orderId;
+    @TableId(value = "order_id", type = IdType.AUTO)
+    private Integer orderId;
 
     /**
      * 送货城市
@@ -112,16 +115,28 @@ public class Order implements Serializable {
      */
     private String shqx;
 
+    private Integer skbz;
+
+
+
     /**
      * 发票内容
      */
     private String fpnr;
 
-    public String getOrderId() {
+    private Integer fpkjsj;
+
+    private Integer fpsdsj;
+
+    private Integer sksj;
+
+    private Integer skje;
+
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
     public String getDeliverycity() {
@@ -250,6 +265,13 @@ public class Order implements Serializable {
     public void setShqx(String shqx) {
         this.shqx = shqx;
     }
+    public Integer getSkbz() {
+        return skbz;
+    }
+
+    public void setSkbz(Integer skbz) {
+        this.skbz = skbz;
+    }
     public String getFpnr() {
         return fpnr;
     }
@@ -257,10 +279,38 @@ public class Order implements Serializable {
     public void setFpnr(String fpnr) {
         this.fpnr = fpnr;
     }
+    public Integer getFpkjsj() {
+        return fpkjsj;
+    }
+
+    public void setFpkjsj(Integer fpkjsj) {
+        this.fpkjsj = fpkjsj;
+    }
+    public Integer getFpsdsj() {
+        return fpsdsj;
+    }
+
+    public void setFpsdsj(Integer fpsdsj) {
+        this.fpsdsj = fpsdsj;
+    }
+    public Integer getSksj() {
+        return sksj;
+    }
+
+    public void setSksj(Integer sksj) {
+        this.sksj = sksj;
+    }
+    public Integer getSkje() {
+        return skje;
+    }
+
+    public void setSkje(Integer skje) {
+        this.skje = skje;
+    }
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "OrderData{" +
         "orderId=" + orderId +
         ", deliverycity=" + deliverycity +
         ", deliverycounty=" + deliverycounty +
@@ -280,7 +330,12 @@ public class Order implements Serializable {
         ", beiz=" + beiz +
         ", shsj=" + shsj +
         ", shqx=" + shqx +
+        ", skbz=" + skbz +
         ", fpnr=" + fpnr +
+        ", fpkjsj=" + fpkjsj +
+        ", fpsdsj=" + fpsdsj +
+        ", sksj=" + sksj +
+        ", skje=" + skje +
         "}";
     }
 }

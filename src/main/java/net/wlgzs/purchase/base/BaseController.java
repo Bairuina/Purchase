@@ -17,7 +17,7 @@ public class BaseController {
     protected IContractService iContractService;
 
     @Autowired
-    protected IOrderService iOrderService;
+    protected IOrderDataService iOrderService;
 
     @Autowired
     protected IPartsService iPartsService;

@@ -1,7 +1,7 @@
 package net.wlgzs.purchase.mapper;
 
-import net.wlgzs.purchase.entity.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import net.wlgzs.purchase.entity.OrderData;
 
 /**
  * <p>
@@ -9,9 +9,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-10-02
+ * @since 2019-10-03
  */
 @org.apache.ibatis.annotations.Mapper
-public interface OrderMapper extends BaseMapper<Order> {
+public interface OrderDataMapper extends BaseMapper<OrderData> {
 
 }
