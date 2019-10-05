@@ -32,40 +32,45 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             queryWrapper.select("lbbh", "lbmc");
             List<Product> lbbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper)));
             QueryWrapper<Product> queryWrapper1 = new QueryWrapper<>();
-            if (lbbh.equals(null)) {
+            if (lbbh.equals("0")) {
                 lbbh = lbbhlist.get(0).getLbbh();
             }
             queryWrapper1.eq("lbbh", lbbh).select("pmbh", "pmmc");
             List<Product> pmbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper1)));
             QueryWrapper<Product> queryWrapper2 = new QueryWrapper<>();
-            if (pmbh.equals(null)) {
+            if (pmbh.equals("0")) {
                 pmbh = pmbhlist.get(0).getPmbh();
             }
             queryWrapper2.eq("pmbh", pmbh).select("ppbh", "ppmc");
             List<Product> ppbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
             QueryWrapper<Product> queryWrapper3 = new QueryWrapper<>();
-            if (ppbh.equals(null)){
+            if (ppbh.equals("0")){
                 ppbh = ppbhlist.get(0).getPpbh();
             }
+            if (nr.equals("")){
+                nr="0";
+            }
+
+            System.out.println(lbbh+"***************"+pmbh+"****************"+ppbh+"***************"+nr+"*********");
             List<Product> productList;
             if (lbbh.equals("0")) {
-                queryWrapper3.like("xhmc", nr.equals(null) ? "" : nr)
+                queryWrapper3.like("xhmc", nr.equals("0") ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
+                System.out.println(nr);
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             } else if (!lbbh.equals("0") && pmbh.equals("0")) {
-                queryWrapper3.eq("lbbh", lbbh).like("xhmc", nr.equals(null) ? "" : nr)
+                queryWrapper3.eq("lbbh", lbbh).like("xhmc", nr.equals("0") ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             } else if (!lbbh.equals("0") && !pmbh.equals("0") && ppbh.equals("0")) {
-                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).like("xhmc", nr.equals(null) ? "" : nr)
+                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).like("xhmc", nr.equals("0") ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             } else {
-                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).eq("ppbh", ppbh).like("xhmc", nr.equals(null) ? "" : nr)
+                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).eq("ppbh", ppbh).like("xhmc", nr.equals("0") ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             }
-            System.out.println(lbbh+"*******************"+pmbh+"*******************"+ppbh+"******************");
 //            System.out.println(lbbhlist);
 //            System.out.println(pmbhlist);
 //            System.out.println(ppbhlist);
@@ -83,7 +88,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             for (Product product:pmbhlist){
                 if (product.getPmbh().equals(pmbh)){
                     modelAndView.addObject("productpmbh",product);
-                    System.out.println(product.getPmmc());
                 }
             }
             for (Product product:ppbhlist){
@@ -91,7 +95,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                     modelAndView.addObject("productppbh",product);
                 }
             }
-            modelAndView.addObject("nr",nr.equals("")?"0":nr);
+
+            modelAndView.addObject("nr",nr);
 
 
         } catch (Exception e) {
