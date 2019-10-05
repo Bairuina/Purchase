@@ -1,9 +1,9 @@
 package net.wlgzs.purchase.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -19,6 +19,9 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Parts implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,7 +29,7 @@ public class Parts implements Serializable {
     /**
      * 配件ID
      */
-    @TableId("parts_id")
+    @TableId(value = "parts_id",type = IdType.AUTO)
     private Integer partsId;
 
     /**
@@ -50,11 +53,18 @@ public class Parts implements Serializable {
     /**
      * 品目编号
      */
+    @TableField("pmbh")
     private String pmbh;
 
     /**
      * 品目名称
      */
+    @TableField("pmmc")
     private String pmmc;
+    /**
+     * 配件明细
+     */
+    @TableField("accessoryListmx")
+    private String accessoryListmx;
 
 }

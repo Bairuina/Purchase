@@ -5,12 +5,14 @@ import com.Enxi;
 
 
 import com.alibaba.fastjson.JSON;
+import com.mysql.cj.xdevapi.JsonArray;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Parts;
 import net.wlgzs.purchase.entity.Product;
 import net.wlgzs.purchase.mapper.PartsMapper;
 import net.wlgzs.purchase.mapper.ProductMapper;
+import net.wlgzs.purchase.service.IPartsService;
 import net.wlgzs.purchase.service.IProductService;
 import net.wlgzs.purchase.service.impl.OrderDataServiceImpl;
 import net.wlgzs.purchase.util.ClientUtil;
@@ -59,6 +61,9 @@ public class ProductController extends BaseController {
 
     @Autowired
     private ReadProperties readProperties;
+
+    @Resource
+    private IPartsService partsService;
 
     Logger logger = LoggerFactory.getLogger(OrderDataServiceImpl.class);
 
@@ -151,8 +156,17 @@ public class ProductController extends BaseController {
                 JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getFindPjByPmbh(),json);
                 if (jsonObject.getString("resultFlag").equals("Y")&&jsonObject.getString("resultMessage").equals("返回品目配件信息成功")){
                         String jsonString=jsonObject.getString("accessoryList");
+                        System.out.println(jsonString);
+                        String pmbh1=jsonObject.getString("pmbh");
+                        String pmmc=jsonObject.getString("pmmc");
+                        logger.info(jsonString);
                         List<Parts> parts1=JSON.parseArray(jsonString,Parts.class);
-                        logger.info(parts1+"****************************");
+//                        for(Parts parts2:parts1){
+//                            parts2.setPmbh(pmbh1);
+//                            parts2.setPmmc(pmmc);
+//                        }
+//                        logger.info(parts1+"****************************");
+//                        partsService.saveBatch(parts1);
                 }
 
             }
