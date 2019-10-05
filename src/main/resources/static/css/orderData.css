@@ -4,7 +4,7 @@
 }
 
 .management .content li {
-    height: 25px;
+    height: 32px;
 }
 
 .classifys {
@@ -78,8 +78,11 @@
     display: inline;
     float: right;
 }
+.message li span{
+    word-wrap: break-word;
+    word-break: normal;
+}
 
-.zongji,
 .yes_order,
 .no_order {
     box-sizing: border-box;
@@ -87,14 +90,6 @@
     color: #fff;
     padding: 10px 15px;
     border-radius: 5px;
-}
-
-.order_submit {
-    text-align: center;
-}
-
-.yes_order,
-.no_order {
     border: 0px;
     font-size: 16px;
     margin: 5px 70px;
@@ -102,6 +97,15 @@
     cursor: pointer;
 }
 
+.order_submit {
+    text-align: center;
+}
+
+
 .no_order {
     background-color: #0984E0;
 }
+
+
+
+

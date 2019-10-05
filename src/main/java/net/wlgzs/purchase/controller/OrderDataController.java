@@ -63,7 +63,7 @@ public class OrderDataController extends BaseController {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("订单列表页");
         modelAndView.addObject("orderDara",iOrderService.selectStatusDataOrder(pageSize,pageNum,status));
-        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
+//        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
         return modelAndView;
     }
 
