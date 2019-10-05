@@ -32,18 +32,21 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             queryWrapper.select("lbbh", "lbmc");
             List<Product> lbbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper)));
             QueryWrapper<Product> queryWrapper1 = new QueryWrapper<>();
-            if (lbbh.equals("0")) {
+            if (lbbh.equals(null)) {
                 lbbh = lbbhlist.get(0).getLbbh();
             }
             queryWrapper1.eq("lbbh", lbbh).select("pmbh", "pmmc");
             List<Product> pmbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper1)));
             QueryWrapper<Product> queryWrapper2 = new QueryWrapper<>();
-            if (pmbh.equals("0")) {
+            if (pmbh.equals(null)) {
                 pmbh = pmbhlist.get(0).getPmbh();
             }
             queryWrapper2.eq("pmbh", pmbh).select("ppbh", "ppmc");
             List<Product> ppbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
             QueryWrapper<Product> queryWrapper3 = new QueryWrapper<>();
+            if (ppbh.equals(null)){
+                ppbh = ppbhlist.get(0).getPpbh();
+            }
 
 
 
