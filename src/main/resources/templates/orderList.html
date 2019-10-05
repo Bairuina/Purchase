@@ -29,12 +29,12 @@
                             <li>交易状态</li>
                         </ul>
                     </div>
-                    <div class="dingdan">
+                    <div class="dingdan" th:each="ordeData:${orderDara.data}">
                         <div class="order_time">
                             <ul>
-                                <li>2019-09-27</li>
-                                <li>订单号:<span>640797985986338141</span></li>
-                                <li>采购公司的名字</li>
+                                <li >时间编号:<span th:text="${ordeData.cjrq}"></span></li>
+                                <li>订单号:<span th:text="${ordeData.ddbh}"></span></li>
+                                <li>采购人的名字：<span th:text="${ordeData.cgrmc}"></span></li>
                             </ul>
                         </div>
                         <div class="order_details">
@@ -42,7 +42,7 @@
                                 <li>
                                     <div class="shangpin" style="text-align: left">
                                         <table>
-                                            <caption>总计: <span>2000</span>元</caption>
+                                            <caption>总计: <span th:text="${ordeData.ddze}">2000</span>元</caption>
                                             <tr>
                                                 <th>商品名称</th>
                                                 <th>型号编号</th>
@@ -62,104 +62,26 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div>拒绝</div>
-                                    <div>待审核</div>
-                                    <div><a href="">查看订单详情</a></div>
+                                   <div>
+                                       订单状态
+                                       <br/>
+                                       <span th:if="${ordeData.zt=='2'}">供应商待确认</span>
+                                       <span th:if="${ordeData.zt=='3'}">待验收</span>
+                                       <span th:if="${ordeData.zt=='4'}">订单已取消</span>
+                                       <span th:if="${ordeData.zt=='5'}">验收通过</span>
+                                   </div>
+                                    <div><a th:href="@{'/order-data/selectOneOrder?ddbh='+${ordeData.ddbh}}">查看订单详情</a></div>
                                 </li>
                                 <li>
-                                    <div>订单完成</div>
-                                    <div>物流运输中</div>
-                                    <div><a href="">查看物流详情</a></div>
-                                </li>
-                            </ul>
+                                    <div>
+                                        交易状态
+                                        <br/>
+                                        <span th:if="${ordeData.zt=='2'}">暂无物流信息</span>
+                                        <span th:if="${ordeData.zt=='3'}">物流运输中</span>
+                                        <span th:if="${ordeData.zt=='4'}">订单已取消</span>
+                                        <span th:if="${ordeData.zt=='5'}">验收通过</span>
 
-                        </div>
-                    </div>
-                    <div class="dingdan">
-                        <div class="order_time">
-                            <ul>
-                                <li>2019-09-27</li>
-                                <li>订单号:<span>640797985986338141</span></li>
-                                <li>采购公司的名字</li>
-                            </ul>
-                        </div>
-                        <div class="order_details">
-                            <ul>
-                                <li>
-                                    <div class="shangpin" style="text-align: left">
-                                        <table>
-                                            <caption>总计: <span>2000</span>元</caption>
-                                            <tr>
-                                                <th>商品名称</th>
-                                                <th>型号编号</th>
-                                                <th>数量</th>
-                                            </tr>
-                                            <tr>
-                                                <td>机械键盘</td>
-                                                <td>dfjkdsjh</td>
-                                                <td>4 <span>件</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>无线鼠标</td>
-                                                <td>dfjkdsjh</td>
-                                                <td>4 <span>件</span></td>
-                                            </tr>
-                                        </table>
                                     </div>
-                                </li>
-                                <li>
-                                    <div>确认</div>
-                                    <div>待审核</div>
-                                    <div><a href="">查看订单详情</a></div>
-                                </li>
-                                <li>
-                                    <div>订单完成</div>
-                                    <div>物流运输中</div>
-                                    <div><a href="">查看物流详情</a></div>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-                    <div class="dingdan">
-                        <div class="order_time">
-                            <ul>
-                                <li>2019-09-27</li>
-                                <li>订单号:<span>640797985986338141</span></li>
-                                <li>采购公司的名字</li>
-                            </ul>
-                        </div>
-                        <div class="order_details">
-                            <ul>
-                                <li>
-                                    <div class="shangpin" style="text-align: left">
-                                        <table>
-                                            <caption>总计: <span>2000</span>元</caption>
-                                            <tr>
-                                                <th>商品名称</th>
-                                                <th>型号编号</th>
-                                                <th>数量</th>
-                                            </tr>
-                                            <tr>
-                                                <td>机械键盘</td>
-                                                <td>dfjkdsjh</td>
-                                                <td>4 <span>件</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>无线鼠标</td>
-                                                <td>dfjkdsjh</td>
-                                                <td>4 <span>件</span></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>待审核</div>
-                                    <div><a href="">查看订单详情</a></div>
-                                </li>
-                                <li>
-                                    <div>订单完成</div>
-                                    <div>物流运输中</div>
                                     <div><a href="">查看物流详情</a></div>
                                 </li>
                             </ul>

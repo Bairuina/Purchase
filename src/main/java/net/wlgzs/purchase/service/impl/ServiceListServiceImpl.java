@@ -74,11 +74,11 @@ public class ServiceListServiceImpl extends ServiceImpl<ServiceListMapper, Servi
         queryWrapper.eq("ddbh",ddbh);
         List<ServiceList> lists=baseMapper.selectList(queryWrapper);
         if(lists!=null&&lists.size()!=0) {
-            logger.info("订单服务查询的成功！");
+            logger.info("订单："+ddbh+" 查询状态：订单服务查询的成功！");
             return lists;
         }
         else {
-            logger.info("无相关查询结果！");
+            logger.info("订单："+ddbh+" 查询状态：订单服务无相关查询结果！");
             return null;
         }
     }
