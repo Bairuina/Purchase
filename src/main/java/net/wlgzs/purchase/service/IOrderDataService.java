@@ -29,7 +29,7 @@ public interface IOrderDataService extends IService<OrderData> {
     Result ensureORefuseOrder(String ddbh,int qrzt);
 
     //订单签收物流信息推送
-    Result ensureOrderArrive(String ddbh,int sfcd,String fczddbh,String kdgs,String kddh,String ms,String kdsj);
+    Result ensureOrderArrive(String ddbh,int sfcd,String fczddbh,String kdgs,String kddh,String ms,BigInteger kdsj);
 
     //订单签收时间信息推送
     Result ensureOrderTimeSubmit(String ddbh,int sfcd,String fczddbh,BigInteger shsj);
@@ -52,5 +52,7 @@ public interface IOrderDataService extends IService<OrderData> {
     //订单的合同处理
     Result contractWork(String ddbh);
 
+    //查询不同状态的订单  2-供应商待确认3-待验收 4-订单已取消5-验收通过
+    Result selectStatusDataOrder(Integer pageNum,Integer PageSize,String status);
 
 }

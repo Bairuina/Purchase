@@ -65,6 +65,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         String userName=properties.getUsername();
         String pwd=properties.getPwd();
         DateTime dateTime=new DateTime();
+       iRedis.set("upDataTime",dateTime.toString("yyyy-MM-d  HH：mm：ss"));
         String enPwd = Enxi.enPwd(userName, pwd);
         String jssj =dateTime.toString("yyyyMMddHHmmss") ;
         String kssj = dateTime.minusHours(3).toString("yyyyMMddHHmmss");
@@ -246,7 +247,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
 
     //订单签收物流信息推送
     @Override
-    public Result ensureOrderArrive(String ddbh, int sfcd, String fczddbh, String kdgs, String kddh, String ms, String kdsj) {
+    public Result ensureOrderArrive(String ddbh, int sfcd, String fczddbh, String kdgs, String kddh, String ms, BigInteger kdsj) {
         String username=properties.getUsername();
         String pwd=properties.getPwd();
         String enPwd = Enxi.enPwd(username, pwd);
@@ -264,11 +265,20 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","exeLogistics",jsonStr);
         if(jsonObject!=null&&jsonObject.get("resultFlag").equals("Y")){
             logger.info("物流消息发送成功！");
+            OrderData orderData=new OrderData();
+            orderData.setSfcd(sfcd);
+            orderData.setFczddbh(fczddbh);
+            orderData.setKdgs(kdgs);
+            orderData.setKddh(kddh);
+            orderData.setMs(ms);
+            orderData.setKdsj(kdsj);
+            return  upDateTwo(ddbh,orderData);
         }
         else {
             logger.info("物流消息发送失败！");
+            return  new Result(ResultCode.FAIL);
         }
-        return null;
+
     }
 
 
@@ -468,6 +478,19 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         contract.setContractUrl(jsonObject.getString("url"));
         contract.setDdbh(ddbh);
         return null;
+    }
+
+    //查询不同状态的订单 2-供应商待确认3-待验收 4-订单已取消5-验收通过
+    @Override
+    public Result selectStatusDataOrder(Integer pageNum, Integer pageSize, String status) {
+        QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("zt",status);
+        Page page = new Page(pageNum, pageSize);
+        IPage<OrderData> iPage = null;
+        iPage = baseMapper.selectPage(page,queryWrapper);
+        List<OrderData> OrderList = iPage.getRecords();
+        logger.info(OrderList.toString());
+        return new Result(ResultCode.SUCCESS, "成功！", OrderList, iPage.getPages(), iPage.getCurrent());
     }
 
 

@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>订单列表页</title>
-    <link rel="stylesheet" href="css/订单列表页.css">
+    <link rel="stylesheet"  th:href="@{/css/orderList.css}">
 </head>
 
 <body>
 
-    <head style="height: 230px;background-color: red;"></head>
     <div class="oeder_list_nav">
         <div class="order_list">
             <div class="order_list_left">
                 <ul>
-                    <li style="background-color: #DF0024;"><a href="">我的订单</a></li>
+                    <li style="background-color: #DF0024;"><a th:href="@{/lectDataOrder}">我的订单</a></li>
                     <li><a href="">接受订单</a></li>
                     <li><a href="">拒绝订单</a></li>
                 </ul>
