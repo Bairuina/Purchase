@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>商品详情页面</title>
-    <link rel="stylesheet" th:href="@{css/detailsPage.css}">
-    <link rel="stylesheet" th:href="@{css/same.css}">
+    <link rel="stylesheet" th:href="@{/css/detailsPage.css}">
+    <link rel="stylesheet" th:href="@{/css/same.css}">
 </head>
 <body>
 <div class="container">
@@ -34,15 +34,15 @@
                                 <span>
                                     办公打印
                                 </span>
-                                <img th:src="@{img/down.png}" align="absmiddle">
+                                <img th:src="@{/img/down.png}" align="absmiddle">
                             </p>
                         </a>
                         <div class="kindList">
                             <div class="kindListDetail">
                                 <ul>
                                     <li th:each="lbbhlist:${lbbhlist}">
-                                        <a>
-                                            <p th:text="${lbbhlist.lbmc}">全部</p>
+                                        <a class="list">
+                                            <p th:text="${lbbhlist.lbmc}">类名</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -56,8 +56,8 @@
                     <div class="homepage" id="items">
                         <a class="current">
                             <p>
-                                <span>打印机</span>
-                                <img th:src="@{img/down.png}" align="absmiddle">
+                                <span class="namesOfParts">打印机</span>
+                                <img th:src="@{/img/down.png}" align="absmiddle">
                             </p>
                         </a>
                         <div class="itemsList">
@@ -65,7 +65,7 @@
                                 <ul>
                                     <li th:each="pmbhlist:${pmbhlist}">
                                         <a>
-                                            <p th:text="${pmbhlist.pmmc}">全部</p>
+                                            <p th:text="${pmbhlist.pmmc}" >品目</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -92,9 +92,6 @@
                     <div class="brandDetail">
                         <div class="brandDetailLeft">
                             <p>品牌</p>
-                            <a>
-                                <p>全部</p>
-                            </a>
                         </div>
                         <div class="key">
                             <a class="moreThan">
@@ -104,61 +101,67 @@
                         <div class="brandDetailRight">
                             <div class="brandDetailRightContent">
                                 <ul>
-                                    <li>
-                                        <a>戴尔</a>
+                                    <li th:each="ppbhlist:${ppbhlist}">
+                                        <a>
+                                            <p th:text="${ppbhlist.ppmc}" class="brankName"></p>
+                                        </a>
                                     </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li><li>
-                                    <a>戴尔</a>
-                                </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
-                                    <li>
-                                        <a>戴尔</a>
-                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
+                        <div style="clear: both">
 
+                        </div>
+                    </div>
+                </div>
+<!--                类名-->
+                <div class="brand">
+                    <div class="brandDetail">
+                        <div class="brandDetailLeft">
+                            <p>类名</p>
+                        </div>
+                        <div class="key">
+                            <a class="moreThan">
+                                <span>更多</span>
+                            </a>
+                        </div>
+                        <div class="brandDetailRight">
+                            <div class="brandDetailRightContent">
+                                <ul>
+                                    <li th:each="lbbhlist:${lbbhlist}">
+                                        <a>
+                                            <p th:text="${lbbhlist.lbmc}">类名</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="clear: both">
+
+                        </div>
+                    </div>
+                </div>
+<!--                品目-->
+                <div class="brand">
+                    <div class="brandDetail">
+                        <div class="brandDetailLeft">
+                            <p>品目</p>
+                        </div>
+                        <div class="key">
+                            <a class="moreThan">
+                                <span>更多</span>
+                            </a>
+                        </div>
+                        <div class="brandDetailRight">
+                            <div class="brandDetailRightContent">
+                                <ul>
+                                    <li th:each="pmbhlist:${pmbhlist}">
+                                        <a>
+                                            <p th:text="${pmbhlist.pmmc}"></p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -680,7 +683,7 @@
                     <div class="offer">
                         <a>
                             <p>我要报价
-                                <img th:src="@{img/right.png}" align="absmiddle">
+                                <img th:src="@{/img/right.png}" align="absmiddle">
                             </p>
 
                         </a>
@@ -697,7 +700,7 @@
 
 </div>
 
-<script th:src="@{js/jquery.min.js}"></script>
-<script th:src="@{js/detailsPage.js}"></script>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/detailsPage.js}"></script>
 </body>
 </html>
