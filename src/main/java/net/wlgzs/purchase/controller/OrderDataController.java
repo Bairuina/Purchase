@@ -75,12 +75,14 @@ public class OrderDataController extends BaseController {
     }
 
 
+    //result.data
     @ApiOperation("查看单个订单详情")
     @RequestMapping("/selectOneOrder")
     public ModelAndView checkDetailedOrder(@Param("ddbh") String ddbh){
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("订单详情页");
+        modelAndView.setViewName("orderData");
         modelAndView.addObject("allData",iOrderService.selectOneOrder(ddbh));
+        System.out.println(modelAndView);
         return modelAndView;
     }
 
@@ -121,7 +123,5 @@ public class OrderDataController extends BaseController {
     public Result ensureOrderArrive(@Param("ddbh") String ddbh,@Param("sfcd")int sfcd,@Param("fczddbh")String fczddbh,@Param("kdgs")String kdgs,@Param("kddh")String kddh,@Param("ms")String ms,@Param("kdsj")String kdsj){
         return iOrderService.ensureOrderArrive(ddbh,sfcd,fczddbh,kdgs,kddh,ms,new BigInteger(kdsj));
     }
-
-
 
 }
