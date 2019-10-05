@@ -11,10 +11,7 @@ import net.wlgzs.purchase.entity.*;
 import net.wlgzs.purchase.mapper.OrderDataMapper;
 import net.wlgzs.purchase.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import net.wlgzs.purchase.util.ClientUtil;
-import net.wlgzs.purchase.util.ReadProperties;
-import net.wlgzs.purchase.util.Result;
-import net.wlgzs.purchase.util.ResultCode;
+import net.wlgzs.purchase.util.*;
 import org.codehaus.xfire.client.Client;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -191,8 +188,10 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         List<Object> list=new ArrayList<>();
         list.add(orderData);
         list.add(productLists);
-        list.add(serviceLists);
         list.add(accessoryLists);
+        list.add(serviceLists);
+        list.add(CheckAddress.checkOneAddressWordByNumber(orderData.getDeliverycity()));
+        list.add(CheckAddress.checkOneAddressWordByNumber(orderData.getDeliverycounty()));
         return new Result(ResultCode.SUCCESS,list);
     }
 

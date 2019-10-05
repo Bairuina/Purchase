@@ -5,12 +5,12 @@ import net.wlgzs.purchase.entity.AccessoryList;
 import net.wlgzs.purchase.mapper.AccessoryListMapper;
 import net.wlgzs.purchase.service.IAccessoryListService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-//import net.wlgzs.purchase.service.IOrderDataService;
+
 import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,9 +25,6 @@ import java.util.List;
  */
 @Service
 public class AccessoryListServiceImpl extends ServiceImpl<AccessoryListMapper, AccessoryList> implements IAccessoryListService {
-
-//    @Autowired
-//    IOrderDataService orderDataService;
 
 
     Logger logger= LoggerFactory.getLogger(AccessoryListServiceImpl.class);
@@ -79,11 +76,11 @@ public class AccessoryListServiceImpl extends ServiceImpl<AccessoryListMapper, A
         queryWrapper.eq("ddbh",ddbh);
         List<AccessoryList> lists=baseMapper.selectList(queryWrapper);
         if(lists!=null&&lists.size()!=0) {
-            logger.info("查询的成功！");
+            logger.info("订单："+ddbh+" 查询状态：订单配件查询的成功！");
             return lists;
         }
         else {
-            logger.info("无相关查询结果！");
+            logger.info("订单："+ddbh+" 查询状态：订单配件无相关查询结果！");
             return null;
         }
     }
