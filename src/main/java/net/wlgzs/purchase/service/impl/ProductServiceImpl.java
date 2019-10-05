@@ -49,15 +49,15 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
 
             List<Product> productList;
-            if (lbbh.equals(null)) {
+            if (lbbh.equals("0")) {
                 queryWrapper3.like("xhmc", nr.equals(null) ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-            } else if (!lbbh.equals(null) && pmbh.equals(null)) {
+            } else if (!lbbh.equals("0") && pmbh.equals("0")) {
                 queryWrapper3.eq("lbbh", lbbh).like("xhmc", nr.equals(null) ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-            } else if (!lbbh.equals(null) && !pmbh.equals(null) && ppbh.equals(null)) {
+            } else if (!lbbh.equals("0") && !pmbh.equals("0") && ppbh.equals("0")) {
                 queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).like("xhmc", nr.equals(null) ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
@@ -66,27 +66,29 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             }
-
-            System.out.println(lbbhlist);
-            System.out.println(pmbhlist);
-            System.out.println(ppbhlist);
-            System.out.println(productList);
+            System.out.println(lbbh+"*******************"+pmbh+"*******************"+ppbh+"******************");
+//            System.out.println(lbbhlist);
+//            System.out.println(pmbhlist);
+//            System.out.println(ppbhlist);
+//            System.out.println(productList);
             modelAndView.addObject("lbbhlist", lbbhlist);//第一大类
             modelAndView.addObject("pmbhlist", pmbhlist);//第二大类
             modelAndView.addObject("ppbhlist", ppbhlist);//第三大类
-            modelAndView.addObject("productList", productList);//搜索内容
+            modelAndView.addObject("productList", productList);
+            System.out.println(productList);
             for (Product product:lbbhlist){
                 if (product.getLbbh().equals(lbbh)){
                     modelAndView.addObject("productlbbh",product);
                 }
             }
             for (Product product:pmbhlist){
-                if (product.getLbbh().equals(pmbh)){
+                if (product.getPmbh().equals(pmbh)){
                     modelAndView.addObject("productpmbh",product);
+                    System.out.println(product.getPmmc());
                 }
             }
             for (Product product:ppbhlist){
-                if (product.getLbbh().equals(ppbh)){
+                if (product.getPpbh().equals(ppbh)){
                     modelAndView.addObject("productppbh",product);
                 }
             }
