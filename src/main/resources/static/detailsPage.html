@@ -41,8 +41,9 @@
                             <div class="kindListDetail">
                                 <ul>
                                     <li th:each="lbbhlist:${lbbhlist}">
-                                        <a class="list">
-                                            <p th:text="${lbbhlist.lbmc}">类名</p>
+<!--                                        th:href="@{'/product/'+${lbbhlist.lbbh}+'/'+${ppbh}+'/'+${ppbh}+'/'+${inputMessage}}"-->
+                                        <a class="list" >
+                                            <p th:text="${lbbhlist.lbmc}" th:data-listnumber="${lbbhlist.lbbh}">类名</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -56,7 +57,7 @@
                     <div class="homepage" id="items">
                         <a class="current">
                             <p>
-                                <span class="namesOfParts">打印机</span>
+                                <span>打印机</span>
                                 <img th:src="@{/img/down.png}" align="absmiddle">
                             </p>
                         </a>
@@ -64,8 +65,33 @@
                             <div class="itemsListDetail">
                                 <ul>
                                     <li th:each="pmbhlist:${pmbhlist}">
-                                        <a>
-                                            <p th:text="${pmbhlist.pmmc}" >品目</p>
+<!--                                        th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.ppbh}+'/'+${ppbh}+'/'+${inputMessage}}"-->
+                                        <a >
+                                            <p th:text="${pmbhlist.pmmc}" th:data-itemsnumber="${pmbhlist.pmbh}" class="namesOfParts">品目</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="arrow"> > </span>
+                </div>
+                <!--品牌-->
+                <div class="wrap">
+                    <div class="homepage" >
+                        <a class="current">
+                            <p>
+                                <span>联想</span>
+                                <img th:src="@{/img/down.png}" align="absmiddle">
+                            </p>
+                        </a>
+                        <div class="itemsList">
+                            <div class="itemsListDetail">
+                                <ul>
+                                    <li th:each="ppbhlist:${ppbhlist}">
+<!--                                        th:href="@{'/product/'+${lbbh}+'/'+${ppbh}+'/'+${ppbhlist.ppbh}+'/'+${inputMessage}}"-->
+                                        <a >
+                                            <p th:text="${ppbhlist.ppmc}" th:data-branknumber="${ppbhlist.ppbh}" class="brankName">品牌</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -73,6 +99,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!--搜索框-->
                 <div class="inputProduct">
                     <form>
@@ -87,35 +114,7 @@
                 <div style="clear: both"></div>
             </div>
             <div class="brandRegion">
-                <!--品牌-->
-                <div class="brand">
-                    <div class="brandDetail">
-                        <div class="brandDetailLeft">
-                            <p>品牌</p>
-                        </div>
-                        <div class="key">
-                            <a class="moreThan">
-                                <span>更多</span>
-                            </a>
-                        </div>
-                        <div class="brandDetailRight">
-                            <div class="brandDetailRightContent">
-                                <ul>
-                                    <li th:each="ppbhlist:${ppbhlist}">
-                                        <a>
-                                            <p th:text="${ppbhlist.ppmc}" class="brankName"></p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div style="clear: both">
-
-                        </div>
-                    </div>
-                </div>
-<!--                类名-->
+                <!--                类名-->
                 <div class="brand">
                     <div class="brandDetail">
                         <div class="brandDetailLeft">
@@ -143,7 +142,7 @@
                         </div>
                     </div>
                 </div>
-<!--                品目-->
+                <!--                品目-->
                 <div class="brand">
                     <div class="brandDetail">
                         <div class="brandDetailLeft">
@@ -160,6 +159,34 @@
                                     <li th:each="pmbhlist:${pmbhlist}">
                                         <a>
                                             <p th:text="${pmbhlist.pmmc}"></p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="clear: both">
+
+                        </div>
+                    </div>
+                </div>
+                <!--品牌-->
+                <div class="brand">
+                    <div class="brandDetail">
+                        <div class="brandDetailLeft">
+                            <p>品牌</p>
+                        </div>
+                        <div class="key">
+                            <a class="moreThan">
+                                <span>更多</span>
+                            </a>
+                        </div>
+                        <div class="brandDetailRight">
+                            <div class="brandDetailRightContent">
+                                <ul>
+                                    <li th:each="ppbhlist:${ppbhlist}">
+                                        <a>
+                                            <p th:text="${ppbhlist.ppmc}" class="brankName"></p>
                                         </a>
                                     </li>
                                 </ul>
