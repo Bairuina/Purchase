@@ -47,10 +47,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             if (ppbh.equals(null)){
                 ppbh = ppbhlist.get(0).getPpbh();
             }
-
-
-
-
             List<Product> productList;
             if (lbbh.equals(null)) {
                 queryWrapper3.like("xhmc", nr.equals(null) ? "" : nr)
@@ -93,9 +89,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                     modelAndView.addObject("productppbh",product);
                 }
             }
-
-
-            modelAndView.addObject("nr",nr);
+            modelAndView.addObject("nr",nr.equals("")?"0":nr);
 
 
         } catch (Exception e) {
