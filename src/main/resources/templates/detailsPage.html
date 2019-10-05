@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>商品详情页面</title>
-    <link rel="stylesheet" href="css/detailsPage.css">
-    <link rel="stylesheet" href="css/same.css">
+    <link rel="stylesheet" th:href="@{/static/css/detailsPage.css}">
+    <link rel="stylesheet" th:href="@{/static/css/same.css}">
 </head>
 <body>
 <div class="container">
@@ -20,7 +20,7 @@
                 <!--回到首页-->
                 <div class="wrap">
                     <div class="homepage">
-                        <a class="current" style=" color: #103a86;">
+                        <a class="current" style=" color: #103a86;" th:href="@{/product}">
                             <span>首页</span>
                         </a>
                     </div>
@@ -30,34 +30,22 @@
                 <div class="wrap">
                     <div class="homepage" id="kindList">
                         <a class="current">
-                            <span>
-                                办公打印
-                                 <img src="images/down.png" align="absmiddle">
-                            </span>
+                            <p>
+                                <span th:text="${productlbbh.lbmc}">
+                                    办公打印
+                                </span>
+                                <img th:src="@{/static/img/down.png}" align="absmiddle">
+                            </p>
                         </a>
                         <div class="kindList">
                             <div class="kindListDetail">
-                                <a>
-                                    <p>全部</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
+                                <ul>
+                                    <li th:each="lbbhlist:${lbbhlist}">
+                                        <a class="list" th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/'+${nr}}">
+                                            <p th:text="${lbbhlist.lbmc}" th:data-listnumber="${lbbhlist.lbbh}">类名</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -67,37 +55,48 @@
                 <div class="wrap">
                     <div class="homepage" id="items">
                         <a class="current">
-                            <span>打印机
-                                    <img src="images/down.png" align="absmiddle">
-                            </span>
+                            <p>
+                                <span th:text="${productpmbh.pmmc}"></span>
+                                <img th:src="@{/static/img/down.png}" align="absmiddle">
+                            </p>
                         </a>
                         <div class="itemsList">
                             <div class="itemsListDetail">
-                                <a>
-                                    <p>全部</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
+                                <ul>
+                                    <li th:each="pmbhlist:${pmbhlist}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0/'+${nr}}">
+                                            <p th:text="${pmbhlist.pmmc}" th:data-itemsnumber="${pmbhlist.pmbh}" class="namesOfParts">品目</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="arrow"> > </span>
+                </div>
+                <!--品牌-->
+                <div class="wrap">
+                    <div class="homepage" id="items">
+                        <a class="current">
+                            <p>
+                                <span>联想</span>
+                                <img th:src="@{/static/img/down.png}" align="absmiddle">
+                            </p>
+                        </a>
+                        <div class="itemsList">
+                            <div class="itemsListDetail">
+                                <ul>
+                                    <li th:each="ppbhlist:${ppbhlist}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}+'/'+${nr}}">
+                                            <p th:text="${ppbhlist.ppmc}" th:data-branknumber="${ppbhlist.ppbh}" class="brankName">品牌</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!--搜索框-->
                 <div class="inputProduct">
                     <form>
@@ -112,70 +111,82 @@
                 <div style="clear: both"></div>
             </div>
             <div class="brandRegion">
-                <!--品牌-->
+                <!--                类名-->
                 <div class="brand">
                     <div class="brandDetail">
                         <div class="brandDetailLeft">
-                            <p>品牌</p>
-                            <a>
-                                <p>全部</p>
-                            </a>
+                            <p>类名</p>
                         </div>
                         <div class="key">
                             <a class="moreThan">
                                 <span>更多</span>
                             </a>
                         </div>
-                        <div class="brandDetailRight"  >
+                        <div class="brandDetailRight">
                             <div class="brandDetailRightContent">
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
+                                <ul>
+                                    <li th:each="lbbhlist:${lbbhlist}">
+                                        <a th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/'+${inputMessage}}">
+                                            <p th:text="${lbbhlist.lbmc}">类名</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
+                        <div style="clear: both">
 
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
+                        </div>
+                    </div>
+                </div>
+                <!--                品目-->
+                <div class="brand">
+                    <div class="brandDetail">
+                        <div class="brandDetailLeft">
+                            <p>品目</p>
+                        </div>
+                        <div class="key">
+                            <a class="moreThan">
+                                <span>更多</span>
+                            </a>
+                        </div>
+                        <div class="brandDetailRight">
+                            <div class="brandDetailRightContent">
+                                <ul>
+                                    <li th:each="pmbhlist:${pmbhlist}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0/'+${inputMessage}}">
+                                            <p th:text="${pmbhlist.pmmc}"></p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                                <a>戴尔</a>
+                        <div style="clear: both">
+
+                        </div>
+                    </div>
+                </div>
+                <!--品牌-->
+                <div class="brand">
+                    <div class="brandDetail">
+                        <div class="brandDetailLeft">
+                            <p>品牌</p>
+                        </div>
+                        <div class="key">
+                            <a class="moreThan">
+                                <span>更多</span>
+                            </a>
+                        </div>
+                        <div class="brandDetailRight">
+                            <div class="brandDetailRightContent">
+                                <ul>
+                                    <li th:each="ppbhlist:${ppbhlist}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${ppbh}+'/'+${ppbhlist.ppbh}+'/'+${inputMessage}}">
+                                            <p th:text="${ppbhlist.ppmc}" class="brankName"></p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
 
@@ -187,21 +198,15 @@
             </div>
             <!--获取商品-->
             <div class="message">
-                <div class="messageDetail">
+                <div class="messageDetail" th:each="productList:${productList}">
                     <!--商品名称-->
-                    <h3>电脑</h3>
+                    <h3 th:text="${productList.xhmc}">电脑</h3>
                     <!--类别-->
                     <div class="items">
                         <p>
                             <span>类别名称:</span>
-                            <span>
+                            <span th:text="${productList.lbmc}" th:data-listnametwo="${productList.lbbh}">
                                 电子类
-                            </span>
-                        </p>
-                        <p>
-                            <span>类别编号:</span>
-                            <span>
-                                1234567894561234567894
                             </span>
                         </p>
                     </div>
@@ -211,14 +216,8 @@
                             <span>
                                 品目名称:
                             </span>
-                            <span>
+                            <span th:text="${productList.pmmc}" th:data-itemsnametwo="${productList.ppbh}">
                                 电脑
-                            </span>
-                        </p>
-                        <p>
-                            <span>品目编号:</span>
-                            <span>
-                                1234567894561234567894
                             </span>
                         </p>
                     </div>
@@ -228,7 +227,7 @@
                             <span>
                                 品牌名称:
                             </span>
-                            <span>
+                            <span th:text="${productList.ppmc}">
                                 联想
                             </span>
                         </p>
@@ -241,30 +240,13 @@
                             </span>
                         </p>
                     </div>
-                    <!--型号-->
-                    <div class="items">
-                        <p>
-                           <span> 型号名称:</span>
-                            <span>
-                                电子类
-                            </span>
-                        </p>
-                        <p>
-                            <span>
-                                型号编号:
-                            </span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
                     <!--商品参数-->
                     <div class="items">
                         <p>
                             <span>
                                 商品参数:
                             </span>
-                            <span>
+                            <span th:text="${productList.parametersList}">
                                 1234456789hfvfdgvrgre
                             </span>
                         </p>
@@ -275,7 +257,7 @@
                             <span>
                                 商品状态:
                             </span>
-                            <span>
+                            <span th:text="${productList.zt}">
                                 正在报价中
                             </span>
                         </p>
@@ -284,425 +266,11 @@
                     <div class="offer">
                         <a>
                             <p>我要报价
-                                <img src="images/right.png" align="absmiddle">
+                                <img th:src="@{../static/img/right.png}" align="absmiddle">
                             </p>
-
                         </a>
                     </div>
                 </div>
-                <div class="messageDetail">
-                    <!--商品名称-->
-                    <h3>电脑</h3>
-                    <!--类别-->
-                    <div class="items">
-                        <p>
-                            <span>类别名称:</span>
-                            <span>
-                                电子类
-                            </span>
-                        </p>
-                        <p>
-                            <span>类别编号:</span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--品目-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                品目名称:
-                            </span>
-                            <span>
-                                电脑
-                            </span>
-                        </p>
-                        <p>
-                            <span>品目编号:</span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--品牌-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                品牌名称:
-                            </span>
-                            <span>
-                                联想
-                            </span>
-                        </p>
-                        <p>
-                            <span>
-                                品牌编号:
-                            </span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--型号-->
-                    <div class="items">
-                        <p>
-                            <span> 型号名称:</span>
-                            <span>
-                                电子类
-                            </span>
-                        </p>
-                        <p>
-                            <span>
-                                型号编号:
-                            </span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--商品参数-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                商品参数:
-                            </span>
-                            <span>
-                                1234456789hfvfdgvrgre
-                            </span>
-                        </p>
-                    </div>
-                    <!--商品状态-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                商品状态:
-                            </span>
-                            <span>
-                                正在报价中
-                            </span>
-                        </p>
-                    </div>
-                    <!--报价-->
-                    <div class="offer">
-                        <a>
-                            <p>我要报价
-                                <img src="images/right.png" align="absmiddle">
-                            </p>
-
-                        </a>
-                    </div>
-                </div>
-                <div class="messageDetail">
-                    <!--商品名称-->
-                    <h3>电脑</h3>
-                    <!--类别-->
-                    <div class="items">
-                        <p>
-                            <span>类别名称:</span>
-                            <span>
-                                电子类
-                            </span>
-                        </p>
-                        <p>
-                            <span>类别编号:</span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--品目-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                品目名称:
-                            </span>
-                            <span>
-                                电脑
-                            </span>
-                        </p>
-                        <p>
-                            <span>品目编号:</span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--品牌-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                品牌名称:
-                            </span>
-                            <span>
-                                联想
-                            </span>
-                        </p>
-                        <p>
-                            <span>
-                                品牌编号:
-                            </span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--型号-->
-                    <div class="items">
-                        <p>
-                            <span> 型号名称:</span>
-                            <span>
-                                电子类
-                            </span>
-                        </p>
-                        <p>
-                            <span>
-                                型号编号:
-                            </span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--商品参数-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                商品参数:
-                            </span>
-                            <span>
-                                1234456789hfvfdgvrgre
-                            </span>
-                        </p>
-                    </div>
-                    <!--商品状态-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                商品状态:
-                            </span>
-                            <span>
-                                正在报价中
-                            </span>
-                        </p>
-                    </div>
-                    <!--报价-->
-                    <div class="offer">
-                        <a>
-                            <p>我要报价
-                                <img src="images/right.png" align="absmiddle">
-                            </p>
-
-                        </a>
-                    </div>
-                </div>
-                <div class="messageDetail">
-                    <!--商品名称-->
-                    <h3>电脑</h3>
-                    <!--类别-->
-                    <div class="items">
-                        <p>
-                            <span>类别名称:</span>
-                            <span>
-                                电子类
-                            </span>
-                        </p>
-                        <p>
-                            <span>类别编号:</span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--品目-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                品目名称:
-                            </span>
-                            <span>
-                                电脑
-                            </span>
-                        </p>
-                        <p>
-                            <span>品目编号:</span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--品牌-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                品牌名称:
-                            </span>
-                            <span>
-                                联想
-                            </span>
-                        </p>
-                        <p>
-                            <span>
-                                品牌编号:
-                            </span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--型号-->
-                    <div class="items">
-                        <p>
-                            <span> 型号名称:</span>
-                            <span>
-                                电子类
-                            </span>
-                        </p>
-                        <p>
-                            <span>
-                                型号编号:
-                            </span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--商品参数-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                商品参数:
-                            </span>
-                            <span>
-                                1234456789hfvfdgvrgre
-                            </span>
-                        </p>
-                    </div>
-                    <!--商品状态-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                商品状态:
-                            </span>
-                            <span>
-                                正在报价中
-                            </span>
-                        </p>
-                    </div>
-                    <!--报价-->
-                    <div class="offer">
-                        <a>
-                            <p>我要报价
-                                <img src="images/right.png" align="absmiddle">
-                            </p>
-
-                        </a>
-                    </div>
-                </div>
-                <div class="messageDetail">
-                    <!--商品名称-->
-                    <h3>电脑</h3>
-                    <!--类别-->
-                    <div class="items">
-                        <p>
-                            <span>类别名称:</span>
-                            <span>
-                                电子类
-                            </span>
-                        </p>
-                        <p>
-                            <span>类别编号:</span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--品目-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                品目名称:
-                            </span>
-                            <span>
-                                电脑
-                            </span>
-                        </p>
-                        <p>
-                            <span>品目编号:</span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--品牌-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                品牌名称:
-                            </span>
-                            <span>
-                                联想
-                            </span>
-                        </p>
-                        <p>
-                            <span>
-                                品牌编号:
-                            </span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--型号-->
-                    <div class="items">
-                        <p>
-                            <span> 型号名称:</span>
-                            <span>
-                                电子类
-                            </span>
-                        </p>
-                        <p>
-                            <span>
-                                型号编号:
-                            </span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                        </p>
-                    </div>
-                    <!--商品参数-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                商品参数:
-                            </span>
-                            <span>
-                                1234456789hfvfdgvrgre
-                            </span>
-                        </p>
-                    </div>
-                    <!--商品状态-->
-                    <div class="items">
-                        <p>
-                            <span>
-                                商品状态:
-                            </span>
-                            <span>
-                                正在报价中
-                            </span>
-                        </p>
-                    </div>
-                    <!--报价-->
-                    <div class="offer">
-                        <a>
-                            <p>我要报价
-                                <img src="images/right.png" align="absmiddle">
-                            </p>
-
-                        </a>
-                    </div>
-                </div>
-
             </div>
         </div>
 
@@ -713,7 +281,7 @@
 
 </div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/detailsPage.js"></script>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/detailsPage.js}"></script>
 </body>
 </html>
