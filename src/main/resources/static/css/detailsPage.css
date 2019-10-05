@@ -2,6 +2,7 @@
     height: 100%;
     padding-bottom: 12px;
 }
+
 .brand{
     height: 100%;
 }
@@ -34,7 +35,8 @@
     cursor: pointer;
     font-size: 13px;
 }
-.current>span>img{
+
+.current>p>img{
     width: 8px;
     transition: all 0.5s;
 }
@@ -60,15 +62,17 @@
     justify-content:space-between;
     padding: 10px;
 }
-.itemsListDetail>a{
+.itemsListDetail>ul>li{
     cursor: pointer;
     font-size: 14px;
     width: 100px;
     height: 15px;
     padding: 10px;
     line-height: 15px;
+    display: inline-block;
+    list-style-type: none;
 }
-.itemsListDetail>a:hover{
+.itemsListDetail>ul>li:hover{
     background-color: #F1F1F1;
     cursor: pointer;
 }
@@ -77,11 +81,11 @@
 }
 #items:hover .itemsList{
     display: block;
-    border: 1px solid #FF6600;
+    border: 1px solid #F52F3E;
 }
 #items:hover{
     border-bottom: none;
-    border-color:#FF6600;
+    border-color:#F52F3E;
 }
 #kindList{
     position: relative;
@@ -91,11 +95,11 @@
 }
 #kindList:hover{
     border-bottom:none;
-    border-color: #FF6600;
+    border-color: #F52F3E;
 }
 #kindList:hover .kindList{
     display: block;
-    border:1px solid #FF6600;
+    border:1px solid #F52F3E;
 }
 .kindList{
     width: 400px;
@@ -107,20 +111,21 @@
     z-index: 100;
     display: none;
 }
+
 .kindListDetailList{
     display: inline-block;
     width: 100%;
     height: 100%;
 }
-.kindListDetail a{
+.kindListDetail>ul>li{
     font-size: 14px;
     width: 100px;
-    height: 15px;
     padding: 10px;
     line-height: 15px;
-
+    display: inline-block;
+    list-style-type: none;
 }
-.kindListDetail a:hover{
+.kindListDetail>ul>li:hover{
     background-color: #F1F1F1;
     cursor: pointer;
 }
@@ -132,17 +137,21 @@
     padding: 10px;
 }
 .brandRegion{
-    border: 1px solid #ededed;
+    /*border: 1px solid #ededed;*/
+    border-bottom: 1px solid #ededed;
 }
 .brandDetail{
-    padding: 10px;
+    padding: 10px 10px 10px 1px;
+}
+.brandDetailLeft{
+    width: 8%;
+    height: 44px;
+    background-color: #F52F3E;
 }
 .brandDetailLeft>p{
-    line-height: 20px;
-    color: #333;
-    font-size: 13px;
-    display: inline-block;
-    padding-right: 50px;
+    line-height: 44px;
+    color: white;
+    padding-left: 17px;
 }
 .brandDetailLeft>a{
     display: inline-block;
@@ -150,9 +159,6 @@
 .brandDetailLeft>a>p{
     line-height: 20px;
     font-size: 13px;
-}
-.brandDetailLeft>p:nth-child(1){
-    font-weight: 600;
 }
 .brandDetailLeft>a{
     padding-left: 30px;
@@ -174,10 +180,12 @@
 }
 .brandDetailRight{
     float: right;
-    height: 70px;
-    width: 81%;
-    padding: 10px;
-    margin-right: 21px;
+    height: 45px;
+    width: 75%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    margin-right: 55px;
     overflow: hidden;
 }
 .brandDetailRightContent{
@@ -187,31 +195,33 @@
     justify-content: flex-start;
     align-content: flex-start;
 }
-.brandDetailRightContent>a{
+.brandDetailRightContent>ul>li{
     font-size: 13px;
     cursor: pointer;
     color: #000;
     padding: 3px 15px 3px 15px;
     margin: 2px;
+    display: inline-block;
+    list-style-type: none;
 }
-.brandDetailRightContent>a:hover{
-    background-color: #2D93CA;
+.brandDetailRightContent>ul>li:hover{
+    background-color: #0984E0;
     cursor: pointer;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
 }
-.brandDetailRightContent>a:hover{
+.brandDetailRightContent>ul>li:hover{
     color: white;
 }
 .brandDetailRightContent{
-    height: 140px;
+    height: auto;
 }
 .key{
     float: right ;
 }
 .key>a{
-    padding: 6px 12px;
+    padding: 6px 16px;
     font-size: 12px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -236,7 +246,7 @@
     display: inline-block;
 }
 .inputProduct{
-    border-bottom: 1px solid #46a0d5;
+    border-bottom: 1px solid #F52F3E;
     float: right;
 }
 .inputProduct>form{
@@ -244,7 +254,7 @@
 }
 .submitProduct{
     display: inline-block;
-    background-color: #90bae0;
+    background-color: #F52F3E;
     /* padding: 6px; */
     width: 56px;
     height: 29px;

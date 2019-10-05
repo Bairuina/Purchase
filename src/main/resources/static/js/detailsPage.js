@@ -5,7 +5,7 @@ $(".moreThan").on('click',function(){
         $(this).parent().next().css('height',"auto");
     }else{
         $(this).find("span").text("更多");
-        $(this).parent().next().css('height',"70px");
+        $(this).parent().next().css('height',"45px");
         if(arrows.src.match('up')){
             arrows.src="images/down.png"
         }
@@ -18,3 +18,45 @@ $(".inputProduct").focus(function(){
 });
 
 //搜索时的ajax请求
+$('.list').on('click',function () {
+    //  获取点击的类名
+    var listName = $(this).children().text();
+    console.log(listName);
+    if(listName==''){
+        listName=0;
+    }
+    //  获取品目的名字
+    var items = $('.namesOfParts').text();
+    console.log(items);
+    if(items=='' ){
+        items=0;
+    }
+//    获取品牌
+    var brank = $('.brankName').text();
+    console.log(brank);
+    if(brank==''){
+        brank=0;
+    }
+//    获取搜索框的内容
+    var inputMessage = $("#productSearch").val();
+    console.log(inputMessage);
+    //判断如果值为空则返回0
+    if(inputMessage==''){
+        inputMessage=0;
+    }
+    console.log(listName);
+    console.log(items);
+    console.log(brank);
+    console.log(inputMessage);
+    //发送数据请求
+    // $.ajax({
+    //     url:'/product/'+listName+'/'+items+'/'+brank+'/'+inputMessage,
+    //     type:'GET',
+    //     async:true,
+    //     success:function (data) {
+    //         if(data.code=){
+    //
+    //         }
+    //     }
+    // })
+});

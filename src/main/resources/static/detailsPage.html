@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>商品详情页面</title>
-    <link rel="stylesheet" href="css/detailsPage.css">
-    <link rel="stylesheet" href="css/same.css">
+    <link rel="stylesheet" th:href="@{/css/detailsPage.css}">
+    <link rel="stylesheet" th:href="@{/css/same.css}">
 </head>
 <body>
 <div class="container">
@@ -30,16 +30,22 @@
                 <div class="wrap">
                     <div class="homepage" id="kindList">
                         <a class="current">
-                            <span>
-                                办公打印
-                                 <img th:src="@{img/down.png}" align="absmiddle">
-                            </span>
+                            <p>
+                                <span>
+                                    办公打印
+                                </span>
+                                <img th:src="@{/img/down.png}" align="absmiddle">
+                            </p>
                         </a>
                         <div class="kindList">
                             <div class="kindListDetail">
-                                <a>
-                                    <p>第一个</p>
-                                </a>
+                                <ul>
+                                    <li th:each="lbbhlist:${lbbhlist}">
+                                        <a class="list">
+                                            <p th:text="${lbbhlist.lbmc}">类名</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -49,33 +55,20 @@
                 <div class="wrap">
                     <div class="homepage" id="items">
                         <a class="current">
-                            <span>打印机
-                                    <img src="images/down.png" align="absmiddle">
-                            </span>
+                            <p>
+                                <span class="namesOfParts">打印机</span>
+                                <img th:src="@{/img/down.png}" align="absmiddle">
+                            </p>
                         </a>
                         <div class="itemsList">
                             <div class="itemsListDetail">
-                                <a>
-                                    <p>全部</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
-                                <a>
-                                    <p>第一个</p>
-                                </a>
+                                <ul>
+                                    <li th:each="pmbhlist:${pmbhlist}">
+                                        <a>
+                                            <p th:text="${pmbhlist.pmmc}" >品目</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -99,9 +92,6 @@
                     <div class="brandDetail">
                         <div class="brandDetailLeft">
                             <p>品牌</p>
-                            <a>
-                                <p>全部</p>
-                            </a>
                         </div>
                         <div class="key">
                             <a class="moreThan">
@@ -110,54 +100,69 @@
                         </div>
                         <div class="brandDetailRight">
                             <div class="brandDetailRightContent">
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
+                                <ul>
+                                    <li th:each="ppbhlist:${ppbhlist}">
+                                        <a>
+                                            <p th:text="${ppbhlist.ppmc}" class="brankName"></p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
+                        <div style="clear: both">
 
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a><a>戴尔</a>
-                                <a>戴尔</a>
+                        </div>
+                    </div>
+                </div>
+<!--                类名-->
+                <div class="brand">
+                    <div class="brandDetail">
+                        <div class="brandDetailLeft">
+                            <p>类名</p>
+                        </div>
+                        <div class="key">
+                            <a class="moreThan">
+                                <span>更多</span>
+                            </a>
+                        </div>
+                        <div class="brandDetailRight">
+                            <div class="brandDetailRightContent">
+                                <ul>
+                                    <li th:each="lbbhlist:${lbbhlist}">
+                                        <a>
+                                            <p th:text="${lbbhlist.lbmc}">类名</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                                <a>戴尔</a>
+                        <div style="clear: both">
+
+                        </div>
+                    </div>
+                </div>
+<!--                品目-->
+                <div class="brand">
+                    <div class="brandDetail">
+                        <div class="brandDetailLeft">
+                            <p>品目</p>
+                        </div>
+                        <div class="key">
+                            <a class="moreThan">
+                                <span>更多</span>
+                            </a>
+                        </div>
+                        <div class="brandDetailRight">
+                            <div class="brandDetailRightContent">
+                                <ul>
+                                    <li th:each="pmbhlist:${pmbhlist}">
+                                        <a>
+                                            <p th:text="${pmbhlist.pmmc}"></p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
 
@@ -226,7 +231,7 @@
                     <!--型号-->
                     <div class="items">
                         <p>
-                           <span> 型号名称:</span>
+                            <span> 型号名称:</span>
                             <span>
                                 电子类
                             </span>
@@ -266,7 +271,7 @@
                     <div class="offer">
                         <a>
                             <p>我要报价
-                                <img src="images/right.png" align="absmiddle">
+                                <img th:src="@{img/right.png}" align="absmiddle">
                             </p>
 
                         </a>
@@ -678,7 +683,7 @@
                     <div class="offer">
                         <a>
                             <p>我要报价
-                                <img src="images/right.png" align="absmiddle">
+                                <img th:src="@{/img/right.png}" align="absmiddle">
                             </p>
 
                         </a>
@@ -695,7 +700,7 @@
 
 </div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/detailsPage.js"></script>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/detailsPage.js}"></script>
 </body>
 </html>
