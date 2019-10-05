@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import net.wlgzs.purchase.service.IRedis;
 import net.wlgzs.purchase.util.ReadProperties;
 import net.wlgzs.purchase.util.Result;
-import net.wlgzs.purchase.util.ResultCode;
 import org.apache.ibatis.annotations.Param;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +47,24 @@ public class OrderDataController extends BaseController {
 
     @ApiOperation("显示所有订单")
     @RequestMapping("/selectDataOrder")
-    public ModelAndView selectDataOrder(@Param("pageSize")Integer pageSize,@RequestParam(value = "pageNum", defaultValue = "1")Integer pageNum){
+    public ModelAndView selectDataOrder(@RequestParam(value = "pageSize", defaultValue = "15")Integer pageSize,@RequestParam(value = "pageNum", defaultValue = "1")Integer pageNum){
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("订单详情页");
-        modelAndView.addObject("orderDara",iOrderService.selectAllOrder(15,pageNum));
+        modelAndView.setViewName("订单列表页");
+        modelAndView.addObject("orderDara",iOrderService.selectAllOrder(pageSize,pageNum));
+        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
         return modelAndView;
     }
 
+    //查询不同状态的订单  2-供应商待确认3-待验收 4-订单已取消 5-验收通过
+    @ApiOperation("显示取消或未确认订单")
+    @RequestMapping("/selectStatusDataOrder")
+    public ModelAndView selectStatusDataOrder(@Param("status")String status,@RequestParam(value = "pageSize", defaultValue = "15")Integer pageSize,@RequestParam(value = "pageNum", defaultValue = "1")Integer pageNum) {
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("订单列表页");
+        modelAndView.addObject("orderDara",iOrderService.selectStatusDataOrder(pageSize,pageNum,status));
+        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
+        return modelAndView;
+    }
 
     @ApiOperation(" 确认或取消订单")
     @RequestMapping("/ensureORefuseOrder")
@@ -77,7 +87,7 @@ public class OrderDataController extends BaseController {
     @ApiOperation("订单签收时间信息推送")
     @ResponseBody
     @RequestMapping("/ensureOrderTimeSubmit")
-    public Result ensureOrderTimeSubmit(@Param("ddbh") String ddbh,@Param("sfcd")int sfcd,@Param("fczddbh")String fczddbh,@Param("shsj") BigInteger shsj){
+    public Result ensureOrderTimeSubmit(@Param("ddbh") String ddbh,@Param("sfcd")int sfcd,@Param("fczddbh")String fczddbh){
         return iOrderService.ensureOrderTimeSubmit(ddbh,sfcd,fczddbh,new BigInteger(new DateTime().toString("yyyyMMddHHmmss")));
     }
 
@@ -102,6 +112,13 @@ public class OrderDataController extends BaseController {
     @RequestMapping("/invoiceEndTimeSubmit")
     public Result invoiceEndTimeSubmit(@Param("ddbh")String ddbh){
         return iOrderService.invoiceEndTimeSubmit(ddbh,new BigInteger(new DateTime().toString("yyyyMMddHHmmss")));
+    }
+
+    @ApiOperation("订单发票开始开具时间信息推送")
+    @ResponseBody
+    @RequestMapping("/ensureOrderArrive")
+    public Result ensureOrderArrive(@Param("ddbh") String ddbh,@Param("sfcd")int sfcd,@Param("fczddbh")String fczddbh,@Param("kdgs")String kdgs,@Param("kddh")String kddh,@Param("ms")String ms,@Param("kdsj")String kdsj){
+        return iOrderService.ensureOrderArrive(ddbh,sfcd,fczddbh,kdgs,kddh,ms,new BigInteger(kdsj));
     }
 
 

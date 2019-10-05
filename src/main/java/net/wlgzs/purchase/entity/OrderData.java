@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
@@ -18,7 +19,6 @@ import java.util.List;
  */
 @TableName("order_data")
 public class OrderData implements Serializable {
-
 
     private static final long serialVersionUID = 1L;
 
@@ -119,6 +119,11 @@ public class OrderData implements Serializable {
     private String shqx;
 
     /**
+     * 快递公司
+     */
+    private String kdgs;
+
+    /**
      * skbz 1-正常收款，2-未收款
      */
     private Integer skbz;
@@ -147,6 +152,37 @@ public class OrderData implements Serializable {
      * 收款金额
      */
     private Integer skje;
+
+    /**
+     * 验收标志 验收标志（1-自动验收，2-人工验收）
+     */
+    private Integer ysbz;
+
+    /**
+     * 验收时间
+     */
+    private BigInteger yssj;
+
+    /**
+     * 是否拆单 是否拆单（0-拆单 1-不拆单）
+     */
+    private Integer sfcd;
+
+    /**
+     * 分拆子订单编号  子订单编号，配对一个物流信息（sfcd为0的时候需要填写分拆子订单编号，不拆单的话子订单编号参数不用加）
+     */
+    private String fczddbh;
+
+    private List<ProductList> productList;
+
+    private List<AccessoryList> accessoryList;
+
+    private List<ServiceList> serviceList;
+
+    /**
+     * 快递单号
+     */
+    private String kddh;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -304,6 +340,14 @@ public class OrderData implements Serializable {
         this.shqx = shqx;
     }
 
+    public String getKdgs() {
+        return kdgs;
+    }
+
+    public void setKdgs(String kdgs) {
+        this.kdgs = kdgs;
+    }
+
     public Integer getSkbz() {
         return skbz;
     }
@@ -392,14 +436,6 @@ public class OrderData implements Serializable {
         this.productList = productList;
     }
 
-    public List<ServiceList> getServiceList() {
-        return serviceList;
-    }
-
-    public void setServiceList(List<ServiceList> serviceList) {
-        this.serviceList = serviceList;
-    }
-
     public List<AccessoryList> getAccessoryList() {
         return accessoryList;
     }
@@ -408,66 +444,91 @@ public class OrderData implements Serializable {
         this.accessoryList = accessoryList;
     }
 
-    /**
-     * 验收标志 验收标志（1-自动验收，2-人工验收）
-     */
-    private Integer ysbz;
+    public List<ServiceList> getServiceList() {
+        return serviceList;
+    }
+
+    public void setServiceList(List<ServiceList> serviceList) {
+        this.serviceList = serviceList;
+    }
+
+    public String getKddh() {
+        return kddh;
+    }
+
+    public void setKddh(String kddh) {
+        this.kddh = kddh;
+    }
+
+    public BigInteger getKdsj() {
+        return kdsj;
+    }
+
+    public void setKdsj(BigInteger kdsj) {
+        this.kdsj = kdsj;
+    }
+
+    public String getMs() {
+        return ms;
+    }
+
+    public void setMs(String ms) {
+        this.ms = ms;
+    }
 
     /**
-     * 验收时间
+     * 快递时间
      */
-    private BigInteger yssj;
+    private BigInteger kdsj;
 
     /**
-     * 是否拆单 是否拆单（0-拆单 1-不拆单）
+     * 快递描述
      */
-    private Integer sfcd;
-
-    /**
-     * 分拆子订单编号  子订单编号，配对一个物流信息（sfcd为0的时候需要填写分拆子订单编号，不拆单的话子订单编号参数不用加）
-     */
-    private String fczddbh;
+    private String ms;
 
 
-    private List<ProductList> productList;
 
-    private List<ServiceList> serviceList;
-
-    private List<AccessoryList> accessoryList;
 
 
     @Override
     public String toString() {
         return "OrderData{" +
         "orderId=" + orderId +
-        ", deliverycity=" + deliverycity +
-        ", deliverycounty=" + deliverycounty +
-        ", shdd=" + shdd +
-        ", ddbh=" + ddbh +
-        ", cgrmc=" + cgrmc +
-        ", xflxrxm=" + xflxrxm +
-        ", xfdh=" + xfdh +
-        ", ghsmc=" + ghsmc +
-        ", ddze=" + ddze +
-        ", cjrq=" + cjrq +
-        ", zt=" + zt +
-        ", zffs=" + zffs +
-        ", fptt=" + fptt +
-        ", nsrsbh=" + nsrsbh +
-        ", sfxyazfw=" + sfxyazfw +
-        ", beiz=" + beiz +
-        ", shsj=" + shsj +
-        ", shqx=" + shqx +
-        ", skbz=" + skbz +
-        ", fpnr=" + fpnr +
-        ", fpkjsj=" + fpkjsj +
-        ", fpsdsj=" + fpsdsj +
-        ", sksj=" + sksj +
-        ", skje=" + skje +
-        ", ysbz=" + ysbz +
-        ", yssj=" + yssj +
-        ", sfcd=" + sfcd +
-        ", fczddbh=" + fczddbh +
+        ", \ndeliverycity=" + deliverycity +
+        ", \ndeliverycounty=" + deliverycounty +
+        ", \nshdd=" + shdd +
+        ", \nddbh=" + ddbh +
+        ", \ncgrmc=" + cgrmc +
+        ", \nxflxrxm=" + xflxrxm +
+        ", \nxfdh=" + xfdh +
+        ", \nghsmc=" + ghsmc +
+        ", \nddze=" + ddze +
+        ", \ncjrq=" + cjrq +
+        ", \nzt=" + zt +
+        ", \nzffs=" + zffs +
+        ", \nfptt=" + fptt +
+        ", \nnsrsbh=" + nsrsbh +
+        ", \nsfxyazfw=" + sfxyazfw +
+        ", \nbeiz=" + beiz +
+        ", \nshsj=" + shsj +
+        ", \nshqx=" + shqx +
+        ", \nkdgs=" + kdgs +
+        ", \nskbz=" + skbz +
+        ", \nfpnr=" + fpnr +
+        ", \nfpkjsj=" + fpkjsj +
+        ", \nfpsdsj=" + fpsdsj +
+        ", \nsksj=" + sksj +
+        ", \nskje=" + skje +
+        ", \nysbz=" + ysbz +
+        ", \nyssj=" + yssj +
+        ", \nsfcd=" + sfcd +
+        ", \nfczddbh=" + fczddbh +
+        ", \nproductList=" + productList +
+        ", \naccessoryList=" + accessoryList +
+        ", \nserviceList=" + serviceList +
+        ", \nkddh=" + kddh +
+        ", \nkdsj=" + kdsj +
+        ", \nms=" + ms +
         "}";
     }
 }
