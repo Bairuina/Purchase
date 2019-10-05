@@ -79,7 +79,7 @@
                     <div class="homepage" id="items">
                         <a class="current">
                             <p>
-                                <span>联想</span>
+                                <span th:text="${productppbh.ppmc}">联想</span>
                                 <img th:src="@{/static/img/down.png}" align="absmiddle">
                             </p>
                         </a>
@@ -128,7 +128,7 @@
                             <div class="brandDetailRightContent">
                                 <ul>
                                     <li th:each="lbbhlist:${lbbhlist}">
-                                        <a th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/'+${inputMessage}}">
+                                        <a th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/'+${nr}}">
                                             <p th:text="${lbbhlist.lbmc}">类名</p>
                                         </a>
                                     </li>
@@ -158,7 +158,7 @@
                             <div class="brandDetailRightContent">
                                 <ul>
                                     <li th:each="pmbhlist:${pmbhlist}">
-                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0/'+${inputMessage}}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0/'+${nr}}">
                                             <p th:text="${pmbhlist.pmmc}"></p>
                                         </a>
                                     </li>
@@ -188,7 +188,7 @@
                             <div class="brandDetailRightContent">
                                 <ul>
                                     <li th:each="ppbhlist:${ppbhlist}">
-                                        <a th:href="@{'/product/'+${lbbh}+'/'+${ppbh}+'/'+${ppbhlist.ppbh}+'/'+${inputMessage}}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}+'/'+${nr}}">
                                             <p th:text="${ppbhlist.ppmc}" class="brankName"></p>
                                         </a>
                                     </li>
