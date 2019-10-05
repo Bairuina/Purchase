@@ -49,20 +49,20 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
 
             List<Product> productList;
-            if (lbbh.equals("0")) {
-                queryWrapper3.like("xhmc", nr.equals("0") ? "" : nr)
+            if (lbbh.equals(null)) {
+                queryWrapper3.like("xhmc", nr.equals(null) ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-            } else if (!lbbh.equals("0") && pmbh.equals("0")) {
-                queryWrapper3.eq("lbbh", lbbh).like("xhmc", nr.equals("0") ? "" : nr)
+            } else if (!lbbh.equals(null) && pmbh.equals(null)) {
+                queryWrapper3.eq("lbbh", lbbh).like("xhmc", nr.equals(null) ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-            } else if (!lbbh.equals("0") && !pmbh.equals("0") && ppbh.equals("0")) {
-                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).like("xhmc", nr.equals("0") ? "" : nr)
+            } else if (!lbbh.equals(null) && !pmbh.equals(null) && ppbh.equals(null)) {
+                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).like("xhmc", nr.equals(null) ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             } else {
-                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).eq("ppbh", ppbh).like("xhmc", nr.equals("0") ? "" : nr)
+                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).eq("ppbh", ppbh).like("xhmc", nr.equals(null) ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             }
