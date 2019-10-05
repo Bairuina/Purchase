@@ -5,6 +5,8 @@ import net.wlgzs.purchase.entity.Product;
 import net.wlgzs.purchase.mapper.ProductMapper;
 import net.wlgzs.purchase.service.IProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import net.wlgzs.purchase.util.Result;
+import net.wlgzs.purchase.util.ResultCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
@@ -23,51 +25,51 @@ import java.util.List;
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
     @Override
     public ModelAndView findallProduct(String lbbh,String pmbh,String ppbh,String nr){
-        QueryWrapper<Product> queryWrapper=new QueryWrapper<>();
-        queryWrapper.select("lbbh","lbmc");
-        List<Product> lbbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper)));
-        QueryWrapper<Product> queryWrapper1=new QueryWrapper<>();
-        if (lbbh.equals("0")){
-            lbbh=lbbhlist.get(0).getLbbh();
-        }
-        queryWrapper1.eq("lbbh",lbbh).select("pmbh","pmmc");
-        List<Product> pmbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper1)));
-        QueryWrapper<Product> queryWrapper2=new QueryWrapper<>();
-        if (pmbh.equals("0")){
-            pmbh=pmbhlist.get(0).getPmbh();
-        }
-        queryWrapper2.eq("pmbh",pmbh).select("ppbh","ppmc");
-        List<Product> ppbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
-        QueryWrapper<Product> queryWrapper3=new QueryWrapper<>();
-        
-
-        List<Product> productList;
-        if(lbbh.equals("0")){
-            queryWrapper3.like("xhmc",nr.equals("0")? "":nr)
-                    .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
-            productList=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-        }else if(!lbbh.equals("0")&&pmbh.equals("0")){
-            queryWrapper3.eq("lbbh",lbbh).like("xhmc",nr.equals("0")? "":nr)
-                    .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
-            productList=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-        }else if (!lbbh.equals("0")&&!pmbh.equals("0")&&ppbh.equals("0")){
-            queryWrapper3.eq("lbbh",lbbh).eq("pmbh",pmbh).like("xhmc",nr.equals("0")? "":nr)
-                    .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
-            productList=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-        }else{
-            queryWrapper3.eq("lbbh",lbbh).eq("pmbh",pmbh).eq("ppbh",ppbh).like("xhmc",nr.equals("0")? "":nr)
-                    .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
-            productList=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-        }
-
-
-        System.out.println(lbbhlist);
-        System.out.println(pmbhlist);
-        System.out.println(ppbhlist);
-        System.out.println(productList);
-
         ModelAndView modelAndView=new ModelAndView();
         try {
+            QueryWrapper<Product> queryWrapper=new QueryWrapper<>();
+            queryWrapper.select("lbbh","lbmc");
+            List<Product> lbbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper)));
+            QueryWrapper<Product> queryWrapper1=new QueryWrapper<>();
+            if (lbbh.equals("0")){
+                lbbh=lbbhlist.get(0).getLbbh();
+            }
+            queryWrapper1.eq("lbbh",lbbh).select("pmbh","pmmc");
+            List<Product> pmbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper1)));
+            QueryWrapper<Product> queryWrapper2=new QueryWrapper<>();
+            if (pmbh.equals("0")){
+                pmbh=pmbhlist.get(0).getPmbh();
+            }
+            queryWrapper2.eq("pmbh",pmbh).select("ppbh","ppmc");
+            List<Product> ppbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
+            QueryWrapper<Product> queryWrapper3=new QueryWrapper<>();
+
+
+            List<Product> productList;
+            if(lbbh.equals("0")){
+                queryWrapper3.like("xhmc",nr.equals("0")? "":nr)
+                        .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
+                productList=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
+            }else if(!lbbh.equals("0")&&pmbh.equals("0")){
+                queryWrapper3.eq("lbbh",lbbh).like("xhmc",nr.equals("0")? "":nr)
+                        .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
+                productList=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
+            }else if (!lbbh.equals("0")&&!pmbh.equals("0")&&ppbh.equals("0")){
+                queryWrapper3.eq("lbbh",lbbh).eq("pmbh",pmbh).like("xhmc",nr.equals("0")? "":nr)
+                        .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
+                productList=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
+            }else{
+                queryWrapper3.eq("lbbh",lbbh).eq("pmbh",pmbh).eq("ppbh",ppbh).like("xhmc",nr.equals("0")? "":nr)
+                        .select("product_id","xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
+                productList=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
+            }
+
+
+            System.out.println(lbbhlist);
+            System.out.println(pmbhlist);
+            System.out.println(ppbhlist);
+            System.out.println(productList);
+
             modelAndView.addObject("lbbhlist", lbbhlist);
             modelAndView.addObject("pmbhlist", pmbhlist);
             modelAndView.addObject("ppbhlist", ppbhlist);
@@ -75,8 +77,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             modelAndView.setViewName("detailsPage");
         }catch (Exception e){
             //返回报错页面
-            return new ModelAndView("fghfghghf");
+            modelAndView.addObject("msg", new Result(ResultCode.FAIL));
         }
+        modelAndView.addObject("msg",new Result(ResultCode.SUCCESS));
         return modelAndView;
     }
 

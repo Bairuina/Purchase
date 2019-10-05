@@ -15,7 +15,7 @@ public class ClientUtil {
             Client client=new Client(new URL(url));
             Object[] rets=client.invoke(wayName,new Object[]{parameter});
             String result=rets[0].toString();
-            logger.info(result);
+//            logger.info(result);
             return JSONObject.fromObject(result);
         } catch (Exception e) {
             e.printStackTrace();
