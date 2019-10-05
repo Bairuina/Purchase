@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订单列表页</title>
+    <link rel="stylesheet"  th:href="@{/css/orderList.css}">
+</head>
+
+<body>
+
+    <div class="oeder_list_nav">
+        <div class="order_list">
+            <div class="order_list_left">
+                <ul>
+                    <li style="background-color: #DF0024;"><a th:href="@{/lectDataOrder}">我的订单</a></li>
+                    <li><a href="">接受订单</a></li>
+                    <li><a href="">拒绝订单</a></li>
+                </ul>
+            </div>
+            <div class="order_list_right">
+                <div class="orders">
+                    <div class="orders_title">
+                        <ul>
+                            <li>商品</li>
+                            <li>订单状态</li>
+                            <li>交易状态</li>
+                        </ul>
+                    </div>
+                    <div class="dingdan">
+                        <div class="order_time">
+                            <ul>
+                                <li>2019-09-27</li>
+                                <li>订单号:<span>640797985986338141</span></li>
+                                <li>采购公司的名字</li>
+                            </ul>
+                        </div>
+                        <div class="order_details">
+                            <ul>
+                                <li>
+                                    <div class="shangpin" style="text-align: left">
+                                        <table>
+                                            <caption>总计: <span>2000</span>元</caption>
+                                            <tr>
+                                                <th>商品名称</th>
+                                                <th>型号编号</th>
+                                                <th>数量</th>
+                                            </tr>
+                                            <tr>
+                                                <td>机械键盘</td>
+                                                <td>dfjkdsjh</td>
+                                                <td>4 <span>件</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>无线鼠标</td>
+                                                <td>dfjkdsjh</td>
+                                                <td>4 <span>件</span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>拒绝</div>
+                                    <div>待审核</div>
+                                    <div><a href="">查看订单详情</a></div>
+                                </li>
+                                <li>
+                                    <div>订单完成</div>
+                                    <div>物流运输中</div>
+                                    <div><a href="">查看物流详情</a></div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="dingdan">
+                        <div class="order_time">
+                            <ul>
+                                <li>2019-09-27</li>
+                                <li>订单号:<span>640797985986338141</span></li>
+                                <li>采购公司的名字</li>
+                            </ul>
+                        </div>
+                        <div class="order_details">
+                            <ul>
+                                <li>
+                                    <div class="shangpin" style="text-align: left">
+                                        <table>
+                                            <caption>总计: <span>2000</span>元</caption>
+                                            <tr>
+                                                <th>商品名称</th>
+                                                <th>型号编号</th>
+                                                <th>数量</th>
+                                            </tr>
+                                            <tr>
+                                                <td>机械键盘</td>
+                                                <td>dfjkdsjh</td>
+                                                <td>4 <span>件</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>无线鼠标</td>
+                                                <td>dfjkdsjh</td>
+                                                <td>4 <span>件</span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>确认</div>
+                                    <div>待审核</div>
+                                    <div><a href="">查看订单详情</a></div>
+                                </li>
+                                <li>
+                                    <div>订单完成</div>
+                                    <div>物流运输中</div>
+                                    <div><a href="">查看物流详情</a></div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="dingdan">
+                        <div class="order_time">
+                            <ul>
+                                <li>2019-09-27</li>
+                                <li>订单号:<span>640797985986338141</span></li>
+                                <li>采购公司的名字</li>
+                            </ul>
+                        </div>
+                        <div class="order_details">
+                            <ul>
+                                <li>
+                                    <div class="shangpin" style="text-align: left">
+                                        <table>
+                                            <caption>总计: <span>2000</span>元</caption>
+                                            <tr>
+                                                <th>商品名称</th>
+                                                <th>型号编号</th>
+                                                <th>数量</th>
+                                            </tr>
+                                            <tr>
+                                                <td>机械键盘</td>
+                                                <td>dfjkdsjh</td>
+                                                <td>4 <span>件</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>无线鼠标</td>
+                                                <td>dfjkdsjh</td>
+                                                <td>4 <span>件</span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>待审核</div>
+                                    <div><a href="">查看订单详情</a></div>
+                                </li>
+                                <li>
+                                    <div>订单完成</div>
+                                    <div>物流运输中</div>
+                                    <div><a href="">查看物流详情</a></div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

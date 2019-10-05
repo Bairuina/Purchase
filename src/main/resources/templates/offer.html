@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/same.css">
+    <link rel="stylesheet" href="css/offer.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" /><!--CSS RESET-->
+    <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css"><!--演示页面样式，使用时可以不引用-->
+    <link rel="stylesheet" type="text/css" href="css/example-styles.css">
+    <link rel="stylesheet" type="text/css" href="css/demo-styles.css">
+    <style type="text/css">
+        .offerInput {
+            appearance: none;
+        }
+    </style>
+
+</head>
+<body>
+<div class="contain">
+    <!--顶部-->
+    <div class="header">
+
+    </div>
+    <!--顶部logo-->
+    <div class="wrap">
+
+    </div>
+    <div class="box">
+        <div class="mainPart">
+            <!--报价内容-->
+            <div class="offerContent">
+                <div class="offerTitle">
+                    <p>报价内容:</p>
+                </div>
+                <form class="offerForm" action="">
+                    <!--商品名称-->
+                    <div class="offerFormItem">
+                        <div style="height: 100%;">
+                            <div class="offerFormLabel">商品名称:</div>
+                                <div class="offerInputblock">
+                                    <a>
+                                        <p>123456789</p>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <!--类别名称-->
+                    <div class="offerFormItem">
+                        <div class="offerFormLabel">商品类别:</div>
+                        <div class="offerInputblock">
+                            <p>家电类</p>
+                        </div>
+                    </div>
+                    <!--品目-->
+                    <div class="offerFormItem">
+                        <div class="offerFormLabel">品目:</div>
+                        <div class="offerInputblock">
+                            <p>电视</p>
+                        </div>
+                    </div>
+                    <!--型号-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel">型号编号:</label>
+                        <div class="offerInputblock">
+                            <p>786555555555555555555</p>
+                        </div>
+                    </div>
+                    <!--配件-->
+                    <div class="offerFormItem">
+                        <div style="height: 100%;cursor: pointer">
+                            <div class="offerFormLabel">选择配件:</div>
+                            <form class="demo-example modal-example">
+                                <select id="modal-example" name="inventors" multiple>
+                                    <option value="al">Ada Lovelace</option>
+                                    <option value="gh">Grace Hopper</option>
+                                    <option value="hl">Hedy Lamarr</option>
+                                    <option value="mk">Margaret E. Knight</option>
+                                    <option value="sj">Shirley Ann Jackson</option>
+                                </select>
+                            </form>
+
+                        </div>
+                    </div>
+                    <!--配件价格-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel">配件价格:</label>
+                        <div class="offerInputblock">
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
+                        </div>
+                    </div>
+                    <!--增值服务-->
+                    <div class="offerFormItem">
+                        <div style="height: 100%;cursor: pointer">
+                            <div class="offerFormLabel" style="float: left;">增值服务:</div>
+                            <form class="demo-example" style="float: left;margin-left: 4px;">
+                                <select id="people" name="people" multiple>
+                                    <option value="alice">Alice</option>
+                                    <option value="bob">Bob</option>
+                                    <option value="carol">Carol</option>
+                                </select>
+                            </form>
+                            <div style="clear: both;"></div>
+                        </div>
+                    </div>
+                    <!--增值服务价格-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel">增值服务价格:</label>
+                        <div class="offerInputblock">
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
+                        </div>
+                    </div>
+                    <!--总报价-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel">总价格:</label>
+                        <div class="offerInputblock">
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
+                        </div>
+                    </div>
+                    <!--更改报价原因-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel" style="vertical-align: top;">更改报价原因:</label>
+                        <div class="offerInputblock">
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="submitBar">
+        <a class="cancel">返回</a>
+        <a class="confirm">提交</a>
+    </div>
+</div>
+<!--底部-->
+<div class="footer">
+
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.multi-select.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#people').multiSelect();
+        $('#line-wrap-example').multiSelect({
+            positionMenuWithin: $('.position-menu-within')
+        });
+        $('#categories').multiSelect({
+            noneText: 'All categories',
+            presets: [
+                {
+                    name: 'All categories',
+                    options: []
+                },
+                {
+                    name: 'My categories',
+                    options: ['a', 'c']
+                }
+            ]
+        });
+        $('#modal-example').multiSelect({
+            'modalHTML': '<div class="multi-select-modal">'
+        });
+    });
+</script>
+</html>
+
+
