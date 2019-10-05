@@ -107,7 +107,12 @@
     z-index: 100;
     display: none;
 }
-.kindListDetail>a{
+.kindListDetailList{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.kindListDetail a{
     font-size: 14px;
     width: 100px;
     height: 15px;
@@ -115,7 +120,7 @@
     line-height: 15px;
 
 }
-.kindListDetail>a:hover{
+.kindListDetail a:hover{
     background-color: #F1F1F1;
     cursor: pointer;
 }
