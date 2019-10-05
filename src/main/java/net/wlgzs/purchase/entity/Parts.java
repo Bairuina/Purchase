@@ -33,19 +33,19 @@ public class Parts implements Serializable {
      * 配件编号
      */
     @TableField("PJBH")
-    private String pjbh;
+    private String PJBH;
 
     /**
      * 配件名称
      */
     @TableField("PJMC")
-    private String pjmc;
+    private String PJMC;
 
     /**
      * 配件描述
      */
-    @TableField("OJMS")
-    private String ojms;
+    @TableField("PJMS")
+    private String PJMS;
 
     /**
      * 品目编号

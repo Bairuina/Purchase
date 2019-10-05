@@ -66,7 +66,7 @@ public class ProductController extends BaseController {
     @Test
     public void ppp() {
         String result = null;
-        int page=99;
+        int page=100;
         int numpage=100;
         for (int i = page; i < numpage; i++) {
             try {
@@ -149,10 +149,12 @@ public class ProductController extends BaseController {
             for (int i = 0; i < pmbh.size(); i++) {
                 String json="{\"username\":\""+username+"\",\"pwd\":\""+enPwd1+"\",\"pmbh\":\""+pmbh.get(i)+"\",\"pageNum\":\"1\",\"pageSize\":\"10\"}";
                 JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getFindPjByPmbh(),json);
-                if (jsonObject.getString("resultFlag").equals("Y")){
-
+                if (jsonObject.getString("resultFlag").equals("Y")&&jsonObject.getString("resultMessage").equals("返回品目配件信息成功")){
+                        String jsonString=jsonObject.getString("accessoryList");
+                        List<Parts> parts1=JSON.parseArray(jsonString,Parts.class);
+                        logger.info(parts1+"****************************");
                 }
-                logger.info(jsonObject+"****************************");
+
             }
 
         }catch(Exception e){
@@ -212,6 +214,10 @@ public class ProductController extends BaseController {
      * 查询页
      * 需要遍历lbmc，pmmc，ppmc
      * 还有全部商品列表
+     * @param lbbh 类别编号
+     * @param pmbh 品目编号
+     * @param ppbh 品牌编号
+     * @param  nr  搜索内容
      */
     @RequestMapping(value = "/{lbbh}/{pmbh}/{ppbh}/{nr}",method = RequestMethod.GET)
     @ApiOperation(value = "多条件查询",httpMethod = "GET")
