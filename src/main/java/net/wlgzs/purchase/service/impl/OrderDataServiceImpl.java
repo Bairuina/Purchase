@@ -19,6 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.websocket.Session;
+import java.io.*;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     @Autowired
     IRedis iRedis;
 
+
     @Autowired
     IContractService contractService;
 
@@ -52,6 +55,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     @Autowired
     ReadProperties properties;
 
+    @Autowired
+    private WebSocketServer webSocketServer;
+
 
     Logger logger = LoggerFactory.getLogger(OrderDataServiceImpl.class);
 
@@ -59,19 +65,18 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //更新订单
     @Override
     public Result updateOrderDate(int pageNum) {
+        webSocketServer.sendMessage("订单信息更新完成");
         String userName=properties.getUsername();
         String pwd=properties.getPwd();
         DateTime dateTime=new DateTime();
-       iRedis.set("upDataTime",dateTime.toString("yyyy-MM-d  HH：mm：ss"));
         String enPwd = Enxi.enPwd(userName, pwd);
         String jssj =dateTime.toString("yyyyMMddHHmmss") ;
-        String kssj = dateTime.minusHours(3).toString("yyyyMMddHHmmss");
+        setUpDataTime(dateTime.toString("yyyyMMddHHmmss"));
+        String kssj = checkUpDataTime();
         logger.info("kssj(开始时间):" + kssj);
         logger.info("jssj(结束时间):" + jssj);
-
         int pageSize = 50;
         String result = null;
-
         try {
             Client client = new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
             String jsonStr = "{\"username\":\"" + userName + "\",\"pwd\":\"" + pwd + "\",\"zt\":2,\"kssj\":\"" + kssj + "\",\"jssj\":\"" + jssj + "\",\"pageNum\":\"" + pageNum + "\",\"pageSize\":\"" + pageSize + "\"}";
@@ -150,6 +155,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
             updateOrderDate(pageNum);
         }
             logger.info("更新完成！");
+            webSocketServer.sendMessage("订单信息更新完成");
             return new Result(ResultCode.SUCCESS);
 
     }
@@ -492,6 +498,14 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         return new Result(ResultCode.SUCCESS, "成功！", OrderList, iPage.getPages(), iPage.getCurrent());
     }
 
+    //根据订单信息查询订单列表
+    @Override
+    public Result selectOrderListByData(String Data) {
+        QueryWrapper<OrderData> queryWrapper = new QueryWrapper<>();
+
+        return null;
+    }
+
 
     Result upDateTwo(String ddbh,OrderData orderData) {
         QueryWrapper<OrderData> queryWrapper = new QueryWrapper<>();
@@ -525,7 +539,42 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         }
         return data.getZt();
     }
+
+     String checkUpDataTime(){
+        File file=new File(System.getProperty("user.dir")+"/upDataTime.txt");
+        if(!file.exists()){
+          return "暂无更新时间！";
+        }
+        String upDataTime="";
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            upDataTime=br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return upDataTime;
     }
+
+     void setUpDataTime(String upDataTime){
+        String path=System.getProperty("user.dir");
+            File file=null;
+        try {
+            file=new File(path,"upDataTime.txt");
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            FileWriter fw =  new FileWriter(file);
+            fw.write(upDataTime);
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+}
 
 
 

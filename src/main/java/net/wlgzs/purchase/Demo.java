@@ -7,9 +7,7 @@ public class Demo {
 
 
     public static void main(String[] args) {
-        DateTime dateTime=new DateTime();
-        String jssj =dateTime.toString("yyyy-MM-d  HH：mm：ss") ;
-        System.out.println(jssj);
+        System.out.println(System.getProperty("user.dir"));
 
     }
 }
