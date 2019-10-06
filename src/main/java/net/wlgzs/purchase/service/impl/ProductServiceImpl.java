@@ -44,53 +44,57 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             queryWrapper2.eq("pmbh", pmbh).select("ppbh", "ppmc");
             List<Product> ppbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
             QueryWrapper<Product> queryWrapper3 = new QueryWrapper<>();
+            if (ppbh.equals("0")){
+                ppbh = ppbhlist.get(0).getPpbh();
+            }
+            if (nr.equals("")){
+                nr="0";
+            }
 
-
-
-
+            System.out.println(lbbh+"***************"+pmbh+"****************"+ppbh+"***************"+nr+"*********");
             List<Product> productList;
-            if (lbbh.equals(null)) {
-                queryWrapper3.like("xhmc", nr.equals(null) ? "" : nr)
+            if (lbbh.equals("0")) {
+                queryWrapper3.like("xhmc", nr.equals("0") ? "" : nr)
+                        .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
+                System.out.println(nr);
+                productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
+            } else if (!lbbh.equals("0") && pmbh.equals("0")) {
+                queryWrapper3.eq("lbbh", lbbh).like("xhmc", nr.equals("0") ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-            } else if (!lbbh.equals(null) && pmbh.equals(null)) {
-                queryWrapper3.eq("lbbh", lbbh).like("xhmc", nr.equals(null) ? "" : nr)
-                        .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
-                productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-            } else if (!lbbh.equals(null) && !pmbh.equals(null) && ppbh.equals(null)) {
-                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).like("xhmc", nr.equals(null) ? "" : nr)
+            } else if (!lbbh.equals("0") && !pmbh.equals("0") && ppbh.equals("0")) {
+                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).like("xhmc", nr.equals("0") ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             } else {
-                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).eq("ppbh", ppbh).like("xhmc", nr.equals(null) ? "" : nr)
+                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).eq("ppbh", ppbh).like("xhmc", nr.equals("0") ? "" : nr)
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             }
-
-            System.out.println(lbbhlist);
-            System.out.println(pmbhlist);
-            System.out.println(ppbhlist);
-            System.out.println(productList);
+//            System.out.println(lbbhlist);
+//            System.out.println(pmbhlist);
+//            System.out.println(ppbhlist);
+//            System.out.println(productList);
             modelAndView.addObject("lbbhlist", lbbhlist);//第一大类
             modelAndView.addObject("pmbhlist", pmbhlist);//第二大类
             modelAndView.addObject("ppbhlist", ppbhlist);//第三大类
-            modelAndView.addObject("productList", productList);//搜索内容
+            modelAndView.addObject("productList", productList);
+            System.out.println(productList);
             for (Product product:lbbhlist){
                 if (product.getLbbh().equals(lbbh)){
                     modelAndView.addObject("productlbbh",product);
                 }
             }
             for (Product product:pmbhlist){
-                if (product.getLbbh().equals(pmbh)){
+                if (product.getPmbh().equals(pmbh)){
                     modelAndView.addObject("productpmbh",product);
                 }
             }
             for (Product product:ppbhlist){
-                if (product.getLbbh().equals(ppbh)){
+                if (product.getPpbh().equals(ppbh)){
                     modelAndView.addObject("productppbh",product);
                 }
             }
-
 
             modelAndView.addObject("nr",nr);
 

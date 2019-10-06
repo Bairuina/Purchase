@@ -5,7 +5,6 @@ import net.sf.json.JSONObject;
 import org.codehaus.xfire.client.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.net.URL;
 
 public class ClientUtil {
@@ -15,7 +14,7 @@ public class ClientUtil {
             Client client=new Client(new URL(url));
             Object[] rets=client.invoke(wayName,new Object[]{parameter});
             String result=rets[0].toString();
-//            logger.info(result);
+            logger.info(result);
             return JSONObject.fromObject(result);
         } catch (Exception e) {
             e.printStackTrace();
