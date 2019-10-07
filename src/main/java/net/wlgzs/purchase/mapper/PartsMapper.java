@@ -11,7 +11,7 @@ import java.util.List;
  *  Mapper 接口
  * </p>
  *
- * @author 胡亚星
+ * @author 王耀兴
  * @since 2019-09-28
  */
 @org.apache.ibatis.annotations.Mapper

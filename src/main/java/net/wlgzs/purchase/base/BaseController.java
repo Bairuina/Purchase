@@ -12,7 +12,6 @@ public class BaseController {
     @Autowired
     protected IAccessoryListService iAccessoryListService;
 
-
     @Autowired
     protected IContractService iContractService;
 
@@ -36,4 +35,12 @@ public class BaseController {
 
     @Autowired
     protected IUserService iUserService;
+
+    @Autowired
+    protected IPartsOfferService iPartsOfferService;
+
+    @Autowired
+    protected IServiceOfferService iServiceOfferService;
+
+    @Autowired IProductOfferService iProductOfferService;
 }

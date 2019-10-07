@@ -38,7 +38,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -72,6 +71,8 @@ public class ProductController extends BaseController {
 
     @Autowired
     private ReadProperties readProperties;
+
+    private String xhbh="82db683c0fc342b39c7e9f3ca80c0969";
 
 
 
@@ -249,7 +250,6 @@ public class ProductController extends BaseController {
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
         String enPwd1= Enxi.enPwd(username,pwd);
-        String xhbh = "18cc43d2719142e6a4e791a3a8a9215b";
         String jgsfyy="成本升高";
         Product product = productMapper.findProductByXxbh(xhbh);
         List<Parts> parts=partsMapper.findPartsByPmbh(product.getPmbh());
@@ -272,7 +272,7 @@ public class ProductController extends BaseController {
                 "\"lbmc\":\"" + product.getLbmc() + "\"," +
                 "\"area\":\"00390019\"," +
                 "\"fwcn\":\"郑州以及周边一天内送货，其他地市二天；提供上门安装及后期维修服务\"," +
-                "\"sjjg\": \"4\"," +
+                "\"sjjg\": \"0.5\"," +
                 "\"productlink\":\"http://www.staples.cn/product/1100008501EA\"," +
                 "\"pjxxList\":"+ pjxxList +","+
                 "\"jgsfyy\":\""+jgsfyy+"\"}";
@@ -288,16 +288,13 @@ public class ProductController extends BaseController {
     @Test
     public void PjBaojiaByXhbhPjbh(){
         //获取相关数据
-        String xhbh = "18cc43d2719142e6a4e791a3a8a9215b";
-        String pjbh = "cb56e0ed99e94d8c9c334e30db4d3db8";
+        String pjbh = "06688a98a6c8453bbc801f7708d63478";
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
         String enPwd1= Enxi.enPwd(username,pwd);
         Product product=productMapper.findProductByXxbh(xhbh);
         Parts parts=partsMapper.findPartsByPjbh(pjbh);
-
-
         //拼接json
         String json="{\"username\":\""+username+"\"," +
                 "\"pwd\":\""+enPwd1+"\"," +
@@ -307,7 +304,7 @@ public class ProductController extends BaseController {
                 "\"xhmc\":\""+product.getXhmc()+"\"," +
                 "\"pjbh\": \""+parts.getPJBH()+"\"," +
                 "\"pjmc\": \""+parts.getPJMC()+"\"," +
-                "\"pjjg\":\"25542\"," +
+                "\"pjjg\":\"300000\"," +
                 "\"bjyy\":\"物价上涨\"}";
         JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getQuotedpricePjByPjbh(),json);
         System.out.println(jsonObject.toString());
@@ -317,7 +314,8 @@ public class ProductController extends BaseController {
     //商品增值服务报价
     @Test
     public void ServiceBaojiaByFwbh(){
-        String fwbh="667f7087727d444a8131327dabe0ab86";
+        String xhmc=productMapper.findXhmcByXhbh(xhbh);
+        String fwbh="8d12afbaa31144f5be878d624ca77e9d";
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -326,8 +324,8 @@ public class ProductController extends BaseController {
         String json="{\"username\":\""+username+"\"," +
                 "\"pwd\":\""+enPwd1+"\"," +
                 "\"pmbh\":\""+serviceValue.getPmbh()+"\"," +
-                "\"xhbh\":\"b701a0b74a7040c78c63cd0544b3791b\","+
-                "\"xhmc\":\"JW1804L\","+
+                "\"xhbh\":\""+xhbh+"\","+
+                "\"xhmc\":\""+xhmc+"\","+
                 "\"pmmc\":\""+serviceValue.getPmmc()+"\"," +
                 "\"fwbh\":\""+serviceValue.getFWBH()+"\"," +
                 "\"fwmc\":\""+serviceValue.getFwmc()+"\"," +
@@ -345,7 +343,6 @@ public class ProductController extends BaseController {
     @Test
     public void getProductBjByXhbh(){
         //获取相关数据
-        String xhbh = "18cc43d2719142e6a4e791a3a8a9215b";
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -355,7 +352,7 @@ public class ProductController extends BaseController {
         String json="{\"username\":\""+username+"\"," +
                 "\"pwd\":\""+enPwd1+"\"," +
                 "\"xhbh\":\""+xhbh+"\"}";
-
+        System.out.println(json);
         JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getFindSpByXhbh(),json);
         System.out.println(jsonObject.toString());
     }
@@ -365,7 +362,7 @@ public class ProductController extends BaseController {
     @Test
     public void getProductBjByXhbh2(){
         //获取基本信息
-        String xhbh = "18cc43d2719142e6a4e791a3a8a9215b";
+
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -383,7 +380,7 @@ public class ProductController extends BaseController {
     @Test
     public void qxProductBj(){
         //获取基本信息
-        String xhbh = "18cc43d2719142e6a4e791a3a8a9215b";
+
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -395,6 +392,26 @@ public class ProductController extends BaseController {
                 "xhbh\":\""+xhbh+"\"}";
         System.out.println(json);
         JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getQxShByXhbh(),json);
+        System.out.println(jsonObject);
+    }
+
+    //商品上价下价
+    @Test
+    public void shangxiajia(){
+        //获取基本信息
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+
+        //拼接Json
+        String json="{\"username\":\""+username+"\"," +
+                "\"pwd\":\""+enPwd1+"\"," +
+                "\"xhbh\":\""+xhbh+"\"," +
+                "\"zt\":\"1\"," +
+                "\"xjyy\": \"商品没货需要上架\"}";
+        System.out.println(json);
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getExecSpDown(),json);
         System.out.println(jsonObject);
     }
 
@@ -413,6 +430,10 @@ public class ProductController extends BaseController {
     public ModelAndView findallProduct(@PathVariable("lbbh") String lbbh,@PathVariable("pmbh") String pmbh,@PathVariable("ppbh") String ppbh,@PathVariable("nr") String nr){
         return productService.findallProduct(lbbh,pmbh,ppbh,nr);
     }
+
+    /**
+     *
+     */
 
 //    /**
 //     * 传入一个lbmc,返回pmmc 和 lbmc的全部商品

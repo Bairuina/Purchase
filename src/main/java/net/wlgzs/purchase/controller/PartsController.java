@@ -3,18 +3,25 @@ package net.wlgzs.purchase.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import net.wlgzs.purchase.entity.Parts;
 import net.wlgzs.purchase.service.IPartsService;
+import net.wlgzs.purchase.util.Result;
+import net.wlgzs.purchase.util.ResultCode;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -40,5 +47,24 @@ public class PartsController extends BaseController {
         List<Parts> list= partsService.list(queryWrapper);
         model.addAttribute("Partslist",list);
         return new ModelAndView();
+    }
+
+    /**
+     *某商品某配件报价
+     * @param pjbh 配件编号
+     * @param xhbh 商品编号
+     * @param price 配件价格
+     * @param text 增值原因（可有可无）
+     */
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pjbh",value = "配件价格"),
+            @ApiImplicitParam(name = "xhbh",value = "商品编号"),
+            @ApiImplicitParam(name = "price",value = "配件价格"),
+            @ApiImplicitParam(name = "text",value = "增值原因")
+    })
+    @RequestMapping(value = "/offer",method = RequestMethod.POST)
+    public Result offerPart(Model model, HttpServletRequest request,String pjbh,String xhbh,String price,String text){
+        System.out.println(pjbh);
+        return new Result(ResultCode.SUCCESS);
     }
 }
