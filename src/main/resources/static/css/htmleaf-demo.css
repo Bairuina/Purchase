@@ -23,16 +23,7 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-body, html { font-size: 100%; 	padding: 0; margin: 0;}
-
-/* Reset */
-*,
-*:after,
-*:before {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-}
+body, html { padding: 0; margin: 0;}
 
 /* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
 .clearfix:before,
@@ -46,13 +37,10 @@ body, html { font-size: 100%; 	padding: 0; margin: 0;}
 }
 
 body{
-	font-weight: 500;
-	font-size: 1.05em;
-	font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+	font-family: "Microsoft YaHei","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif;
 }
-a{color: #2fa0ec;text-decoration: none;outline: none;}
-a:hover,a:focus{color:#74777b;}
-
+.htmleaf-links a{ color: rgba(255, 255, 255, 0.6);outline: none;text-decoration: none;-webkit-transition: 0.2s;transition: 0.2s;}
+.htmleaf-links a:hover,.htmleaf-links a:focus{color:#74777b;text-decoration: none;}
 .htmleaf-container{
 	margin: 0 auto;
 }
@@ -80,13 +68,11 @@ a:hover,a:focus{color:#74777b;}
 .htmleaf-header h1 {
 	color: #D5D6E2;
 	font-weight: 600;
-	font-size: 2em;
+	font-size: 1.2em;
 	line-height: 1;
 	margin-bottom: 0;
-	font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
 }
 .htmleaf-header h1 span {
-	font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
 	display: block;
 	font-size: 60%;
 	font-weight: 400;
@@ -104,7 +90,7 @@ a:hover,a:focus{color:#74777b;}
 	position: relative;
 	display: inline-block;
 	white-space: nowrap;
-	font-size: 1.5em;
+	font-size: 0.8em;
 	text-align: center;
 }
 
@@ -177,6 +163,7 @@ a:hover,a:focus{color:#74777b;}
 	-webkit-transition: opacity 0.3s;
 	transition: opacity 0.3s;
 	-webkit-backface-visibility: hidden;
+	text-decoration: none;
 }
 
 .related a:hover,
@@ -193,8 +180,9 @@ a:hover,a:focus{color:#74777b;}
 .related a:active img {
 	opacity: 1;
 }
-.related h3{font-family: "Microsoft YaHei", sans-serif;}
+.related h3{font-family: "Microsoft YaHei", sans-serif;font-size: 1.2em}
 .related a h3 {
+	font-size: 0.85em;
 	font-weight: 300;
 	margin-top: 0.15em;
 	color: #fff;
@@ -208,24 +196,47 @@ a:hover,a:focus{color:#74777b;}
 	content: "\e5001";
 }
 
-@media screen and (max-width: 50em) {
+@media screen and (max-width: 1024px) {
 	.htmleaf-header {
-		padding: 3em 10% 4em;
+		padding: 2em 10% 2em;
 	}
 	.htmleaf-header h1 {
-        font-size:2em;
+        font-size:1.4em;
     }
+    .htmleaf-links{font-size: 1.4em}
 }
 
-
-@media screen and (max-width: 40em) {
-	.htmleaf-header h1 {
-		font-size: 1.5em;
+@media screen and (max-width: 960px) {
+	.htmleaf-header {
+		padding: 2em 10% 2em;
 	}
-}
-
-@media screen and (max-width: 30em) {
-    .htmleaf-header h1 {
+	.htmleaf-header h1 {
         font-size:1.2em;
     }
+    .htmleaf-links{font-size: 1.2em}
+    .related h3{font-size: 1em;}
+	.related a h3 {
+		font-size: 0.8em;
+	}
+}
+
+@media screen and (max-width: 766px) {
+	.htmleaf-header h1 {
+        font-size:1.3em;
+    }
+    .htmleaf-links{font-size: 1.3em}
+}
+
+@media screen and (max-width: 640px) {
+	.htmleaf-header {
+		padding: 2em 10% 2em;
+	}
+	.htmleaf-header h1 {
+        font-size:1em;
+    }
+    .htmleaf-links{font-size: 1em}
+    .related h3{font-size: 0.8em;}
+	.related a h3 {
+		font-size: 0.6em;
+	}
 }

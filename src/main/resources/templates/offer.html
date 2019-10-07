@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+
+    <link rel="stylesheet" type="text/css" href="css/niftymodals.css" />
+
+    <!--[if IE]>
+    <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+    <link rel="stylesheet" href="css/demo.css">
     <link rel="stylesheet" href="css/same.css">
     <link rel="stylesheet" href="css/offer.css">
     <link rel="stylesheet" type="text/css" href="css/normalize.css" /><!--CSS RESET-->
-    <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css"><!--演示页面样式，使用时可以不引用-->
     <link rel="stylesheet" type="text/css" href="css/example-styles.css">
     <link rel="stylesheet" type="text/css" href="css/demo-styles.css">
-    <style type="text/css">
-        .offerInput {
-            appearance: none;
-        }
-    </style>
-
 </head>
 <body>
 <div class="contain">
@@ -30,9 +31,21 @@
         <div class="mainPart">
             <!--报价内容-->
             <div class="offerContent">
-                <div class="offerTitle">
+                <div class="offerTitle" >
                     <p>报价内容:</p>
                 </div>
+                <div class="addition">
+                    <div class="parts md-trigger" data-modal="modal-1">
+                        <p>配件报价</p>
+                    </div>
+                    <div class="serve md-trigger" data-modal="modal-2">
+                        <p>增值服务</p>
+                    </div>
+                    <div class="view md-trigger" data-modal="modal-3">
+                        <p>查看所有已报价商品</p>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
                 <form class="offerForm" action="">
                     <!--商品名称-->
                     <div class="offerFormItem">
@@ -59,62 +72,11 @@
                             <p>电视</p>
                         </div>
                     </div>
-                    <!--型号-->
-                    <div class="offerFormItem">
-                        <label class="offerFormLabel">型号编号:</label>
-                        <div class="offerInputblock">
-                            <p>786555555555555555555</p>
-                        </div>
-                    </div>
-                    <!--配件-->
-                    <div class="offerFormItem">
-                        <div style="height: 100%;cursor: pointer">
-                            <div class="offerFormLabel">选择配件:</div>
-                            <form class="demo-example modal-example">
-                                <select id="modal-example" name="inventors" multiple>
-                                    <option value="al">Ada Lovelace</option>
-                                    <option value="gh">Grace Hopper</option>
-                                    <option value="hl">Hedy Lamarr</option>
-                                    <option value="mk">Margaret E. Knight</option>
-                                    <option value="sj">Shirley Ann Jackson</option>
-                                </select>
-                            </form>
-
-                        </div>
-                    </div>
-                    <!--配件价格-->
-                    <div class="offerFormItem">
-                        <label class="offerFormLabel">配件价格:</label>
-                        <div class="offerInputblock">
-                            <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
-                        </div>
-                    </div>
-                    <!--增值服务-->
-                    <div class="offerFormItem">
-                        <div style="height: 100%;cursor: pointer">
-                            <div class="offerFormLabel" style="float: left;">增值服务:</div>
-                            <form class="demo-example" style="float: left;margin-left: 4px;">
-                                <select id="people" name="people" multiple>
-                                    <option value="alice">Alice</option>
-                                    <option value="bob">Bob</option>
-                                    <option value="carol">Carol</option>
-                                </select>
-                            </form>
-                            <div style="clear: both;"></div>
-                        </div>
-                    </div>
-                    <!--增值服务价格-->
-                    <div class="offerFormItem">
-                        <label class="offerFormLabel">增值服务价格:</label>
-                        <div class="offerInputblock">
-                            <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
-                        </div>
-                    </div>
                     <!--总报价-->
                     <div class="offerFormItem">
-                        <label class="offerFormLabel">总价格:</label>
+                        <label class="offerFormLabel">商品价格:</label>
                         <div class="offerInputblock">
-                            <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入价格" class="offerInput" style="width: 145px;">
                         </div>
                     </div>
                     <!--更改报价原因-->
@@ -132,6 +94,189 @@
         <a class="cancel">返回</a>
         <a class="confirm">提交</a>
     </div>
+<!--配件报价模态框-->
+    <div class="md-container md-effect-1" id="modal-1">
+        <div class="md-content">
+            <table >
+                    <thead>
+                    <tr>
+                        <th>配件名称:</th>
+                        <th>价格</th>
+                        <th>备注</th>
+                        <th>修改</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>TanmayTanmayTanmayTanmayTanmay</td>
+                        <td>
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
+                        </td>
+                        <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                        </td>
+                        <td>
+                            <p>提交报价</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TanmayTanmayTanmayTanmayTanmay</td>
+                        <td>
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
+                        </td>
+                        <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                        </td>
+                        <td>
+                            <p>提交报价</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TanmayTanmayTanmayTanmayTanmay</td>
+                        <td>
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
+                        </td>
+                        <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                        </td>
+                        <td>
+                            <p>提交报价</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TanmayTanmayTanmayTanmayTanmay</td>
+                        <td>
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
+                        </td>
+                        <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                        </td>
+                        <td>
+                            <p>提交报价</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TanmayTanmayTanmayTanmayTanmay</td>
+                        <td>
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
+                        </td>
+                        <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                        </td>
+                        <td>
+                            <p>提交报价</p>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+        </div>
+    </div>
+    <!--增值服务-->
+    <div class="md-container md-effect-2" id="modal-2">
+        <div class="md-content">
+            <table >
+                <thead>
+                <tr>
+                    <th>增值服务名称:</th>
+                    <th>增值服务价格</th>
+                    <th>备注</th>
+                    <th>修改</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>TanmayTanmayTanmayTanmayTanmay</td>
+                    <td>
+                        <input type="text" name="title" autocomplete="off" placeholder="请输入价格" class="offerInput" style="width: 145px;">
+                    </td>
+                    <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                    </td>
+                    <td>
+                        <p>提交报价</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TanmayTanmayTanmayTanmayTanmay</td>
+                    <td>
+                        <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
+                    </td>
+                    <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                    </td>
+                    <td>
+                        <p>提交报价</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TanmayTanmayTanmayTanmayTanmay</td>
+                    <td>
+                        <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
+                    </td>
+                    <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                    </td>
+                    <td>
+                        <p>提交报价</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TanmayTanmayTanmayTanmayTanmay</td>
+                    <td>
+                        <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
+                    </td>
+                    <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                    </td>
+                    <td>
+                        <p>提交报价</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TanmayTanmayTanmayTanmayTanmay</td>
+                    <td>
+                        <input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">
+                    </td>
+                    <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                    </td>
+                    <td>
+                        <p>提交报价</p>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <!--超看所有报价商品-->
+    <div class="md-container md-effect-3" id="modal-3">
+        <div class="md-content">
+            <h3>Modal Dialog</h3>
+            <div>
+                <p>This is a modal window. You can do the following things with it:</p>
+                <ul>
+                    <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                    <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                    <li><strong>Close:</strong> click on the button below to close the modal.</li>
+                </ul>
+                <button class="md-close">Close me!</button>
+            </div>
+        </div>
+    </div>
+    <div class="md-overlay"></div>
 </div>
 <!--底部-->
 <div class="footer">
@@ -162,8 +307,34 @@
         $('#modal-example').multiSelect({
             'modalHTML': '<div class="multi-select-modal">'
         });
+
     });
 </script>
+<script src="js/offer.js"></script>
+
+<script src="js/niftymodals.js"></script>
+<script>
+    $(document).ready(function() {
+
+        $('.md-trigger').on('click',function(){
+
+            var modal = $(this).data('modal');
+            $("#" + modal).niftyModal();
+        });
+
+    });
+</script>
+<!-- for the blur effect -->
+<!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
+<script>
+    // this is important for IEs
+    var polyfilter_scriptpath = '/lib/js/';
+</script>
+
+<script src="js/cssParser.js"></script>
+<script src="js/css-filters-polyfill.js"></script>
+
+
 </html>
 
 
