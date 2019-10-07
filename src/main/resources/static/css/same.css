@@ -23,7 +23,7 @@ a{
 .box{
     width: 1200px;
     margin: 0 auto;
-    min-height: 800px;
+    padding-bottom: 20px;
 }
 .footer{
     height: 180px;
