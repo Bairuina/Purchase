@@ -1,5 +1,7 @@
 package net.wlgzs.purchase.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
@@ -27,7 +29,7 @@ public class ServiceValue implements Serializable {
     /**
      * 增值服务ID
      */
-    @TableId("service_id")
+    @TableId(value = "service_id",type = IdType.AUTO)
     private Integer serviceId;
 
     /**
@@ -54,5 +56,22 @@ public class ServiceValue implements Serializable {
      * 品目名称
      */
     private String pmmc;
+
+    /**
+     * 服务价格
+     */
+    private String fwjg;
+
+    /**
+     * 服务编号
+     */
+    @TableField("FWBH")
+    private String FWBH;
+
+    /**
+     * RN
+     */
+    @TableField("RN")
+    private String RN;
 
 }

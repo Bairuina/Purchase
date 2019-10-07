@@ -6,24 +6,30 @@ import com.Enxi;
 
 import com.alibaba.fastjson.JSON;
 import com.mysql.cj.xdevapi.JsonArray;
+import com.mysql.cj.xdevapi.JsonString;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Parts;
 import net.wlgzs.purchase.entity.Product;
+import net.wlgzs.purchase.entity.ServiceValue;
 import net.wlgzs.purchase.mapper.PartsMapper;
 import net.wlgzs.purchase.mapper.ProductMapper;
+import net.wlgzs.purchase.mapper.ServiceValueMapper;
 import net.wlgzs.purchase.service.IPartsService;
 import net.wlgzs.purchase.service.IProductService;
+import net.wlgzs.purchase.service.IServiceValueService;
 import net.wlgzs.purchase.service.impl.OrderDataServiceImpl;
 import net.wlgzs.purchase.util.ClientUtil;
 import net.wlgzs.purchase.util.ReadProperties;
 import org.codehaus.xfire.client.Client;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.annotation.*;
 import net.wlgzs.purchase.base.BaseController;
@@ -32,8 +38,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -48,7 +54,6 @@ import java.util.Set;
 @RequestMapping("/product")
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
 public class ProductController extends BaseController {
 
     @Resource
@@ -58,21 +63,28 @@ public class ProductController extends BaseController {
     private ProductMapper productMapper;
     @Resource
     private PartsMapper partsMapper;
+    @Resource
+    private ServiceValueMapper serviceValueMapper;
+    @Resource
+    private IPartsService partsService;
+    @Resource
+    private IServiceValueService serviceValueService;
 
     @Autowired
     private ReadProperties readProperties;
 
-    @Resource
-    private IPartsService partsService;
+
 
     Logger logger = LoggerFactory.getLogger(OrderDataServiceImpl.class);
+
+
 
     //获取商品入库
     @Test
     public void ppp() {
         String result = null;
-        int page=100;
-        int numpage=100;
+        int page=586;
+        int numpage=1037;
         for (int i = page; i < numpage; i++) {
             try {
                 Client client = new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
@@ -112,37 +124,13 @@ public class ProductController extends BaseController {
                 }
             }
         }
-//            try {
-//                Client client = new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
-//                String username = "7223";
-//                String pwd = "ff8080814a1353ac014a139496110049";
-//                String enPwd1 = Enxi.enPwd(username, pwd);
-//                String jsonStr = "{\n\"username\":\"7223\",\n" +
-//                        "\"pwd\":\"" + enPwd1 + "\",\n" +
-//                        "\"sprkkssj\":\"20160913094809\",\n" +
-//                        "\"sprkJssj\":\"20170913094809\",\n" +
-//                        "\"pageNum\":\"3\",\n" +
-//                        "\"pageSize\":\"50\"\n}";
-//                Object[] rets = client.invoke("findSprkandParam", new Object[]{jsonStr});
-//                result = (String) rets[0];
-//                System.out.println(jsonStr);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        JSONObject jso1 = JSONObject.fromObject(result);
-//        System.out.println(Integer.parseInt(jso1.getString("pagecount"))*50+"总数据***************************************");
-//        String jsonString = jso1.getString("spList");
-//        System.out.println(jsonString);
-//        List<Product> product = JSON.parseArray(jsonString, Product.class);
-//        for (Product product1 : product) {
-//            System.out.println(product1);
-//        }
-//        System.out.println(productService);
-//        productService.saveBatch(product);
+    }
 
 
 
-        //根据品目获取配件
+    //配件入库
+    @Test
+    public void pppp(){
         List<String> pmbh=productMapper.findpmbh();
         System.out.println(pmbh);
         List<String> parts= partsMapper.findPJBH();
@@ -155,22 +143,31 @@ public class ProductController extends BaseController {
                 String json="{\"username\":\""+username+"\",\"pwd\":\""+enPwd1+"\",\"pmbh\":\""+pmbh.get(i)+"\",\"pageNum\":\"1\",\"pageSize\":\"10\"}";
                 JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getFindPjByPmbh(),json);
                 if (jsonObject.getString("resultFlag").equals("Y")&&jsonObject.getString("resultMessage").equals("返回品目配件信息成功")){
-                        String jsonString=jsonObject.getString("accessoryList");
-                        System.out.println(jsonString);
-                        String pmbh1=jsonObject.getString("pmbh");
-                        String pmmc=jsonObject.getString("pmmc");
-                        logger.info(jsonString);
-                        List<Parts> parts1=JSON.parseArray(jsonString,Parts.class);
-//                        for(Parts parts2:parts1){
-//                            parts2.setPmbh(pmbh1);
-//                            parts2.setPmmc(pmmc);
-//                        }
-//                        logger.info(parts1+"****************************");
-//                        partsService.saveBatch(parts1);
+                    String jsonString=jsonObject.getString("accessoryList");
+                    System.out.println(jsonString);
+                    String pmbh1=jsonObject.getString("pmbh");
+                    String pmmc=jsonObject.getString("pmmc");
+                    logger.info(jsonString);
+                    List<Parts> parts1=JSON.parseArray(jsonString,Parts.class);
+                    for(Parts parts2:parts1){
+                        parts2.setPmbh(pmbh1);
+                        parts2.setPmmc(pmmc);
+                        boolean b=true;
+                        for (String pjbh:parts){
+                            if (parts2.getPJBH().equals(pjbh)) {
+                                b = false;
+                                System.out.println("重复");
+                                break;
+                            }
+                        }
+                        if (b){
+                            partsService.save(parts2);
+                        }
+                    }
+                    logger.info(parts1+"****************************");
+
                 }
-
             }
-
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -178,50 +175,228 @@ public class ProductController extends BaseController {
 
 
 
+    //获取商品春入数据库
+    @Scheduled(cron = "0 0 12 * * ?")
+    public void getProductList(){
+        //商品表更新
+        String result =null;
+        DateTime dateTime=new DateTime();
+        String sprkJssj=dateTime.toString("yyyyMMddHHmmss");
+        String sprkkssj=dateTime.minusDays(1).toString("yyyyMMddHHmmss");
+
+        try{
+            Client client= new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
+            String username="7223";
+            String pwd="ff8080814a1353ac014a139496110049";
+
+            String enPwd1= Enxi.enPwd(username,pwd);
+            String jsonStr="{\n\"username\":\"7223\",\n" +
+                    "\"pwd\":\""+enPwd1+"\",\n" +
+                    "\"sprkkssj\":\""+sprkkssj+"\",\n" +
+                    "\"sprkJssj\":\""+sprkJssj+"\",\n" +
+                    "\"pageNum\":\"1\",\n" +
+                    "\"pageSize\":\"3\"\n}";
+            Object[] rets=client.invoke("findSprkandParam",new Object[]{jsonStr});
+            result=(String) rets[0];
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        JSONObject jso1= JSONObject.fromObject(result);
+        String s=jso1.getString("resultFlag");
+        if ("N".equals(s)){
+            System.out.println(jso1.getString("resultMessage"));
+        }else {
+            String jsonString = jso1.getString("spList");
+            List<Product> product = JSON.parseArray(jsonString, Product.class);
+            boolean flg = productService.saveBatch(product);
+            if (flg){
+                System.out.println("有数据更新");
+            }
+        }
+    }
+
+
+    //根据品目获取增值服务
+    @Test
+    public void getService(){
+        String pmbh="000400010021000600010001";
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+
+        System.out.println(pmbh);
+            String jsonstr ="{\"username\":\""+username+"\"," +
+                                "\"pwd\":\""+enPwd1+"\"," +
+                                "\"pmbh\":\""+pmbh+"\"}";
+            JSONObject jsonObject=ClientUtil.getJSONObject(readProperties.getUrl(),readProperties.getFindFwByPmbh(),jsonstr);
+        System.out.println(jsonObject.toString());
+            if (jsonObject.getString("resultMessage").equals("返回品目增值服务信息成功")&&jsonObject.getString("resultFlag").equals("Y")){
+                String jsonStrig=jsonObject.getString("serviceList");
+                List<ServiceValue> serviceValues =JSON.parseArray(jsonStrig, ServiceValue.class);
+            for (ServiceValue serviceValue:serviceValues){
+                serviceValue.setPmbh(pmbh);
+                serviceValue.setPmmc(jsonObject.getString("pmmc"));
+            }
+            System.out.println(serviceValues);
+        }
+    }
+
+
+    //商品报价
+    @Test
+    public void baojiaProdut(){
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+        String xhbh = "18cc43d2719142e6a4e791a3a8a9215b";
+        String jgsfyy="成本升高";
+        Product product = productMapper.findProductByXxbh(xhbh);
+        List<Parts> parts=partsMapper.findPartsByPmbh(product.getPmbh());
+
+        String pjxxList = "[{\"pjmc\":\""+parts.get(0).getPJMC()+"\",\"pjjg\":\"0\",\"sxh\":\""+parts.get(0).getRN()+"\",\"pjbh\":\""+parts.get(0).getPJBH()+"\"}";
+        for (int i = 1; i < parts.size(); i++) {
+            pjxxList+=",{\"pjmc\":\""+parts.get(i).getPJMC()+"\",\"pjjg\":\"0\",\"sxh\":\""+parts.get(i).getRN()+"\",\"pjbh\":\""+parts.get(i).getPJBH()+"\"}";
+        }
+        pjxxList+="]";
+        logger.info(pjxxList);
+        String json = "{\"username\":\"" + username + "\"," +
+                "\"pwd\":\"" + enPwd1 + "\"," +
+                "\"xhbh\":\"" + xhbh + "\"," +
+                "\"xhmc\":\"" + product.getXhmc() + "\"," +
+                "\"pmbh\":\"" + product.getPmbh() + "\"," +
+                "\"pmmc\":\"" + product.getPmmc() + "\"," +
+                "\"ppbh\":\"" + product.getPpbh() + "\"," +
+                "\"ppmc\":\"" + product.getPpmc() + "\"," +
+                "\"lbbh\":\"" + product.getLbbh() + "\"," +
+                "\"lbmc\":\"" + product.getLbmc() + "\"," +
+                "\"area\":\"00390019\"," +
+                "\"fwcn\":\"郑州以及周边一天内送货，其他地市二天；提供上门安装及后期维修服务\"," +
+                "\"sjjg\": \"4\"," +
+                "\"productlink\":\"http://www.staples.cn/product/1100008501EA\"," +
+                "\"pjxxList\":"+ pjxxList +","+
+                "\"jgsfyy\":\""+jgsfyy+"\"}";
+        System.out.println(json);
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getExecute(),json);
+        System.out.println(readProperties.getExecute());
+        logger.info(jsonObject.toString());
+    }
 
 
 
+    //商品配件报价
+    @Test
+    public void PjBaojiaByXhbhPjbh(){
+        //获取相关数据
+        String xhbh = "18cc43d2719142e6a4e791a3a8a9215b";
+        String pjbh = "cb56e0ed99e94d8c9c334e30db4d3db8";
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+        Product product=productMapper.findProductByXxbh(xhbh);
+        Parts parts=partsMapper.findPartsByPjbh(pjbh);
 
 
-//    //获取商品春入数据库
-//    @Scheduled(cron = "0 0 12 * * ?")
-//    public void getProductList(){
-//        //商品表更新
-//        String result =null;
-//        DateTime dateTime=new DateTime();
-//        String sprkJssj=dateTime.toString("yyyyMMddHHmmss");
-//        String sprkkssj=dateTime.minusDays(1).toString("yyyyMMddHHmmss");
-//
-//        try{
-//            Client client= new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
-//            String username="7223";
-//            String pwd="ff8080814a1353ac014a139496110049";
-//
-//            String enPwd1= Enxi.enPwd(username,pwd);
-//            String jsonStr="{\n\"username\":\"7223\",\n" +
-//                    "\"pwd\":\""+enPwd1+"\",\n" +
-//                    "\"sprkkssj\":\""+sprkkssj+"\",\n" +
-//                    "\"sprkJssj\":\""+sprkJssj+"\",\n" +
-//                    "\"pageNum\":\"1\",\n" +
-//                    "\"pageSize\":\"3\"\n}";
-//            Object[] rets=client.invoke("findSprkandParam",new Object[]{jsonStr});
-//            result=(String) rets[0];
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//        JSONObject jso1= JSON.parseObject(result);
-//        String s=jso1.getString("resultFlag");
-//        if (s.equals("N")){
-//            System.out.println(jso1.getString("resultMessage"));
-//        }else {
-//            String jsonString = jso1.getString("spList");
-//            List<Product> product = JSON.parseArray(jsonString, Product.class);
-//            boolean flg = productService.saveBatch(product);
-//            if (flg==true){
-//                System.out.println("有数据更新");
-//            }
-//        }
-//    }
+        //拼接json
+        String json="{\"username\":\""+username+"\"," +
+                "\"pwd\":\""+enPwd1+"\"," +
+                "\"pmbh\":\""+product.getPmbh()+"\"," +
+                "\"pmmc\":\""+product.getPmmc()+"\"," +
+                "\"xhbh\": \""+product.getXhbh()+"\"," +
+                "\"xhmc\":\""+product.getXhmc()+"\"," +
+                "\"pjbh\": \""+parts.getPJBH()+"\"," +
+                "\"pjmc\": \""+parts.getPJMC()+"\"," +
+                "\"pjjg\":\"25542\"," +
+                "\"bjyy\":\"物价上涨\"}";
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getQuotedpricePjByPjbh(),json);
+        System.out.println(jsonObject.toString());
+    }
+
+
+    //商品增值服务报价
+    @Test
+    public void ServiceBaojiaByFwbh(){
+        String fwbh="667f7087727d444a8131327dabe0ab86";
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+        ServiceValue serviceValue=serviceValueMapper.findServiceValueByFWBH(fwbh);
+        String json="{\"username\":\""+username+"\"," +
+                "\"pwd\":\""+enPwd1+"\"," +
+                "\"pmbh\":\""+serviceValue.getPmbh()+"\"," +
+                "\"xhbh\":\"b701a0b74a7040c78c63cd0544b3791b\","+
+                "\"xhmc\":\"JW1804L\","+
+                "\"pmmc\":\""+serviceValue.getPmmc()+"\"," +
+                "\"fwbh\":\""+serviceValue.getFWBH()+"\"," +
+                "\"fwmc\":\""+serviceValue.getFwmc()+"\"," +
+                "\"fwjg\":\"10\"," +
+                "\"bjyy\":\"人工费用变高物价上涨\"," +
+                "\"zt\":\""+serviceValue.getZt()+"\"}";
+        System.out.println(json);
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getQuotedpriceFwByFwbh(),json);
+        System.out.println(jsonObject.toString());
+    }
+
+
+
+    //获取商品型号以及相关报价信息
+    @Test
+    public void getProductBjByXhbh(){
+        //获取相关数据
+        String xhbh = "18cc43d2719142e6a4e791a3a8a9215b";
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+
+        //拼接json
+        String json="{\"username\":\""+username+"\"," +
+                "\"pwd\":\""+enPwd1+"\"," +
+                "\"xhbh\":\""+xhbh+"\"}";
+
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getFindSpByXhbh(),json);
+        System.out.println(jsonObject.toString());
+    }
+
+
+    //获取单个商品报价
+    @Test
+    public void getProductBjByXhbh2(){
+        //获取基本信息
+        String xhbh = "18cc43d2719142e6a4e791a3a8a9215b";
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+
+        //拼接Json
+        String json="{\"username\":\""+username+"\"," +
+                "\"pwd\":\""+enPwd1+"\"," +
+                "\"xhbh\":\""+xhbh+"\"}";
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getFindSpSfbj(),json);
+        System.out.println(jsonObject.toString());
+    }
+
+    //撤销报价
+    @Test
+    public void qxProductBj(){
+        //获取基本信息
+        String xhbh = "18cc43d2719142e6a4e791a3a8a9215b";
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+
+        //拼json
+        String json="{\"username\":\""+username+"\"," +
+                "\"pwd\": \""+enPwd1+"\",\"" +
+                "xhbh\":\""+xhbh+"\"}";
+        System.out.println(json);
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getQxShByXhbh(),json);
+        System.out.println(jsonObject);
+    }
 
 
     /**
