@@ -5,6 +5,7 @@ import com.Enxi;
 
 
 import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Parts;
@@ -421,9 +422,10 @@ public class ProductController extends BaseController {
      * @param ppbh 品牌编号
      * @param  nr  搜索内容
      */
-    @RequestMapping(value = "/{lbbh}/{pmbh}/{ppbh}/{nr}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{lbbh}/{pmbh}/{ppbh}",method = RequestMethod.POST)
     @ApiOperation(value = "多条件查询",httpMethod = "GET")
-    public ModelAndView findallProduct(@PathVariable("lbbh") String lbbh,@PathVariable("pmbh") String pmbh,@PathVariable("ppbh") String ppbh,@PathVariable("nr") String nr){
+    @ApiImplicitParam(name = "nr",dataType = "内容")
+    public ModelAndView findallProduct(@PathVariable("lbbh") String lbbh,@PathVariable("pmbh") String pmbh,@PathVariable("ppbh") String ppbh,@RequestParam(name = "nr")String nr){
         return productService.findallProduct(lbbh,pmbh,ppbh,nr);
     }
 
