@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>报价页面</title>
 
-    <link rel="stylesheet" type="text/css" href="css/niftymodals.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/niftymodals.css}" />
 
     <!--[if IE]>
     <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
-    <link rel="stylesheet" href="css/demo.css">
-    <link rel="stylesheet" href="css/same.css">
-    <link rel="stylesheet" href="css/offer.css">
-    <link rel="stylesheet" type="text/css" href="css/normalize.css" /><!--CSS RESET-->
-    <link rel="stylesheet" type="text/css" href="css/example-styles.css">
-    <link rel="stylesheet" type="text/css" href="css/demo-styles.css">
+    <link rel="stylesheet" type="text/csstatics" th:href="@{static/css/htmleaf-demo.css}">
+    <link rel="stylesheet" th:href="@{/static/css/demo.css}">
+    <link rel="stylesheet" th:href="@{/static/css/same.css}">
+    <link rel="stylesheet" th:href="@{/static/css/offer.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/normalize.css}" /><!--CSS RESET-->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/example-styles.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/demo-styles.css}">
 </head>
 <body>
 <div class="contain">
@@ -53,7 +53,7 @@
                             <div class="offerFormLabel">商品名称:</div>
                                 <div class="offerInputblock">
                                     <a>
-                                        <p>123456789</p>
+                                        <p th:text="${product.xhmc}">123456789</p>
                                     </a>
                                 </div>
                         </div>
@@ -62,14 +62,30 @@
                     <div class="offerFormItem">
                         <div class="offerFormLabel">商品类别:</div>
                         <div class="offerInputblock">
-                            <p>家电类</p>
+                            <p th:text="${product.lbmc}">家电类</p>
                         </div>
                     </div>
                     <!--品目-->
                     <div class="offerFormItem">
                         <div class="offerFormLabel">品目:</div>
                         <div class="offerInputblock">
-                            <p>电视</p>
+                            <p th:text="${product.pmmc}">电视</p>
+                        </div>
+                    </div>
+<!--                    商品参数-->
+                    <!--商品名称-->
+                    <div class="offerFormItem">
+                        <div style="height: 100%;">
+                            <div class="offerFormLabel">商品参数:</div>
+                            <div class="offerInputblock" style="vertical-align: text-top;">
+                                <a>
+                                    <p th:each="parameters:${parametersList}">
+                                        <span th:text="${parameters.cssm}"></span>
+                                        <span>：</span>
+                                        <span th:text="${parameters.csz}"></span>
+                                    </p>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <!--总报价-->
@@ -283,8 +299,8 @@
 
 </div>
 </body>
-<script src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.multi-select.js"></script>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/jquery.multi-select.js}"></script>
 <script type="text/javascript">
     $(function(){
         $('#people').multiSelect();
@@ -310,9 +326,9 @@
 
     });
 </script>
-<script src="js/offer.js"></script>
+<script th:src="@{/static/js/offer.js}"></script>
 
-<script src="js/niftymodals.js"></script>
+<script th:src="@{/static/js/niftymodals.js}"></script>
 <script>
     $(document).ready(function() {
 
@@ -331,8 +347,8 @@
     var polyfilter_scriptpath = '/lib/js/';
 </script>
 
-<script src="js/cssParser.js"></script>
-<script src="js/css-filters-polyfill.js"></script>
+<script th:src="@{/static/js/cssParser.js}"></script>
+<script th:src="@{/static/js/css-filters-polyfill.js}"></script>
 
 
 </html>
