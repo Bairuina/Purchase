@@ -73,10 +73,17 @@ public class OrderDataController extends BaseController {
     }
 
     @ApiOperation("确认或取消订单")
-    @PutMapping("/ensureORefuseOrder")
+    @RequestMapping("/ensureORefuseOrder")
     @ResponseBody
     public Result ensureORefuseOrder(@Param("ddbh") String ddbh, @Param("qrzt")int qrzt){
         return iOrderService.ensureORefuseOrder(ddbh,qrzt);
+    }
+
+    @ApiOperation("确认或取消订单")
+    @RequestMapping("/deletEnsureOrder")
+    @ResponseBody
+    public Result deletEnsureOrder(@Param("ddbh") String ddbh, @Param("qxyy")String qxyy){
+        return iOrderService.deletEnsureOrder(ddbh,qxyy);
     }
 
 
@@ -129,15 +136,15 @@ public class OrderDataController extends BaseController {
         return iOrderService.ensureOrderArrive(ddbh,sfcd,fczddbh,kdgs,kddh,ms,new BigInteger(kdsj));
     }
 
-//    @ApiOperation("")
-//    @GetMapping
-//    public ModelAndView selectOrderByData(@Param("data")String data){
-//        ModelAndView modelAndView=new ModelAndView();
-//        modelAndView.addObject("orderListByData","");
-//        iOrderService.selectOrderListByData(data);
-//        modelAndView.setViewName("");
-//        return modelAndView;
-//    }
-
-
+    @ApiOperation("根据订单搜索")
+    @GetMapping("/select/{pageNum}")
+    public ModelAndView selectOrderByData(@Param("ddbh") String ddbh,@Param("cgrmc")String cgrmc,@Param("zt")String zt,@RequestParam(value = "pageSize", defaultValue = "15")Integer pageSize,@PathVariable(value = "pageNum")Integer pageNum){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("orderListByData",iOrderService.selectOrderListByData(ddbh,cgrmc,zt,pageSize,pageNum));
+        modelAndView.addObject("ddbh",ddbh);
+        modelAndView.addObject("cgrmc",cgrmc);
+        modelAndView.addObject("zt",zt);
+        modelAndView.setViewName("orderList");
+        return modelAndView;
+    }
 }
