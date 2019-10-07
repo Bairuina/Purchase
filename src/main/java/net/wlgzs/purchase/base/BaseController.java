@@ -36,11 +36,11 @@ public class BaseController {
     @Autowired
     protected IUserService iUserService;
 
-    @Autowired
-    protected IServiceOfferService iServiceOfferService;
-
-    @Autowired
-    protected IProductOfferService iProductOfferService;
+//    @Autowired
+//    protected IServiceOfferService iServiceOfferService;
+//
+//    @Autowired
+//    protected IProductOfferService iProductOfferService;
 
     @Autowired
     protected IPartsOfferService iPartsOfferService;
