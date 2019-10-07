@@ -50,6 +50,5 @@ $(".no_order").on('click', function () {
         })
     }
     else {
-        location.reload(true);
     }
 });
