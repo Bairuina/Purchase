@@ -1,6 +1,7 @@
 package net.wlgzs.purchase.controller;
 
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import net.wlgzs.purchase.util.Result;
@@ -20,6 +21,7 @@ import net.wlgzs.purchase.base.BaseController;
  */
 @RestController
 @RequestMapping("/contract")
+@Api(value = "合同管理接口", tags = "合同管理接口信息", description = "合同相关接口")
 public class ContractController extends BaseController {
 
     /**

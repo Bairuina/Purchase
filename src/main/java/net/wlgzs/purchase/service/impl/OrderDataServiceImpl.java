@@ -36,7 +36,7 @@ import java.util.List;
  */
 @Service
 public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData> implements IOrderDataService {
-    @Autowired
+
     IRedis iRedis;
 
 
@@ -65,7 +65,6 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //更新订单
     @Override
     public Result updateOrderDate(int pageNum) {
-        webSocketServer.sendMessage("订单信息更新完成");
         String userName=properties.getUsername();
         String pwd=properties.getPwd();
         DateTime dateTime=new DateTime();
@@ -79,7 +78,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         String result = null;
         try {
             Client client = new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
-            String jsonStr = "{\"username\":\"" + userName + "\",\"pwd\":\"" + pwd + "\",\"zt\":2,\"kssj\":\"" + kssj + "\",\"jssj\":\"" + jssj + "\",\"pageNum\":\"" + pageNum + "\",\"pageSize\":\"" + pageSize + "\"}";
+            String jsonStr;
             jsonStr = "{\n" +
                     "\"username\":\""+userName+"\",\n" +
                     "\"pwd\":\"" + enPwd + "\",\n" +
@@ -96,17 +95,19 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         }
         JSONObject jsonObject = JSONObject.fromObject(result);
         String flag = jsonObject.get("resultFlag").toString();
-        if(flag.equals("N")){
+        if("N".equals(flag)){
             logger.info("没有订单信息！");
+            webSocketServer.sendMessage("此次订单更新失败！");
             return new Result(ResultCode.FAIL);
         }
         int count = Integer.parseInt(jsonObject.get("count").toString());
         List<OrderData> orderList = null;
-        List<ProductList> productLists=null;
-        List<AccessoryList> accessoryLists=null;
-        List<ServiceList> serviceLists=null;
+        List<ProductList> productLists;
+        List<AccessoryList> accessoryLists;
+        List<ServiceList> serviceLists;
         if(jsonObject.get("orderList")==null||jsonObject.get("orderList").equals("")){
             logger.info("没有更新内容!");
+            webSocketServer.sendMessage("此次订单更新，没有可需更新内容。");
             return new Result(ResultCode.FAIL);
         }
         JSONArray orderListData = jsonObject.getJSONArray("orderList");
@@ -164,12 +165,13 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //查询所有订单
     @Override
     public Result selectAllOrder(Integer pageSize,Integer pageNum) {
-        Page page = new Page(pageNum, pageSize);
-        IPage<OrderData> iPage = null;
-        iPage = baseMapper.selectPage(page,null);
-        List<OrderData> OrderList = iPage.getRecords();
-       logger.info(OrderList.toString());
-        return new Result(ResultCode.SUCCESS, "成功！", OrderList, iPage.getPages(), iPage.getCurrent());
+        QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
+        Page page = new Page(pageNum, 3);
+        IPage<OrderData> iPage=null;
+        iPage = baseMapper.selectPage(page,queryWrapper);
+        List orderList = iPage.getRecords();
+        logger.info("\n\n总页数为："+iPage.getPages()+"当前页数为："+iPage.getCurrent()+"\n");
+        return new Result(ResultCode.SUCCESS, "成功！", orderList, iPage.getPages(), iPage.getCurrent());
     }
 
 
@@ -185,9 +187,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
             return new Result(ResultCode.FAIL);
         }
         String ddbhData=orderData.getDdbh();
-        List<ProductList> productLists=null;
-        List<AccessoryList> accessoryLists=null;
-        List<ServiceList> serviceLists=null;
+        List<ProductList> productLists;
+        List<AccessoryList> accessoryLists;
+        List<ServiceList> serviceLists;
         productLists=iProductListService.selectProductList(ddbhData);
         serviceLists=iServiceListService.selectServiceList(ddbhData);
         accessoryLists=iAccessoryListService.selectAccessoryList(ddbhData);
@@ -205,7 +207,8 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //确定或拒绝订单
     @Override
     public Result ensureORefuseOrder(String ddbh, int qrzt) {
-        if(!checkZt(ddbh).equals("2")){
+        logger.info("ddbh："+ddbh+" qrzt："+qrzt);
+        if(!"2".equals(checkZt(ddbh))){
             logger.info("该订单状态存在问题！");
             return new Result(ResultCode.FAIL);
         }
@@ -222,7 +225,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
             Client client=new Client(new URL("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl"));
             Object[] rets=client.invoke("execGysOrderQr",new Object[]{jsonStr});
             String result=rets[0].toString();
-            logger.info(result.toString());
+            logger.info(result);
             JSONObject jsonObject=JSONObject.fromObject(result);
             if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")){
                 String ddbhData=jsonObject.get("ddbh").toString();
@@ -268,7 +271,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"kdsj\": \""+kdsj+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","exeLogistics",jsonStr);
-        if(jsonObject!=null&&jsonObject.get("resultFlag").equals("Y")){
+        if(jsonObject!=null&& "Y".equals(jsonObject.get("resultFlag"))){
             logger.info("物流消息发送成功！");
             OrderData orderData=new OrderData();
             orderData.setSfcd(sfcd);
@@ -290,7 +293,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //订单签收时间信息推送
     @Override
     public Result ensureOrderTimeSubmit(String ddbh, int sfcd, String fczddbh, BigInteger shsj) {
-        if(!checkZt(ddbh).equals("3")){
+        if(!"3".equals(checkZt(ddbh))){
             logger.info("该订单状态存在问题！");
             return new Result(ResultCode.FAIL);
         }
@@ -306,7 +309,8 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"fczddbh\": \""+fczddbh+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","execQssj",jsonStr);
-        if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
+        assert jsonObject != null;
+        if(jsonObject.get("resultFlag")!=null&& "Y".equals(jsonObject.get("resultFlag"))) {
             QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
             queryWrapper.eq("ddbh",ddbh);
             OrderData orderData=new OrderData();
@@ -327,7 +331,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //订单发票开始开具时间信息推送
     @Override
     public Result invoiceStaTimeSubmit(String ddbh, BigInteger fpkjsj) {
-        if(!checkZt(ddbh).equals("5")){
+        if(!"5".equals(checkZt(ddbh))){
             logger.info("该订单状态存在问题！");
             return new Result(ResultCode.FAIL);
         }
@@ -342,7 +346,8 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"fpkjsj\":\""+fpkjsj+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("JSONObject jsonObject=ClientUtil.getJSONObject","execFpkjsjByOrder",jsonStr);
-        if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
+        assert jsonObject != null;
+        if(jsonObject.get("resultFlag")!=null&& "Y".equals(jsonObject.get("resultFlag"))) {
             logger.info("发票开具开始时间已推送！");
             OrderData orderData=new OrderData();
             orderData.setFpkjsj(fpkjsj);
@@ -356,7 +361,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //订单发票开具结束时间信息推送
     @Override
     public Result invoiceEndTimeSubmit(String ddbh, BigInteger fpsdsj) {
-        if(!checkZt(ddbh).equals("5")){
+        if(!"5".equals(checkZt(ddbh))){
             logger.info("该订单状态存在问题！");
             return new Result(ResultCode.FAIL);
         }
@@ -370,7 +375,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"fpsdsj\": \""+fpsdsj+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","execfpsdsjByorder",jsonStr);
-        if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
+        if(jsonObject.get("resultFlag")!=null&& "Y".equals(jsonObject.get("resultFlag"))) {
             logger.info("收到发票时间信息已推送！");
             OrderData orderData=new OrderData();
             orderData.setFpsdsj(fpsdsj);
@@ -385,7 +390,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //电商已经收到采购单位的付款,将收款标志、收款金额、收款时间提交
     @Override
     public Result getMoneyDataSubmit(String ddbh, int skbz, Integer skje, BigInteger sksj) {
-        if(!checkZt(ddbh).equals("2")){
+        if(!"2".equals(checkZt(ddbh))){
             logger.info("该订单状态存在问题！");
             return new Result(ResultCode.FAIL);
         }
@@ -401,6 +406,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"sksj\": \""+sksj+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","execSkqk",jsonStr);
+        assert jsonObject != null;
         if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
             logger.info("标志、收款金额、收款时间已提交！");
             OrderData orderData=new OrderData();
@@ -420,7 +426,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //取消订单(已经对进行订单确认)
     @Override
     public Result deletEnsureOrder(String ddbh, String qxyy) {
-        if(!checkZt(ddbh).equals("3")){
+        if(!"3".equals(checkZt(ddbh))){
             logger.info("该订单状态存在问题！");
             return new Result(ResultCode.FAIL);
         }
@@ -434,7 +440,8 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"qxyy\":\""+qxyy+"\"\n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","execDsZfdd",jsonStr);
-        if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
+        assert jsonObject != null;
+        if(jsonObject.get("resultFlag")!=null&& "Y".equals(jsonObject.get("resultFlag"))) {
             OrderData orderData=new OrderData();
             orderData.setZt("4");
             return upDateTwo(ddbh,orderData);
@@ -458,7 +465,8 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "\"ddbh\": \""+ddbh+"\", \n" +
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","findYsByOrder",jsonStr);
-        if(jsonObject.get("resultFlag")!=null&&jsonObject.get("resultFlag").equals("Y")) {
+        assert jsonObject != null;
+        if(jsonObject.get("resultFlag")!=null&& "Y".equals(jsonObject.get("resultFlag"))) {
             OrderData orderData=new OrderData();
             orderData.setZt("5");
             return upDateTwo(ddbh,orderData);
@@ -480,6 +488,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
                 "}\n";
         JSONObject jsonObject=ClientUtil.getJSONObject("http://222.143.21.205:8091/wsscservices_test/services/wsscWebService?wsdl","findOrderHt",jsonStr);
         Contract contract=new Contract();
+        assert jsonObject != null;
         contract.setContractUrl(jsonObject.getString("url"));
         contract.setDdbh(ddbh);
         return null;
@@ -491,23 +500,44 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("zt",status);
         Page page = new Page(pageNum, pageSize);
-        IPage<OrderData> iPage = null;
+        IPage iPage;
         iPage = baseMapper.selectPage(page,queryWrapper);
-        List<OrderData> OrderList = iPage.getRecords();
-        logger.info(OrderList.toString());
-        return new Result(ResultCode.SUCCESS, "成功！", OrderList, iPage.getPages(), iPage.getCurrent());
+        List orderList = iPage.getRecords();
+        logger.info(orderList.toString());
+        return new Result(ResultCode.SUCCESS, "成功！", orderList, iPage.getPages(), iPage.getCurrent());
     }
 
     //根据订单信息查询订单列表
     @Override
-    public Result selectOrderListByData(String Data) {
+    public Result selectOrderListByData(String ddbh,String cgrmc,String zt,Integer pageSize,Integer pageNum) {
+        logger.info("ddbh:"+ddbh+" cgrmc:"+cgrmc+" zt:"+zt+" pageSize:"+pageSize+" pageNum:"+pageNum);
         QueryWrapper<OrderData> queryWrapper = new QueryWrapper<>();
-
-        return null;
+            int number=0;
+            if (ddbh != null) {
+                queryWrapper.like("ddbh", ddbh);
+                number++;
+            }
+            if (cgrmc != null) {
+                queryWrapper.like("cgrmc", cgrmc);
+                number++;
+            }
+            if (zt != null) {
+                queryWrapper.eq("zt", zt);
+                number++;
+            }
+            if(number==0){
+                queryWrapper=null;
+            }
+            Page page = new Page(pageNum, pageSize);
+            IPage iPage;
+            iPage = baseMapper.selectPage(page, queryWrapper);
+            List orderList = iPage.getRecords();
+            logger.info(orderList.toString());
+            return new Result(ResultCode.SUCCESS, "成功！", orderList, iPage.getPages(), iPage.getCurrent());
     }
 
 
-    Result upDateTwo(String ddbh,OrderData orderData) {
+    private Result upDateTwo(String ddbh, OrderData orderData) {
         QueryWrapper<OrderData> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("ddbh", ddbh);
         int data = baseMapper.update(orderData, queryWrapper);
@@ -520,17 +550,14 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         }
     }
 
-    boolean checkddbh(String ddbh){
+    private boolean checkddbh(String ddbh){
         QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("ddbh",ddbh);
         OrderData data=baseMapper.selectOne(queryWrapper);
-        if(data==null){
-            return true;
-        }
-        return false;
+        return data == null;
     }
 
-    String checkZt(String ddbh){
+    private String checkZt(String ddbh){
         QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("ddbh",ddbh);
         OrderData data=baseMapper.selectOne(queryWrapper);
@@ -540,7 +567,7 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         return data.getZt();
     }
 
-     String checkUpDataTime(){
+     private String checkUpDataTime(){
         File file=new File(System.getProperty("user.dir")+"/upDataTime.txt");
         if(!file.exists()){
           return "暂无更新时间！";
@@ -555,9 +582,9 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
         return upDataTime;
     }
 
-     void setUpDataTime(String upDataTime){
+     private void setUpDataTime(String upDataTime){
         String path=System.getProperty("user.dir");
-            File file=null;
+            File file;
         try {
             file=new File(path,"upDataTime.txt");
             if(!file.exists()){

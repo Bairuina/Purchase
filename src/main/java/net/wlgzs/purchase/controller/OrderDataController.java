@@ -25,7 +25,7 @@ import java.math.BigInteger;
  * </p>
  *
  * @author 王言
- * @since 2019-10-03
+ * @since 2019-10-01
  */
 @Api("订单模块")
 @RestController
@@ -51,13 +51,12 @@ public class OrderDataController extends BaseController {
 
 
     @ApiOperation("显示所有订单")
-    @GetMapping
-    public ModelAndView selectDataOrder(@RequestParam(value = "pageSize", defaultValue = "15")Integer pageSize,@RequestParam(value = "pageNum", defaultValue = "1")Integer pageNum){
+    @GetMapping("/{pageNum}")
+    public ModelAndView selectDataOrder(@RequestParam(value = "pageSize", defaultValue = "3")Integer pageSize,@PathVariable(value = "pageNum")Integer pageNum){
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("orderList");
         modelAndView.addObject("orderDara",iOrderService.selectAllOrder(pageSize,pageNum));
-        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
-        System.out.println(modelAndView);
+//        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
         return modelAndView;
     }
 
@@ -68,15 +67,22 @@ public class OrderDataController extends BaseController {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("订单列表页");
         modelAndView.addObject("orderDara",iOrderService.selectStatusDataOrder(pageSize,pageNum,status));
-        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
+//        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
         return modelAndView;
     }
 
     @ApiOperation("确认或取消订单")
-    @PutMapping("/ensureORefuseOrder")
+    @RequestMapping("/ensureORefuseOrder")
     @ResponseBody
     public Result ensureORefuseOrder(@Param("ddbh") String ddbh, @Param("qrzt")int qrzt){
         return iOrderService.ensureORefuseOrder(ddbh,qrzt);
+    }
+
+    @ApiOperation("确认或取消订单")
+    @RequestMapping("/deletEnsureOrder")
+    @ResponseBody
+    public Result deletEnsureOrder(@Param("ddbh") String ddbh, @Param("qxyy")String qxyy){
+        return iOrderService.deletEnsureOrder(ddbh,qxyy);
     }
 
 
@@ -129,15 +135,15 @@ public class OrderDataController extends BaseController {
         return iOrderService.ensureOrderArrive(ddbh,sfcd,fczddbh,kdgs,kddh,ms,new BigInteger(kdsj));
     }
 
-//    @ApiOperation("")
-//    @GetMapping
-//    public ModelAndView selectOrderByData(@Param("data")String data){
-//        ModelAndView modelAndView=new ModelAndView();
-//        modelAndView.addObject("orderListByData","");
-//        iOrderService.selectOrderListByData(data);
-//        modelAndView.setViewName("");
-//        return modelAndView;
-//    }
-
-
+    @ApiOperation("根据订单搜索")
+    @GetMapping("/select/{pageNum}")
+    public ModelAndView selectOrderByData(@Param("ddbh") String ddbh,@Param("cgrmc")String cgrmc,@Param("zt")String zt,@RequestParam(value = "pageSize", defaultValue = "15")Integer pageSize,@PathVariable(value = "pageNum")Integer pageNum){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("orderListByData",iOrderService.selectOrderListByData(ddbh,cgrmc,zt,pageSize,pageNum));
+        modelAndView.addObject("ddbh",ddbh);
+        modelAndView.addObject("cgrmc",cgrmc);
+        modelAndView.addObject("zt",zt);
+        modelAndView.setViewName("orderList");
+        return modelAndView;
+    }
 }

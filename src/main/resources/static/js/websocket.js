@@ -1,7 +1,9 @@
 var websocket=null;
+var str = window.location.href.split("/");
+var urlData=str[2];
 
 if('WebSocket' in  window){
-    websocket=new WebSocket('ws://localhost:10508/WebSocketServer');
+    websocket=new WebSocket('ws://'+urlData+'/WebSocketServer');
 }else{
     layer.msg('该浏览器不支持websocket',{icon:2,time:1000});
 }
