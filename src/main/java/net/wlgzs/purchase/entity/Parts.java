@@ -66,5 +66,10 @@ public class Parts implements Serializable {
      */
     @TableField("accessoryListmx")
     private String accessoryListmx;
+    /**
+     * RN神秘字段 可能关联shx
+     */
+    @TableField("RN")
+    private String RN;
 
 }

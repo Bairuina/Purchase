@@ -1,6 +1,7 @@
 package net.wlgzs.purchase.controller;
 
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +27,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
+@Api(value = "用户登录管理接口", tags = "用户管理接口信息", description = "用户相关接口")
 public class UserController extends BaseController {
 
     /**

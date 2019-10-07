@@ -13,6 +13,9 @@
 </head>
 
 <body>
+    <div th:if="${allData.data==null}">
+        无该订单信息！！
+    </div>
     <div th:if="${allData.data!=null}" class="management">
         <div class="classifys">
             <ul>
@@ -56,7 +59,8 @@
                     <li><span th:text="${allData.data[0].ghsmc}"></span></li>
                     <li><span th:text="${allData.data[0].ddze}"></span><span>元</span></li>
                     <li><span th:text="${allData.data[0].cjrq}"></span></li>
-                    <li><span th:if="${allData.data[0].zt=='2'}">供应商待确认</span>
+                    <li >
+                        <span th:if="${allData.data[0].zt=='2'}">供应商待确认</span>
                         <span th:if="${allData.data[0].zt=='3'}">待验收</span>
                         <span th:if="${allData.data[0].zt=='4'}">订单已取消</span>
                         <span th:if="${allData.data[0].zt=='5'}">验收通过</span>
