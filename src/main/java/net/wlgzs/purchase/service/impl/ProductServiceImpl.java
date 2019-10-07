@@ -1,14 +1,21 @@
 package net.wlgzs.purchase.service.impl;
-
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+
+import net.wlgzs.purchase.entity.Parameters;
+import net.wlgzs.purchase.entity.Parts;
 import net.wlgzs.purchase.entity.Product;
+import net.wlgzs.purchase.entity.ServiceValue;
+import net.wlgzs.purchase.mapper.PartsMapper;
 import net.wlgzs.purchase.mapper.ProductMapper;
+import net.wlgzs.purchase.mapper.ServiceValueMapper;
 import net.wlgzs.purchase.service.IProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +30,12 @@ import java.util.List;
  */
 @Service
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
+
+    @Resource
+    private PartsMapper partsMapper;
+    @Resource
+    private ServiceValueMapper serviceValueMapper;
+
     @Override
     public ModelAndView findallProduct(String lbbh,String pmbh,String ppbh,String nr){
         ModelAndView modelAndView=new ModelAndView();
@@ -107,18 +120,21 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         return modelAndView;
     }
 
-//    @Override
-//    public ModelAndView findallProduct1(String lbbh){
-//        Set<Product> pmmc1 = productMapper.findpmmc(lbbh);
-//        List<Product> pmmc =new ArrayList<>(pmmc1);
-//        QueryWrapper<Product> queryWrapper=new QueryWrapper<>();
-//        queryWrapper.select("xhbh","xhmc","pmbh","pmmc","ppbh","ppmc","lbbh","lbmc","zt");
-//        Set<Product> products=new HashSet<>(productMapper.selectList(queryWrapper));
-//        System.out.println(products);
-//        System.out.println(pmmc);
-//        ModelAndView modelAndView=new ModelAndView();
-//        modelAndView.addObject("products",products);
-//        modelAndView.addObject("pmmc",pmmc);
-//        return modelAndView;
-//    }
+    @Override
+    public ModelAndView getProductByXhbh(String xhbh){
+        ModelAndView modelAndView=new ModelAndView();
+        QueryWrapper<Product> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("xhbh",xhbh);
+        Product product=baseMapper.selectOne(queryWrapper);
+        List<Parts> partsList=partsMapper.findPartsByPmbh(product.getPmbh());
+        List<ServiceValue> serviceValueList=serviceValueMapper.findServiceValueByPmbh(product.getPmbh());
+        modelAndView.addObject("product",product);
+        modelAndView.addObject("partsList",partsList);
+        modelAndView.addObject("serviceValueList",serviceValueList);
+        String json=product.getParametersList();
+        List<Parameters> parametersList= JSON.parseArray(json,Parameters.class);
+        modelAndView.addObject("parametersList",parametersList);
+        modelAndView.setViewName("");
+        return modelAndView;
+    }
 }

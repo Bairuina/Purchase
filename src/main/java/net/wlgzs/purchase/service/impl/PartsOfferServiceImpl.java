@@ -44,7 +44,7 @@ public class PartsOfferServiceImpl extends ServiceImpl<PartsOfferMapper, PartsOf
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
         String enPwd1= Enxi.enPwd(username,pwd);
-        Product product=productMapper.findProductByXxbh(xhbh);
+        Product product=productMapper.findProductByXhbh(xhbh);
         Parts parts=partsMapper.findPartsByPjbh(pjbh);
         //拼接json
         String json="{\"username\":\""+username+"\"," +
