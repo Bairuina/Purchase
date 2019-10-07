@@ -1,5 +1,4 @@
-
-$(".yes_order").click(function () {
+$("yes_order").click(function () {
 
     $.ajax({
         url:"/order-data/ensureORefuseOrder",
@@ -24,7 +23,7 @@ $(".yes_order").click(function () {
 });
 
 
-$(".no_order").click(function () {
+$("no_order").click(function () {
     var urlData;
     var ztDataWord=$("#ztDataWordLi").data('ztdata');
     console.log(ztDataWord);
