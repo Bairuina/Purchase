@@ -5,7 +5,6 @@ import com.Enxi;
 
 
 import com.alibaba.fastjson.JSON;
-
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Parts;
@@ -71,7 +70,7 @@ public class ProductController extends BaseController {
     @Autowired
     private ReadProperties readProperties;
 
-    private String xhbh="82db683c0fc342b39c7e9f3ca80c0969";
+    private String xhbh="07ef4565964948a9a45292b2241a0563";
 
 
 
@@ -250,15 +249,13 @@ public class ProductController extends BaseController {
         String pwd=readProperties.getPwd();
         String enPwd1= Enxi.enPwd(username,pwd);
         String jgsfyy="成本升高";
-        Product product = productMapper.findProductByXxbh(xhbh);
+        Product product = productMapper.findProductByXhbh(xhbh);
         List<Parts> parts=partsMapper.findPartsByPmbh(product.getPmbh());
-
-        String pjxxList = "[{\"pjmc\":\""+parts.get(0).getPJMC()+"\",\"pjjg\":\"0\",\"sxh\":\""+parts.get(0).getRN()+"\",\"pjbh\":\""+parts.get(0).getPJBH()+"\"}";
-        for (int i = 1; i < parts.size(); i++) {
-            pjxxList+=",{\"pjmc\":\""+parts.get(i).getPJMC()+"\",\"pjjg\":\"0\",\"sxh\":\""+parts.get(i).getRN()+"\",\"pjbh\":\""+parts.get(i).getPJBH()+"\"}";
-        }
-        pjxxList+="]";
-        logger.info(pjxxList);
+//        String pjxxList = "[{\"pjmc\":\""+parts.get(0).getPJMC()+"\",\"pjjg\":\"0\",\"sxh\":\""+parts.get(0).getRN()+"\",\"pjbh\":\""+parts.get(0).getPJBH()+"\"}";
+//        for (int i = 1; i < parts.size(); i++) {
+//            pjxxList+=",{\"pjmc\":\""+parts.get(i).getPJMC()+"\",\"pjjg\":\"0\",\"sxh\":\""+parts.get(i).getRN()+"\",\"pjbh\":\""+parts.get(i).getPJBH()+"\"}";
+//        }
+//        pjxxList+="]";
         String json = "{\"username\":\"" + username + "\"," +
                 "\"pwd\":\"" + enPwd1 + "\"," +
                 "\"xhbh\":\"" + xhbh + "\"," +
@@ -273,7 +270,7 @@ public class ProductController extends BaseController {
                 "\"fwcn\":\"郑州以及周边一天内送货，其他地市二天；提供上门安装及后期维修服务\"," +
                 "\"sjjg\": \"0.5\"," +
                 "\"productlink\":\"http://www.staples.cn/product/1100008501EA\"," +
-                "\"pjxxList\":"+ pjxxList +","+
+                "\"pjxxList\":\"\","+
                 "\"jgsfyy\":\""+jgsfyy+"\"}";
         System.out.println(json);
         JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getExecute(),json);
@@ -292,7 +289,7 @@ public class ProductController extends BaseController {
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
         String enPwd1= Enxi.enPwd(username,pwd);
-        Product product=productMapper.findProductByXxbh(xhbh);
+        Product product=productMapper.findProductByXhbh(xhbh);
         Parts parts=partsMapper.findPartsByPjbh(pjbh);
         //拼接json
         String json="{\"username\":\""+username+"\"," +
@@ -443,6 +440,13 @@ public class ProductController extends BaseController {
 //    }
 
     /**
-     * 传入pmmc 返回
+     * 传入pmbh 返回商品信息
+     * @param xhbh 商品编号
+     * @return
      */
+    @RequestMapping(value = "/product/{xhbh}",method = RequestMethod.PUT)
+    @ApiOperation(value = "报价商品页",httpMethod = "PUT")
+    public ModelAndView getProductByXhbh(@PathVariable("xhbh")String xhbh){
+        return productService.getProductByXhbh(xhbh);
+    }
 }

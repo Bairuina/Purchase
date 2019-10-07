@@ -4,6 +4,8 @@ import net.wlgzs.purchase.entity.ServiceValue;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -21,5 +23,14 @@ public interface ServiceValueMapper extends BaseMapper<ServiceValue> {
      */
     @Select("SELECT * FROM service_value where FWBH=#{FWBH}")
     public ServiceValue findServiceValueByFWBH(String FWBH);
+
+    /**
+     * 根据pmbh品目编号获取增值服务
+     * @param pmbh 品目编号
+     *
+     */
+    @Select("SELECT * FROM service_value where pmbh=#{pmbh}")
+    public List<ServiceValue> findServiceValueByPmbh(String pmbh);
+
 
 }

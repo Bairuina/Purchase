@@ -26,5 +26,5 @@ public interface IProductService extends IService<Product> {
      */
     public ModelAndView findallProduct(String lbbh,String pmbh,String ppbh,String nr);
 
-//    public ModelAndView findallProduct1(String lbbh);
+    public ModelAndView getProductByXhbh(String xhbh);
 }
