@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情页面</title>
+    <link rel="stylesheet" th:href="@{/static/css/detailsPage.css}">
+    <link rel="stylesheet" th:href="@{/static/css/same.css}">
+</head>
+<body>
+<div class="container">
+    <!--顶部-->
+    <div class="header">
+
+    </div>
+    <div class="box">
+        <div class="mainPart">
+            <!--顶部-->
+            <div class="mainPartTitle">
+                <!--标题-->
+                <!--回到首页-->
+                <div class="wrap">
+                    <div class="homepage">
+                        <a class="current" style=" color: #103a86;" th:href="@{/product}">
+                            <span>首页</span>
+                        </a>
+                    </div>
+                    <span class="arrow"> > </span>
+                </div>
+                <!--类-->
+                <div class="wrap">
+                    <div class="homepage" id="kindList">
+                        <a class="current">
+                            <p>
+                                <span th:text="${productlbbh.lbmc}">
+                                    办公打印
+                                </span>
+                                <img th:src="@{/static/img/down.png}" align="absmiddle">
+                            </p>
+                        </a>
+                        <div class="kindList">
+                            <div class="kindListDetail">
+                                <ul>
+                                    <li th:each="lbbhlist:${lbbhlist}">
+                                        <a class="list" th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/'+${nr}}">
+                                            <p th:text="${lbbhlist.lbmc}" th:data-listnumber="${lbbhlist.lbbh}">类名</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="arrow"> > </span>
+                </div>
+                <!--品目-->
+                <div class="wrap">
+                    <div class="homepage" id="items">
+                        <a class="current">
+                            <p>
+                                <span th:text="${productpmbh.pmmc}"></span>
+                                <img th:src="@{/static/img/down.png}" align="absmiddle">
+                            </p>
+                        </a>
+                        <div class="itemsList">
+                            <div class="itemsListDetail">
+                                <ul>
+                                    <li th:each="pmbhlist:${pmbhlist}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0/'+${nr}}">
+                                            <p th:text="${pmbhlist.pmmc}" th:data-itemsnumber="${pmbhlist.pmbh}" class="namesOfParts">品目</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="arrow"> > </span>
+                </div>
+                <!--品牌-->
+                <div class="wrap">
+                    <div class="homepage" id="items">
+                        <a class="current">
+                            <p>
+                                <span th:text="${productppbh.ppmc}">联想</span>
+                                <img th:src="@{/static/img/down.png}" align="absmiddle">
+                            </p>
+                        </a>
+                        <div class="itemsList">
+                            <div class="itemsListDetail">
+                                <ul>
+                                    <li th:each="ppbhlist:${ppbhlist}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}+'/'+${nr}}">
+                                            <p th:text="${ppbhlist.ppmc}" th:data-branknumber="${ppbhlist.ppbh}" class="brankName">品牌</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--搜索框-->
+                <div class="inputProduct">
+                    <form>
+                        <input type="search" id="productSearch" placeholder="请输入商品信息">
+                    </form>
+                    <div class="submitProduct">
+                        <a>
+                            <p>确定</p>
+                        </a>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div class="brandRegion">
+                <!--                类名-->
+                <div class="brand">
+                    <div class="brandDetail">
+                        <div class="brandDetailLeft">
+                            <p>
+                                <img th:src="@{/static/img/arrowLeft.png}" align="absmiddle">
+                                类名</p>
+                        </div>
+                        <div class="key">
+                            <a class="moreThan">
+                                <span>更多</span>
+                            </a>
+                        </div>
+                        <div class="brandDetailRight">
+                            <div class="brandDetailRightContent">
+                                <ul>
+                                    <li th:each="lbbhlist:${lbbhlist}">
+                                        <a th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/'+${nr}}">
+                                            <p th:text="${lbbhlist.lbmc}">类名</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="clear: both">
+
+                        </div>
+                    </div>
+                </div>
+                <!--                品目-->
+                <div class="brand">
+                    <div class="brandDetail">
+                        <div class="brandDetailLeft">
+                            <p>
+                                <img th:src="@{/static/img/arrowLeft.png}" align="absmiddle">
+                                品目</p>
+                        </div>
+                        <div class="key">
+                            <a class="moreThan">
+                                <span>更多</span>
+                            </a>
+                        </div>
+                        <div class="brandDetailRight">
+                            <div class="brandDetailRightContent">
+                                <ul>
+                                    <li th:each="pmbhlist:${pmbhlist}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0/'+${nr}}">
+                                            <p th:text="${pmbhlist.pmmc}"></p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="clear: both">
+
+                        </div>
+                    </div>
+                </div>
+                <!--品牌-->
+                <div class="brand">
+                    <div class="brandDetail">
+                        <div class="brandDetailLeft">
+                            <p>
+                                <img th:src="@{/static/img/arrowLeft.png}" align="absmiddle">
+                                品牌</p>
+                        </div>
+                        <div class="key">
+                            <a class="moreThan">
+                                <span>更多</span>
+                            </a>
+                        </div>
+                        <div class="brandDetailRight">
+                            <div class="brandDetailRightContent">
+                                <ul>
+                                    <li th:each="ppbhlist:${ppbhlist}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}+'/'+${nr}}">
+                                            <p th:text="${ppbhlist.ppmc}" class="brankName"></p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="clear: both">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--获取商品-->
+            <div class="message">
+                <div class="messageDetail" th:each="productList:${productList}">
+                    <!--商品名称-->
+                    <h3 th:text="${productList.xhmc}">电脑</h3>
+                    <!--类别-->
+                    <div class="items">
+                        <p>
+                            <span>类别名称:</span>
+                            <span th:text="${productList.lbmc}" th:data-listnametwo="${productList.lbbh}">
+                                电子类
+                            </span>
+                        </p>
+                    </div>
+                    <!--品目-->
+                    <div class="items">
+                        <p>
+                            <span>
+                                品目名称:
+                            </span>
+                            <span th:text="${productList.pmmc}" th:data-itemsnametwo="${productList.ppbh}">
+                                电脑
+                            </span>
+                        </p>
+                    </div>
+                    <!--品牌-->
+                    <div class="items">
+                        <p>
+                            <span>
+                                品牌名称:
+                            </span>
+                            <span th:text="${productList.ppmc}">
+                                联想
+                            </span>
+                        </p>
+                        <p>
+                            <span>
+                                品牌编号:
+                            </span>
+                            <span>
+                                1234567894561234567894
+                            </span>
+                        </p>
+                    </div>
+                    <!--商品参数-->
+                    <div class="items">
+                        <p>
+                            <span>
+                                商品参数:
+                            </span>
+                            <span th:text="${productList.parametersList}">
+                                1234456789hfvfdgvrgre
+                            </span>
+                        </p>
+                    </div>
+                    <!--商品状态-->
+                    <div class="items">
+                        <p>
+                            <span>
+                                商品状态:
+                            </span>
+                            <span th:text="${productList.zt}">
+                                正在报价中
+                            </span>
+                        </p>
+                    </div>
+                    <!--报价-->
+                    <div class="offer">
+                        <a>
+                            <p>我要报价
+                                <img th:src="@{../static/img/right.png}" align="absmiddle">
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--底部-->
+<div class="footer">
+
+</div>
+
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/detailsPage.js}"></script>
+</body>
+</html>

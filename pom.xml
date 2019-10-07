@@ -31,6 +31,11 @@
 <!--                </exclusion>-->
 <!--            </exclusions>-->
         </dependency>
+        <!--WebSocket-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -151,6 +156,19 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.61</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.xfire</groupId>
+            <artifactId>xfire-java5</artifactId>
+            <version>1.0</version>
+        </dependency>
+<!-- thymself-->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
+
     </dependencies>
 
     <build>

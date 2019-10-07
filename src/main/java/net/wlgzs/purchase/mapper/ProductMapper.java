@@ -14,7 +14,7 @@ import java.util.Set;
  *  Mapper 接口
  * </p>
  *
- * @author 胡亚星
+ * @author 王耀兴
  * @since 2019-09-28
  */
 @org.apache.ibatis.annotations.Mapper
@@ -41,9 +41,28 @@ public interface ProductMapper extends BaseMapper<Product> {
     public Set<String> findppmc();
 
     /**
-     * 根据lbmc返回pmmc和pmbh
+     * 返回全部品目编号pmbh
+     *
      */
-    @Select("SELECT pmbh,pmmc,lbbh,lbmc FROM product where lbbh=#{lbbh}")
-    public Set<Product> findpmmc(String lbbh);
+    @Select("SELECT distinct pmbh FROM `product`")
+    public List<String> findpmbh();
+    /**
+     * 返回全部型号编号xhbh
+     */
+    @Select("SELECT distinct xhbh FROM `product`")
+    public List<String> findxhbh();
+
+    /**
+     * 根据型号xhbh获取商品
+     */
+    @Select("SELECT * FROM `product` where xhbh=#{xhbh}")
+    public Product findProductByXxbh(String xhbh);
+
+    /**
+     * 根据品目编号pmbh获取商品编号xhbh
+     */
+    @Select("SELECT distinct xhbh FROM `product` where pmbh=#{pmbh}")
+    public List<String> findXhbhByPmbh(String pmbh);
+
 
 }

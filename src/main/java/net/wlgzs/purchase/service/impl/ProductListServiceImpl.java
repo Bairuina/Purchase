@@ -10,7 +10,6 @@ import net.wlgzs.purchase.util.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -54,9 +53,9 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
     }
 
     @Override
-    public Result delProductListByOrderId(int orderId) {
+    public Result delProductListByOrderId(String ddbh) {
         QueryWrapper<ProductList> queryWrapper=new QueryWrapper();
-        queryWrapper.eq("order_id",orderId);
+        queryWrapper.eq("ddbh",ddbh);
         int count=baseMapper.delete(queryWrapper);
         if(count>=0){
             logger.info("该订单商品信息删除完毕！");
@@ -69,17 +68,18 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
     }
 
     @Override
-    public Result selectProductList(int orderId) {
+    public List<ProductList> selectProductList(String ddbh) {
         QueryWrapper<ProductList> queryWrapper=new QueryWrapper();
-        queryWrapper.eq("order_id",orderId);
+        queryWrapper.eq("ddbh",ddbh);
+
         List<ProductList> lists=baseMapper.selectList(queryWrapper);
         if(lists!=null&&lists.size()!=0) {
-            logger.info("该订单商品查询的成功！");
-            return new Result(ResultCode.SUCCESS,lists);
+            logger.info("订单："+ddbh+" 商品查询状态：该订单商品查询的成功！");
+            return lists;
         }
         else {
-            logger.info("无相关查询结果！");
-            return new Result(ResultCode.FAIL,"没有相关内容！");
+            logger.info("订单："+ddbh+" 商品查询状态：该订单商品无相关商品查询结果！");
+            return null;
         }
     }
 
@@ -87,11 +87,11 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
     public Result selectProduct(int productId) {
         ProductList productList=baseMapper.selectById(productId);
         if(productList!=null) {
-            logger.info("订单商品查询的成功！");
+            logger.info("该商品查询的成功！");
             return new Result(ResultCode.SUCCESS,productList);
         }
         else {
-            logger.info("无相关查询结果！");
+            logger.info("该商品无相关查询结果！");
             return new Result(ResultCode.FAIL,"没有相关内容！");
         }
     }

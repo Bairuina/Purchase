@@ -1,13 +1,9 @@
 package net.wlgzs.purchase.entity;
 
 import java.math.BigDecimal;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 
 /**
@@ -16,11 +12,8 @@ import java.io.Serializable;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-09-28
+ * @since 2019-10-04
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @TableName("product_list")
 public class ProductList implements Serializable {
 
@@ -30,7 +23,7 @@ public class ProductList implements Serializable {
      * 订单商品id
      */
     @TableId("productList_id")
-    private Integer productlistId;
+    private int productlistId;
 
     /**
      * 型号编号
@@ -77,7 +70,84 @@ public class ProductList implements Serializable {
     /**
      * 订单id
      */
-    @TableField("order_id")
-    private Integer orderId;
+    private String ddbh;
 
+    public Integer getProductlistId() {
+        return productlistId;
+    }
+
+    public void setProductlistId(Integer productlistId) {
+        this.productlistId = productlistId;
+    }
+    public String getXhbh() {
+        return xhbh;
+    }
+
+    public void setXhbh(String xhbh) {
+        this.xhbh = xhbh;
+    }
+    public String getXhmc() {
+        return xhmc;
+    }
+
+    public void setXhmc(String xhmc) {
+        this.xhmc = xhmc;
+    }
+    public String getPpbh() {
+        return ppbh;
+    }
+
+    public void setPpbh(String ppbh) {
+        this.ppbh = ppbh;
+    }
+    public String getPpmc() {
+        return ppmc;
+    }
+
+    public void setPpmc(String ppmc) {
+        this.ppmc = ppmc;
+    }
+    public Integer getSl() {
+        return sl;
+    }
+
+    public void setSl(Integer sl) {
+        this.sl = sl;
+    }
+    public BigDecimal getSjjg() {
+        return sjjg;
+    }
+
+    public void setSjjg(BigDecimal sjjg) {
+        this.sjjg = sjjg;
+    }
+    public BigDecimal getXjjg() {
+        return xjjg;
+    }
+
+    public void setXjjg(BigDecimal xjjg) {
+        this.xjjg = xjjg;
+    }
+    public String getDdbh() {
+        return ddbh;
+    }
+
+    public void setDdbh(String ddbh) {
+        this.ddbh = ddbh;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductList{" +
+        "productlistId=" + productlistId +
+        ", xhbh=" + xhbh +
+        ", xhmc=" + xhmc +
+        ", ppbh=" + ppbh +
+        ", ppmc=" + ppmc +
+        ", sl=" + sl +
+        ", sjjg=" + sjjg +
+        ", xjjg=" + xjjg +
+        ", ddbh=" + ddbh +
+        "}";
+    }
 }
