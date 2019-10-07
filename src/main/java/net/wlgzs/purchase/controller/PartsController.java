@@ -3,18 +3,25 @@ package net.wlgzs.purchase.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import net.wlgzs.purchase.entity.Parts;
 import net.wlgzs.purchase.service.IPartsService;
+import net.wlgzs.purchase.util.Result;
+import net.wlgzs.purchase.util.ResultCode;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -41,4 +48,6 @@ public class PartsController extends BaseController {
         model.addAttribute("Partslist",list);
         return new ModelAndView();
     }
+
+
 }
