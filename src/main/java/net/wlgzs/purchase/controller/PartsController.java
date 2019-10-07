@@ -49,22 +49,5 @@ public class PartsController extends BaseController {
         return new ModelAndView();
     }
 
-    /**
-     *某商品某配件报价
-     * @param pjbh 配件编号
-     * @param xhbh 商品编号
-     * @param price 配件价格
-     * @param text 增值原因（可有可无）
-     */
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pjbh",value = "配件价格"),
-            @ApiImplicitParam(name = "xhbh",value = "商品编号"),
-            @ApiImplicitParam(name = "price",value = "配件价格"),
-            @ApiImplicitParam(name = "text",value = "增值原因")
-    })
-    @RequestMapping(value = "/offer",method = RequestMethod.POST)
-    public Result offerPart(Model model, HttpServletRequest request,String pjbh,String xhbh,String price,String text){
-        System.out.println(pjbh);
-        return new Result(ResultCode.SUCCESS);
-    }
+
 }

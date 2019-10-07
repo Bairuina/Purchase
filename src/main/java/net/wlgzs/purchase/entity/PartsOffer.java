@@ -2,11 +2,9 @@ package net.wlgzs.purchase.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.*;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 
 /**
@@ -17,12 +15,6 @@ import java.io.Serializable;
  * @author 胡亚星
  * @since 2019-10-07
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @TableName("parts_offer")
 public class PartsOffer implements Serializable {
 
@@ -31,7 +23,7 @@ public class PartsOffer implements Serializable {
     /**
      * 配件报价Id
      */
-    @TableId("parts_offer_id")
+    @TableId(value = "parts_offer_id", type = IdType.AUTO)
     private Integer partsOfferId;
 
     /**

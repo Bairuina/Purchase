@@ -5,8 +5,7 @@ import com.Enxi;
 
 
 import com.alibaba.fastjson.JSON;
-import com.mysql.cj.xdevapi.JsonArray;
-import com.mysql.cj.xdevapi.JsonString;
+
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Parts;

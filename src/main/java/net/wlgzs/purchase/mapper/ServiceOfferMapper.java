@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author 胡亚星
  * @since 2019-10-07
  */
+@org.apache.ibatis.annotations.Mapper
 public interface ServiceOfferMapper extends BaseMapper<ServiceOffer> {
 
 }

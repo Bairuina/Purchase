@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
  * @author 胡亚星
  * @since 2019-10-07
  */
-@Service
 public interface IProductOfferService extends IService<ProductOffer> {
 
 }
