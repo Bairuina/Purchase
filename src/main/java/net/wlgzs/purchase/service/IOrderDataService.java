@@ -55,4 +55,6 @@ public interface IOrderDataService extends IService<OrderData> {
     //查询不同状态的订单  2-供应商待确认3-待验收 4-订单已取消5-验收通过
     Result selectStatusDataOrder(Integer pageNum,Integer PageSize,String status);
 
+    //根据条件查询订单信息
+    Result selectOrderListByData(String Data);
 }
