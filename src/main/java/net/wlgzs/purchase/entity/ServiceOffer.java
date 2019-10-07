@@ -2,6 +2,7 @@ package net.wlgzs.purchase.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 
@@ -21,7 +22,7 @@ public class ServiceOffer implements Serializable {
     /**
      * 增值服务报价Id
      */
-    @TableId("service_offer_id")
+    @TableId(value = "service_offer_id", type = IdType.AUTO)
     private Integer serviceOfferId;
 
     /**

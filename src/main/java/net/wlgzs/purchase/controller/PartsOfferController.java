@@ -28,7 +28,7 @@ public class PartsOfferController extends BaseController {
     /**
      * 配件报价并存入本地库
      * @param pjbh 配件编号
-     * @param xhbh 商品名称
+     * @param xhbh 商品编号
      * @param price 配件价格
      * @param text 备注
      *
@@ -40,7 +40,7 @@ public class PartsOfferController extends BaseController {
             @ApiImplicitParam(name = "price",value = "配件价格"),
             @ApiImplicitParam(name = "text",value = "备注")
     })
-    @RequestMapping(value = "/offer",method = RequestMethod.POST)
+    @RequestMapping(value = "/offer",method = RequestMethod.PUT)
     public Result PartsOffer(String pjbh,String xhbh,int price,String text){
         return iPartsOfferService.offerPart(pjbh, xhbh, price, text);
     }

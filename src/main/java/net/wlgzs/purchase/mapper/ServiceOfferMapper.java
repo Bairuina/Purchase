@@ -2,6 +2,9 @@ package net.wlgzs.purchase.mapper;
 
 import net.wlgzs.purchase.entity.ServiceOffer;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,5 +16,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 @org.apache.ibatis.annotations.Mapper
 public interface ServiceOfferMapper extends BaseMapper<ServiceOffer> {
-
+    @Select("SELECT service_offer_id FROM service_offer where fubh=#{fubh} and xhbh=#{xhbh}")
+    public List<Integer> findIdByFubhXhbh(String fubh,String xhbh);
 }
