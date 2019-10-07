@@ -27,7 +27,6 @@ $("no_order").click(function () {
     var urlData;
     var ztDataWord=$("#ztDataWordLi").data('ztdata');
     console.log(ztDataWord);
-
     if(ztDataWord=='2'){
         urlData='/order-data/ensureORefuseOrder'
     }

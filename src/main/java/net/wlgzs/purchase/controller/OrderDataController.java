@@ -51,13 +51,12 @@ public class OrderDataController extends BaseController {
 
 
     @ApiOperation("显示所有订单")
-    @GetMapping
-    public ModelAndView selectDataOrder(@RequestParam(value = "pageSize", defaultValue = "15")Integer pageSize,@RequestParam(value = "pageNum", defaultValue = "1")Integer pageNum){
+    @GetMapping("/{pageNum}")
+    public ModelAndView selectDataOrder(@RequestParam(value = "pageSize", defaultValue = "3")Integer pageSize,@PathVariable(value = "pageNum")Integer pageNum){
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("orderList");
         modelAndView.addObject("orderDara",iOrderService.selectAllOrder(pageSize,pageNum));
 //        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
-        System.out.println(modelAndView);
         return modelAndView;
     }
 

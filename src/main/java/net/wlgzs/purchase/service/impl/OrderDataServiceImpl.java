@@ -165,12 +165,13 @@ public class OrderDataServiceImpl extends ServiceImpl<OrderDataMapper, OrderData
     //查询所有订单
     @Override
     public Result selectAllOrder(Integer pageSize,Integer pageNum) {
-        Page page = new Page(pageNum, pageSize);
-        IPage iPage;
-        iPage = baseMapper.selectPage(page,null);
-        List OrderList = iPage.getRecords();
-       logger.info(OrderList.toString());
-        return new Result(ResultCode.SUCCESS, "成功！", OrderList, iPage.getPages(), iPage.getCurrent());
+        QueryWrapper<OrderData> queryWrapper=new QueryWrapper<>();
+        Page page = new Page(pageNum, 3);
+        IPage<OrderData> iPage=null;
+        iPage = baseMapper.selectPage(page,queryWrapper);
+        List orderList = iPage.getRecords();
+        logger.info("\n\n总页数为："+iPage.getPages()+"当前页数为："+iPage.getCurrent()+"\n");
+        return new Result(ResultCode.SUCCESS, "成功！", orderList, iPage.getPages(), iPage.getCurrent());
     }
 
 
