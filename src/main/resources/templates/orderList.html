@@ -7,11 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>订单列表页</title>
     <link rel="stylesheet"  th:href="@{/css/orderList.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
 </head>
 
 <body>
-
-    <div class="oeder_list_nav">
+    <div th:replace="common:: commonTop"></div>
+    <div th:include="common :: commonHead"></div>
+    <div class="oeder_list_nav" style="min-height: 800px;">
         <div class="order_list">
             <div class="order_list_left">
                 <ul>
@@ -92,7 +96,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!-- 分页-->
     <div class="fenye" th:if="${TotalPages > 0 and isSearch==0}">
@@ -164,8 +167,12 @@
             <li class="numpage" style="display: inline-block;" th:text="'共'+${TotalPages}+'页'"></li>
         </ul>
     </div>
+    <div th:include="common :: commonFoot"></div>
+    <div th:include="common :: commonBackTop"></div>
 
 
 </body>
 <script th:src="@{/js/websocket.js}"></script>
+<script th:src="@{/js/index.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/BackTop.js}" type="text/javascript" charset="utf-8"></script>
 </html>
