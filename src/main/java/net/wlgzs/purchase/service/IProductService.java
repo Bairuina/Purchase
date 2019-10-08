@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -24,7 +25,7 @@ public interface IProductService extends IService<Product> {
      * 需要遍历lbmc，pmmc，ppmc
      * 还有全部商品列表
      */
-    public ModelAndView findallProduct(String lbbh,String pmbh,String ppbh,String nr);
+    public ModelAndView findallProduct(HttpServletRequest request,String lbbh, String pmbh, String ppbh, String nr);
 
     public ModelAndView getProductByXhbh(String xhbh);
 }

@@ -50,16 +50,6 @@ public class OrderDataController extends BaseController {
     }
 
 
-    @ApiOperation("显示所有订单")
-    @GetMapping("/{pageNum}")
-    public ModelAndView selectDataOrder(@RequestParam(value = "pageSize", defaultValue = "3")Integer pageSize,@PathVariable(value = "pageNum")Integer pageNum){
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("orderList");
-        modelAndView.addObject("orderDara",iOrderService.selectAllOrder(pageSize,pageNum));
-//        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
-        return modelAndView;
-    }
-
     //查询不同状态的订单  2-供应商待确认3-待验收 4-订单已取消 5-验收通过
     @ApiOperation("显示取消或未确认订单")
     @GetMapping("/selectStatusDataOrder")
@@ -67,7 +57,6 @@ public class OrderDataController extends BaseController {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("订单列表页");
         modelAndView.addObject("orderDara",iOrderService.selectStatusDataOrder(pageSize,pageNum,status));
-//        modelAndView.addObject("upDataTime",iRedis.get("upDataTime"));
         return modelAndView;
     }
 
@@ -135,15 +124,18 @@ public class OrderDataController extends BaseController {
         return iOrderService.ensureOrderArrive(ddbh,sfcd,fczddbh,kdgs,kddh,ms,new BigInteger(kdsj));
     }
 
-    @ApiOperation("根据订单搜索")
-    @GetMapping("/select/{pageNum}")
-    public ModelAndView selectOrderByData(@Param("ddbh") String ddbh,@Param("cgrmc")String cgrmc,@Param("zt")String zt,@RequestParam(value = "pageSize", defaultValue = "15")Integer pageSize,@PathVariable(value = "pageNum")Integer pageNum){
+    @ApiOperation("根据信息搜索")
+    @GetMapping("/select")
+    public ModelAndView selectOrderByData(@Param("zt")String zt,@Param("data")String data,@RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum){
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.addObject("orderListByData",iOrderService.selectOrderListByData(ddbh,cgrmc,zt,pageSize,pageNum));
-        modelAndView.addObject("ddbh",ddbh);
-        modelAndView.addObject("cgrmc",cgrmc);
+        if(data!=null&&data.equals("null")){
+            data=null;
+        }
+        modelAndView.addObject("orderDara",iOrderService.selectOrderListByData(data,zt,pageSize,pageNum));
         modelAndView.addObject("zt",zt);
+        modelAndView.addObject("data",data);
         modelAndView.setViewName("orderList");
         return modelAndView;
     }
+
 }

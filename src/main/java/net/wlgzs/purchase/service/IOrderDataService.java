@@ -56,5 +56,5 @@ public interface IOrderDataService extends IService<OrderData> {
     Result selectStatusDataOrder(Integer pageNum,Integer PageSize,String status);
 
     //根据条件查询订单信息
-    Result selectOrderListByData(String ddbh,String cgrmc,String zt,Integer pageSize,Integer pageNum);
+    Result selectOrderListByData(String data,String zt,Integer pageSize,Integer pageNum);
 }
