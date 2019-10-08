@@ -255,7 +255,6 @@ a{
 }
 .submitProduct{
     display: inline-block;
-    background-color: #F52F3E;
     /* padding: 6px; */
     width: 56px;
     height: 29px;
@@ -265,8 +264,15 @@ a{
     font-size: 14px;
     cursor: pointer;
 }
-.submitProduct>a{
+.submitProduct>input{
+    outline-style: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: #F52F3E;
+    cursor: pointer;
     color: white;
+    /*background-color: ;*/
 }
 .submitProduct:hover{
     opacity:0.8;

@@ -447,7 +447,11 @@ public class ProductController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/product/{xhbh}",method = RequestMethod.GET)
+<<<<<<< HEAD
     @ApiOperation(value = "报价商品页",httpMethod = "GET")
+=======
+    @ApiOperation(value = "报价商品页",httpMethod = "PUT")
+>>>>>>> 4abf7f6ac4c8f0f82ee619ae5ecc739672387ac9
     public ModelAndView getProductByXhbh(@PathVariable("xhbh")String xhbh){
         return productService.getProductByXhbh(xhbh);
     }

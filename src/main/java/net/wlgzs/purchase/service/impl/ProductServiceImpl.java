@@ -134,7 +134,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         String json=product.getParametersList();
         List<Parameters> parametersList= JSON.parseArray(json,Parameters.class);
         modelAndView.addObject("parametersList",parametersList);
-        modelAndView.setViewName("");
+        modelAndView.setViewName("offer");
         return modelAndView;
     }
 }
