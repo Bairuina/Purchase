@@ -13,9 +13,16 @@ import net.wlgzs.purchase.service.IProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
+import org.apache.tools.ant.taskdefs.condition.Http;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
+import sun.misc.Request;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,8 +44,23 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private ServiceValueMapper serviceValueMapper;
 
     @Override
-    public ModelAndView findallProduct(String lbbh,String pmbh,String ppbh,String nr){
+    public ModelAndView findallProduct(HttpServletRequest request, String lbbh, String pmbh, String ppbh, String nr){
         ModelAndView modelAndView=new ModelAndView();
+        HttpSession session=request.getSession(true);
+        if (lbbh.equals("0") && pmbh.equals("0") &&ppbh.equals("0") && nr.equals("0")){
+            session.setAttribute("lbbh",0);
+            session.setAttribute("pmbh",0);
+            session.setAttribute("ppbh",0);
+            session.setAttribute("nr",null);
+        }
+        else{
+            session.setAttribute("lbbh",lbbh);
+            session.setAttribute("pmbh",pmbh);
+            session.setAttribute("ppbh",ppbh);
+            if (!nr.equals("0")){
+                session.setAttribute("nr",nr);
+            }
+        }
         modelAndView.setViewName("detailsPage");
         try {
             QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
@@ -60,11 +82,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             if (ppbh.equals("0")){
                 ppbh = ppbhlist.get(0).getPpbh();
             }
-            if (nr.equals("")){
-                nr="0";
-            }
 
-            System.out.println(lbbh+"***************"+pmbh+"****************"+ppbh+"***************"+nr+"*********");
             List<Product> productList;
             if (lbbh.equals("0")) {
                 queryWrapper3.like("xhmc", nr.equals("0") ? "" : nr)
@@ -84,10 +102,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             }
-//            System.out.println(lbbhlist);
-//            System.out.println(pmbhlist);
-//            System.out.println(ppbhlist);
-//            System.out.println(productList);
             modelAndView.addObject("lbbhlist", lbbhlist);//第一大类
             modelAndView.addObject("pmbhlist", pmbhlist);//第二大类
             modelAndView.addObject("ppbhlist", ppbhlist);//第三大类

@@ -35,6 +35,7 @@ import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import java.net.URL;
 import java.util.List;
@@ -425,8 +426,8 @@ public class ProductController extends BaseController {
     @RequestMapping(value = "/{lbbh}/{pmbh}/{ppbh}",method = RequestMethod.GET)
     @ApiOperation(value = "多条件查询",httpMethod = "GET")
     @ApiImplicitParam(name = "nr",dataType = "内容")
-    public ModelAndView findallProduct(@PathVariable("lbbh") String lbbh,@PathVariable("pmbh") String pmbh,@PathVariable("ppbh") String ppbh,@RequestParam(name = "nr",defaultValue = "0")String nr){
-        return productService.findallProduct(lbbh,pmbh,ppbh,nr);
+    public ModelAndView findallProduct(HttpServletRequest request, @PathVariable("lbbh") String lbbh, @PathVariable("pmbh") String pmbh, @PathVariable("ppbh") String ppbh, @RequestParam(name = "nr",defaultValue = "0")String nr){
+        return productService.findallProduct(request,lbbh,pmbh,ppbh,nr);
     }
 
     /**
@@ -447,11 +448,7 @@ public class ProductController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/product/{xhbh}",method = RequestMethod.GET)
-<<<<<<< HEAD
     @ApiOperation(value = "报价商品页",httpMethod = "GET")
-=======
-    @ApiOperation(value = "报价商品页",httpMethod = "PUT")
->>>>>>> 4abf7f6ac4c8f0f82ee619ae5ecc739672387ac9
     public ModelAndView getProductByXhbh(@PathVariable("xhbh")String xhbh){
         return productService.getProductByXhbh(xhbh);
     }
