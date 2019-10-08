@@ -422,10 +422,10 @@ public class ProductController extends BaseController {
      * @param ppbh 品牌编号
      * @param  nr  搜索内容
      */
-    @RequestMapping(value = "/{lbbh}/{pmbh}/{ppbh}",method = RequestMethod.POST)
+    @RequestMapping(value = "/{lbbh}/{pmbh}/{ppbh}",method = RequestMethod.GET)
     @ApiOperation(value = "多条件查询",httpMethod = "GET")
     @ApiImplicitParam(name = "nr",dataType = "内容")
-    public ModelAndView findallProduct(@PathVariable("lbbh") String lbbh,@PathVariable("pmbh") String pmbh,@PathVariable("ppbh") String ppbh,@RequestParam(name = "nr")String nr){
+    public ModelAndView findallProduct(@PathVariable("lbbh") String lbbh,@PathVariable("pmbh") String pmbh,@PathVariable("ppbh") String ppbh,@RequestParam(name = "nr",defaultValue = "0")String nr){
         return productService.findallProduct(lbbh,pmbh,ppbh,nr);
     }
 
@@ -446,8 +446,8 @@ public class ProductController extends BaseController {
      * @param xhbh 商品编号
      * @return
      */
-    @RequestMapping(value = "/product/{xhbh}",method = RequestMethod.PUT)
-    @ApiOperation(value = "报价商品页",httpMethod = "PUT")
+    @RequestMapping(value = "/product/{xhbh}",method = RequestMethod.GET)
+    @ApiOperation(value = "报价商品页",httpMethod = "GET")
     public ModelAndView getProductByXhbh(@PathVariable("xhbh")String xhbh){
         return productService.getProductByXhbh(xhbh);
     }
