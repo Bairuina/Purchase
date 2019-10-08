@@ -3,11 +3,11 @@ a{
 }
 select,textarea,input{
     outline-style: none;
+    border:none;
 }
 input:focus{
     box-shadow: 0 0 3px #a0a0a0;
     border:none;
-
 }
 select:focus{
     box-shadow: 0 0 3px #a0a0a0;
@@ -209,10 +209,10 @@ input[type='checkbox']{
 .parts,.serve,.view{
     display: inline-block;
     /* width: 100px; */
-    height: 30px;
+    /* height: 30px; */
     border-radius: 4px;
     text-align: center;
-    line-height: 12px;
+    /* line-height: 12px; */
     padding: 10px;
     color: white;
     cursor: pointer;
@@ -227,5 +227,5 @@ input[type='checkbox']{
     background-color: forestgreen;
 }
 .parameter{
-    padding-bottom: 6px;
+    padding-bottom: 10px;
 }

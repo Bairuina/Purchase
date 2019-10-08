@@ -5,15 +5,13 @@
     <title>报价页面</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/niftymodals.css}" />
-
     <link rel="stylesheet" th:href="@{/static/css/style.css}">
-    <link rel="stylesheet" type="text/csstatics" th:href="@{static/css/htmleaf-demo.css}">
+    <link rel="stylesheet" th:href="@{static/css/htmleaf-demo.css}">
     <link rel="stylesheet" th:href="@{/static/css/demo.css}">
     <link rel="stylesheet" th:href="@{/static/css/same.css}">
+    <link rel="stylesheet" th:href="@{/static/css/normalize.css}" /><!--CSS RESET-->
+<!--    <link rel="stylesheet" th:href="@{/static/css/layer.css}">-->
     <link rel="stylesheet" th:href="@{/static/css/offer.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/normalize.css}" /><!--CSS RESET-->
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/example-styles.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/demo-styles.css}">
 </head>
 <body>
 <div class="contain">
@@ -88,9 +86,20 @@
                             <div class="offerFormLabel">商品名称:</div>
                                 <div class="offerInputblock">
                                     <a>
-                                        <p th:text="${product.xhmc}">123456789</p>
+                                        <p th:text="${product.xhmc}" th:data-number="${product.xhbh}" class="commodityNumber">123456789</p>
                                     </a>
                                 </div>
+                        </div>
+                    </div>
+                    <!--商品原价-->
+                    <div class="offerFormItem">
+                        <div style="height: 100%;">
+                            <div class="offerFormLabel">商品曾报价:</div>
+                            <div class="offerInputblock">
+                                <a>
+                                    <p>123456789</p>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <!--类别名称-->
@@ -121,18 +130,18 @@
                             </div>
                         </div>
                     </div>
-                    <!--总报价-->
+                    <!--报价-->
                     <div class="offerFormItem">
                         <label class="offerFormLabel">商品价格:</label>
                         <div class="offerInputblock">
-                            <input type="text" name="title" autocomplete="off" placeholder="请输入价格" class="offerInput" style="width: 145px;">
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入价格" class="offerInput" style="width: 145px;" id="offerInputContent">
                         </div>
                     </div>
                     <!--更改报价原因-->
                     <div class="offerFormItem">
                         <label class="offerFormLabel" style="vertical-align: top;">更改报价原因:</label>
                         <div class="offerInputblock">
-                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea"></textarea>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" id="offerTextareaContent"></textarea>
                         </div>
                     </div>
                 </form>
@@ -336,6 +345,7 @@
 </div>
 </body>
 <script th:src="@{/static/js/jquery.min.js}"></script>
+
 <script type="text/javascript" th:src="@{/static/js/jquery.multi-select.js}"></script>
 <script type="text/javascript">
     $(function(){
