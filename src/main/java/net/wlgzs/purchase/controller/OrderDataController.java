@@ -50,15 +50,6 @@ public class OrderDataController extends BaseController {
     }
 
 
-    @ApiOperation("显示所有订单")
-    @GetMapping("/{pageNum}")
-    public ModelAndView selectDataOrder(@RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,@PathVariable(value = "pageNum")Integer pageNum){
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("orderList");
-        modelAndView.addObject("orderDara",iOrderService.selectAllOrder(pageSize,pageNum));
-        return modelAndView;
-    }
-
     //查询不同状态的订单  2-供应商待确认3-待验收 4-订单已取消 5-验收通过
     @ApiOperation("显示取消或未确认订单")
     @GetMapping("/selectStatusDataOrder")
@@ -138,6 +129,8 @@ public class OrderDataController extends BaseController {
     public ModelAndView selectOrderByData(@Param("zt")String zt,@Param("data")String data,@RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum){
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.addObject("orderDara",iOrderService.selectOrderListByData(data,zt,pageSize,pageNum));
+        modelAndView.addObject("zt",zt);
+        modelAndView.addObject("data",data);
         modelAndView.setViewName("orderList");
         return modelAndView;
     }

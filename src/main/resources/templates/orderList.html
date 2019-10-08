@@ -18,15 +18,17 @@
     <div class="head_nav">
         <div class="head">
             <div class="logo">
-                <a href=""><img src="img/logo.png" alt=""></a>
+                <a href="/order-data/select/"><img src="img/logo.png" alt=""></a>
             </div>
             <div class="search">
                 <form action="">
                     <select style="width: 18%;height: 100%;color: #000;outline: none;border: 0px;padding: 5px;float: left;font-size: 18px" >
-                        <option value="待验收">待验收</option>
-                        <option value="已验收">已验收</option>
-                        <option value="待付款">待付款</option>
-                        <option value="已付款">已付款</option>
+                        <option  th:if="${zt=='2'}" th:value="${zt}">待确定</option>
+                        <option  th:if="${zt=='3'}" th:value="${zt}">待验收</option>
+                        <option  th:if="${zt=='5'}" th:value="${zt}">已验收</option>
+                        <option  th:if="${zt!='2'}" value="2">待确定</option>
+                        <option  th:if="${zt!='3'}" value="3">待验收</option>
+                        <option  th:if="${zt!='5'}" value="5">已验收</option>
                     </select>
                     <input class="search-con" type="text" placeholder="输入关键字，搜索相关信息" style="width: 62%;float: left">
                     <input class="search-sub" type="submit" value="搜 索">
@@ -39,9 +41,20 @@
         <div class="order_list">
             <div class="order_list_left">
                 <ul>
-                    <li style="background-color: #DF0024;"><a th:href="@{/lectDataOrder}">我的订单</a></li>
-                    <li><a href="" class="accept">接受订单</a></li>
-                    <li><a href="">拒绝订单</a></li>
+                    <li th:if="${zt==null}" ><a th:href="@{/lectDataOrder}">我的订单</a></li>
+                    <li th:if="${zt!=null and zt==}" style="background-color: #DF0024;"><a th:href="@{/lectDataOrder}">我的订单</a></li>
+
+
+                    <li th:if="${zt==null and zt==2}" ><a th:href="">待确定订单</a></li>
+                    <li th:if="${zt==null and }" ><a th:href="">待确定订单</a></li>
+
+
+                    <li th:if="${zt==null or zt!=3}"><a th:href="" class="accept">接受订单</a></li>
+                    <li th:if="${zt!=null and zt==3}" style="background-color: #DF0024;"><a th href="" class="accept">接受订单</a></li>
+
+
+                    <li th:if="${zt==null or zt!=4}"><a href="">拒绝订单</a></li>
+                    <li th:if="${zt!=null and zt==4}" style="background-color: #DF0024;"><a href="">拒绝订单</a></li>
                 </ul>
             </div>
             <div class="order_list_right">
@@ -61,6 +74,7 @@
                                 <li>采购人的名字：<span th:text="${ordeData.cgrmc}"></span></li>
                             </ul>
                         </div>
+
                         <div class="order_details">
                             <ul>
                                 <li>
@@ -112,64 +126,51 @@
 
                         </div>
                     </div>
-
+                        <div th:if="${orderDara==null}">
+                        暂无订单信息
+                         </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- 分页-->
-    <div class="paging" th:if="${orderDara.pages > 0 }">
-        <ul class="pagination" id="pagination1" th:if="${orderDara.current == 1} and ${orderDara.pages> 1}">
-            <!--//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页-->
-            <li id="first"><a th:href="@{/order-data/1}">首页</a></li>
-            <li><a th:href="@{'/order-data/'+${orderDara.current-1}}">上一页</a></li>
-            <li  th:each="i:${#numbers.sequence(1,orderDara.pages)}">
-                <!--//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数-->
-                <a class="active" th:if="${i > orderDara.current-3} and ${i < orderDara.current+3} and ${i == orderDara.current}" href="javascript:void(0);" th:text="${i}">#</a>
-                <!--//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击-->
-                <a th:if="${i > orderDara.current-3} and ${i < orderDara.current+3} and ${i != orderDara.current}"
-                   th:href="@{'/order-data/'+${i}}" th:text="${i}">#</a><!--//限制显示页数的条数  4到6个页数-->
-            </li>
-            <li><a th:href="@{'/order-data/'+${orderDara.current+1}}">下一页</a></li>
-            <li id="last"><a th:href="@{'/order-data/'+${orderDara.pages}}">尾页</a></li><!--//跳转至第orderDara.current页-->
-            <li><a href="" th:text="'共'+${orderDara.pages}+'页'"></a></li>
-        </ul>
-    </div>
-<!--    &lt;!&ndash;搜索分页&ndash;&gt;-->
-<!--    <div class="fenye" th:if="${orderDara.pages > 0 and isSearch==1}">-->
-<!--        <ul class="pagination" th:if="${orderDara.current == 1} and ${orderDara.pages> 1}">-->
+<!--    &lt;!&ndash; 分页&ndash;&gt;-->
+<!--    <div class="paging" th:if="${orderDara.pages > 0 and zt==null and data==null}">-->
+<!--        <ul class="pagination" id="pagination1" th:if="${orderDara.current == 1} and ${orderDara.pages> 1}">-->
 <!--            &lt;!&ndash;//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页&ndash;&gt;-->
-<!--            <li><a th:href="@{/members/membersList/1(findName=${findName})}">首页</a></li>-->
-<!--            <li class="active" th:each="i:${#numbers.sequence(1,orderDara.pages)}">-->
+<!--            <li id="first"><a th:href="@{'/order-data/select?pageNum=1'}">首页</a></li>-->
+<!--            <li><a th:href="@{'/order-data/select?pageNum='+${orderDara.current-1}}">上一页</a></li>-->
+<!--            <li  th:each="i:${#numbers.sequence(1,orderDara.pages)}">-->
 <!--                &lt;!&ndash;//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数&ndash;&gt;-->
-<!--                <a th:if="${i > orderDara.current-3} and ${i < orderDara.current+3} and ${i == orderDara.current}" href="javascript:void(0);" th:text="${i}">#</a>-->
+<!--                <a class="active" th:if="${i > orderDara.current-3} and ${i < orderDara.current+3} and ${i == orderDara.current}" href="javascript:void(0);" th:text="${i}">#</a>-->
 <!--                &lt;!&ndash;//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击&ndash;&gt;-->
 <!--                <a th:if="${i > orderDara.current-3} and ${i < orderDara.current+3} and ${i != orderDara.current}"-->
-<!--                   th:href="@{'/members/membersList/'+${i}(findName=${findName})}" th:text="${i}"-->
-<!--                   style="color: #337ab7;background-color: #fff;border-color: #fff;">#</a>&lt;!&ndash;//限制显示页数的条数  4到6个页数&ndash;&gt;-->
+<!--                   th:href="@{'/order-data/select?pageNum='+${i}}" th:text="${i}">#</a>&lt;!&ndash;//限制显示页数的条数  4到6个页数&ndash;&gt;-->
 <!--            </li>-->
-<!--            <li><a th:href="@{'/members/membersList/'+${orderDara.current+1}(findName=${findName})}">下一页</a></li>&lt;!&ndash;//请求页数+1&ndash;&gt;-->
-<!--            <li><a th:href="@{'/members/membersList/'+${orderDara.pages}}">尾页</a></li>&lt;!&ndash;//跳转至第orderDara.current页&ndash;&gt;-->
-<!--            <li class="numpage" style="display: inline-block;" th:text="'共'+${orderDara.pages}+'页'"></li>-->
-<!--        </ul>-->
-
-<!--        <ul class="pagination" th:if="${orderDara.current > 1} and ${orderDara.pages > 1}">&lt;!&ndash;//显示上一页&ndash;&gt;-->
-<!--            <li><a th:href="@{'/members/membersList/'+1(findName=${findName})}">首页</a></li>&lt;!&ndash;//跳转至第一页&ndash;&gt;-->
-<!--            <li><a th:href="@{'/members/membersList/'+${orderDara.current-1}(findName=${findName})}">上一页</a></li>&lt;!&ndash;//请求页数-1&ndash;&gt;-->
-<!--            <li class="active" th:each="i:${#numbers.sequence(1,orderDara.pages)}">-->
-<!--                &lt;!&ndash;//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数&ndash;&gt;-->
-<!--                <a th:if="${i > orderDara.current-3} and ${i < orderDara.current+3} and ${i == orderDara.current}" href="javascript:void(0);" th:text="${i}">#</a>-->
-<!--                &lt;!&ndash;//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击&ndash;&gt;-->
-<!--                <a th:if="${i > orderDara.current-3} and ${i < orderDara.current+3} and ${i != orderDara.current}"-->
-<!--                   th:href="@{'/members/membersList/'+${i}(findName=${findName})}" th:text="${i}"-->
-<!--                   style="color: #337ab7;background-color: #fff;border-color: #fff;">#</a>&lt;!&ndash;//限制显示页数的条数  4到6个页数&ndash;&gt;-->
-<!--            </li>-->
-<!--            <li th:if="${orderDara.current != orderDara.pages}"><a-->
-<!--                    th:href="@{'/members/membersList/'+${orderDara.current+1}(findName=${findName})}">下一页</a></li>&lt;!&ndash;//请求页数+1&ndash;&gt;-->
-<!--            <li><a th:href="@{'/members/membersList/'+${orderDara.pages}(findName=${findName})}">尾页</a></li>&lt;!&ndash;//跳转至第ordeData.current页&ndash;&gt;-->
-<!--            <li class="numpage" style="display: inline-block;" th:text="'共'+${ordeData.pages}+'页'"></li>-->
+<!--            <li><a th:href="@{'/order-data/select?pageNum='+${orderDara.current+1}}">下一页</a></li>-->
+<!--            <li id="last"><a th:href="@{'/order-data/select?pageNum='+${orderDara.pages}}">尾页</a></li>&lt;!&ndash;//跳转至第orderDara.current页&ndash;&gt;-->
+<!--            <li><a href="" th:text="'共'+${orderDara.pages}+'页'"></a></li>-->
 <!--        </ul>-->
 <!--    </div>-->
+
+<!--    &lt;!&ndash;    &lt;!&ndash;搜索分页&ndash;&gt;&ndash;&gt;-->
+<!--    <div class="paging" th:if="${orderDara.pages > 0} and ${zt!=null} or ${data!=null}">-->
+<!--        <ul class="pagination" id="pagination1" th:if="${orderDara.current == 1} and ${orderDara.pages> 1}">-->
+<!--            &lt;!&ndash;//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页&ndash;&gt;-->
+<!--            <li id="first"><a th:href="@{'/order-data/select?pageNum=1'}">首页</a></li>-->
+<!--            <li><a th:href="@{'/order-data/select?pageNum='+${orderDara.current-1}+'&zt='+${zt}+'&data='${data}">上一页</a></li>-->
+<!--            <li  th:each="i:${#numbers.sequence(1,orderDara.pages)}">-->
+<!--                &lt;!&ndash;//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数&ndash;&gt;-->
+<!--                <a class="active" th:if="${i > orderDara.current-3} and ${i < orderDara.current+3} and ${i == orderDara.current}" href="javascript:void(0);" th:text="${i}">#</a>-->
+<!--                &lt;!&ndash;//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击&ndash;&gt;-->
+<!--                <a th:if="${i > orderDara.current-3} and ${i < orderDara.current+3} and ${i != orderDara.current}"-->
+<!--                   th:href="@{'/order-data/select?pageNum='+${i}+'&zt='+${zt}+'&data='${data}}" th:text="${i}">#</a>&lt;!&ndash;//限制显示页数的条数  4到6个页数&ndash;&gt;-->
+<!--            </li>-->
+<!--            <li><a th:href="@{'/order-data/select?pageNum='+${orderDara.current+1}+'&zt='+${zt}+'&data='${data}}">下一页</a></li>-->
+<!--            <li id="last"><a th:href="@{'/order-data/select?pageNum='+${orderDara.pages}+'&zt='+${zt}+'&data='${data}}">尾页</a></li>&lt;!&ndash;//跳转至第orderDara.current页&ndash;&gt;-->
+<!--            <li><a href="" th:text="'共'+${orderDara.pages}+'页'"></a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
     <div th:include="common :: commonFoot"></div>
     <div th:include="common :: commonBackTop"></div>
 
