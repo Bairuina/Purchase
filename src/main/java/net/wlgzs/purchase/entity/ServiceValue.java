@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -60,7 +61,7 @@ public class ServiceValue implements Serializable {
     /**
      * 服务价格
      */
-    private String fwjg;
+    private BigDecimal fwjg;
 
     /**
      * 服务编号
@@ -73,5 +74,7 @@ public class ServiceValue implements Serializable {
      */
     @TableField("RN")
     private String RN;
+
+
 
 }
