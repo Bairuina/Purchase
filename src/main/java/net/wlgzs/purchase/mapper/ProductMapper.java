@@ -56,7 +56,7 @@ public interface ProductMapper extends BaseMapper<Product> {
      * 根据型号xhbh获取商品
      */
     @Select("SELECT * FROM `product` where xhbh=#{xhbh}")
-    public Product findProductByXxbh(String xhbh);
+    public Product findProductByXhbh(String xhbh);
 
     /**
      * 根据品目编号pmbh获取商品编号xhbh

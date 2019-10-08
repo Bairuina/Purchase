@@ -1,3 +1,6 @@
+a{
+    color: #444;
+}
 .mainPartTitle{
     height: 100%;
     padding-bottom: 12px;
@@ -65,7 +68,6 @@
     cursor: pointer;
     font-size: 14px;
     width: 100px;
-    height: 15px;
     padding: 10px;
     line-height: 15px;
     display: inline-block;
@@ -239,6 +241,7 @@
     border-radius: 2px;
     border: none;
     outline-style: none;
+    background-color: #F9F9F9;
 }
 .product{
     display: inline-block;
@@ -252,7 +255,6 @@
 }
 .submitProduct{
     display: inline-block;
-    background-color: #F52F3E;
     /* padding: 6px; */
     width: 56px;
     height: 29px;
@@ -262,8 +264,15 @@
     font-size: 14px;
     cursor: pointer;
 }
-.submitProduct>a{
+.submitProduct>input{
+    outline-style: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: #F52F3E;
+    cursor: pointer;
     color: white;
+    /*background-color: ;*/
 }
 .submitProduct:hover{
     opacity:0.8;
@@ -302,20 +311,21 @@
     top: 74%;
     width: 130px;
     height: 31px;
-    background-color: cadetblue;
+    background-color: #0984E0;
     text-align: center;
     border-radius: 3px;
     line-height: 31px;
-    color: white;
     cursor: pointer;
     transition: all 2s;
 }
+
 .offer:hover p{
     opacity:0.8;
     margin-left: 15px
 }
 .offer p{
     transition: all 0.5s;
+    color: white;
 }
 .offer img{
     transition: all 0.5s;
@@ -323,4 +333,34 @@
 .offer:hover img{
     margin-left: 15px;
 }
-/*类目*/
+/*分页*/
+.paging{
+    padding: 20px;
+    text-align: center;
+}
+
+.pagination>li{
+    list-style-type: none;
+    display: inline;
+    cursor: pointer;
+}
+.pagination>li>a:hover{
+    background-color: #337ab7;
+    color: white;
+}
+.pagination>li>a{
+    font-size: 13px;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+#first{
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+#last{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
