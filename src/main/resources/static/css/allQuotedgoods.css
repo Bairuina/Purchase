@@ -43,8 +43,29 @@
 }
 
 .two{
-    opacity:0;
+   display: none;
 }
 .three{
-    opacity: 0;
+    display: none;
+}
+.revocation{
+    left: 85%;
+}
+.productDetails,.revocation{
+    position: absolute;
+    top: 74%;
+    width: 130px;
+    height: 31px;
+    background-color: cadetblue;
+    text-align: center;
+    border-radius: 3px;
+    line-height: 31px;
+    color: white;
+    cursor: pointer;
+}
+.productDetails{
+    left: 75%;
+}
+.state>p>span:nth-child(2){
+    color: #FF0000;
 }

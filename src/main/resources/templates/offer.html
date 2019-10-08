@@ -6,9 +6,7 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/niftymodals.css}" />
 
-    <!--[if IE]>
-    <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
     <link rel="stylesheet" type="text/csstatics" th:href="@{static/css/htmleaf-demo.css}">
     <link rel="stylesheet" th:href="@{/static/css/demo.css}">
     <link rel="stylesheet" th:href="@{/static/css/same.css}">
@@ -19,20 +17,57 @@
 </head>
 <body>
 <div class="contain">
-    <!--顶部-->
-    <div class="header">
+    <!-- 顶部 -->
+    <div th:fragment="commonTop">
+        <div class="top_nav">
+            <div class="top">
+                您好，欢迎访问河南省政府采购网上电商！
+                <button id="btn">登录</button>
+            </div>
 
+            <!-- <div id="mask"></div>
+            <div class="login" id="login">
+                <div class="title" id="title">登录账号      <a href="#" class="close">X</a>
+                </div>
+                <div class="content">
+                    <div class="user">
+                        <input type="text" class="pt" placeholder="手机/邮箱/用户名" value="" name="">
+                    </div>
+                    <div class="password">
+                        <input type="password" class="pt" placeholder="请输入密码" value="" name="">
+                    </div>
+                    <div class="submit">
+                        <input type="button" class="sm" value="登陆">
+                    </div>
+                </div>
+            </div> -->
+        </div>
     </div>
-    <!--顶部logo-->
-    <div class="wrap">
+    <!-- 头部 -->
+    <div th:fragment="commonHead">
+        <div class="head_nav">
+            <div class="head">
+                <div class="logo">
+                    <a href="">
+                        <img th:src="@{/static/img/logo.png}" alt="">
+                    </a>
+                </div>
+                <div class="search">
+                    <form action="">
+                        <input class="search-con" type="text" placeholder="输入关键字，搜索相关信息">
+                        <input class="search-sub" type="submit" value="搜 索">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    </div>
     <div class="box">
         <div class="mainPart">
             <!--报价内容-->
             <div class="offerContent">
                 <div class="offerTitle" >
-                    <p>报价内容:</p>
+                    <h3 style="color: #103A86;">报价内容:</h3>
                 </div>
                 <div class="addition">
                     <div class="parts md-trigger" data-modal="modal-1">
@@ -41,7 +76,7 @@
                     <div class="serve md-trigger" data-modal="modal-2">
                         <p>增值服务</p>
                     </div>
-                    <div class="view md-trigger" data-modal="modal-3">
+                    <div class="view">
                         <p>查看所有已报价商品</p>
                     </div>
                 </div>
@@ -78,13 +113,11 @@
                         <div style="height: 100%;">
                             <div class="offerFormLabel">商品参数:</div>
                             <div class="offerInputblock" style="vertical-align: text-top;">
-                                <a>
-                                    <p th:each="parameters:${parametersList}">
+                                    <p th:each="parameters:${parametersList}" class="parameter">
                                         <span th:text="${parameters.cssm}"></span>
                                         <span>：</span>
                                         <span th:text="${parameters.csz}"></span>
                                     </p>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -113,6 +146,9 @@
 <!--配件报价模态框-->
     <div class="md-container md-effect-1" id="modal-1">
         <div class="md-content">
+            <div class="md-contentTitle" style="padding: 4px 0px 4px;">
+                <p>配件报价:</p>
+            </div>
             <table >
                     <thead>
                     <tr>
@@ -196,6 +232,9 @@
     <!--增值服务-->
     <div class="md-container md-effect-2" id="modal-2">
         <div class="md-content">
+            <div class="md-contentTitle" style="padding: 4px 0px 4px;">
+                <p>增值服务报价:</p>
+            </div>
             <table >
                 <thead>
                 <tr>
@@ -277,26 +316,23 @@
 
         </div>
     </div>
-    <!--超看所有报价商品-->
-    <div class="md-container md-effect-3" id="modal-3">
-        <div class="md-content">
-            <h3>Modal Dialog</h3>
-            <div>
-                <p>This is a modal window. You can do the following things with it:</p>
-                <ul>
-                    <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-                    <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-                    <li><strong>Close:</strong> click on the button below to close the modal.</li>
-                </ul>
-                <button class="md-close">Close me!</button>
-            </div>
-        </div>
-    </div>
+
     <div class="md-overlay"></div>
 </div>
-<!--底部-->
-<div class="footer">
-
+<!-- 底部 -->
+<div th:fragment="commonFoot">
+    <div class="foot_nav">
+        <div class="foot">
+            <img th:src="@{/static/img/logo.png}" alt="">
+            <p>版权所有 ©2019 河南省政府采购网上电商</p>
+        </div>
+    </div>
+</div>
+<!-- 返回顶部 -->
+<div th:fragment="commonFoot">
+    <div class="BackTop">
+        <img class="footer" id="BackTop" th:src="@{/static/img/BackTop.png}" alt="">
+    </div>
 </div>
 </body>
 <script th:src="@{/static/js/jquery.min.js}"></script>
@@ -340,12 +376,7 @@
 
     });
 </script>
-<!-- for the blur effect -->
-<!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
-<script>
-    // this is important for IEs
-    var polyfilter_scriptpath = '/lib/js/';
-</script>
+
 
 <script th:src="@{/static/js/cssParser.js}"></script>
 <script th:src="@{/static/js/css-filters-polyfill.js}"></script>
