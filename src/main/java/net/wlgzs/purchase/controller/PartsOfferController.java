@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import net.wlgzs.purchase.base.BaseController;
 
@@ -44,4 +45,6 @@ public class PartsOfferController extends BaseController {
     public Result PartsOffer(String pjbh,String xhbh,int price,String text){
         return iPartsOfferService.offerPart(pjbh, xhbh, price, text);
     }
+
+
 }

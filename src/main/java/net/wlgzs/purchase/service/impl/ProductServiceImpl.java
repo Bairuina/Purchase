@@ -6,9 +6,7 @@ import net.wlgzs.purchase.entity.Parameters;
 import net.wlgzs.purchase.entity.Parts;
 import net.wlgzs.purchase.entity.Product;
 import net.wlgzs.purchase.entity.ServiceValue;
-import net.wlgzs.purchase.mapper.PartsMapper;
-import net.wlgzs.purchase.mapper.ProductMapper;
-import net.wlgzs.purchase.mapper.ServiceValueMapper;
+import net.wlgzs.purchase.mapper.*;
 import net.wlgzs.purchase.service.IProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import net.wlgzs.purchase.util.Result;
@@ -23,6 +21,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -42,6 +41,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private PartsMapper partsMapper;
     @Resource
     private ServiceValueMapper serviceValueMapper;
+    @Resource
+    private PartsOfferMapper partsOfferMapper;
+    @Resource
+    private ServiceOfferMapper serviceOfferMapper;
 
     @Override
     public ModelAndView findallProduct(HttpServletRequest request, String lbbh, String pmbh, String ppbh, String nr){
@@ -141,10 +144,29 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         queryWrapper.eq("xhbh",xhbh);
         Product product=baseMapper.selectOne(queryWrapper);
         List<Parts> partsList=partsMapper.findPartsByPmbh(product.getPmbh());
-        List<ServiceValue> serviceValueList=serviceValueMapper.findServiceValueByPmbh(product.getPmbh());
+
         modelAndView.addObject("product",product);
-        modelAndView.addObject("partsList",partsList);
-        modelAndView.addObject("serviceValueList",serviceValueList);
+        List<Parts> pjlist=new ArrayList<>();
+        for (Parts parts:partsList){
+            Parts parts1=new Parts();
+            parts1.setPJMC(parts.getPJMC());
+            parts1.setPrice(partsOfferMapper.findPartOffersPriceByXhbhPjbh(xhbh,parts.getPJBH()));
+            parts1.setPJBH(parts.getPJBH());
+            pjlist.add(parts1);
+        }
+        modelAndView.addObject("partsList",pjlist);                        //返回所有配件及其曾经报价
+
+        List<ServiceValue> serviceValueList=serviceValueMapper.findServiceValueByPmbh(product.getPmbh());
+        List<ServiceValue> fulist=new ArrayList<>();
+        for (ServiceValue serviceValue:serviceValueList){
+            ServiceValue serviceValue1=new ServiceValue();
+            serviceValue1.setFwjg(serviceOfferMapper.findServiceOfferByFubhXhbh(serviceValue.getFWBH(),xhbh));
+            serviceValue1.setFWBH(serviceValue.getFWBH());
+            serviceValue1.setFwmc(serviceValue.getFwmc());
+            fulist.add(serviceValue1);
+        }
+
+        modelAndView.addObject("serviceValueList",fulist);                   //返回全部服务及其报价
         String json=product.getParametersList();
         List<Parameters> parametersList= JSON.parseArray(json,Parameters.class);
         modelAndView.addObject("parametersList",parametersList);
