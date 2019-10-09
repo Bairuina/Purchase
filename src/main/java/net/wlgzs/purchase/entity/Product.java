@@ -7,6 +7,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -91,5 +92,15 @@ public class Product implements Serializable {
      */
     @TableField("parametersList")
     private String parametersList;
+
+    /**
+     * 商品报价
+     */
+    private BigDecimal price;
+
+    /**
+     * 商品审核价格
+     */
+    private BigDecimal shjg;
 
 }
