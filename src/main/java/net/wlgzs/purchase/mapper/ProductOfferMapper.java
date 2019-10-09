@@ -24,4 +24,10 @@ public interface ProductOfferMapper extends BaseMapper<ProductOffer> {
     @Select("SELECT * FROM product_offer WHERE xhbh=#{xhbh}")
     public List<ProductOffer> findProductOfferByXhbh(String xhbh);
 
+    /**
+     * 根据传入状态获取该状态的所有报价
+     */
+    @Select("SELECT * FROM product_offer WHERE zt=#{zt}")
+    public List<ProductOffer> findProductOffersByZt(String zt);
+
 }

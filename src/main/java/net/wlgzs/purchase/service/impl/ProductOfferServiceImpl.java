@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,7 +44,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
     @Resource
     private PartsOfferMapper partsOfferMapper;
 
-
+    //报价一个商品
     @Override
     public Result productOffer(String xhbh, BigDecimal price, String text){
         String url=readProperties.getUrl();
@@ -122,6 +123,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         return new Result(ResultCode.FAIL,"异常，报价失败");
     }
 
+    //撤销报价
     @Override
     public Result delProductOfferXhbh(String xhbh){
         //获取基本信息
@@ -151,5 +153,76 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
             return new Result(ResultCode.FAIL,"没有审核记录");
         }
         return new Result(ResultCode.FAIL,"撤销失败");
+    }
+
+    //查看所有已报价
+
+    @Override
+    public ModelAndView findAllOffer(){
+        List<ProductOffer> productOfferList1= baseMapper.findProductOffersByZt("1");
+        List<ProductOffer> productOfferList2= baseMapper.findProductOffersByZt("2");
+        List<ProductOffer> productOfferList3= baseMapper.findProductOffersByZt("3");
+        List<Product> productList1=new ArrayList<>();
+        for (ProductOffer productOffer:productOfferList1){
+            Product product=productMapper.findProductByXhbh(productOffer.getXhbh());
+            product.setPrice(productOffer.getPrice());
+            product.setZt("1");
+            productList1.add(product);
+        }
+        List<Product> productList2=new ArrayList<>();
+        for (ProductOffer productOffer:productOfferList2){
+            Product product=productMapper.findProductByXhbh(productOffer.getXhbh());
+            product.setPrice(productOffer.getPrice());
+            product.setZt("2");
+            productList2.add(product);
+        }
+        List<Product> productList3=new ArrayList<>();
+        for (ProductOffer productOffer:productOfferList3){
+            Product product=productMapper.findProductByXhbh(productOffer.getXhbh());
+            product.setPrice(productOffer.getPrice());
+            product.setShjg(productOffer.getShjg());
+            product.setZt("3");
+            productList3.add(product);
+        }
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("productList1",productList1);
+        modelAndView.addObject("productList2",productList2);
+        modelAndView.addObject("productList3",productList3);
+        System.out.println(productList1+"--------------");
+        System.out.println(productList2+"--------------");
+        System.out.println(productList3+"--------------");
+        modelAndView.setViewName("");
+        return modelAndView;
+    }
+
+    //商品上下架
+    @Override
+    public Result changeProductOfferZt(String xhbh,String zt,String text){
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+        //拼接Json
+        String json="{\"username\":\""+username+"\"," +
+                "\"pwd\":\""+enPwd1+"\"," +
+                "\"xhbh\":\""+xhbh+"\"," +
+                "\"zt\":\""+zt+"\"," +
+                "\"xjyy\": \""+text+"\"}";
+        System.out.println(json);
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getExecSpDown(),json);
+        System.out.println(jsonObject);
+        ProductOffer productOffer=baseMapper.findProductOfferByXhbh(xhbh).get(0);
+        if (jsonObject.getString("resultMessage").equals("商品下架成功")){
+            productOffer.setZt("2");
+            if(baseMapper.updateById(productOffer)>0){
+                return new Result(ResultCode.SUCCESS,"商品下架成功");
+            }
+        }else if(jsonObject.getString("resultMessage").equals("商品上架成功")){
+            productOffer.setZt("1");
+            if(baseMapper.updateById(productOffer)>0){
+                return new Result(ResultCode.SUCCESS,"商品上架成功");
+            }
+        }
+        return new Result(ResultCode.FAIL,"失败");
     }
 }

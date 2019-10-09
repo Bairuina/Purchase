@@ -28,13 +28,15 @@
                         <option  th:if="${zt=='3'}" th:value="${zt}">待验收</option>
                         <option  th:if="${zt=='4'}" th:value="${zt}">拒绝</option>
                         <option  th:if="${zt=='5'}" th:value="${zt}">已验收</option>
-                        <option  th:if="${zt!='2'}" value="2">待确定</option>
+                        <option  th:if="${zt!='2'
+
+                        }" value="2">待确定</option>
                         <option  th:if="${zt!='3'}" value="3">待验收</option>
                         <option  th:if="${zt!='4'}" value="4">拒绝</option>
                         <option  th:if="${zt!='5'}" value="5">已验收</option>
                         <option  th:if="${zt!=null}">全部状态</option>
                     </select>
-                    <input name="data" class="search-con" type="text" placeholder="输入关键字，搜索相关信息" style="width: 62%;float: left">
+                    <input name="data" class="search-con" type="text" placeholder="输入关键字，搜索相关信息" th:value="${data}" style="width: 62%;float: left">
                     <input class="search-sub" type="submit" value="搜 索">
                 </form>
             </div>
@@ -46,18 +48,11 @@
             <div class="order_list_left">
 
                 <ul>
-<!--                    <li th:if="${zt==null}" ><a th:href="@{/lectDataOrder}">我的订单</a></li>-->
-<!--                    <li th:if="${zt!=null and zt==}" style="background-color: #DF0024;"><a th:href="@{/lectDataOrder}">我的订单</a></li>-->
 
-
-<!--                    <li ><a >待确定订单</a></li>-->
-<!--                    <li ><a >待确定订单</a></li>-->
-<!--                    <li ><a >待确定订单</a></li>-->
-<!--                    <li ><a >待确定订单</a></li>-->
                     <li th:if="${zt!=null}" ><a th:href="@{'/order-data/select/'}" >全部订单</a></li>
                     <li th:if="${zt==null}" style="background-color: #DF0024;"><a th:href="@{'/order-data/select/'}">全部订单</a></li>
 
-                    <li th:if="${zt==null || zt!='2'}" ><a th:href="@{'/order-data/select/?zt=2'}" >待确定订单</a></li>
+                    <li th:if="${zt==null || zt!='2'}" ><a              th:href="@{'/order-data/select/?zt=2'}" >待确定订单</a></li>
                     <li th:if="${zt!=null and zt=='2'}" style="background-color: #DF0024;"><a th:href="@{'/order-data/select/?zt=2'}">待确定订单</a></li>
 
 
@@ -142,7 +137,7 @@
 
                         </div>
                     </div>
-                        <div th:if="${orderDara==null}">
+                        <div th:if="${orderDara.data==null || orderDara.data.size()==0}">
                         暂无订单信息
                          </div>
                 </div>
