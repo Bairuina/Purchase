@@ -1,8 +1,4 @@
-// $('.select').on('click',function(){
-//    $(this).next().slideToggle() ;
-//    var selectText = $(this).children().find(span).text();
-//    // console.log(selectText);
-// });
+
 //提交ajax请求
 $('.confirm').click(function () {
 
@@ -23,8 +19,10 @@ $('.confirm').click(function () {
       success:function (data) {
          if(data.code==0){
             alert(data.msg);
+            window.location.reload();
          }else{
             alert(data.msg)
+            window.location.reload();
          }
       }
    });
@@ -61,48 +59,58 @@ $('.submitPrice').on('click',function () {
          if (data.code==0){
             alert(data.msg);
             $(this).prev().prev().prev().children().text('accessoriesText');
+            window.location.reload();
          }else{
             alert(data.msg);
+            window.location.reload();
          }
       }
    })
 
 });
 
-// //增值服务报价
-// $(".addServe").on('click',function () {
-//    //原价格
-//    var originAddName = $(this).prev().prev().prev().children().text();
-//    console.log(originAddName);
-//    //价格
-//    var addText = $(this).prev().prev().children().val();
-//    console.log(addText);
-//    //备注
-//    var addTextarea = $(this).prev().children().val();
-//    console.log(addTextarea);
-//    //配件编号
-//    var accessoriesNumber = $('.accessoriesnumber').data("accessories");
-//    //商品编号
-//    var number = $(".commodityNumber").data("number");
-//    console.log(number);
-//    console.log(accessoriesNumber);
-//    $.ajax({
-//       url:"/service-offer/Offer",
-//       data:{
-//          pjbh:accessoriesNumber,
-//          xhbh:number,
-//          price:accessoriesText,
-//          text:accessoriesTextarea,
-//       },
-//       type:"PUT",
-//       success:function (data) {
-//          if (data.code==0){
-//             alert(data.msg);
-//             $(this).prev().prev().prev().children().text('accessoriesText');
-//          }else{
-//             alert(data.msg);
-//          }
-//       }
-//    })
-//
-// });
+//增值服务报价
+$(".addServe").on('click',function () {
+   //原价格
+   var originAddName = $(this).prev().prev().prev().children().text();
+   console.log("增值服务原价格"+originAddName);
+
+   //增值服务编号
+   var serialNumber = $(this).data('addnumber');
+   console.log("增值服务编号"+serialNumber);
+   //商品编号
+   var number = $(".commodityNumber").data("number");
+   console.log(number);
+   //价格
+   var addText = $(this).prev().prev().children().val();
+   console.log(addText);
+   //备注
+   var addTextarea = $(this).prev().children().val();
+   console.log(addTextarea);
+
+   $.ajax({
+      url:"/service-offer/Offer",
+      data:{
+         //增值服务编号
+         fubh:serialNumber,
+         //增值服务价格
+         fujg:addText,
+         //商品编号
+         xhbh:number,
+         //备注
+         Text:addTextarea,
+      },
+      type:"PUT",
+      success:function (data) {
+         if (data.code==0){
+            alert(data.msg);
+            $(this).prev().prev().prev().children().text('originAddName');
+            window.location.reload();
+         }else{
+            alert(data.msg);
+            window.location.reload();
+         }
+      }
+   })
+
+});
