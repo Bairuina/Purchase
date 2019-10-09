@@ -53,7 +53,7 @@
                     <li><span th:text="${allData.data[4]}"></span></li>
                     <li><span th:text="${allData.data[5]}"></span></li>
                     <li><span th:text="${allData.data[0].shdd}"></span></li>
-                    <li><span th:text="${allData.data[0].ddbh}"></span></li>
+                    <li ><span id="ddbh" th:text="${allData.data[0].ddbh}"></span></li>
                     <li><span th:text="${allData.data[0].cgrmc}"></span></li>
                     <li><span th:text="${allData.data[0].xflxrxm}"></span></li>
                     <li><span th:text="${allData.data[0].xfdh}"></span></li>
@@ -61,10 +61,10 @@
                     <li><span th:text="${allData.data[0].ddze}"></span><span>元</span></li>
                     <li><span th:text="${allData.data[0].cjrq}"></span></li>
                     <li >
-                        <span th:if="${allData.data[0].zt=='2'}">供应商待确认</span>
-                        <span th:if="${allData.data[0].zt=='3'}">待验收</span>
-                        <span th:if="${allData.data[0].zt=='4'}">订单已取消</span>
-                        <span th:if="${allData.data[0].zt=='5'}">验收通过</span>
+                        <span class="orderZtData" th:if="${allData.data[0].zt=='2'}">供应商待确认</span>
+                        <span class="orderZtData" th:if="${allData.data[0].zt=='3'}">待验收</span>
+                        <span class="orderZtData" th:if="${allData.data[0].zt=='4'}">订单已取消</span>
+                        <span class="orderZtData" th:if="${allData.data[0].zt=='5'}">验收通过</span>
                     </li>
                     <li>
                         <span th:if="${allData.data[0].zffs=='70080001'}">现金</span>
@@ -176,8 +176,10 @@
                 </div>
             </div>
             <div class="order_submit">
+                <button class="lookContract">查看合同</button>
                 <button class="yes_order">确定订单</button>
                 <button class="no_order">拒绝订单</button>
+                <button class="checkInvoice">查看发票</button>
             </div>
 
         </div>

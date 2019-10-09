@@ -9,12 +9,12 @@
     cursor: pointer;
 }
 .pagination>li>.active{
-    background-color: #337ab7;
+    background-color: #0984e0;
     color: white;
 }
 
 .pagination>li>a:hover{
-    background-color: #337ab7;
+    background-color: #0984e0;
     color: white;
 }
 .pagination>li>a{

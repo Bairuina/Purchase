@@ -1,6 +1,7 @@
 $(".yes_order").on('click', function () {
     var orderReference = $(".ddbh").text();
     var orderStatus = $(".ddzt span").text();
+    console.log(orderReference);
     console.log(orderStatus);
     var inform = "您确定要接受订单号为" + orderReference + "的订单？";
     var r = confirm(inform);
@@ -26,6 +27,7 @@ $(".yes_order").on('click', function () {
         location.reload(true);
     }
 });
+
 $(".no_order").on('click', function () {
     var orderReference = $(".ddbh").text();
     var orderStatus = $(".ddzt span").text();
