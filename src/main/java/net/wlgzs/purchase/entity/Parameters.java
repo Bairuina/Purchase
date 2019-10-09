@@ -21,6 +21,4 @@ public class Parameters {
     private String cssm;   //键
 
     private String csz;    //值
-
-
 }
