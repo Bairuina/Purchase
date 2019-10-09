@@ -160,7 +160,7 @@
             </div>
                 <table >
                     <thead>
-                        <tr>
+                        <tr class="accessoriesTitle">
                             <th>配件名称:</th>
                             <th>原价格</th>
                             <th>报价</th>
@@ -170,12 +170,12 @@
                     </thead>
                     <tbody>
                     <tr th:each="parts:${partsList}">
-                        <td th:text="${parts.PJMC}" th:data-accessories="${parts.PJBH}">配件名字</td>
+                        <td th:text="${parts.PJMC}" th:data-accessories="${parts.PJBH}" class="accessoriesnumber">配件名字</td>
                         <td>
                             <p>50</p>
                         </td>
                         <td>
-                            <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput accessoriesText" style="width: 145px;">
+                            <input type="text" name="title" autocomplete="off"  class="offerInput accessoriesText" placeholder="价格" style="width: 82px;">
                         </td>
                         <td>
                             <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea accessoriesTextarea" style="height: 50px;
@@ -212,13 +212,13 @@
                         <p>50</p>
                     </td>
                     <td>
-                        <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
+                        <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput addInput" style="width: 145px;">
                     </td>
                     <td>
-                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea addTextarea" style="height: 50px;
     line-height: 40px;width: 230px;"></textarea>
                     </td>
-                    <td>
+                    <td class="addServe">
                         <p>提交报价</p>
                     </td>
                 </tr>
