@@ -29,3 +29,10 @@ $('.confirm').click(function () {
       }
    });
 });
+
+//配件报价
+$('.submitPrice').on('click',function () {
+    var accessoriesText = $(this).pre().prev().children().val();
+    console.log($(this).prev().prev().children());
+
+});

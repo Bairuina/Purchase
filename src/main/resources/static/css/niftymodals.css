@@ -87,8 +87,9 @@ perspective effects (not including the modals and the overlay).
   font-weight: 300;
   font-size: 1.15em;
 }
-.md-contentTitle table>thred>tr>th{
+.md-contentTitle table>thead>tr>th{
   min-width: 90px;
+  width: 90px;
 }
 .md-content > div p {
   margin: 0;

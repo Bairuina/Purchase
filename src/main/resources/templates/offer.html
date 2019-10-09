@@ -97,7 +97,7 @@
                             <div class="offerFormLabel">商品曾报价:</div>
                             <div class="offerInputblock">
                                 <a>
-                                    <p>123456789</p>
+                                    <p th:text="${product.price}"></p>
                                 </a>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
             <div class="md-contentTitle" style="padding: 4px 0px 4px;">
                 <p>配件报价:</p>
             </div>
-            <table >
+                <table >
                     <thead>
                         <tr>
                             <th>配件名称:</th>
@@ -169,159 +169,22 @@
                         </tr>
                     </thead>
                     <tbody>
-<<<<<<< HEAD
-                        <tr>
-                            <td>TanmayTanmay</td>
-                            <td>500</td>
-                            <td>
-                                <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
-                            </td>
-                            <td>
-                                <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
-        line-height: 40px;width: 230px;"></textarea>
-                            </td>
-                            <td>
-                                <p>提交报价</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>TanmayTanmay</td>
-                            <td>500</td>
-                            <td>
-                                <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
-                            </td>
-                            <td>
-                                <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
-        line-height: 40px;width: 230px;"></textarea>
-                            </td>
-                            <td>
-                                <p>提交报价</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>TanmayTanmay</td>
-                            <td>500</td>
-                            <td>
-                                <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
-                            </td>
-                            <td>
-                                <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
-        line-height: 40px;width: 230px;"></textarea>
-                            </td>
-                            <td>
-                                <p>提交报价</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>TanmayTanmay</td>
-                            <td>500</td>
-                            <td>
-                                <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
-                            </td>
-                            <td>
-                                <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
-        line-height: 40px;width: 230px;"></textarea>
-                            </td>
-                            <td>
-                                <p>提交报价</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>TanmayTanmay</td>
-                            <td>500</td>
-                            <td>
-                                <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
-                            </td>
-                            <td>
-                                <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
-        line-height: 40px;width: 230px;"></textarea>
-                            </td>
-                            <td>
-                                <p>提交报价</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>TanmayTanmay</td>
-                            <td>500</td>
-                            <td>
-                                <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
-                            </td>
-                            <td>
-                                <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
-        line-height: 40px;width: 230px;"></textarea>
-                            </td>
-                            <td>
-                                <p>提交报价</p>
-                            </td>
-                        </tr>
-=======
                     <tr th:each="parts:${partsList}">
-                        <td th:text="${parts.PJMC}"></td>
+                        <td th:text="${parts.PJMC}" th:data-accessories="${parts.PJBH}">配件名字</td>
                         <td>
-                            <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
+                            <p>50</p>
                         </td>
                         <td>
-                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput accessoriesText" style="width: 145px;">
+                        </td>
+                        <td>
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea accessoriesTextarea" style="height: 50px;
     line-height: 40px;width: 230px;"></textarea>
                         </td>
-                        <td>
+                        <td class="submitPrice">
                             <p>提交报价</p>
                         </td>
                     </tr>
-                    <!--<tr>-->
-                        <!--<td>TanmayTanmayTanmayTanmayTanmay</td>-->
-                        <!--<td>-->
-                            <!--<input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;-->
-    <!--line-height: 40px;width: 230px;"></textarea>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<p>提交报价</p>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td>TanmayTanmayTanmayTanmayTanmay</td>-->
-                        <!--<td>-->
-                            <!--<input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;-->
-    <!--line-height: 40px;width: 230px;"></textarea>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<p>提交报价</p>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td>TanmayTanmayTanmayTanmayTanmay</td>-->
-                        <!--<td>-->
-                            <!--<input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;-->
-    <!--line-height: 40px;width: 230px;"></textarea>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<p>提交报价</p>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td>TanmayTanmayTanmayTanmayTanmay</td>-->
-                        <!--<td>-->
-                            <!--<input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;-->
-    <!--line-height: 40px;width: 230px;"></textarea>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<p>提交报价</p>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-
->>>>>>> 4264fa4dd85b47f6cbcc89c6f9df2f0aacbb2fcf
                     </tbody>
                 </table>
         </div>
@@ -335,29 +198,21 @@
             <table >
                 <thead>
                 <tr>
-<<<<<<< HEAD
                     <th>增值服务名称:</th>
-                    <th>原报价</th>
+                    <th>增值服务原报价</th>
                     <th>增值服务报价</th>
-=======
-                    <th>增值服务内容:</th>
-                    <th>增值服务价格</th>
->>>>>>> 4264fa4dd85b47f6cbcc89c6f9df2f0aacbb2fcf
-                    <th>备注</th>
+                    <th>增值服务内容</th>
                     <th>修改</th>
                 </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD
-                <tr>
-                    <td>TanmayTanmay</td>
-                    <td>5000</td>
-=======
                 <tr th:each="service:${serviceValueList}">
-                    <td th:text="${service.fwmc}"></td>
->>>>>>> 4264fa4dd85b47f6cbcc89c6f9df2f0aacbb2fcf
+                    <td th:text="${service.fwmc}" >增值服务名字</td>
                     <td>
-                        <input type="text" name="title" autocomplete="off" placeholder="请输入价格" class="offerInput" style="width: 145px;">
+                        <p>50</p>
+                    </td>
+                    <td>
+                        <input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">
                     </td>
                     <td>
                             <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
@@ -367,118 +222,6 @@
                         <p>提交报价</p>
                     </td>
                 </tr>
-<<<<<<< HEAD
-                <tr>
-                    <td>TanmayTanmay</td>
-                    <td>5000</td>
-                    <td>
-                        <input type="text" name="title" autocomplete="off" placeholder="请输入价格" class="offerInput" style="width: 145px;">
-                    </td>
-                    <td>
-                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
-    line-height: 40px;width: 230px;"></textarea>
-                    </td>
-                    <td>
-                        <p>提交报价</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>TanmayTanmay</td>
-                    <td>5000</td>
-                    <td>
-                        <input type="text" name="title" autocomplete="off" placeholder="请输入价格" class="offerInput" style="width: 145px;">
-                    </td>
-                    <td>
-                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
-    line-height: 40px;width: 230px;"></textarea>
-                    </td>
-                    <td>
-                        <p>提交报价</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>TanmayTanmay</td>
-                    <td>5000</td>
-                    <td>
-                        <input type="text" name="title" autocomplete="off" placeholder="请输入价格" class="offerInput" style="width: 145px;">
-                    </td>
-                    <td>
-                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
-    line-height: 40px;width: 230px;"></textarea>
-                    </td>
-                    <td>
-                        <p>提交报价</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>TanmayTanmay</td>
-                    <td>5000</td>
-                    <td>
-                        <input type="text" name="title" autocomplete="off" placeholder="请输入价格" class="offerInput" style="width: 145px;">
-                    </td>
-                    <td>
-                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;
-    line-height: 40px;width: 230px;"></textarea>
-                    </td>
-                    <td>
-                        <p>提交报价</p>
-                    </td>
-                </tr>
-=======
-                <!--<tr>-->
-                    <!--<td>TanmayTanmayTanmayTanmayTanmay</td>-->
-                    <!--<td>-->
-                        <!--<input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">-->
-                    <!--</td>-->
-                    <!--<td>-->
-                            <!--<textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;-->
-    <!--line-height: 40px;width: 230px;"></textarea>-->
-                    <!--</td>-->
-                    <!--<td>-->
-                        <!--<p>提交报价</p>-->
-                    <!--</td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td>TanmayTanmayTanmayTanmayTanmay</td>-->
-                    <!--<td>-->
-                        <!--<input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">-->
-                    <!--</td>-->
-                    <!--<td>-->
-                            <!--<textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;-->
-    <!--line-height: 40px;width: 230px;"></textarea>-->
-                    <!--</td>-->
-                    <!--<td>-->
-                        <!--<p>提交报价</p>-->
-                    <!--</td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td>TanmayTanmayTanmayTanmayTanmay</td>-->
-                    <!--<td>-->
-                        <!--<input type="text" name="title" autocomplete="off" placeholder="请输入配件价格" class="offerInput" style="width: 145px;">-->
-                    <!--</td>-->
-                    <!--<td>-->
-                            <!--<textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea" style="height: 50px;-->
-    <!--line-height: 40px;width: 230px;"></textarea>-->
-                    <!--</td>-->
-                    <!--<td>-->
-                        <!--<p>提交报价</p>-->
-                    <!--</td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td>TanmayTanmayTanmayTanmayTanmay</td>-->
-                    <!--<td>-->
-                        <!--<input type="text" name="title" autocomplete="off" placeholder="请输入服务价格" class="offerInput" style="width: 145px;">-->
-                    <!--</td>-->
-                    <!--<td>-->
-                            <!--<textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" style="height: 50px;-->
-    <!--line-height: 40px;width: 230px;"></textarea>-->
-                    <!--</td>-->
-                    <!--<td>-->
-                        <!--<p>提交报价</p>-->
-                    <!--</td>-->
-                <!--</tr>-->
->>>>>>> 4264fa4dd85b47f6cbcc89c6f9df2f0aacbb2fcf
-
                 </tbody>
             </table>
 
