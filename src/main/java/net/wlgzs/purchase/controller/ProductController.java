@@ -72,7 +72,7 @@ public class ProductController extends BaseController {
     @Autowired
     private ReadProperties readProperties;
 
-    private String xhbh="07ef4565964948a9a45292b2241a0563";
+    private String xhbh="30d541a4217c47a2a4bfb8ef96f8b744";
 
 
 
@@ -452,4 +452,13 @@ public class ProductController extends BaseController {
     public ModelAndView getProductByXhbh(@PathVariable("xhbh")String xhbh){
         return productService.getProductByXhbh(xhbh);
     }
+
+
+    /**
+     * 获取审核商品信息 查看是否审核成功
+     * @param xhbh 商品编号
+     *
+     */
+//    @Test
+//    public void
 }
