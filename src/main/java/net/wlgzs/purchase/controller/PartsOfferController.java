@@ -37,7 +37,7 @@ public class PartsOfferController extends BaseController {
     @ApiOperation(value = "配件报价(单个配件)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pjbh",value = "配件编号"),
-            @ApiImplicitParam(name = "xhbh",value = "商品名称"),
+            @ApiImplicitParam(name = "xhbh",value = "商品编号"),
             @ApiImplicitParam(name = "price",value = "配件价格"),
             @ApiImplicitParam(name = "text",value = "备注")
     })
