@@ -195,6 +195,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         return modelAndView;
     }
 
+    //商品上下架
     @Override
     public Result changeProductOfferZt(String xhbh,String zt,String text){
         String url=readProperties.getUrl();
