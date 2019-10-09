@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import net.wlgzs.purchase.base.BaseController;
 
@@ -36,7 +37,7 @@ public class PartsOfferController extends BaseController {
     @ApiOperation(value = "配件报价(单个配件)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pjbh",value = "配件编号"),
-            @ApiImplicitParam(name = "xhbh",value = "商品名称"),
+            @ApiImplicitParam(name = "xhbh",value = "商品编号"),
             @ApiImplicitParam(name = "price",value = "配件价格"),
             @ApiImplicitParam(name = "text",value = "备注")
     })
@@ -44,4 +45,6 @@ public class PartsOfferController extends BaseController {
     public Result PartsOffer(String pjbh,String xhbh,int price,String text){
         return iPartsOfferService.offerPart(pjbh, xhbh, price, text);
     }
+
+
 }

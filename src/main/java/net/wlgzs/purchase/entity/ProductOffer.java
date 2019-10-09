@@ -40,6 +40,22 @@ public class ProductOffer implements Serializable {
      */
     private String zt;
 
+    /**
+     *
+     * 审核中的价格
+     */
+    private BigDecimal shjg;
+
+    public BigDecimal getShjg() {
+        return shjg;
+    }
+
+    public void setShjg(BigDecimal shjg) {
+        this.shjg = shjg;
+    }
+
+
+
     public Integer getProductOfferId() {
         return productOfferId;
     }

@@ -24,4 +24,10 @@ public interface PartsOfferMapper extends BaseMapper<PartsOffer> {
     @Select("SELECT offer_price FROM parts_offer where xhbh=#{xhbh}")
     public List<BigDecimal> findPartsPriceByXhbh(String xhbh);
 
+    /**
+     * 根据商品ID 和配件Id 获取配件报价
+     */
+    @Select("SELECT offer_price FROM parts_offer where xhbh=#{xhbh} and pjbh=#{pjbh}")
+    public BigDecimal findPartOffersPriceByXhbhPjbh(String xhbh,String pjbh);
+
 }

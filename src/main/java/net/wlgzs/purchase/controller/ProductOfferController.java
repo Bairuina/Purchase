@@ -1,16 +1,17 @@
 package net.wlgzs.purchase.controller;
 
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.RequestMapping;
+import net.wlgzs.purchase.util.Result;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.websocket.server.PathParam;
 import java.math.BigDecimal;
 
 /**
@@ -38,8 +39,26 @@ public class ProductOfferController extends BaseController {
             @ApiImplicitParam(name = "price",value = "商品价格"),
             @ApiImplicitParam(name = "text",value = "备注")
     })
-    public ModelAndView productOffer(String xhbh, BigDecimal price, String text){
+    public Result productOffer(String xhbh, BigDecimal price, String text){
         return iProductOfferService.productOffer(xhbh,price,text);
     }
 
+    @RequestMapping(value = "/offer",method = RequestMethod.DELETE)
+    @ApiOperation(value = "撤销报价根据xhbh",httpMethod = "DELETE")
+    @ApiImplicitParam(name = "xhbh",value = "报价商品编号")
+    public Result delProductOfferByXhbh(@RequestParam(value = "xhbh",required = true) String xhbh){
+        return iProductOfferService.delProductOfferXhbh(xhbh);
+    }
+
+    @RequestMapping(value = "/offer/all",method = RequestMethod.GET)
+    @ApiOperation(value = "查看已报价商品",httpMethod = "GET")
+    public ModelAndView findAllOffer(){
+        return iProductOfferService.findAllOffer();
+    }
+
+    @RequestMapping(value = "/offer/{xhbh}/{zt}/{text}",method = RequestMethod.GET)
+    @ApiOperation(value = "修改报价过商品的状态",httpMethod = "GET")
+    public Result changeProductOfferZt(@PathVariable("xhbh") String xhbh,@PathVariable("zt")String zt,@PathVariable("text")String text){
+        return iProductOfferService.changeProductOfferZt(xhbh,zt,text);
+    }
 }
