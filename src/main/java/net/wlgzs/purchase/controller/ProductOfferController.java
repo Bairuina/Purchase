@@ -6,14 +6,12 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import net.wlgzs.purchase.util.Result;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.websocket.server.PathParam;
 import java.math.BigDecimal;
 
 /**
@@ -52,4 +50,15 @@ public class ProductOfferController extends BaseController {
         return iProductOfferService.delProductOfferXhbh(xhbh);
     }
 
+    @RequestMapping(value = "/offer/all",method = RequestMethod.GET)
+    @ApiOperation(value = "查看已报价商品",httpMethod = "GET")
+    public ModelAndView findAllOffer(){
+        return iProductOfferService.findAllOffer();
+    }
+
+    @RequestMapping(value = "/offer/{xhbh}/{zt}/{text}",method = RequestMethod.GET)
+    @ApiOperation(value = "修改报价过商品的状态",httpMethod = "GET")
+    public Result changeProductOfferZt(@PathVariable("xhbh") String xhbh,@PathVariable("zt")String zt,@PathVariable("text")String text){
+        return iProductOfferService.changeProductOfferZt(xhbh,zt,text);
+    }
 }
