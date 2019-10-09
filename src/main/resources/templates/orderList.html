@@ -49,7 +49,7 @@
                 <ul>
                     <li th:if="${zt!=null}" style="border-left: 10px solid #0984E0;"><a style="transform: translateX(-10px);"class="excursion" th:href="@{'/order-data/select/'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--1" fill="#fff"></use></svg>全部订单</a></li>
                     <li th:if="${zt==null}" style="border-left: 10px solid #0984E0;"><a style="transform: translateX(-10px);" class="excursion" th:href="@{'/order-data/select/'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--1" fill="#fff"></use></svg>全部订单</a></li>
-                    <li th:if="${zt==null || zt!='2'}"><a class="excursion" th:href="@{'/order-data/select/?zt=2'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--3" fill="#fff"></use></svg>待确定订单</a></li>
+                    <li th:if="${zt==null || zt!='2'}"><a  class="excursion" th:href="@{'/order-data/select/?zt=2'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--3" fill="#fff"></use></svg>待确定订单</a></li>
                     <li th:if="${zt!=null and zt=='2'}"><a class="excursion" th:href="@{'/order-data/select/?zt=2'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--3" fill="#fff"></use></svg>待确定订单</a></li>
                     <li th:if="${zt==null || zt!='3'}"><a class="accept excursion" th:href="@{'/order-data/select/?zt=3'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--2" fill="#fff"></use></svg>接受订单</a></li>
                     <li th:if="${zt!=null and zt=='3'}"><a class="accept excursion" th:href="@{'/order-data/select/?zt=3'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--2" fill="#fff"></use></svg>接受订单</a></li>
