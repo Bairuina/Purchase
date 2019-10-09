@@ -2,6 +2,7 @@ package net.wlgzs.purchase.controller;
 
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import net.wlgzs.purchase.service.IRedis;
 import net.wlgzs.purchase.util.ReadProperties;
@@ -61,14 +62,14 @@ public class OrderDataController extends BaseController {
     }
 
     @ApiOperation("确认或取消订单")
-    @RequestMapping("/ensureORefuseOrder")
+    @PutMapping("/ensureORefuseOrder")
     @ResponseBody
     public Result ensureORefuseOrder(@Param("ddbh") String ddbh, @Param("qrzt")int qrzt){
         return iOrderService.ensureORefuseOrder(ddbh,qrzt);
     }
 
-    @ApiOperation("确认或取消订单")
-    @RequestMapping("/deletEnsureOrder")
+    @ApiOperation("确认或取消订单(已经确定的订单)")
+    @PutMapping("/deletEnsureOrder")
     @ResponseBody
     public Result deletEnsureOrder(@Param("ddbh") String ddbh, @Param("qxyy")String qxyy){
         return iOrderService.deletEnsureOrder(ddbh,qxyy);
@@ -135,7 +136,15 @@ public class OrderDataController extends BaseController {
         modelAndView.addObject("zt",zt);
         modelAndView.addObject("data",data);
         modelAndView.setViewName("orderList");
+        System.out.println(modelAndView);
         return modelAndView;
+    }
+
+    @ApiOperation("物流消息推送")
+    @PutMapping("/transportDataSubmit")
+    public Result transportDataSubmit(String ddbh,int sfcd,String fczddbh,String kdgs,String kddh,String ms,BigInteger kdsj){
+        return iOrderService.ensureOrderArrive(ddbh,sfcd,fczddbh,kdgs,kddh,ms,kdsj);
+
     }
 
 }
