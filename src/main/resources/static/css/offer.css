@@ -5,18 +5,19 @@ select,textarea,input{
     outline-style: none;
     border:none;
 }
-input:focus{
-    box-shadow: 0 0 3px #a0a0a0;
-    border:none;
-}
-select:focus{
-    box-shadow: 0 0 3px #a0a0a0;
-    border:none;
-}
-textarea:focus{
-    box-shadow: 0 0 3px #a0a0a0;
-    border:none;
-}
+
+/*input:focus{*/
+/*    box-shadow: 0 0 3px #a0a0a0;*/
+/*    border:none;*/
+/*}*/
+/*select:focus{*/
+/*    box-shadow: 0 0 3px #a0a0a0;*/
+/*    border:none;*/
+/*}*/
+/*textarea:focus{*/
+/*    box-shadow: 0 0 3px #a0a0a0;*/
+/*    border:none;*/
+/*}*/
 .contain{
     height: 100%;
     min-width: 1200px;
@@ -26,7 +27,7 @@ textarea:focus{
     font-weight: 600;
     padding-top: 5px;
 }
-.offerTitle>p:before{
+.offerTitle>h3:before{
     border-left: 2px solid #5f79a2;
     padding-right: 8px;
     content: '';
@@ -46,12 +47,11 @@ textarea:focus{
     display: inline-block;
 }
 .offerFormLabel{
-    width: 123px;
+    width: 95px;
     font-weight: 400;
     line-height: 20px;
     /* padding-right: 46px; */
     text-align: left;
-    padding-left: 106px;
 }
 .offerInput{
     height: 35px;
@@ -146,6 +146,9 @@ textarea:focus{
     -moz-appearance: none;
     -webkit-appearance: none;
 }
+.offerForm{
+    padding: 25px 36px 25px 36px;
+}
 .offerFormLabelLeft{
     float: left;
     /* position: relative; */
@@ -227,5 +230,20 @@ input[type='checkbox']{
     background-color: forestgreen;
 }
 .parameter{
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+}
+.commodityNumber{
+    color: #103A86;;
+}
+.paramaters{
+    float: left;
+    width: 9%;
+}
+.paramatersDetails{
+    vertical-align: text-top;
+    float: left;
+    width: 90%;
+}
+.paramatersDetails>p>span{
+    line-height: 27px;
 }
