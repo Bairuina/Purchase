@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>订单列表页</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet"  th:href="@{/css/orderList.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/paging.css}">
-    <link rel="stylesheet" th:href="@{/css/logistics.css}">
     <link rel="stylesheet" th:href="@{/css/iconfont.css}">
-    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 
 <body>
@@ -117,7 +118,7 @@
                                         <span th:if="${ordeData.zt=='4'}">订单已取消</span>
                                         <span th:if="${ordeData.zt=='5'}">验收通过</span>
                                     </div>
-                                    <div class="logisticsDetail" style="">查看物流详情</div>
+                                    <div data-toggle="modal" data-target="#myModal" style="cursor: pointer;">查看物流详情</div>
 
                                 </li>
                             </ul>
@@ -131,115 +132,54 @@
             </div>
         </div>
     </div>
-
-    <div class="logisticsContainer">
-        <div class="logisticsContent">
-            <div class="logisticsTitle">
-                <p>物流详情</p>
-                <p class="logisticsImg">
-                    <img th:src="@{/img/error-2.png}">
-                </p>
-                <div style="clear: both;"></div>
-            </div>
-
-            <div class="LogisticsAddress">
-                <!--<ul>-->
-                <!--<li>-->
-                <!--<div class="circle">-->
-
-                <!--</div>-->
-                <!--<div class="ymd">-->
-                <!--<p>年月日</p>-->
-                <!--</div>-->
-                <!--<div class="week">-->
-                <!--<p>周</p>-->
-                <!--</div>-->
-                <!--<div class="time">-->
-                <!--<p>-->
-                <!--时分秒-->
-                <!--<span>地址</span>-->
-                <!--</p>-->
-                <!--<p>-->
-                <!--时分秒-->
-                <!--<span>地址</span>-->
-                <!--</p>-->
-                <!--<p>-->
-                <!--时分秒-->
-                <!--<span>地址</span>-->
-                <!--</p>-->
-                <!--</div>-->
-
-
-                <!--</li>-->
-                <!--<li>-->
-                <!--<div class="circle">-->
-
-                <!--</div>-->
-                <!--<div class="ymd">-->
-                <!--<p>年月日</p>-->
-                <!--</div>-->
-                <!--<div class="week">-->
-                <!--<p>周</p>-->
-                <!--</div>-->
-                <!--<div class="time">-->
-                <!--<p>-->
-                <!--时分秒-->
-                <!--<span>地址</span>-->
-                <!--</p>-->
-                <!--<p>-->
-                <!--时分秒-->
-                <!--<span>地址</span>-->
-                <!--</p>-->
-                <!--<p>-->
-                <!--时分秒-->
-                <!--<span>地址</span>-->
-                <!--</p>-->
-                <!--</div>-->
-                <!--<div style="clear: both;"></div>-->
-
-
-                <!--</li>-->
-                <!--</ul>-->
-
-                <div class="timeline-small">
-                    <div class="timeline-small-body">
-                        <ul>
-                            <li>
-                                <div class="bullet pink"></div>
-                                <div class="date">XXXX年XX月XX日</div>
-                                <div class="desc">
-                                    <h4>时分秒</h4>
-                                    <h4>内容段落2内容段落2内容段落2内容段落2</h4>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="bullet pink"></div>
-                                <div class="date">XXXX年XX月XX日</div>
-                                <div class="desc">
-                                    <h4>时分秒</h4>
-                                    <h4>内容段落2内容段落2内容段落2内容段落2</h4>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="bullet pink"></div>
-                                <div class="date">XXXX年XX月XX日</div>
-                                <div class="desc">
-                                    <h4>时分秒</h4>
-                                    <h4>内容段落2内容段落2内容段落2内容段落2</h4>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="bullet pink"></div>
-                                <div class="date">XXXX年XX月XX日</div>
-                                <div class="desc">
-                                    <h4>时分秒</h4>
-                                    <h4>内容段落2内容段落2内容段落2内容段落2</h4>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
                 </div>
-
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped" id="mytable">
+                        <thead>
+                        <tr>
+                            <td style="text-align: center">时间</td>
+                            <td style="text-align: center">地点</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>2019-09-28</td>
+                            <td>【大连市】快件已从大连市场部发出，准备发往大连</td>
+                        </tr>
+                        <tr>
+                            <td>2019-09-29</td>
+                            <td>【北京市】快件已从北京发出，准备发往新乡中转</td>
+                        </tr>
+                        <tr>
+                            <td>2019-10-02</td>
+                            <td>【新乡市】快件已从新乡中转发出，准备发往新乡</td>
+                        </tr>
+                        <tr>
+                            <td>2019-10-02</td>
+                            <td>【新乡市】快件已到达新乡</td>
+                        </tr>
+                        <tr>
+                            <td>2019-10-03</td>
+                            <td>货物已签收</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" id="add"><i class="fa fa-plus"></i> 添加新的表格行</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-success">
+                        提交更改
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -298,8 +238,14 @@
 
 </body>
 <script th:src="@{/js/websocket.js}"></script>
-<script th:src="@{/js/index.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/login.js}" type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/BackTop.js}" type="text/javascript" charset="utf-8"></script>
 <script rel="script" th:src="@{/js/logistics.js}"></script>
 <script th:src="@{/js/iconfont.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstable.js}"></script>
+<script type="text/javascript">
+    $('#mytable').SetEditable({
+        $addButton: $('#add')
+    });
+</script>
 </html>

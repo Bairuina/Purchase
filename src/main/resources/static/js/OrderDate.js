@@ -54,3 +54,43 @@ $(".no_order").on('click', function () {
     else {
     }
 });
+
+
+$(".lookContract").on('click', function () {
+    var orderReference = $(".ddbh").text();
+    console.log(orderReference);
+    $.ajax({
+        type: "get",
+        url: "/contract/queryContract",
+        data: {
+            'ddbh': orderReference,
+        },
+        contentType:"application/json",
+        dataType:"json",
+        success: function (data) {
+            location.href="data";
+        },
+        error: function (msg) {
+            alert("查看合同失败！");
+        }
+    })
+});
+$(".checkInvoice").on('click', function () {
+    var orderReference = $(".ddbh").text();
+    console.log(orderReference);
+    $.ajax({
+        type: "put",
+        url: "/order-data/invoiceEndTimeSubmit",
+        data: {
+            'ddbh': orderReference,
+        },
+        contentType:"application/json",
+        dataType:"json",
+        success: function (data) {
+            alert("开具发票成功！");
+        },
+        error: function (msg) {
+            alert("开具发票失败！");
+        }
+    })
+});

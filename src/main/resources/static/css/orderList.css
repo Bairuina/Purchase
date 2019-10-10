@@ -2,11 +2,15 @@
     margin: 0;
     padding: 0;
 }
+a:link {text-decoration: none;
+    color: #333;}
+a:visited {text-decoration: none;
+    color: #333;}
+a:hover {ctext-decoration: none;
+    color: #333;}
+a:active {text-decoration: none;
+    color: #333;}
 
-a {
-    text-decoration: none;
-    color: #000;
-}
 
 li {
     list-style: none;
@@ -24,6 +28,9 @@ li {
     background-color: #fff;
     box-sizing: border-box;
 }
+.order_list_left ul{
+    margin: 0px;
+}
 
 .order_list_left li {
     list-style: none;
@@ -35,6 +42,7 @@ li {
     letter-spacing: 5px;
     border-left: 0px solid #0984E0;
     outline: 1px solid #ccc;
+    box-sizing: content-box;
 }
 .order_list_left li:hover a.excursion{
     transform: translateX(-10px);
