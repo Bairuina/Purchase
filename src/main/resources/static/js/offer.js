@@ -1,4 +1,3 @@
-
 //提交ajax请求
 $('.confirm').click(function () {
    var number = $(".commodityNumber").data("number");
@@ -122,10 +121,17 @@ $(".addServe").on('click',function () {
    var addTextarea = $(this).prev().children().val();
    console.log(addTextarea);
    var aa = /(^[\-0-9][0-9]*(.[0-9]+)?)$/;
-   var serveprice = $(this).prev().find("span").text();
-   var serveText = $(this).prev().prev().find("span").text();
-   if(serveprice!=''&&serveText!=''){
-      if(aa.test(serveprice)){
+   //提示
+   var serveprice = $(this).prev().prev().find("span").text();
+   var serveText = $(this).prev().find("span").text();
+
+
+   if(addText!=''&&addTextarea!=''){
+      //备注提示清空
+      $(this).prev().find('span').text('');
+      //价格提示清空
+      $(this).prev().prev().find('span').text('');
+      if(aa.test(addText)){
          $.ajax({
             url:"/service-offer/Offer",
             data:{
@@ -155,9 +161,9 @@ $(".addServe").on('click',function () {
       }
    }else if(serveprice==''){
       $(this).prev().prev().find("span").text("无价格");
-   }else if(serveText==''){
+   }else if(addTextarea==''){
       $(this).prev().find("span").text("无备注");
+   }else if(addText==''){
+      $(this).prev().prev().find("span").text("无价格");
    }
-
-
 });
