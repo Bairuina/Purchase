@@ -83,7 +83,7 @@
                             <div class="kindListDetail">
                                 <ul>
                                     <li th:each="lbbhlist:${lbbhlist}">
-                                        <a class="list" th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0'}">
+                                        <a class="list" th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/'+${pagenumber}}">
                                             <p th:text="${lbbhlist.lbmc}" th:data-listnumber="${lbbhlist.lbbh}">类名</p>
                                         </a>
                                     </li>
@@ -106,7 +106,7 @@
                             <div class="itemsListDetail">
                                 <ul>
                                     <li th:each="pmbhlist:${pmbhlist}">
-                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0'}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0'+${pagenumber}}">
                                             <p th:text="${pmbhlist.pmmc}" th:data-itemsnumber="${pmbhlist.pmbh}" class="namesOfParts">品目</p>
                                         </a>
                                     </li>
@@ -129,7 +129,7 @@
                             <div class="itemsListDetail">
                                 <ul>
                                     <li th:each="ppbhlist:${ppbhlist}">
-                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}+'/'+${pagenumber}}">
                                             <p th:text="${ppbhlist.ppmc}" th:data-branknumber="${ppbhlist.ppbh}" class="brankName">品牌</p>
                                         </a>
                                     </li>
@@ -141,7 +141,7 @@
 
                 <!--搜索框-->
                 <div class="inputProduct">
-                    <form th:action="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}}"  type="GET">
+                    <form th:action="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'++${pagenumber}}"  type="GET">
                         <input type="search" id="productSearch" placeholder="请输入商品信息" name="nr">
                     </form>
                     <div class="submitProduct">

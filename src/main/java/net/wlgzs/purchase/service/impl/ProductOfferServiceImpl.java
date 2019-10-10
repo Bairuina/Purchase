@@ -13,10 +13,7 @@ import net.wlgzs.purchase.mapper.ProductMapper;
 import net.wlgzs.purchase.mapper.ProductOfferMapper;
 import net.wlgzs.purchase.service.IProductOfferService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import net.wlgzs.purchase.util.ClientUtil;
-import net.wlgzs.purchase.util.ReadProperties;
-import net.wlgzs.purchase.util.Result;
-import net.wlgzs.purchase.util.ResultCode;
+import net.wlgzs.purchase.util.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -158,7 +155,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
     //查看所有已报价
 
     @Override
-    public ModelAndView findAllOffer(){
+    public ModelAndView findAllOffer(int nowPage1,int nowPage2,int nowPage3){
         List<ProductOffer> productOfferList1= baseMapper.findProductOffersByZt("1");
         List<ProductOffer> productOfferList2= baseMapper.findProductOffersByZt("2");
         List<ProductOffer> productOfferList3= baseMapper.findProductOffersByZt("3");
@@ -185,13 +182,27 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
             productList3.add(product);
         }
         ModelAndView modelAndView=new ModelAndView();
+        Page<Product> page=new Page<Product>();
+        page.setLength(5);
+        page.setDate(productList1);
+        page.setSize();
+        productList1=page.getDateByYs(nowPage1);
+        modelAndView.addObject("length1",page.getSize());  //返回上架总页数
+        page.setDate(productList2);
+        page.setSize();
+        productList2=page.getDateByYs(nowPage2);
+        modelAndView.addObject("length2",page.getSize());  //返回下架总页数
+        page.setDate(productList3);
+        page.setSize();
+        productList3=page.getDateByYs(nowPage3);
+        modelAndView.addObject("length3",page.getSize());  //返回待审核总页数
         modelAndView.addObject("productList1",productList1);
         modelAndView.addObject("productList2",productList2);
         modelAndView.addObject("productList3",productList3);
-        System.out.println(productList1+"--------------");
-        System.out.println(productList2+"--------------");
-        System.out.println(productList3+"--------------");
         modelAndView.setViewName("Allquotedgoods");
+        modelAndView.addObject("nowPage1",nowPage1);    //上架当前页
+        modelAndView.addObject("nowPage2",nowPage2);    //下架当前页
+        modelAndView.addObject("nowPage3",nowPage3);    //待审核当前页
         return modelAndView;
     }
 

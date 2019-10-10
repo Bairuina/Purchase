@@ -72,7 +72,7 @@ public class ProductController extends BaseController {
     @Autowired
     private ReadProperties readProperties;
 
-    private String xhbh="07ef4565964948a9a45292b2241a0563";
+    private String xhbh="30d541a4217c47a2a4bfb8ef96f8b744";
 
 
 
@@ -421,13 +421,19 @@ public class ProductController extends BaseController {
      * @param lbbh 类别编号
      * @param pmbh 品目编号
      * @param ppbh 品牌编号
+     * @param nowPage 当前页
      * @param  nr  搜索内容
      */
-    @RequestMapping(value = "/{lbbh}/{pmbh}/{ppbh}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{lbbh}/{pmbh}/{ppbh}/{page}",method = RequestMethod.GET)
     @ApiOperation(value = "多条件查询",httpMethod = "GET")
     @ApiImplicitParam(name = "nr",dataType = "内容")
-    public ModelAndView findallProduct(HttpServletRequest request, @PathVariable("lbbh") String lbbh, @PathVariable("pmbh") String pmbh, @PathVariable("ppbh") String ppbh, @RequestParam(name = "nr",defaultValue = "0")String nr){
-        return productService.findallProduct(request,lbbh,pmbh,ppbh,nr);
+    public ModelAndView findallProduct(HttpServletRequest request,
+                                       @PathVariable("lbbh") String lbbh,
+                                       @PathVariable("pmbh") String pmbh,
+                                       @PathVariable("ppbh") String ppbh,
+                                       @RequestParam(name = "nr",defaultValue = "0")String nr,
+                                       @PathVariable("page") int nowPage){
+        return productService.findallProduct(request,lbbh,pmbh,ppbh,nr,nowPage);
     }
 
     /**
@@ -452,4 +458,13 @@ public class ProductController extends BaseController {
     public ModelAndView getProductByXhbh(@PathVariable("xhbh")String xhbh){
         return productService.getProductByXhbh(xhbh);
     }
+
+
+    /**
+     * 获取审核商品信息 查看是否审核成功
+     * @param xhbh 商品编号
+     *
+     */
+//    @Test
+//    public void
 }

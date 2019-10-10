@@ -50,10 +50,12 @@ public class ProductOfferController extends BaseController {
         return iProductOfferService.delProductOfferXhbh(xhbh);
     }
 
-    @RequestMapping(value = "/offer/all",method = RequestMethod.GET)
+    @RequestMapping(value = "/offer/all/{nowPage1}/{nowPage2}/{nowPage3}",method = RequestMethod.GET)
     @ApiOperation(value = "查看已报价商品",httpMethod = "GET")
-    public ModelAndView findAllOffer(){
-        return iProductOfferService.findAllOffer();
+    public ModelAndView findAllOffer(@PathVariable("nowPage1")int nowPage1,
+                                     @PathVariable("nowPage2")int nowPage2,
+                                     @PathVariable("nowPage3")int nowPage3){
+        return iProductOfferService.findAllOffer(nowPage1,nowPage2,nowPage3);
     }
 
     @RequestMapping(value = "/offer/{xhbh}/{zt}/{text}",method = RequestMethod.GET)
