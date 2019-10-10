@@ -106,16 +106,19 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             page.setDate(productList);   //传入数据
             page.setLength(5);          //设置每页数量
             page.setSize();              //获取总页数
-            modelAndView.addObject("pagesize",page.getLength());
+            System.out.println(page.getSize());
+            modelAndView.addObject("pagesize",page.getSize());
             productList=page.getDateByYs(nowPage);          //获取该页数list
-            System.out.println(productList);
             modelAndView.addObject("pagenumber",nowPage);   //返回页码
             modelAndView.addObject("productList", productList);
             for (Product product:lbbhlist){
                 if (product.getLbbh().equals(lbbh)){
                     modelAndView.addObject("productlbbh",product);
+                    System.out.println(product);
+                    break;
                 }
             }
+
             for (Product product:pmbhlist){
                 if (product.getPmbh().equals(pmbh)){
                     modelAndView.addObject("productpmbh",product);

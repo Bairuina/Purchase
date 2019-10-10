@@ -83,7 +83,7 @@
                             <div class="kindListDetail">
                                 <ul>
                                     <li th:each="lbbhlist:${lbbhlist}">
-                                        <a class="list" th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/'+${pagenumber}}">
+                                        <a class="list" th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/1'}">
                                             <p th:text="${lbbhlist.lbmc}" th:data-listnumber="${lbbhlist.lbbh}">类名</p>
                                         </a>
                                     </li>
@@ -106,7 +106,7 @@
                             <div class="itemsListDetail">
                                 <ul>
                                     <li th:each="pmbhlist:${pmbhlist}">
-                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0'+${pagenumber}}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0/1'}">
                                             <p th:text="${pmbhlist.pmmc}" th:data-itemsnumber="${pmbhlist.pmbh}" class="namesOfParts">品目</p>
                                         </a>
                                     </li>
@@ -141,7 +141,7 @@
 
                 <!--搜索框-->
                 <div class="inputProduct">
-                    <form th:action="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'++${pagenumber}}"  type="GET">
+                    <form th:action="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/1'}"  type="GET">
                         <input type="search" id="productSearch" placeholder="请输入商品信息" name="nr">
                     </form>
                     <div class="submitProduct">
@@ -168,7 +168,7 @@
                             <div class="brandDetailRightContent">
                                 <ul>
                                     <li th:each="lbbhlist:${lbbhlist}">
-                                        <a th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0'}">
+                                        <a th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/1'}">
                                             <p th:text="${lbbhlist.lbmc}">类名</p>
                                         </a>
                                     </li>
@@ -198,7 +198,7 @@
                             <div class="brandDetailRightContent">
                                 <ul>
                                     <li th:each="pmbhlist:${pmbhlist}">
-                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0'}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0/1'}">
                                             <p th:text="${pmbhlist.pmmc}"></p>
                                         </a>
                                     </li>
@@ -228,7 +228,7 @@
                             <div class="brandDetailRightContent">
                                 <ul>
                                     <li th:each="ppbhlist:${ppbhlist}">
-                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}}">
+                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}+'/1'}">
                                             <p th:text="${ppbhlist.ppmc}" class="brankName"></p>
                                         </a>
                                     </li>
@@ -311,57 +311,23 @@
                 </div>
             </div>
         </div>
-        <!--    分页-->
-        <div class="paging">
-            <ul class="pagination" id="pagination1">
-                <li >
-                    <a id="first">
-                        首页
-                    </a>
+
+        <!-- 分页-->
+        <div class="paging" th:if="${pagesize > 0 and zt==null and data==null}">
+            <ul class="pagination" id="pagination1" th:if=" ${pagesize> 1}">
+                <!--//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页-->
+                <li id="first"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/1'}">首页</a></li>
+                <li th:if="${pagenumber>1}"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${pagenumber-1}}">上一页</a></li>
+                <li  th:each="i:${#numbers.sequence(1,pagesize)}">
+                    <!--//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数-->
+                    <a class="active" th:if="${i > pagenumber-3} and ${i <pagenumber+3} and ${i == pagenumber}" href="javascript:void(0);" th:text="${i}">#</a>
+                    <!--//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击-->
+                    <a th:if="${i > pagenumber -3} and ${i < pagenumber+3} and ${i != pagenumber}"
+                       th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${i}}" th:text="${i}">#</a><!--//限制显示页数的条数  4到6个页数-->
                 </li>
-                <li>
-                    <a>
-                        前一页
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        1
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        2
-                    </a>
-                </li>
-                <li>
-                    <a>
-                       3
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        4
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        5
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        6
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        后一页
-                    </a>
-                </li>
-                <li>
-                    <a id="last">最后一页</a>
-                </li>
+                <li th:if="${pagenumber<pagesize}"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${pagenumber+1}}">下一页</a></li>
+                <li id="last"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${pagesize}}">尾页</a></li><!--//跳转至第orderDara.current页-->
+                <li><a href="" th:text="'共'+${pagesize}+'页'"></a></li>
             </ul>
         </div>
     </div>

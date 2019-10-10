@@ -13,9 +13,8 @@ public class Page<T> {
 
     //总页数赋值
     public void setSize(){
-        int size= 1;
         int datelength=date.size();
-        this.size= datelength%size==0? datelength/size:datelength/size+1;
+        this.size= datelength%length==0? datelength/length:datelength/length+1;
     }
     //获取当前页的数据
     public List<T> getDateByYs(int ys){
