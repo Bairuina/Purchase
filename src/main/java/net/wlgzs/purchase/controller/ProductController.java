@@ -72,7 +72,7 @@ public class ProductController extends BaseController {
     @Autowired
     private ReadProperties readProperties;
 
-    private String xhbh="30d541a4217c47a2a4bfb8ef96f8b744";
+    private String xhbh="53f802aed6bc47938a328066f64ee66e";
 
 
 
@@ -407,7 +407,7 @@ public class ProductController extends BaseController {
                 "\"pwd\":\""+enPwd1+"\"," +
                 "\"xhbh\":\""+xhbh+"\"," +
                 "\"zt\":\"1\"," +
-                "\"xjyy\": \"商品没货需要上架\"}";
+                "\"xjyy\": \"河南飞鸾电子科技有限公司\"}";
         System.out.println(json);
         JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getExecSpDown(),json);
         System.out.println(jsonObject);
