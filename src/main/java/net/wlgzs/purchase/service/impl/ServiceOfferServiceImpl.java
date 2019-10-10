@@ -59,6 +59,7 @@ public class ServiceOfferServiceImpl extends ServiceImpl<ServiceOfferMapper, Ser
                 "\"fwjg\":\""+serviceOffer.getFujg()+"\"," +
                 "\"bjyy\":\""+Text+"\"," +
                 "\"zt\":\""+serviceValue.getZt()+"\"}";
+        System.out.println(json);
         JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getQuotedpriceFwByFwbh(),json);
         if(jsonObject.getString("resultMessage").equals("服务报价成功")){
             List<Integer> id=baseMapper.findIdByFubhXhbh(serviceOffer.getFubh(),serviceOffer.getXhbh());

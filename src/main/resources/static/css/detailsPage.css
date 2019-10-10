@@ -7,6 +7,9 @@ a{
 }
 .brand{
     height: 100%;
+
+    /* border: 1px solid #e4e4e4; */
+    border-bottom: 1px solid #d5d5d5;
 }
 .wrap{
     float: left;
@@ -137,10 +140,7 @@ a{
     justify-content:space-between;
     padding: 10px;
 }
-.brandRegion{
-    /*border: 1px solid #ededed;*/
-    border-bottom: 1px solid #ededed;
-}
+
 .brandDetail{
     padding: 10px 10px 10px 1px;
 }
@@ -333,17 +333,21 @@ a{
 .offer:hover img{
     margin-left: 15px;
 }
-/*分页*/
+    /*分页*/
 .paging{
     padding: 20px;
     text-align: center;
 }
 
 .pagination>li{
-    list-style-type: none;
     display: inline;
     cursor: pointer;
 }
+.pagination>li>.active{
+    background-color: #337ab7;
+    color: white;
+}
+
 .pagination>li>a:hover{
     background-color: #337ab7;
     color: white;
@@ -351,11 +355,11 @@ a{
 .pagination>li>a{
     font-size: 13px;
     padding: 6px 12px;
-    line-height: 1.42857143;
     color: #337ab7;
     background-color: #fff;
     border: 1px solid #ddd;
 }
+
 #first{
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
@@ -363,4 +367,14 @@ a{
 #last{
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
+}
+.pricing{
+    position: relative;
+}
+.pricing>span{
+    position: absolute;
+    left: 49%;
+    top: 37%;
+    font-size: 13px;
+    color: red;
 }

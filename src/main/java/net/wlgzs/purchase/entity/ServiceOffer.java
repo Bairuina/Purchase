@@ -38,6 +38,7 @@ public class ServiceOffer implements Serializable {
     /**
      * 商品Id
      */
+
     private String xhbh;
 
     public Integer getServiceOfferId() {
