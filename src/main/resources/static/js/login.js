@@ -11,7 +11,7 @@ function b() {
     //创建登录层div并插入body
     var login = document.createElement("div");
     login.id = "login";
-    login.innerHTML = '<div class="title" id="title">登录账号' + '<a href="#" class="close">X</a>' + '</div>' + '<div class="content">' + '<div class="user">' + '<input type="text" class="pt" placeholder="手机/邮箱/用户名" value="" name="">' + '</div>' + '<div class="password">' + '<input type="password" class="pt" placeholder="请输入密码" value="" name="">' + '</div>' + '<div class="submit">' + '<input type="button" class="sm" value="登陆">' + '</div>' + '</div>';
+    login.innerHTML = '<div class="title" id="title">登录账号' + '<a href="#" class="close">×</a>' + '</div>' + '<div class="content">' + '<div class="user">' + '<input type="text" class="pt" placeholder="手机/邮箱/用户名" value="" name="">' + '</div>' + '<div class="password">' + '<input type="password" class="pt" placeholder="请输入密码" value="" name="">' + '</div>' + '<div class="submit">' + '<input type="button" class="sm" value="登陆">' + '</div>' + '</div>';
     document.body.appendChild(login);
     //窗口可视区域宽度
     var cwidth = document.documentElement.clientWidth || document.body.clientWidth;

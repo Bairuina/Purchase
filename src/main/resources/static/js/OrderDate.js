@@ -94,3 +94,27 @@ $(".checkInvoice").on('click', function () {
         }
     })
 });
+
+
+//提交更改
+function update() {
+    //获取模态框数据
+    var ddbh = $('ddbh').text();
+    var skbz = $('#skbz').val();
+    console.log(skbz);
+    var skje = $('#skje').val();
+    var sksj = data();
+    $.ajax({
+        type: "",
+        url: "",
+        ddbh: ddbh,
+        skbz: skbz,
+        skje: skje,
+        sksj: sksj,
+        dataType: 'html',
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        success: function(result) {
+            location.reload();
+        }
+    });
+}
