@@ -5,19 +5,6 @@ select,textarea,input{
     outline-style: none;
     border:none;
 }
-
-/*input:focus{*/
-/*    box-shadow: 0 0 3px #a0a0a0;*/
-/*    border:none;*/
-/*}*/
-/*select:focus{*/
-/*    box-shadow: 0 0 3px #a0a0a0;*/
-/*    border:none;*/
-/*}*/
-/*textarea:focus{*/
-/*    box-shadow: 0 0 3px #a0a0a0;*/
-/*    border:none;*/
-/*}*/
 .contain{
     height: 100%;
     min-width: 1200px;
@@ -46,8 +33,13 @@ select,textarea,input{
 .offerInputblock{
     display: inline-block;
 }
+.offerInputblock>span{
+    padding-left: 15px;
+    font-size: 13px;
+    color: red;
+}
 .offerFormLabel{
-    width: 95px;
+    width: 110px;
     font-weight: 400;
     line-height: 20px;
     /* padding-right: 46px; */
@@ -223,11 +215,23 @@ input[type='checkbox']{
 .parts{
     background-color: #00B0F0;
 }
+.parts:hover{
+    opacity: 0.8;
+}
 .serve{
     background-color: #F52F3E;
 }
+.serve:hover{
+    opacity: 0.8;
+}
 .view{
     background-color: forestgreen;
+}
+.view:hover{
+    opacity: 0.8;
+}
+.view>a>p{
+    color: white;
 }
 .parameter{
     padding-bottom: 15px;
@@ -246,4 +250,14 @@ input[type='checkbox']{
 }
 .paramatersDetails>p>span{
     line-height: 27px;
+}
+.pricing{
+    position: relative;
+}
+.pricing>span{
+    position: absolute;
+    font-size: 13px;
+    color: red;
+    left: 50%;
+    top: 40%;
 }

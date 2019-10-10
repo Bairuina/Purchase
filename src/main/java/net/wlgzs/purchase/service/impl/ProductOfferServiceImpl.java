@@ -191,7 +191,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         System.out.println(productList1+"--------------");
         System.out.println(productList2+"--------------");
         System.out.println(productList3+"--------------");
-        modelAndView.setViewName("");
+        modelAndView.setViewName("Allquotedgoods");
         return modelAndView;
     }
 

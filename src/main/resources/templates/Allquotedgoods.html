@@ -7,10 +7,10 @@
     <link rel="stylesheet" th:href="@{/static/css/style.css}">
     <link rel="stylesheet" th:href="@{/static/css/same.css}">
     <link rel="stylesheet" th:href="@{/static/css/detailsPage.css}">
-    <link rel="stylesheet" th:href="@{/static/css/allQuotedgoods.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/normalize.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/htmleaf-demo.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/niftymodals.css}" />
+    <link rel="stylesheet" th:href="@{/static/css/allQuotedgoods.css}">
 </head>
 <body>
 <div class="contain">
@@ -21,23 +21,6 @@
                 您好，欢迎访问河南省政府采购网上电商！
                 <button id="btn">登录</button>
             </div>
-
-            <!-- <div id="mask"></div>
-            <div class="login" id="login">
-                <div class="title" id="title">登录账号      <a href="#" class="close">X</a>
-                </div>
-                <div class="content">
-                    <div class="user">
-                        <input type="text" class="pt" placeholder="手机/邮箱/用户名" value="" name="">
-                    </div>
-                    <div class="password">
-                        <input type="password" class="pt" placeholder="请输入密码" value="" name="">
-                    </div>
-                    <div class="submit">
-                        <input type="button" class="sm" value="登陆">
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
     <!-- 头部 -->
@@ -79,29 +62,24 @@
             <div class="commodityDetails">
                 <div class="commodityBox">
                     <div class="message one">
-                        <div class="messageDetail">
+                        <div class="messageDetailTitle">
+                            <p>待审核商品:</p>
+                        </div>
+                        <div class="messageDetail" th:each="product3:${productList3}">
                             <!--商品名称-->
-                            <h3>电脑</h3>
+                            <h3 th:text="${product3.xhmc }">电脑</h3>
                             <!--价格-->
                             <div class="items">
                                 <p>
                                     <span>报价:</span>
-                                    <span>5000</span>
+                                    <span th:text="${product3.price}">5000</span>
                                 </p>
-                                <!--<p>-->
-                                <!--<span>-->
-                                <!--品牌编号:-->
-                                <!--</span>-->
-                                <!--<span>-->
-                                <!--1234567894561234567894-->
-                                <!--</span>-->
-                                <!--</p>-->
                             </div>
                             <!--类别-->
                             <div class="items">
                                 <p>
                                     <span>类别名称:</span>
-                                    <span>电子类</span>
+                                    <span th:text="${product3.lbmc}">电子类</span>
                                 </p>
                             </div>
                             <!--品目-->
@@ -110,16 +88,10 @@
                             <span>
                                 品目名称:
                             </span>
-                                    <span>
+                                    <span th:text="${product3.pmmc}">
                                 电脑
                             </span>
                                 </p>
-                                <!--<p>-->
-                                    <!--<span>品目编号:</span>-->
-                                    <!--<span>-->
-                                <!--1234567894561234567894-->
-                            <!--</span>-->
-                                <!--</p>-->
                             </div>
                             <!--品牌-->
                             <div class="items">
@@ -127,29 +99,21 @@
                             <span>
                                 品牌名称:
                             </span>
-                                    <span>
+                                    <span th:text="${product3.ppmc}">
                                 联想
                             </span>
                                 </p>
-                                <!--<p>-->
-                            <!--<span>-->
-                                <!--品牌编号:-->
-                            <!--</span>-->
-                                    <!--<span>-->
-                                <!--1234567894561234567894-->
-                            <!--</span>-->
-                                <!--</p>-->
                             </div>
                             <!--按钮-->
-                            <div class="revocation " style="width: 90px;" >
+                            <div class="revocation repeal" style="width: 90px;" th:data-number="${product3.xhbh}">
                                 <a>
                                     <p>
                                         撤销报价
                                     </p>
                                 </a>
                             </div>
-                            <div class="productDetails md-trigger" style="width: 90px;" data-modal="modal-1">
-                                <a>
+                            <div class="productDetails" style="width: 90px;" >
+                                <a th:href="@{'/product/product/'+${product3.xhbh}}">
                                     <p>
                                         商品详情
                                     </p>
@@ -158,29 +122,24 @@
                         </div>
                     </div>
                     <div class="message two">
-                        <div class="messageDetail">
+                        <div class="messageDetailTitle">
+                            <p>已上架商品:</p>
+                        </div>
+                        <div class="messageDetail" th:each="product1:${productList1}">
                             <!--商品名称-->
-                            <h3>电脑</h3>
+                            <h3 th:text="${product1.xhmc}" th:data-number="${product1.xhbh}" class="outNumber">电脑</h3>
                             <!--价格-->
                             <div class="items">
                                 <p>
                                     <span>报价:</span>
-                                    <span>5000</span>
+                                    <span th:text="${product1.price}">5000</span>
                                 </p>
-                                <!--<p>-->
-                                <!--<span>-->
-                                <!--品牌编号:-->
-                                <!--</span>-->
-                                <!--<span>-->
-                                <!--1234567894561234567894-->
-                                <!--</span>-->
-                                <!--</p>-->
                             </div>
                             <!--类别-->
                             <div class="items">
                                 <p>
                                     <span>类别名称:</span>
-                                    <span>电子类</span>
+                                    <span th:text="${product1.lbmc}">电子类</span>
                                 </p>
                             </div>
                             <!--品目-->
@@ -189,16 +148,10 @@
                             <span>
                                 品目名称:
                             </span>
-                                    <span>
+                                    <span th:text="${product1.pmmc}">
                                 电脑
                             </span>
                                 </p>
-                                <!--<p>-->
-                                <!--<span>品目编号:</span>-->
-                                <!--<span>-->
-                                <!--1234567894561234567894-->
-                                <!--</span>-->
-                                <!--</p>-->
                             </div>
                             <!--品牌-->
                             <div class="items">
@@ -206,29 +159,21 @@
                             <span>
                                 品牌名称:
                             </span>
-                                    <span>
+                                    <span th:text="${product1.ppmc}">
                                 联想
                             </span>
                                 </p>
-                                <!--<p>-->
-                                <!--<span>-->
-                                <!--品牌编号:-->
-                                <!--</span>-->
-                                <!--<span>-->
-                                <!--1234567894561234567894-->
-                                <!--</span>-->
-                                <!--</p>-->
                             </div>
                             <!--按钮-->
-                            <div class="revocation " style="width: 90px;" >
+                            <div class="revocation soldOut  md-trigger" style="width: 90px;" data-modal="modal-1">
                                 <a>
                                     <p>
                                         下架
                                     </p>
                                 </a>
                             </div>
-                            <div class="productDetails md-trigger" style="width: 90px;" data-modal="modal-1">
-                                <a>
+                            <div class="productDetails" style="width: 90px;">
+                                <a th:href="@{'/product/product/'+${product1.xhbh}}">
                                     <p>
                                         商品详情
                                     </p>
@@ -237,29 +182,24 @@
                         </div>
                     </div>
                     <div class="message three">
-                        <div class="messageDetail">
+                        <div class="messageDetailTitle">
+                            <p>已下架商品:</p>
+                        </div>
+                        <div class="messageDetail" th:each="product2:${productList2}">
                             <!--商品名称-->
-                            <h3>电脑</h3>
+                            <h3 th:text="${product2.xhmc}" th:data-putawaynumber="${product2.xhbh}" class="putAway">电脑</h3>
                             <!--价格-->
                             <div class="items">
                                 <p>
                                     <span>报价:</span>
-                                    <span>5000</span>
+                                    <span th:text="${product2.price}">5000</span>
                                 </p>
-                                <!--<p>-->
-                                <!--<span>-->
-                                <!--品牌编号:-->
-                                <!--</span>-->
-                                <!--<span>-->
-                                <!--1234567894561234567894-->
-                                <!--</span>-->
-                                <!--</p>-->
                             </div>
                             <!--类别-->
                             <div class="items">
                                 <p>
                                     <span>类别名称:</span>
-                                    <span>电子类</span>
+                                    <span th:text="${product2.lbmc}">电子类</span>
                                 </p>
                             </div>
                             <!--品目-->
@@ -268,16 +208,10 @@
                             <span>
                                 品目名称:
                             </span>
-                                    <span>
+                                    <span th:text="${product2.pmmc}">
                                 电脑
                             </span>
                                 </p>
-                                <!--<p>-->
-                                <!--<span>品目编号:</span>-->
-                                <!--<span>-->
-                                <!--1234567894561234567894-->
-                                <!--</span>-->
-                                <!--</p>-->
                             </div>
                             <!--品牌-->
                             <div class="items">
@@ -285,29 +219,21 @@
                             <span>
                                 品牌名称:
                             </span>
-                                    <span>
+                                    <span th:text="${product2.ppmc}">
                                 联想
                             </span>
                                 </p>
-                                <!--<p>-->
-                                <!--<span>-->
-                                <!--品牌编号:-->
-                                <!--</span>-->
-                                <!--<span>-->
-                                <!--1234567894561234567894-->
-                                <!--</span>-->
-                                <!--</p>-->
                             </div>
                             <!--按钮-->
-                            <div class="revocation " style="width: 90px;" >
+                            <div class="revocation md-trigger putaway" style="width: 90px;" data-modal="modal-19">
                                 <a>
                                     <p>
                                         上架
                                     </p>
                                 </a>
                             </div>
-                            <div class="productDetails md-trigger" style="width: 90px;" data-modal="modal-1">
-                                <a>
+                            <div class="productDetails" style="width: 90px;" >
+                                <a th:href="@{'/product/product/'+${product2.xhbh}}">
                                     <p>
                                         商品详情
                                     </p>
@@ -319,85 +245,52 @@
             </div>
         </div>
     </div>
-<!--详情模态框-->
+<!--    下架理由模态框-->
     <div class="md-container md-effect-1" id="modal-1">
         <div class="md-content">
             <div class="md-contentTitle" style="padding: 4px 40px 4px;">
-                <p>商品详情</p>
+                <p>下架理由</p>
             </div>
             <div class="md-productTitle" style="padding: 4px 40px 4px;">
                 <div class="messageDetail" style="margin-top: 0;">
-                    <!--商品名称-->
-                    <p>电脑</p>
-                    <!--类别-->
-                    <div class="items">
-                        <p>
-                            <span>类别名称:</span>
-                            <span>电子类</span>
-                        </p>
-                        <p>
-                        <span>类别编号:</span>
-                        <span>1234567894561234567894</span>
-                        </p>
-                    </div>
-                    <!--品目-->
-                    <div class="items">
-                        <p>
-                            <span>品目名称:</span>
-                            <span>电脑</span>
-                        </p>
-                        <p>
-                            <span>品目编号:</span>
-                            <span>1234567894561234567894</span>
-                        </p>
-                    </div>
-                    <!--品牌-->
-                    <div class="items">
-                        <p>
-                            <span>品牌名称:</span>
-                            <span>联想</span>
-                        </p>
-                        <p>
-                            <span>品牌编号:</span>
-                            <span>1234567894561234567894</span>
-                        </p>
-                    </div>
-                    <!--型号-->
-                    <div class="items">
-                    <p>
-                        <span> 型号名称:</span>
-                        <span>电子类</span>
-                    </p>
-                        <p>
-                            <span>型号编号:</span>
-                            <span>
-                                1234567894561234567894
-                            </span>
-                    </p>
-                    </div>
-                    <!--商品参数-->
-                    <div class="items">
-                            <p>商品参数:</p>
-                            <span></span>
-                            <span>:</span>
-                            <span>1234456789hfvfdgvrgre</span>
-                    </div>
-                    <!--商品状态-->
-                    <div class="items state">
-                    <p>
-                    <span>
-                    商品状态:
-                    </span>
-                    <span>
-                    正在报价中
-                    </span>
-                    </p>
+                    <!--更改报价原因-->
+                    <div class="offerFormItem">
+                        <div class="offerInputblock">
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" id="offerTextareaContent"></textarea>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="submitBarT">
+                <a class="cancel">返回</a>
+                <a class="confirm present">提交</a>
+            </div>
+        </div>
+    </div>
+    <!--    上架理由模态框-->
+    <div class="md-container md-effect-19" id="modal-19">
+        <div class="md-content">
+            <div class="md-contentTitle" style="padding: 4px 40px 4px;">
+                <p>上架理由</p>
+            </div>
+            <div class="md-productTitle" style="padding: 4px 40px 4px;">
+                <div class="messageDetail" style="margin-top: 0;">
+                    <!--更改报价原因-->
+                    <div class="offerFormItem">
+                        <div class="offerInputblock">
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" id="offerTextareaContent"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submitBarT">
+                <a class="cancel">返回</a>
+                <a class="confirm present">提交</a>
             </div>
         </div>
     </div>
     <div class="md-overlay"></div>
+
 </div>
 <!-- 底部 -->
 <div th:fragment="commonFoot">
@@ -430,6 +323,5 @@
 </script>
 <script th:src="@{/static/js/cssParser.js}"></script>
 <script th:src="@{/static/js/css-filters-polyfill.js}"></script>
-<script> </script>
 </body>
 </html>
