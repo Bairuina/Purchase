@@ -106,7 +106,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             page.setDate(productList);   //传入数据
             page.setLength(5);          //设置每页数量
             page.setSize();              //获取总页数
-            modelAndView.addObject("pagesize",page.getLength());
+            modelAndView.addObject("pagesize",page.getSize());
             productList=page.getDateByYs(nowPage);          //获取该页数list
             System.out.println(productList);
             modelAndView.addObject("pagenumber",nowPage);   //返回页码
