@@ -16,7 +16,7 @@
     <div th:fragment="commonTop">
         <div class="top_nav">
             <div class="top">
-                您好，欢迎访问河南省政府采购网上电商！
+                您好，欢迎访问河南省飞鸾电子商城！
                 <button id="btn">登录</button>
             </div>
 
@@ -44,7 +44,7 @@
             <div class="head">
                 <div class="logo">
                     <a href="">
-                        <img src="img/logo.png" alt="">
+                        <img th:src="@{/img/logo.png}" alt="">
                     </a>
                 </div>
                 <div class="search">
@@ -61,15 +61,15 @@
     <div th:fragment="commonFoot">
         <div class="foot_nav">
         <div class="foot">
-            <img src="img/logo.png" alt="">
-            <p>版权所有 ©2019 河南省政府采购网上电商</p>
+            <img th:src="@{/img/logo.png}" alt="">
+            <p>版权所有 ©2019 河南省飞鸾电子商城</p>
         </div>
     </div>
     </div>
     <!-- 返回顶部 -->
     <div th:fragment="commonBackTop">
         <div class="BackTop">
-        <img class="footer" id="BackTop" src="img/BackTop.png" alt="">
+        <img class="footer" id="BackTop" th:src="@{/img/BackTop.png}" alt="">
     </div>
     </div>
     <script th:src="@{js/index.js}" type="text/javascript" charset="utf-8"></script>

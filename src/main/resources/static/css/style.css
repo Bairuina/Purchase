@@ -2,16 +2,17 @@
     margin: 0;
     padding: 0;
 }
-
 body {
     background-color: #F9F9F9;
 }
-
+a{
+    text-decoration: none;
+    color: #000;
+}
 .top_nav {
     min-width: 1200px;
     margin: 0 auto;
 }
-
 .top {
     width: 1200px;
     margin: 0 auto;
@@ -68,11 +69,11 @@ body {
     padding-left: 30px;
 }
 
-.close {
+.title .close {
     position: absolute;
-    top: 0;
+    top: 10px;
     right: 10px;
-    color: #ccc;
+    color: #777;
 }
 
 .content {

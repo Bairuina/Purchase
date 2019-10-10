@@ -1,14 +1,10 @@
 $(".yes_order").on('click', function () {
-    var orderReference = $("#orderDataDdbh").text();
-    var orderStatus = $(".orderDataZt").text();
-    console.log(orderStatus);
+    var orderReference = $(".ddbh").text();
+    var orderStatus = $(".ddzt span").text();
     console.log(orderReference);
+    console.log(orderStatus);
     var inform = "您确定要接受订单号为" + orderReference + "的订单？";
     var r = confirm(inform);
-    if(orderStatus!='2'&&orderStatus!='3'){
-        alert("该订单不允许这样操作！")
-        r=!r
-    }
     if (r) {
         $.ajax({
             type: "put",
@@ -20,14 +16,7 @@ $(".yes_order").on('click', function () {
             contentType:"application/json",
             dataType:"json",
             success: function (data) {
-                console.log(data);
-                if(data.code=='0'){
-                    alert("确认订单成功！")
-                    window.onload;
-                }
-                else{
-                    alert("确认订单失败！")
-                }
+                alert("确认订单成功");
             },
             error: function (msg) {
                 alert("确认订单失败");
@@ -40,29 +29,14 @@ $(".yes_order").on('click', function () {
 });
 
 $(".no_order").on('click', function () {
-    var orderReference = $("#orderDataDdbh").text();
-    var orderStatus = $(".orderDataZt").text();
+    var orderReference = $(".ddbh").text();
+    var orderStatus = $(".ddzt span").text();
     var inform = "您确定要拒绝订单号为" + orderReference + "的订单？";
     var r = confirm(inform);
-    var urlData;
-    console.log(orderStatus);
-    console.log(orderReference);
-
-    if(orderStatus=='2'){
-        urlData='/order-data/ensureORefuseOrder'
-    }
-    else if(orderStatus=='3'){
-        urlData='/order-data/deletEnsureOrder'
-    }
-
-    if(orderStatus!='2'&&orderStatus!='3'){
-        alert("该订单不允许这样操作！")
-        r=!r
-    }
     if (r) {
         $.ajax({
             type: "put",
-            url: urlData,
+            url: "/order-data/selectOneOrder",
             data: {
                 ddbh:orderReference,
                 ddzt:orderStatus
@@ -70,12 +44,7 @@ $(".no_order").on('click', function () {
             contentType:"application/json",
             dataType: "JSON",
             success: function (data) {
-                if (data.code == '0') {
-                    alert("取消订单成功！")
-                    window.onload;
-                } else {
-                    alert("取消订单失败！")
-                }
+                alert("拒绝订单成功");
             },
             error: function (msg) {
                 alert("拒绝订单失败");
@@ -84,4 +53,44 @@ $(".no_order").on('click', function () {
     }
     else {
     }
+});
+
+
+$(".lookContract").on('click', function () {
+    var orderReference = $(".ddbh").text();
+    console.log(orderReference);
+    $.ajax({
+        type: "get",
+        url: "/contract/queryContract",
+        data: {
+            'ddbh': orderReference,
+        },
+        contentType:"application/json",
+        dataType:"json",
+        success: function (data) {
+            location.href="data";
+        },
+        error: function (msg) {
+            alert("查看合同失败！");
+        }
+    })
+});
+$(".checkInvoice").on('click', function () {
+    var orderReference = $(".ddbh").text();
+    console.log(orderReference);
+    $.ajax({
+        type: "put",
+        url: "/order-data/invoiceEndTimeSubmit",
+        data: {
+            'ddbh': orderReference,
+        },
+        contentType:"application/json",
+        dataType:"json",
+        success: function (data) {
+            alert("开具发票成功！");
+        },
+        error: function (msg) {
+            alert("开具发票失败！");
+        }
+    })
 });

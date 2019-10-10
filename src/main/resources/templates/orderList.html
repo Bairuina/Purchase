@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>订单列表页</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet"  th:href="@{/css/orderList.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/paging.css}">
-    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 
 <body>
@@ -18,25 +21,23 @@
     <div class="head_nav">
         <div class="head">
             <div class="logo">
-                <a href="/order-data/select/"><img src="img/logo.png" alt=""></a>
-            </div>
+                <a th:href="@{/order-data/select/}"><img th:src="@{/img/logo.png}" alt=""></a>
+        </div>
             <div class="search">
                 <form action="/order-data/select/">
-                    <select name="zt" style="width: 18%;height: 100%;color: #000;outline: none;border: 0px;padding: 5px;float: left;font-size: 18px" >
+                    <select name="zt" style="color: #757575;width: 22%;height: 100%;outline: none;border: 0px;padding: 5px;float: left;font-size: 18px" >
                         <option  th:if="${zt==null}">全部状态</option>
                         <option  th:if="${zt=='2'}" th:value="${zt}">待确定</option>
                         <option  th:if="${zt=='3'}" th:value="${zt}">待验收</option>
                         <option  th:if="${zt=='4'}" th:value="${zt}">拒绝</option>
                         <option  th:if="${zt=='5'}" th:value="${zt}">已验收</option>
-                        <option  th:if="${zt!='2'
-
-                        }" value="2">待确定</option>
+                        <option  th:if="${zt!='2'}" value="2">待确定</option>
                         <option  th:if="${zt!='3'}" value="3">待验收</option>
                         <option  th:if="${zt!='4'}" value="4">拒绝</option>
                         <option  th:if="${zt!='5'}" value="5">已验收</option>
                         <option  th:if="${zt!=null}">全部状态</option>
                     </select>
-                    <input name="data" class="search-con" type="text" placeholder="输入关键字，搜索相关信息" th:value="${data}" style="width: 62%;float: left">
+                    <input name="data" class="search-con" type="text" placeholder="输入关键字，搜索相关信息" style="width: 58%;float: left">
                     <input class="search-sub" type="submit" value="搜 索">
                 </form>
             </div>
@@ -46,26 +47,17 @@
     <div class="oeder_list_nav" style="min-height: 970px;">
         <div class="order_list">
             <div class="order_list_left">
-
                 <ul>
-
-                    <li th:if="${zt!=null}" ><a th:href="@{'/order-data/select/'}" >全部订单</a></li>
-                    <li th:if="${zt==null}" style="background-color: #DF0024;"><a th:href="@{'/order-data/select/'}">全部订单</a></li>
-
-                    <li th:if="${zt==null || zt!='2'}" ><a              th:href="@{'/order-data/select/?zt=2'}" >待确定订单</a></li>
-                    <li th:if="${zt!=null and zt=='2'}" style="background-color: #DF0024;"><a th:href="@{'/order-data/select/?zt=2'}">待确定订单</a></li>
-
-
-                    <li th:if="${zt==null || zt!='3'}"><a th:href="@{'/order-data/select/?zt=3'}" class="accept">接受订单</a></li>
-                    <li th:if="${zt!=null and zt=='3'}" style="background-color: #DF0024;"><a th th:href="@{'/order-data/select/?zt=3'}" class="accept">接受订单</a></li>
-
-
-                    <li th:if="${zt==null || zt!='4'}"><a th:href="@{'/order-data/select/?zt=4'}">拒绝订单</a></li>
-                    <li th:if="${zt!=null and zt=='4'}" style="background-color: #DF0024;"><a th:href="@{'/order-data/select/?zt=4'}">拒绝订单</a></li>
-
-                    <li th:if="${zt==null || zt!='5'}"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
-                    <li th:if="${zt!=null and zt=='5'}" style="background-color: #DF0024;"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
-
+                    <li th:if="${zt!=null}" style="border-left: 10px solid #0984E0;"><a style="transform: translateX(-10px);"class="excursion" th:href="@{'/order-data/select/'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--1" fill="#fff"></use></svg>全部订单</a></li>
+                    <li th:if="${zt==null}" style="border-left: 10px solid #0984E0;"><a style="transform: translateX(-10px);" class="excursion" th:href="@{'/order-data/select/'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--1" fill="#fff"></use></svg>全部订单</a></li>
+                    <li th:if="${zt==null || zt!='2'}"><a  class="excursion" th:href="@{'/order-data/select/?zt=2'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--3" fill="#fff"></use></svg>待确定订单</a></li>
+                    <li th:if="${zt!=null and zt=='2'}"><a class="excursion" th:href="@{'/order-data/select/?zt=2'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--3" fill="#fff"></use></svg>待确定订单</a></li>
+                    <li th:if="${zt==null || zt!='3'}"><a class="accept excursion" th:href="@{'/order-data/select/?zt=3'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--2" fill="#fff"></use></svg>接受订单</a></li>
+                    <li th:if="${zt!=null and zt=='3'}"><a class="accept excursion" th:href="@{'/order-data/select/?zt=3'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--2" fill="#fff"></use></svg>接受订单</a></li>
+                    <li th:if="${zt==null || zt!='4'}"><a class="excursion" th:href="@{'/order-data/select/?zt=4'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--5" fill="#fff"></use></svg>拒绝订单</a></li>
+                    <li th:if="${zt!=null and zt=='4'}"><a class="excursion" th:href="@{'/order-data/select/?zt=4'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--5" fill="#fff"></use></svg>拒绝订单</a></li>
+                    <li th:if="${zt==null || zt!='5'}"><a class="excursion" th:href="@{'/order-data/select/?zt=5'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--4" fill="#fff"></use></svg>已签收订单</a></li>
+                    <li th:if="${zt!=null and zt=='5'}"><a class="excursion" th:href="@{'/order-data/select/?zt=5'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--4" fill="#fff"></use></svg>已签收订单</a></li>
                 </ul>
             </div>
             <div class="order_list_right">
@@ -112,8 +104,6 @@
                                 </li>
                                 <li>
                                    <div>
-                                       订单状态
-                                       <br/>
                                        <span th:if="${ordeData.zt=='2'}">供应商待确认</span>
                                        <span th:if="${ordeData.zt=='3'}">待验收</span>
                                        <span th:if="${ordeData.zt=='4'}">订单已取消</span>
@@ -123,23 +113,72 @@
                                 </li>
                                 <li>
                                     <div>
-                                        交易状态
-                                        <br/>
                                         <span th:if="${ordeData.zt=='2'}">暂无物流信息</span>
                                         <span th:if="${ordeData.zt=='3'}">物流运输中</span>
                                         <span th:if="${ordeData.zt=='4'}">订单已取消</span>
                                         <span th:if="${ordeData.zt=='5'}">验收通过</span>
-
                                     </div>
-                                    <div><a href="">查看物流详情</a></div>
+                                    <div data-toggle="modal" data-target="#myModal" style="cursor: pointer;">查看物流详情</div>
+
                                 </li>
                             </ul>
 
                         </div>
                     </div>
-                        <div th:if="${orderDara.data==null || orderDara.data.size()==0}">
+                    <div style="text-align: center;line-height: 250px;color: #888;" th:if="${orderDara.data==null || orderDara.data.size()==0}">
                         暂无订单信息
-                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped" id="mytable">
+                        <thead>
+                        <tr>
+                            <td style="text-align: center">时间</td>
+                            <td style="text-align: center">地点</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>2019-09-28</td>
+                            <td>【大连市】快件已从大连市场部发出，准备发往大连</td>
+                        </tr>
+                        <tr>
+                            <td>2019-09-29</td>
+                            <td>【北京市】快件已从北京发出，准备发往新乡中转</td>
+                        </tr>
+                        <tr>
+                            <td>2019-10-02</td>
+                            <td>【新乡市】快件已从新乡中转发出，准备发往新乡</td>
+                        </tr>
+                        <tr>
+                            <td>2019-10-02</td>
+                            <td>【新乡市】快件已到达新乡</td>
+                        </tr>
+                        <tr>
+                            <td>2019-10-03</td>
+                            <td>货物已签收</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" id="add"><i class="fa fa-plus"></i> 添加新的表格行</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-success">
+                        提交更改
+                    </button>
                 </div>
             </div>
         </div>
@@ -195,11 +234,17 @@
 
 
     <div th:include="common :: commonFoot"></div>
-    <div th:include="common :: commonBackTop"></div>
 
 
 </body>
+<script type="text/javascript" th:src="@{/js/bootstable.js}"></script>
 <script th:src="@{/js/websocket.js}"></script>
-<script th:src="@{/js/index.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/login.js}" type="text/javascript" charset="utf-8"></script>
 <script th:src="@{/js/BackTop.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/iconfont.js}"></script>
+<script type="text/javascript">
+    $('#mytable').SetEditable({
+        $addButton: $('#add')
+    });
+</script>
 </html>

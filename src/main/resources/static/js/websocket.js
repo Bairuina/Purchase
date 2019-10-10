@@ -15,7 +15,7 @@ websocket.onclose=function(event){
 }
 websocket.onmessage=function(event) {
     if (event.data != null) {
-        alert("订单信息已经更新！")
+        // alert("订单信息已经更新！")
     }
     console.info('收到消息' + event.data);
 }
