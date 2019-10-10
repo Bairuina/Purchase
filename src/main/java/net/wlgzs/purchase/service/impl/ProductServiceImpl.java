@@ -8,6 +8,7 @@ import net.wlgzs.purchase.entity.ServiceValue;
 import net.wlgzs.purchase.mapper.*;
 import net.wlgzs.purchase.service.IProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import net.wlgzs.purchase.util.Page;
 import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private ServiceOfferMapper serviceOfferMapper;
 
     @Override
-    public ModelAndView findallProduct(HttpServletRequest request, String lbbh, String pmbh, String ppbh, String nr){
+    public ModelAndView findallProduct(HttpServletRequest request, String lbbh, String pmbh, String ppbh, String nr,int nowPage){
         ModelAndView modelAndView=new ModelAndView();
         HttpSession session=request.getSession(true);
         if (lbbh.equals("0") && pmbh.equals("0") &&ppbh.equals("0") && nr.equals("0")){
@@ -101,8 +102,15 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             modelAndView.addObject("lbbhlist", lbbhlist);//第一大类
             modelAndView.addObject("pmbhlist", pmbhlist);//第二大类
             modelAndView.addObject("ppbhlist", ppbhlist);//第三大类
-            modelAndView.addObject("productList", productList);
+            Page<Product> page =new Page<Product>();
+            page.setDate(productList);   //传入数据
+            page.setLength(5);          //设置每页数量
+            page.setSize();              //获取总页数
+            modelAndView.addObject("length",page.getLength());
+            productList=page.getDateByYs(nowPage);          //获取该页数list
             System.out.println(productList);
+            modelAndView.addObject("nowPage",nowPage);   //返回页码
+            modelAndView.addObject("productList", productList);
             for (Product product:lbbhlist){
                 if (product.getLbbh().equals(lbbh)){
                     modelAndView.addObject("productlbbh",product);
