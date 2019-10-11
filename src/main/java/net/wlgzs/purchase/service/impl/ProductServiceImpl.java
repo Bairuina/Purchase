@@ -149,7 +149,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         queryWrapper.eq("xhbh",xhbh);
         Product product=baseMapper.selectOne(queryWrapper);
         List<Parts> partsList=partsMapper.findPartsByPmbh(product.getPmbh());
-        product.setPrice(productOfferMapper.findProductOfferByXhbh(xhbh).get(0).getPrice());
+        product.setPrice(productOfferMapper.findProductOfferByXhbh(xhbh).size()==1? productOfferMapper.findProductOfferByXhbh(xhbh).get(0).getPrice():null);
         modelAndView.addObject("product",product);
         List<Parts> pjlist=new ArrayList<>();
         for (Parts parts:partsList){

@@ -74,6 +74,8 @@ public class ServiceOfferServiceImpl extends ServiceImpl<ServiceOfferMapper, Ser
                 }
             }
             return new Result(ResultCode.FAIL,"本地存记录失败");
+        }else if (jsonObject.get("resultMessage").equals("未找到对应的商品型号报价信息")){
+            return new Result(ResultCode.FAIL,"请先对该商品报价");
         }
         return new Result(ResultCode.FAIL,"报价失败");
     }
