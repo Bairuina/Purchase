@@ -46,6 +46,26 @@ public class ProductOffer implements Serializable {
      */
     private BigDecimal shjg;
 
+    private String fwcn;   //服务承诺
+
+    private String productlink;  //商品在自有网站的的绝对地址
+
+    public String getFwcn() {
+        return fwcn;
+    }
+
+    public void setFwcn(String fwcn) {
+        this.fwcn = fwcn;
+    }
+
+    public String getProductlink() {
+        return productlink;
+    }
+
+    public void setProductlink(String productlink) {
+        this.productlink = productlink;
+    }
+
     public BigDecimal getShjg() {
         return shjg;
     }

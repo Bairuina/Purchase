@@ -413,6 +413,31 @@ public class ProductController extends BaseController {
         System.out.println(jsonObject);
     }
 
+    //推送商品唯一标识
+    @Test
+    public void ProductWybs(){
+        String ddbh="";
+        String wybs="";
+        String pic="";
+        //获取基本信息
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+
+        //拼接Json
+        String json="{\"username\":\""+username+"\"," +
+                "\"pwd\":\""+enPwd1+"\"," +
+                "\"ddbh\":\""+ddbh+"\"," +
+                "\"xhbh\":\""+xhbh+"\"," +
+                "\"wybs\":\""+wybs+"\"," +
+                "\"pic\": \""+pic+"\"}";
+        System.out.println(json);
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getExecTsWybs(),json);
+        System.out.println(jsonObject);
+
+    }
+
 
     /**
      * 查询页
