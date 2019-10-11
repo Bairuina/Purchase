@@ -1,8 +1,6 @@
 $(".yes_order").on('click', function () {
     var orderReference = $(".ddbh").text();
-    var orderStatus = $(".ddzt span").text();
     console.log(orderReference);
-    console.log(orderStatus);
     var inform = "您确定要接受订单号为" + orderReference + "的订单？";
     var r = confirm(inform);
     if (r) {
@@ -11,12 +9,19 @@ $(".yes_order").on('click', function () {
             url: "/order-data/ensureORefuseOrder",
             data: {
                 'ddbh': orderReference,
-                'qrzt': orderStatus
+                'qrzt':0
             },
             contentType:"application/json",
             dataType:"json",
             success: function (data) {
-                alert("确认订单成功");
+                console.log(data);
+                if(data.code=='0'){
+                    alert("确认订单成功！")
+                    window.onload;
+                }
+                else{
+                    alert("确认订单失败！")
+                }
             },
             error: function (msg) {
                 alert("确认订单失败");
@@ -75,6 +80,7 @@ $(".lookContract").on('click', function () {
         }
     })
 });
+
 $(".checkInvoice").on('click', function () {
     var orderReference = $(".ddbh").text();
     console.log(orderReference);
