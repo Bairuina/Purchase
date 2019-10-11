@@ -34,9 +34,7 @@ $(".present").on('click',function () {
     //下架原因
     var text= $(this).parent().prev().children().children().children().children().val();
     console.log(text);
-//    商品编号
-//     var number = $('.outNumber').data('number');
-//     console.log(number);
+
     $.ajax({
         url:"/productoffer/offer/"+num+'/'+2+'/'+text,
         type:"GET",
