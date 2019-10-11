@@ -151,7 +151,7 @@ public class OrderData implements Serializable {
     /**
      * 收款金额
      */
-    private Integer skje;
+    private BigDecimal skje;
 
     /**
      * 验收标志 验收标志（1-自动验收，2-人工验收）
@@ -388,11 +388,11 @@ public class OrderData implements Serializable {
         this.sksj = sksj;
     }
 
-    public Integer getSkje() {
+    public BigDecimal getSkje() {
         return skje;
     }
 
-    public void setSkje(Integer skje) {
+    public void setSkje(BigDecimal skje) {
         this.skje = skje;
     }
 

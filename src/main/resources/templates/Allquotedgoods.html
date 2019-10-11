@@ -76,6 +76,13 @@
                                     <span th:text="${product3.price}">5000</span>
                                 </p>
                             </div>
+                            <!--待审核价格-->
+                            <div class="items">
+                                <p>
+                                    <span>报价:</span>
+                                    <span th:text="${product3.shjg}">5000</span>
+                                </p>
+                            </div>
                             <!--类别-->
                             <div class="items">
                                 <p>
@@ -185,9 +192,9 @@
                                 </p>
                             </div>
                             <!--按钮-->
-                            <div class="revocation soldOut  md-trigger" style="width: 90px;" data-modal="modal-1">
+                            <div th:data-number="${product1.xhbh}" class="revocation soldOut  md-trigger" style="width: 90px;" data-modal="modal-1">
                                 <a>
-                                    <p>
+                                    <p >
                                         下架
                                     </p>
                                 </a>
@@ -264,9 +271,9 @@
                                 </p>
                             </div>
                             <!--按钮-->
-                            <div class="revocation md-trigger putaway" style="width: 90px;" data-modal="modal-19">
+                            <div th:data-number="${product2.xhbh}" class="revocation md-trigger putaway" style="width: 90px;" data-modal="modal-19">
                                 <a>
-                                    <p>
+                                    <p >
                                         上架
                                     </p>
                                 </a>
@@ -342,7 +349,7 @@
             </div>
             <div class="submitBarT">
                 <a class="cancel">返回</a>
-                <a class="confirm present">提交</a>
+                <a class="confirm putaway">提交</a>
             </div>
         </div>
     </div>
@@ -365,16 +372,13 @@
     </div>
 </div>
 <script th:src="@{/static/js/jquery.min.js}"></script>
-<script th:src="@{/static/js/allAuotedGoods.js}"></script>
+
 <script th:src="@{/static/js/niftymodals.js}"></script>
+<script th:src="@{/static/js/allAuotedGoods.js}"></script>
 <script>
     $(document).ready(function() {
 
-        $('.md-trigger').on('click',function(){
 
-            var modal = $(this).data('modal');
-            $("#" + modal).niftyModal();
-        });
 
     });
 </script>
