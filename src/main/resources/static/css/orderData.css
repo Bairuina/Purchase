@@ -86,6 +86,7 @@
 .yes_order,
 .lookContract,
 .checkInvoice,
+.collectionConfirm,
 .no_order {
     box-sizing: border-box;
     background-color: #DF0024;
@@ -114,6 +115,19 @@
 .checkInvoice{
     background-color: #ff882b;
 }
+.collectionConfirm{
+    background-color: #c221d8;
+}
+.collection{
+    text-align: center;
+}
+.collection input{
+    display: inline-block;
+    margin: 10px auto;
+}
+
+
+
 
 
 

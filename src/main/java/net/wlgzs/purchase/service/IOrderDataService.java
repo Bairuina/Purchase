@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import net.wlgzs.purchase.entity.OrderData;
 import net.wlgzs.purchase.util.Result;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
@@ -17,7 +18,7 @@ import java.math.BigInteger;
  */
 public interface IOrderDataService extends IService<OrderData> {
     //定时更新接口
-    Result updateOrderDate(int pageNum);
+    Result updateOrderDate(Integer pageNum);
 
     //查询订单
     Result selectAllOrder(Integer pageSize,Integer pageNum);
@@ -26,13 +27,13 @@ public interface IOrderDataService extends IService<OrderData> {
     Result selectOneOrder(String ddbh);
 
     //确认或取消订单
-    Result ensureORefuseOrder(String ddbh,int qrzt);
+    Result ensureORefuseOrder(String ddbh,Integer qrzt);
 
     //订单签收物流信息推送
-    Result ensureOrderArrive(String ddbh,int sfcd,String fczddbh,String kdgs,String kddh,String ms,BigInteger kdsj);
+    Result ensureOrderArrive(String ddbh,Integer sfcd,String fczddbh,String kdgs,String kddh,String ms,BigInteger kdsj);
 
     //订单签收时间信息推送
-    Result ensureOrderTimeSubmit(String ddbh,int sfcd,String fczddbh,BigInteger shsj);
+    Result ensureOrderTimeSubmit(String ddbh,Integer sfcd,String fczddbh,BigInteger shsj);
 
     //订单发票开具时间信息推送
     Result invoiceStaTimeSubmit(String ddbh, BigInteger fpkjsj);
@@ -41,7 +42,7 @@ public interface IOrderDataService extends IService<OrderData> {
     Result invoiceEndTimeSubmit(String ddbh,BigInteger fpsdsj);
 
     //电商已经收到采购单位的付款,将收款标志、收款金额、收款时间提交
-    Result getMoneyDataSubmit(String ddbh,int skbz,Integer skje,BigInteger sksj);
+    Result getMoneyDataSubmit(String ddbh, Integer skbz, BigDecimal skje, BigInteger sksj);
 
     //取消订单(已经对进行订单确认)
     Result deletEnsureOrder(String ddbh,String qxyy);
@@ -57,4 +58,13 @@ public interface IOrderDataService extends IService<OrderData> {
 
     //根据条件查询订单信息
     Result selectOrderListByData(String data,String zt,Integer pageSize,Integer pageNum);
+
+    //删除已经取消的订单
+    Result delOrderByData(String ddbh);
+
+    //批量删除订单编号
+    Result delOrdersByData(String[] ddbh);
+
+    Result upDataOneData(String ddbh);
+
 }
