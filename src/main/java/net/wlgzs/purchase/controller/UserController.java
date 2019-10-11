@@ -27,44 +27,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-@Api(value = "用户登录管理接口", tags = "用户管理接口信息", description = "用户相关接口")
+@Api(value = "用户管理接口", tags = "用户管理接口信息", description = "用户相关接口")
 public class UserController extends BaseController {
-
-    /**
-     * 去登录
-     * @return
-     */
-    @ApiOperation(value = "去登录")
-    @RequestMapping(value = "/toLogin")
-    public ModelAndView toLogin() {
-        return new ModelAndView("login");
-    }
-
-    /**
-     * 登录
-     * @param model model
-     * @param request
-     * @param userName 用户名或手机号
-     * @param password 密码
-     * @return
-     */
-    @ApiOperation(value = "登录(登录失败返回页面login)")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userName",value = "用户名或手机号"),
-            @ApiImplicitParam(name = "password",value = "密码")
-    })
-    @RequestMapping(value = "userLogin",method = RequestMethod.POST)
-    public ModelAndView userLogin(Model model, HttpServletRequest request, String userName, String password) {
-        Result result = iUserService.login(request, userName, password);
-        int code = result.getCode();
-        if (code == 0) {
-            //登录成功
-            return new ModelAndView("");
-        } else {//登录失败
-            model.addAttribute("msg", "账号或密码错误");
-            return new ModelAndView("login");
-        }
-    }
 
     /**
      * 添加一个用户

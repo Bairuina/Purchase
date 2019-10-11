@@ -4,7 +4,9 @@ package net.wlgzs.purchase.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import net.wlgzs.purchase.entity.Contract;
 import net.wlgzs.purchase.util.Result;
+import net.wlgzs.purchase.util.ResultCode;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +36,12 @@ public class ContractController extends BaseController {
     @ApiImplicitParam(name = "ddbh",value = "订单编号",required = true)
     @RequestMapping(value = "queryContract",method = RequestMethod.GET)
     public Result queryContract(String ddbh){
-        Result result = iContractService.queryContract(ddbh);
+//        Result result = iContractService.queryContract(ddbh);
+        Contract contract = new Contract();
+        contract.setContractUrl("12456");
+        contract.setDdbh("123");
+        contract.setContractId(1);
+        Result result = new Result(ResultCode.SUCCESS,"成功！",contract);
         return result;
     }
 
