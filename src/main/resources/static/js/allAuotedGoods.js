@@ -22,9 +22,11 @@ $(".repeal").on('click',function () {
         url:"/productoffer/offer",
         success:function (data) {
             if(data.code==0){
-                console.log(data.msg);
+                alert(data.msg);
+                window.location.reload();
             }else{
-                console.log(data.msg);
+                alert(data.msg);
+                window.location.reload();
             }
         }
     })
