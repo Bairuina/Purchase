@@ -68,7 +68,12 @@ $(".lookContract").on('click', function () {
         contentType:"application/json",
         dataType:"json",
         success: function (data) {
-            location.href="data";
+            if(data.code == 0){
+                console.log(data.data);
+                location.href= data.data.contractUrl;
+            }else{
+                alert(data.msg);
+            }
         },
         error: function (msg) {
             alert("查看合同失败！");
