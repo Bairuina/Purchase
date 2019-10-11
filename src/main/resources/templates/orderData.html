@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{../css/orderData.css}">
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
     <title>订单详情页</title>
 </head>
 
@@ -50,7 +52,7 @@
                     <li><span th:text="${allData.data[4]}"></span></li>
                     <li><span th:text="${allData.data[5]}"></span></li>
                     <li><span th:text="${allData.data[0].shdd}"></span></li>
-                    <li ><span id="ddbh" th:text="${allData.data[0].ddbh}"></span></li>
+                    <li ><span id="ddbhData"   th:text="${allData.data[0].ddbh}"></span></li>
                     <li><span th:text="${allData.data[0].cgrmc}"></span></li>
                     <li><span th:text="${allData.data[0].xflxrxm}"></span></li>
                     <li><span th:text="${allData.data[0].xfdh}"></span></li>
@@ -176,9 +178,35 @@
                 <a style="text-decoration: none" class="lookContract" href="javascript:void(0)">查看合同</a>
                 <button class="yes_order">确定订单</button>
                 <button  class="no_order">拒绝订单</button>
-                <button class="checkInvoice">查看发票</button>
+                <button class="checkInvoice" th:if="${allData.data[0].fpkjsj==0}">开具发票</button>
+                <button class="checkInvoice" th:if="${allData.data[0].fpkjsj!=0}"> 收到发票</button>
+                <button class="collectionConfirm" data-toggle="modal" data-target="#collection_Confirm" >确认收款</button>
             </div>
 
+        </div>
+    </div>
+
+    <div class="modal fade" id="collection_Confirm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">添加收款信息</h4>
+                </div>
+                <div class="modal-body collection" >
+                    收款标志：<input type="text" name="skbz" id="skbz" list="sexlist" autocomplete="off">
+                    <datalist id="sexlist">
+                        <option>已收款</option>
+                        <option>未收款</option>
+                    </datalist>
+                    <br>
+                    收款金额：<input name="skje" id="skje" >
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="update()">提交更改</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>

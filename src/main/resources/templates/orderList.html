@@ -83,21 +83,19 @@
                                 <li>
                                     <div class="shangpin" style="text-align: left">
                                         <table>
-                                            <caption>总计: <span th:text="${ordeData.ddze}">2000</span>元</caption>
+                                            <caption>总计: <span th:text="${ordeData.ddze}"></span>元</caption>
                                             <tr>
-                                                <th>商品名称</th>
-                                                <th>型号编号</th>
-                                                <th>数量</th>
+                                                <th>订单状态</th>
+                                                <th>需方联系人</th>
+                                                <th>需方联系电话</th>
                                             </tr>
                                             <tr>
-                                                <td>机械键盘</td>
-                                                <td>dfjkdsjh</td>
-                                                <td>4 <span>件</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>无线鼠标</td>
-                                                <td>dfjkdsjh</td>
-                                                <td>4 <span>件</span></td>
+                                                <td><span th:if="${ordeData.zt=='2'}" >待确定</span>
+                                                    <span  th:if="${ordeData.zt=='3'}" >待验收</span>
+                                                    <span  th:if="${ordeData.zt=='4'}" >拒绝</span>
+                                                    <span  th:if="${ordeData.zt=='5'}" >已验收</span></td>
+                                                <td><span th:text="${ordeData.xflxrxm}"></span></td>
+                                                <td><span th:text="${ordeData.xfdh}"></span></td>
                                             </tr>
                                         </table>
                                     </div>
