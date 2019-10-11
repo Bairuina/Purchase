@@ -43,7 +43,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
 
     //报价一个商品
     @Override
-    public Result productOffer(String xhbh, BigDecimal price, String text){
+    public Result productOffer(String xhbh, BigDecimal price, String text,String fwcn,String productlink){
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -78,9 +78,9 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
                 "\"lbbh\":\"" + product.getLbbh() + "\"," +
                 "\"lbmc\":\"" + product.getLbmc() + "\"," +
                 "\"area\":\"00390019\"," +
-                "\"fwcn\":\"郑州以及周边一天内送货，其他地市二天；提供上门安装及后期维修服务\"," +
+                "\"fwcn\":\""+fwcn+"\"," +
                 "\"sjjg\": \""+price+"\"," +
-                "\"productlink\":\"http://www.staples.cn/product/1100008501EA\"," +
+                "\"productlink\":\""+productlink+"\"," +
                 "\"pjxxList\":"+ pjxxList +","+
                 "\"jgsfyy\":\""+text+"\"}";
         JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getExecute(),json);
@@ -145,7 +145,6 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
             if (baseMapper.updateById(productOffer)>0){
                 return new Result(ResultCode.SUCCESS,"撤销成功，商品待上架");
             }
-
         }else if (jsonObject.getString("resultMessage").equals("没有对应的审核记录")){
             return new Result(ResultCode.FAIL,"没有审核记录");
         }
