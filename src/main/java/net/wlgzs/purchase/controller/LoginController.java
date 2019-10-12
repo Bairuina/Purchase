@@ -46,17 +46,10 @@ public class LoginController extends BaseController {
             @ApiImplicitParam(name = "userName",value = "用户名或手机号"),
             @ApiImplicitParam(name = "password",value = "密码")
     })
-    @RequestMapping(value = "userLogin",method = RequestMethod.POST)
-    public ModelAndView userLogin(Model model, HttpServletRequest request, String userName, String password) {
+    @RequestMapping(value = "/userLogin",method = RequestMethod.POST)
+    public Result userLogin(Model model, HttpServletRequest request, String userName, String password) {
         Result result = iUserService.login(request, userName, password);
-        int code = result.getCode();
-        if (code == 0) {
-            //登录成功
-            return new ModelAndView("");
-        } else {//登录失败
-            model.addAttribute("msg", "账号或密码错误");
-            return new ModelAndView("login");
-        }
+        return result;
     }
 
 }
