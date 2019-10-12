@@ -65,6 +65,7 @@ public interface IOrderDataService extends IService<OrderData> {
     //批量删除订单编号
     Result delOrdersByData(String[] ddbh);
 
+    //更新
     Result upDataOneData(String ddbh);
 
 }

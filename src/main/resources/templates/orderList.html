@@ -116,7 +116,7 @@
                                         <span th:if="${ordeData.zt=='4'}">订单已取消</span>
                                         <span th:if="${ordeData.zt=='5'}">验收通过</span>
                                     </div>
-                                    <div data-toggle="modal" data-target="#myModal" style="cursor: pointer;">查看物流详情</div>
+                                    <div th:data-ddbhData="${ordeData}" data-toggle="modal" data-target="#myModal" style="cursor: pointer;">查看物流详情</div>
 
                                 </li>
                             </ul>
@@ -130,7 +130,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" th:each="ordeData:${orderDara.data}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -149,27 +150,35 @@
                         <tbody>
                         <tr>
                             <td>是否拆单</td>
-                            <td></td>
+                            <td th:if="${orderDara.sfcd!=null && orderDara.sfcd=='0'}">拆单</td>
+                            <td th:if="${orderDara.sfcd!=null && orderDara.sfcd=='1'}">不拆单</td>
+                            <td th:if="${orderDara.sfcd==null}">信息错误</td>
                         </tr>
                         <tr>
                             <td>分拆子订单编号</td>
-                            <td></td>
+                            <td th:if="${orderDara.sfcd!=null && orderDara.sfcd=='0'}" th:text="${orderDara.fczddbh}">拆单</td>
+                            <td th:if="${orderDara.sfcd!=null && orderDara.sfcd=='1'}">无分拆子订单编号</td>
+                            <td th:if="${orderDara.sfcd==null}">信息错误</td>
                         </tr>
                         <tr>
                             <td>快递公司</td>
-                            <td></td>
+                            <td th:if="${orderDara.kdgs==null}">信息异常</td>
+                            <td th:if="${orderDara.kdgs!=null}" th:text="${orderDara.kdgs}"></td>
                         </tr>
                         <tr>
                             <td>快递单号</td>
-                            <td></td>
+                            <td th:if="${orderDara.kddh==null}">信息异常</td>
+                            <td th:if="${orderDara.kddh!=null}" th:text="${orderDara.kddh}"></td>
                         </tr>
                         <tr>
                             <td>描述</td>
-                            <td></td>
+                            <td th:if="${orderDara.ms==null}">无描述</td>
+                            <td th:if="${orderDara.ms!=null}" th:text="${orderDara.ms}"></td>
                         </tr>
                         <tr>
                             <td>快递时间</td>
-                            <td></td>
+                            <td th:if="${orderDara.kdsj==null}">无描述</td>
+                            <td th:if="${orderDara.kdsj!=null}" th:text="${orderDara.kdsj}"></td>
                         </tr>
                         </tbody>
                     </table>

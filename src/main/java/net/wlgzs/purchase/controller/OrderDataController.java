@@ -61,14 +61,14 @@ public class OrderDataController extends BaseController {
     }
 
     @ApiOperation("确认或取消订单")
-    @GetMapping("/ensureORefuseOrder")
+    @PutMapping("/ensureORefuseOrder")
     @ResponseBody
     public Result ensureORefuseOrder(@Param("ddbh") String ddbh, @Param("qrzt")Integer qrzt){
         return iOrderService.ensureORefuseOrder(ddbh,qrzt);
     }
 
     @ApiOperation("确认或取消订单(已经确定的订单)")
-    @GetMapping("/deletEnsureOrder")
+    @PutMapping("/deletEnsureOrder")
     @ResponseBody
     public Result deletEnsureOrder(@Param("ddbh") String ddbh, @Param("qxyy")String qxyy){
         return iOrderService.deletEnsureOrder(ddbh,qxyy);
@@ -147,7 +147,7 @@ public class OrderDataController extends BaseController {
 
 
     @ApiOperation("电商已经收到采购单位的付款,将收款标志、收款金额、收款时间提交")
-    @GetMapping("/getMoneyDataSubmit")
+    @PutMapping("/getMoneyDataSubmit")
     public Result getMoneyDataSubmit(@Param("ddbh") String ddbh, @Param("skbz")Integer skbz, @Param("skje") BigDecimal skje, @Param("sksj")BigInteger sksj){
         return iOrderService.getMoneyDataSubmit(ddbh,skbz,skje,sksj);
     }

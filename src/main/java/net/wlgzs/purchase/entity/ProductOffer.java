@@ -50,6 +50,16 @@ public class ProductOffer implements Serializable {
 
     private String productlink;  //商品在自有网站的的绝对地址
 
+    private String area;
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
     public String getFwcn() {
         return fwcn;
     }
