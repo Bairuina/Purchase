@@ -72,6 +72,34 @@ public class ProductList implements Serializable {
      */
     private String ddbh;
 
+    /**
+     * 商品唯一标识
+     */
+    private String wybs;
+
+    /**
+     * 图片地址
+     */
+    private String imgpath;
+
+    public String getWybs() {
+        return wybs;
+    }
+
+    public void setWybs(String wybs) {
+        this.wybs = wybs;
+    }
+
+    public String getImgpath() {
+        return imgpath;
+    }
+
+    public void setImgpath(String imgpath) {
+        this.imgpath = imgpath;
+    }
+
+
+
     public Integer getProductlistId() {
         return productlistId;
     }

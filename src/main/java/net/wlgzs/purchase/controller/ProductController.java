@@ -37,7 +37,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -72,7 +77,7 @@ public class ProductController extends BaseController {
     @Autowired
     private ReadProperties readProperties;
 
-    private String xhbh="53f802aed6bc47938a328066f64ee66e";
+    private String xhbh="40282a3e177bfb3f01177c8d379300e8";
 
 
 
@@ -415,15 +420,23 @@ public class ProductController extends BaseController {
 
     //推送商品唯一标识
     @Test
-    public void ProductWybs(){
-        String ddbh="";
-        String wybs="";
-        String pic="";
+    public void ProductWybs() throws IOException {
+        String ddbh="WSCG201910100854540938320003730";
+        String wybs="fghfghfgh";
+        String imgpath="C:\\Users\\Wyx\\Desktop\\1#138\\{L`22OB{`58JNV(G64D[HHS.jpg";
         //获取基本信息
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
         String enPwd1= Enxi.enPwd(username,pwd);
+
+
+        File picFile=new File(imgpath);
+        FileInputStream fis=new FileInputStream(picFile);
+        byte[] arr =new byte[1024*1024*5];
+        byte[] arrByte=new byte[1024*1024*5];
+        int read=fis.read(arr);
+        String pic= Base64.getEncoder().encodeToString(arr);
 
         //拼接Json
         String json="{\"username\":\""+username+"\"," +
