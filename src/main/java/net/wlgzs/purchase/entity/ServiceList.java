@@ -2,6 +2,7 @@ package net.wlgzs.purchase.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-10-04
+ * @since 2019-10-12
  */
 @TableName("service_list")
 public class ServiceList implements Serializable {
@@ -22,13 +23,12 @@ public class ServiceList implements Serializable {
     /**
      * 订单服务id
      */
-    @TableId("serviceList_id")
-    private int servicelistId;
+    @TableId(value = "serviceList_id", type = IdType.AUTO)
+    private Integer servicelistId;
 
     /**
      * 服务名称
      */
-    @TableField("fwMC")
     private String fwMC;
 
     /**
@@ -46,8 +46,13 @@ public class ServiceList implements Serializable {
     /**
      * 订单id
      */
-    @TableField("ddbh")
     private String ddbh;
+
+    @TableField("XHBH")
+    private String xhbh;
+
+    @TableField("PPBH")
+    private String ppbh;
 
     public Integer getServicelistId() {
         return servicelistId;
@@ -84,6 +89,20 @@ public class ServiceList implements Serializable {
     public void setDdbh(String ddbh) {
         this.ddbh = ddbh;
     }
+    public String getXhbh() {
+        return xhbh;
+    }
+
+    public void setXhbh(String xhbh) {
+        this.xhbh = xhbh;
+    }
+    public String getPpbh() {
+        return ppbh;
+    }
+
+    public void setPpbh(String ppbh) {
+        this.ppbh = ppbh;
+    }
 
     @Override
     public String toString() {
@@ -93,6 +112,8 @@ public class ServiceList implements Serializable {
         ", sl=" + sl +
         ", fwjg=" + fwjg +
         ", ddbh=" + ddbh +
+        ", xhbh=" + xhbh +
+        ", ppbh=" + ppbh +
         "}";
     }
 }

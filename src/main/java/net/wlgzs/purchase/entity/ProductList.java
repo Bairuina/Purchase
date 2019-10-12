@@ -2,6 +2,7 @@ package net.wlgzs.purchase.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author 胡亚星
- * @since 2019-10-04
+ * @since 2019-10-12
  */
 @TableName("product_list")
 public class ProductList implements Serializable {
@@ -22,8 +23,8 @@ public class ProductList implements Serializable {
     /**
      * 订单商品id
      */
-    @TableId("productList_id")
-    private int productlistId;
+    @TableId(value = "productList_id", type = IdType.AUTO)
+    private Integer productlistId;
 
     /**
      * 型号编号
@@ -71,6 +72,22 @@ public class ProductList implements Serializable {
      * 订单id
      */
     private String ddbh;
+
+    /**
+     * 商品唯一标识
+     */
+    private String wybs;
+
+    @TableField("service_list")
+    private String serviceList;
+
+    @TableField("accessory_list")
+    private String accessoryList;
+
+    /**
+     * 图片
+     */
+    private String imgpath;
 
     public Integer getProductlistId() {
         return productlistId;
@@ -135,6 +152,34 @@ public class ProductList implements Serializable {
     public void setDdbh(String ddbh) {
         this.ddbh = ddbh;
     }
+    public String getWybs() {
+        return wybs;
+    }
+
+    public void setWybs(String wybs) {
+        this.wybs = wybs;
+    }
+    public String getServiceList() {
+        return serviceList;
+    }
+
+    public void setServiceList(String serviceList) {
+        this.serviceList = serviceList;
+    }
+    public String getAccessoryList() {
+        return accessoryList;
+    }
+
+    public void setAccessoryList(String accessoryList) {
+        this.accessoryList = accessoryList;
+    }
+    public String getImgpath() {
+        return imgpath;
+    }
+
+    public void setImgpath(String imgpath) {
+        this.imgpath = imgpath;
+    }
 
     @Override
     public String toString() {
@@ -148,6 +193,10 @@ public class ProductList implements Serializable {
         ", sjjg=" + sjjg +
         ", xjjg=" + xjjg +
         ", ddbh=" + ddbh +
+        ", wybs=" + wybs +
+        ", serviceList=" + serviceList +
+        ", accessoryList=" + accessoryList +
+        ", imgpath=" + imgpath +
         "}";
     }
 }
