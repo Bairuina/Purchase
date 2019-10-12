@@ -145,7 +145,7 @@
             <div class="commodities">
                 <div class="commodity">
                     <div class="item">
-                        <span class="label">型号名称</span>
+                        <span class="label" th:data-xhbh="${product.xhbh}">型号名称</span>
                         <span class="info" th:if="${product.xhmc==null}">暂无内容</span>
                         <span class="info" th:if="${product.xhmc!=null}" th:text="${product.xhmc}"></span>
                     </div>
@@ -154,7 +154,7 @@
                         <span class="info" th:if="${product.ppmc==null}">暂无内容</span>
                         <span class="info" th:if="${product.ppmc!=null}" th:text="${product.ppmc}"></span>
                     </div>
-                    <div class="item">
+                    <div class="item" th:data-xhbh="${product.xhbh}">
                         <span class="label">商品标识码</span>
                         <span class="info" th:if="${product.wybs==null}">暂无内容</span>
                         <span class="info" th:if="${product.wybs!=null}" th:text="${product.wybs}"></span>
@@ -182,7 +182,7 @@
                         <span class="concreteAmount" th:text="${accessory.sl}"></span>
                     </div>
                 </div>
-
+            </div>
             <div class="services" th:each="service:${product.serviceList}">
                 <div class="service">
                     <div class="commodity">
