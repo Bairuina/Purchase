@@ -15,6 +15,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         return new ServerEndpointExporter();
     }
 
+
     /**
      * 注册webSocket端点
      */

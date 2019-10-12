@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.enter {
+    width: 440px;
+    background-color: rgba(0.1, 0.1, 0.1, 0.3);
+    border-radius: 2%;
+    margin: 200px auto 0px;
+    padding: 30px;
+}
+
+.enter small {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 50px;
+}
+
+.enter input {
+    display: inline-block;
+}
+
+.enter span {
+    font-size: 14px;
+    color: red;
+    margin: 10px auto;
+    display: block;
+    text-align: right;
+}
+
+.in {
+    width: 75%;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 15px;
+    float: right;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+#passWord {
+    margin-left: 7%
+}
+
+.logonName,
+.logonPass {
+    width: 90%;
+    margin: 0 auto;
+    font-size: 20px;
+    color: #fff;
+}
+
+.logonName {
+    top: 29%;
+}
+
+.logonPass {
+    top: 45%;
+}
+
+.logonRember {
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    margin: 20px;
+}
+
+#automatic {
+    margin-left: 100px;
+}
+
+.entry {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #2196F3;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    border: 1px solid #2196F3;
+    font-size: 20px;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.entry:hover {
+    color: black;
+    background-color: #fff;
+    border: 1px solid #fff;
+}
+
+.entry>p {
+    font-size: 23px;
+    padding-top: 3%;
+    text-decoration: none;
+}

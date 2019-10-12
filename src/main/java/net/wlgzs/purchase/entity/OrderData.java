@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 胡亚星
@@ -174,10 +174,6 @@ public class OrderData implements Serializable {
     private String fczddbh;
 
     private List<ProductList> productList;
-
-    private List<AccessoryList> accessoryList;
-
-    private List<ServiceList> serviceList;
 
     /**
      * 快递单号
@@ -436,22 +432,6 @@ public class OrderData implements Serializable {
         this.productList = productList;
     }
 
-    public List<AccessoryList> getAccessoryList() {
-        return accessoryList;
-    }
-
-    public void setAccessoryList(List<AccessoryList> accessoryList) {
-        this.accessoryList = accessoryList;
-    }
-
-    public List<ServiceList> getServiceList() {
-        return serviceList;
-    }
-
-    public void setServiceList(List<ServiceList> serviceList) {
-        this.serviceList = serviceList;
-    }
-
     public String getKddh() {
         return kddh;
     }
@@ -524,8 +504,6 @@ public class OrderData implements Serializable {
         ", \nsfcd=" + sfcd +
         ", \nfczddbh=" + fczddbh +
         ", \nproductList=" + productList +
-        ", \naccessoryList=" + accessoryList +
-        ", \nserviceList=" + serviceList +
         ", \nkddh=" + kddh +
         ", \nkdsj=" + kdsj +
         ", \nms=" + ms +
