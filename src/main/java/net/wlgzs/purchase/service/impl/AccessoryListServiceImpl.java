@@ -111,4 +111,14 @@ public class AccessoryListServiceImpl extends ServiceImpl<AccessoryListMapper, A
         }
 
     }
+
+    //根据商品查询订单配件
+    @Override
+    public List<AccessoryList> getDateAccessoryByProduce(String ddbh, String xhbh, String ppbh) {
+        QueryWrapper<AccessoryList> queryWrapper=new QueryWrapper();
+        queryWrapper.eq("ddbh",ddbh);
+        queryWrapper.eq("XHBH",xhbh);
+        queryWrapper.eq("PPBH",ppbh);
+        return baseMapper.selectList(queryWrapper);
+    }
 }

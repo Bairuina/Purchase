@@ -279,7 +279,6 @@ public class CheckAddress {
 
     public static void main(String[] args) {
         System.out.println(checkOneAddressNumberByWord("新蔡县"));
-        System.out.println(checkOneAddressWordByNumber("003900170011"));
     }
 
 }

@@ -5,11 +5,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.ProductList;
 import net.wlgzs.purchase.mapper.ProductListMapper;
+import net.wlgzs.purchase.service.IAccessoryListService;
 import net.wlgzs.purchase.service.IProductListService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import net.wlgzs.purchase.service.IServiceListService;
 import net.wlgzs.purchase.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,6 +39,10 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
     @Resource
     private MultipartFileToFile multipartFileToFile;
 
+    @Autowired
+    IAccessoryListService iAccessoryListService;
+    @Autowired
+    IServiceListService iServiceListService;
 
     Logger logger= LoggerFactory.getLogger(ProductListServiceImpl.class);
     @Override
@@ -86,6 +93,10 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
 
         List<ProductList> lists=baseMapper.selectList(queryWrapper);
         if(lists!=null&&lists.size()!=0) {
+            for(ProductList data:lists){
+                data.setAccessoryList(iAccessoryListService.getDateAccessoryByProduce(ddbh,data.getXhbh(),data.getPpbh()));
+                data.setServiceList(iServiceListService.getDateServiceListByProduce(ddbh,data.getXhbh(),data.getPpbh()));
+            }
             logger.info("订单："+ddbh+" 商品查询状态：该订单商品查询的成功！");
             return lists;
         }
