@@ -14,10 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.MalformedURLException;
 import java.util.Base64;
 import java.util.List;
 
@@ -35,6 +33,8 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
 
     @Resource
     private ReadProperties readProperties;
+    @Resource
+    private MultipartFileToFile multipartFileToFile;
 
 
     Logger logger= LoggerFactory.getLogger(ProductListServiceImpl.class);
@@ -122,34 +122,42 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
 
     }
     @Override
-    public Result upProductListJpg(String wybs, String xhbh, String ddbh,MultipartFile myFileName){
+    public Result upProductListJpg(String wybs, String xhbh, String ddbh,MultipartFile myFileName) throws MalformedURLException {
         List<ProductList> list=baseMapper.findProductListByXhbhDdbh(xhbh, ddbh);
-
         //准备工作
+        int n;
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
         String enPwd1= Enxi.enPwd(username,pwd);
-
         String pic="";
 
-        try {
-            File picFile = null;
-            if (myFileName.equals("")||myFileName.getSize()<=0){
-                myFileName=null;
-            }else{
-                InputStream ins =null;
-                ins= myFileName.getInputStream();
-                picFile =new File(myFileName.getOriginalFilename());
+        System.out.println(myFileName.getOriginalFilename());
+        System.out.println();
+        String pathname="src/main/resources/pictures/"+xhbh+ddbh+".jpg";
+        File file=new File(pathname);
+        try(InputStream in =myFileName.getInputStream();OutputStream os=new FileOutputStream(file)){
 
+            byte[] buffer=new byte[4096];
+            while((n=in.read(buffer,0,4096))!=-1){
+                os.write(buffer,0,n);
             }
-            FileInputStream fis = new FileInputStream(picFile);
-            byte[] arr = new byte[1024 * 1024 * 5];
-            byte[] arrByte = new byte[1024 * 1024 * 5];
-            int read = fis.read(arr);
-            pic = Base64.getEncoder().encodeToString(arr);
+            BufferedReader bufferedReader= new BufferedReader(new FileReader(file));
+            //输出路径
+            bufferedReader.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        try {
+            FileInputStream fis=new FileInputStream(file);
+            byte[] arr =new byte[1024*1024*5];
+            byte[] arrByte=new byte[1024*1024*5];
+            int read=fis.read(arr);
+            pic= Base64.getEncoder().encodeToString(arr);
         }catch (IOException e){
             System.out.println("数据异常");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         //拼接Json
@@ -163,8 +171,15 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
         JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getExecTsWybs(),json);
         System.out.println(jsonObject);
         if ("Y".equals(jsonObject.getString("resultFlag"))&&"推送唯一标识成功".equals(jsonObject.getString("resultMessage"))){
-
+            ProductList productList=list.get(0);
+            productList.setWybs(wybs);
+            productList.setImgpath(pathname);
+            if(baseMapper.updateById(productList)>0){
+                return new Result(ResultCode.SUCCESS,"推送商品唯一标识成功");
+            }else{
+                return new Result(ResultCode.SUCCESS,"推送成功，本地记录失败");
+            }
         }
-        return new Result(ResultCode.SUCCESS,"成功");
+        return new Result(ResultCode.SUCCESS,"返回商品唯一标识失败");
     }
 }

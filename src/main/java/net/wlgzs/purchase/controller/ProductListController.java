@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.MalformedURLException;
+
 /**
  * <p>
  *  前端控制器
@@ -33,8 +35,8 @@ public class ProductListController extends BaseController {
      * @param ddbh 订单编号
      * @param myFileName 图片流
      */
-    @RequestMapping(value = "/product",method = RequestMethod.PUT)
-    @ApiOperation(value = "返回商品唯一标识",httpMethod = "PUT")
+    @RequestMapping(value = "/product",method = RequestMethod.POST)
+    @ApiOperation(value = "返回商品唯一标识",httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "wybs",value = "商品唯一标识"),
             @ApiImplicitParam(name = "xhbh",value = "商品编号"),
@@ -44,7 +46,7 @@ public class ProductListController extends BaseController {
     public Result pushXhbhDdbh(@RequestParam("wybs") String wybs,
                                @RequestParam("xhbh") String xhbh,
                                @RequestParam("ddbh") String ddbh,
-                               @RequestParam("imgpath") MultipartFile myFileName){
+                               @RequestParam("myFileName") MultipartFile myFileName) throws MalformedURLException {
         return iProductListService.upProductListJpg(wybs, xhbh, ddbh,myFileName);
     }
 

@@ -1,5 +1,5 @@
 package net.wlgzs.purchase.util;
-
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,6 +10,7 @@ import java.io.*;
  * @createTime 2019-10-12 15:17
  *
  */
+@Component
 public class MultipartFileToFile {
 
     /**
@@ -17,7 +18,7 @@ public class MultipartFileToFile {
      * @param file MultipartFile流
      * @throws Exception
      */
-    public static void multipartFileToFile(@RequestParam MultipartFile file)throws Exception{
+    public static File multipartFileToFile(@RequestParam MultipartFile file)throws Exception{
         File tofile =null;
         if (file.equals("")||file.getSize()<=0){
             file=null;
@@ -28,6 +29,7 @@ public class MultipartFileToFile {
             inputStreamToFile(ins,tofile);
             ins.close();
         }
+        return tofile;
     }
 
     public static void inputStreamToFile(InputStream ins,File file){

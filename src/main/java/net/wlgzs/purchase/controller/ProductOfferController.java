@@ -41,14 +41,16 @@ public class ProductOfferController extends BaseController {
             @ApiImplicitParam(name = "price",value = "商品价格"),
             @ApiImplicitParam(name = "text",value = "备注"),
             @ApiImplicitParam(name = "fwcn",value = "服务承诺"),
-            @ApiImplicitParam(name = "productlink",value = "商品在自有网站的的绝对地址")
+            @ApiImplicitParam(name = "productlink",value = "商品在自有网站的的绝对地址"),
+            @ApiImplicitParam(name = "area",value = "地区")
     })
     public Result productOffer(@RequestParam(name = "xhbh") String xhbh,
                                @RequestParam(name = "price") BigDecimal price,
                                @RequestParam(name = "text") String text,
                                @RequestParam(name = "fwcn") String fwcn,
-                               @RequestParam(name = "productlink") String productlink){
-        return iProductOfferService.productOffer(xhbh,price,text,fwcn,productlink);
+                               @RequestParam(name = "productlink") String productlink,
+                               @RequestParam(name = "area")String area){
+        return iProductOfferService.productOffer(xhbh,price,text,fwcn,productlink,area);
     }
 
     @RequestMapping(value = "/offer",method = RequestMethod.DELETE)
