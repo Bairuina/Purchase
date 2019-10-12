@@ -27,5 +27,7 @@ public interface IAccessoryListService extends IService<AccessoryList> {
     Result selectAccessory(int AccessoryId);
     //更新订单配件
     Result upDateAccessory(AccessoryList accessoryList);
+    //根据商品查询订单配件
+    List<AccessoryList> getDateAccessoryByProduce(String ddbh,String xhbh ,String ppbh);
 
 }

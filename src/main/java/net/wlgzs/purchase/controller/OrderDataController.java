@@ -80,7 +80,7 @@ public class OrderDataController extends BaseController {
     @GetMapping("/selectOneOrder")
     public ModelAndView checkDetailedOrder(@Param("ddbh") String ddbh){
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("orderData");
+        modelAndView.setViewName("orderDataTwo");
         modelAndView.addObject("allData",iOrderService.selectOneOrder(ddbh));
         System.out.println(modelAndView);
         return modelAndView;
