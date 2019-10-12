@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -78,11 +79,29 @@ public class ProductList implements Serializable {
      */
     private String wybs;
 
-    @TableField("service_list")
-    private String serviceList;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
-    @TableField("accessory_list")
-    private String accessoryList;
+    public List<ServiceList> getServiceList() {
+        return serviceList;
+    }
+
+    public void setServiceList(List<ServiceList> serviceList) {
+        this.serviceList = serviceList;
+    }
+
+    public List<AccessoryList> getAccessoryList() {
+        return accessoryList;
+    }
+
+    public void setAccessoryList(List<AccessoryList> accessoryList) {
+        this.accessoryList = accessoryList;
+    }
+
+    private List<ServiceList> serviceList;
+
+    private List<AccessoryList> accessoryList;
 
     /**
      * 图片
@@ -158,20 +177,6 @@ public class ProductList implements Serializable {
 
     public void setWybs(String wybs) {
         this.wybs = wybs;
-    }
-    public String getServiceList() {
-        return serviceList;
-    }
-
-    public void setServiceList(String serviceList) {
-        this.serviceList = serviceList;
-    }
-    public String getAccessoryList() {
-        return accessoryList;
-    }
-
-    public void setAccessoryList(String accessoryList) {
-        this.accessoryList = accessoryList;
     }
     public String getImgpath() {
         return imgpath;

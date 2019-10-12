@@ -1,6 +1,7 @@
 package net.wlgzs.purchase.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import net.wlgzs.purchase.entity.AccessoryList;
 
 /**
  * <p>

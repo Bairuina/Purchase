@@ -29,6 +29,7 @@ public class ServiceList implements Serializable {
     /**
      * 服务名称
      */
+    @TableField("fwMC")
     private String fwMC;
 
     /**
@@ -46,6 +47,7 @@ public class ServiceList implements Serializable {
     /**
      * 订单id
      */
+    @TableField("ddbh")
     private String ddbh;
 
     @TableField("XHBH")
