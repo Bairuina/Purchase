@@ -130,6 +130,143 @@
 
 
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.orderInformation,
+.commodityDetails {
+    width: 1200px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+}
+
+.name {
+    background-color: #ccc;
+    padding: 10px;
+}
+
+.orderWrap,
+.commodityWrap {
+    overflow: hidden;
+    font-size: 12px;
+    padding: 20px;
+}
+
+.orderMessage_nav {
+    width: 66%;
+    float: left;
+    display: inline-block;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.orderMessage1,
+.orderMessage2 {
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.orderMessage1 {
+    float: left;
+}
+
+.orderMessage2 {
+    float: right;
+}
+
+.orderOperation_nav {
+    width: 33.5%;
+    display: inline-block;
+    vertical-align: top;
+    float: right;
+}
+
+.label {
+    margin-right: 3%;
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+}
+
+.item {
+    margin: 5px auto;
+}
+
+.info {
+    width: 65%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.commodityWrap ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.commodityWrap ul li {
+    width: 30%;
+    margin: 0 1%;
+    list-style: none;
+    display: inline-block;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.title {
+    border-bottom: 1px solid #ccc;
+}
+
+.title li {
+    text-align: center;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.commodities,
+.mountings {
+    border-bottom: 1px solid #ccc;
+}
+
+.commodities>div,
+.mounting>div,
+.service>div {
+    width: 30%;
+    margin: 0 1%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.mounting .commodity,
+.service .commodity,
+.price,
+.amount {
+    text-align: center;
+}
+
+.detail {
+    background: rgb(225, 255, 198);
+    margin: 15px 0;
+}
+
+.total {
+    text-align: right;
+}
+
+.amountTo {
+    font-size: 18px;
+}
+
+
+
+
+
 
 
 
