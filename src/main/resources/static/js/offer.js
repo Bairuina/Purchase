@@ -13,7 +13,13 @@ $('.confirm').click(function () {
    var attentionText = $("#attention").val();
    console.log(attentionText);
    var aa = /(^[\-0-9][0-9]*(.[0-9]+)?)$/;
+   //地址的提示框
+   var alertAddress = $("#alertAddress").text();
+   //获取省份的编号
+   var addressnumber =  $(".selectAddress").find("option:selected").data("addressnumber");
    //价格后的提示框
+   //获取省份
+   var addressname =  $(".selectAddress").find("option:selected").text();
 
    if(price!='' && content!=''){
       if(aa.test(price)){
@@ -21,6 +27,7 @@ $('.confirm').click(function () {
          $("#textHint").text("");
          $(".attention").text("");
          $(".address").text("");
+         $("#alertAddress").text('');
          $.ajax({
             url:'/productoffer/offer',
             data:{
@@ -29,6 +36,7 @@ $('.confirm').click(function () {
                text:content,
                fwcn:attentionText,
                productlink:addressText,
+               area:addressnumber,
             },
             type:'PUT',
             success:function (data) {
@@ -46,6 +54,8 @@ $('.confirm').click(function () {
       }}
    else if(price==''){
       $("#priceHint").text("请输入价格");
+   }else if(addressname==""){
+      $("#alertAddress").text("请输入省份");
    }else if(address==''){
       $(".address").text("请输入商品地址");
    }else if(content==''){
@@ -54,6 +64,19 @@ $('.confirm').click(function () {
       $(".attention").text("请输入该商品售后问题");
    }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //配件报价
 $('.submitPrice').on('click',function () {
