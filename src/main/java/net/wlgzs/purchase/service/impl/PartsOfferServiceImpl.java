@@ -76,6 +76,8 @@ public class PartsOfferServiceImpl extends ServiceImpl<PartsOfferMapper, PartsOf
                     return new Result(ResultCode.SUCCESS, "修改报价成功");
                 }
             }
+        }else if (jsonObject.get("resultMessage").equals("未找到对应的商品型号报价信息")){
+            return new Result(ResultCode.FAIL,"请先对该商品报价");
         }
         return new Result(ResultCode.FAIL);
     }

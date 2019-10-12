@@ -6,6 +6,12 @@ $('.confirm').click(function () {
    console.log(price);
    var content = $("#offerTextareaContent").val();
    console.log(content);
+   var addressText = $("#address").val();
+   var address = $(".address").text();
+   console.log(addressText);
+   var attention = $('.attention').text();
+   var attentionText = $("#attention").val();
+   console.log(attentionText);
    var aa = /(^[\-0-9][0-9]*(.[0-9]+)?)$/;
    //价格后的提示框
 
@@ -13,12 +19,16 @@ $('.confirm').click(function () {
       if(aa.test(price)){
          $("#priceHint").text("");
          $("#textHint").text("");
+         $(".attention").text("");
+         $(".address").text("");
          $.ajax({
             url:'/productoffer/offer',
             data:{
                xhbh:number,
                price:price,
-               text:content
+               text:content,
+               fwcn:attentionText,
+               productlink:addressText,
             },
             type:'PUT',
             success:function (data) {
@@ -36,8 +46,12 @@ $('.confirm').click(function () {
       }}
    else if(price==''){
       $("#priceHint").text("请输入价格");
+   }else if(address==''){
+      $(".address").text("请输入商品地址");
    }else if(content==''){
       $("#textHint").text("请输入备注");
+   }else if(attention==''){
+      $(".attention").text("请输入该商品售后问题");
    }
 });
 

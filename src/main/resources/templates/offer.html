@@ -75,7 +75,7 @@
                         <p>增值服务</p>
                     </div>
                     <div class="view">
-                        <a th:href="@{/productoffer/offer/all}">
+                        <a th:href="@{/productoffer/offer/all/1/1/1}">
                             <p>
                                 查看所有已报价商品
                             </p>
@@ -143,12 +143,29 @@
                             <span id="priceHint"></span>
                         </div>
                     </div>
+                    <!--商品的地址-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel">商品地址:</label>
+                        <div class="offerInputblock">
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入商品地址" class="offerInput" style="width: 700px;" id="address">
+                            <span class="address"></span>
+                        </div>
+                    </div>
                     <!--更改报价原因-->
                     <div class="offerFormItem">
                         <label class="offerFormLabel" style="vertical-align: top;">更改报价原因:</label>
                         <div class="offerInputblock">
                             <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" id="offerTextareaContent"></textarea>
                             <span id="textHint"></span>
+                        </div>
+                    </div>
+                    <!--对该商品供货周期，以及售后服务简要描述-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel" style="vertical-align: top;">服务承诺:</label>
+                        <div class="offerInputblock">
+                            <textarea type="text" name="title" autocomplete="off" placeholder="对该商品供货周期，以及售后服务简要描述
+" class="offerTextarea" id="attention"></textarea>
+                            <span class="attention"></span>
                         </div>
                     </div>
                 </div>

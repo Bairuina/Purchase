@@ -3,7 +3,13 @@ $(".same").on('click',function(){
     console.log(indexnumber);
     $(this).parent().next().children().children().eq(indexnumber).css('display','block').siblings().css('display','none');
 });
-
+var num="";
+$('.md-trigger').on('click',function(){
+    var modal = $(this).data('modal');
+    num = $(this).data('number');
+    console.log(num)
+    $("#" + modal).niftyModal();
+});
 //撤销请求的ajax
 $(".repeal").on('click',function () {
     var number = $(this).data('number');
@@ -16,9 +22,11 @@ $(".repeal").on('click',function () {
         url:"/productoffer/offer",
         success:function (data) {
             if(data.code==0){
-                console.log(data.msg);
+                alert(data.msg);
+                window.location.reload();
             }else{
-                console.log(data.msg);
+                alert(data.msg);
+                window.location.reload();
             }
         }
     })
@@ -28,16 +36,9 @@ $(".present").on('click',function () {
     //下架原因
     var text= $(this).parent().prev().children().children().children().children().val();
     console.log(text);
-//    商品编号
-    var number = $('.outNumber').data('number');
-    console.log(number);
+
     $.ajax({
-        url:"/productoffer/offer/"+number+'/'+2+'/'+text,
-        data:{
-            xhbh:number,
-            zt:2,
-            text:text,
-        },
+        url:"/productoffer/offer/"+num+'/'+2+'/'+text,
         type:"GET",
         success:function (data) {
             if(data.code==0){
@@ -61,15 +62,10 @@ $(".putaway").on('click',function () {
     var text= $(this).parent().prev().children().children().children().children().val();
     console.log(text);
 //    商品编号
-    var putawaynumber = $('.putAway').data('putawaynumber');
-    console.log(putawaynumber);
+//     var putawaynumber = $('.putAway').data('putawaynumber');
+//     console.log(putawaynumber);
     $.ajax({
-        url:"/productoffer/offer/"+putawaynumber+'/'+1+'/'+text,
-        data:{
-            xhbh:putawaynumber,
-            zt:1,
-            text:text,
-        },
+        url:"/productoffer/offer/"+num+'/'+1+'/'+text,
         type:"GET",
         success:function (data) {
             if(data.code==0){
