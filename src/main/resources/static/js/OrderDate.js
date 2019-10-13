@@ -92,7 +92,7 @@ $(".lookContract").on('click', function () {
             console.log(data);
             if(data.code=='0'){
                 alert("查看合同成功！")
-                window.onload;
+                location.href="date";
             }
             else{
                 alert("查看合同失败！")

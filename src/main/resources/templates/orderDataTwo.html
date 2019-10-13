@@ -249,6 +249,27 @@
         <button class="signSubmit_btn">提交</button>
     </div>
 </div>
+<!--推送标识码-->
+<div class="code_modal">
+    <ul class="bill_startTimeBox">
+        <li><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="QRCode_orderID" value="" /></li>
+        <li><span>类型编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_goodsID" id="QRcode_ModalID" value="" /></li>
+        <li><span>商品标识码：</span>&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_onlyCodeID" id="QRcode_onlyCodeID" value="" /></li>
+        <li>
+            <span>标识码图片：</span>&emsp;&emsp;&emsp;&emsp;
+            <div class="picBox">
+                <div>
+                    <img class="pic">
+                    <input class="upload QRcode" name="file" type="file" style="display: none"/>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="code_btns_box">
+        <button class="idenCode_return">返回</button>
+        <button class="codeSubmit_btn">完成</button>
+    </div>
+</div>
 
 <!--提示模态框-->
 <div class="modal">
