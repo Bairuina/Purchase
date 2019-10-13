@@ -80,7 +80,6 @@
                                 查看所有已报价商品
                             </p>
                         </a>
-
                     </div>
                 </div>
                 <div style="clear: both"></div>
@@ -133,6 +132,18 @@
                                     </p>
                             </div>
                             <div style="clear: both"></div>
+                        </div>
+                    </div>
+                    <!--选地区-->
+                    <div class="offerFormItem">
+                        <div style="height: 100%;">
+                            <div class="offerFormLabel">地址:</div>
+                            <div class="offerInputblock">
+                                <select style="width: 150px;cursor: pointer;outline-style: none;" class="selectAddress" >
+                                    <option  th:each="area:${areas}"th:text="${area[1]}" th:data-addressnumber="${area[0]}"  ></option>
+                                    <span id="alertAddress"></span>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <!--报价-->

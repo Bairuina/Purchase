@@ -1,6 +1,9 @@
 package net.wlgzs.purchase.util;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CheckAddress {
     static String[] allAddressData={
             "0039	河南省",
@@ -260,9 +263,28 @@ public class CheckAddress {
         return "无查询结果";
     }
 
+    /**
+     * 返回全部地区
+     * @return List
+     */
+    public static List<String[]> allArea(){
+        List<String[]> list=new ArrayList<>();
+        for (String dataChack:allAddressData){
+            String[] s=dataChack.split("	");
+            list.add(s);
+        }
+        return list;
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(checkOneAddressNumberByWord("新蔡县"));
-        System.out.println(checkOneAddressWordByNumber("003900170011"));
+
+//        System.out.println(checkOneAddressNumberByWord("新蔡县"));
+        List<String[]> list=new ArrayList<>();
+        for (String dataChack:allAddressData){
+            String[] s=dataChack.split("	");
+            list.add(s);
+        }
     }
 
 }

@@ -104,32 +104,32 @@ $(".lookContract").on('click', function () {
     })
 });
 
-$(".checkInvoice").on('click', function () {
-    var orderReference = $("#ddbhData").text();
-    console.log(orderReference);
-    $.ajax({
-        type: "put",
-        url: "/order-data/invoiceEndTimeSubmit",
-        data: {
-            'ddbh': orderReference,
-        },
-        contentType:"application/json",
-        dataType:"json",
-        success: function (data) {
-            console.log(data);
-            if(data.code=='0'){
-                alert("开具发票成功！")
-                window.onload;
-            }
-            else{
-                alert("开具发票失败！")
-            }
-        },
-        error: function (msg) {
-            alert("开具发票失败！");
-        }
-    })
-});
+// $(".checkInvoice").on('click', function () {
+//     var orderReference = $("#ddbhData").text();
+//     console.log(orderReference);
+//     $.ajax({
+//         type: "put",
+//         url: "/order-data/invoiceEndTimeSubmit",
+//         data: {
+//             'ddbh': orderReference,
+//         },
+//         contentType:"application/json",
+//         dataType:"json",
+//         success: function (data) {
+//             console.log(data);
+//             if(data.code=='0'){
+//                 alert("开具发票成功！")
+//                 window.onload;
+//             }
+//             else{
+//                 alert("开具发票失败！")
+//             }
+//         },
+//         error: function (msg) {
+//             alert("开具发票失败！");
+//         }
+//     })
+// });
 
 
 //提交更改

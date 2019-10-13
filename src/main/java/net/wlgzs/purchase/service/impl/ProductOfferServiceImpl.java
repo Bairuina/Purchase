@@ -43,7 +43,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
 
     //报价一个商品
     @Override
-    public Result productOffer(String xhbh, BigDecimal price, String text,String fwcn,String productlink){
+    public Result productOffer(String xhbh, BigDecimal price, String text,String fwcn,String productlink,String area){
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -77,12 +77,13 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
                 "\"ppmc\":\"" + product.getPpmc() + "\"," +
                 "\"lbbh\":\"" + product.getLbbh() + "\"," +
                 "\"lbmc\":\"" + product.getLbmc() + "\"," +
-                "\"area\":\"00390019\"," +
+                "\"area\":\""+area+"\"," +
                 "\"fwcn\":\""+fwcn+"\"," +
                 "\"sjjg\": \""+price+"\"," +
                 "\"productlink\":\""+productlink+"\"," +
                 "\"pjxxList\":"+ pjxxList +","+
                 "\"jgsfyy\":\""+text+"\"}";
+        System.out.println("传出的数据"+json);
         JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getExecute(),json);
         System.out.println(jsonObject);
         if(jsonObject.getString("resultFlag").equals("Y")){
@@ -92,6 +93,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
             productOffer.setXhbh(xhbh);
             if (jsonObject.getString("resultMessage").equals("商品上架成功,商品详细信息已返回")){
                 productOffer.setZt("1");
+                productOffer.setArea(area);
                 if (jg.size()==0){
                     if(baseMapper.insert(productOffer)>0){
                         return new Result(ResultCode.SUCCESS,"报价成功");

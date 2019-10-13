@@ -22,10 +22,12 @@ public interface IServiceListService extends IService<ServiceList> {
     //根据订单id删除订单服务
     Result delServiceByOrderId(String ddbh);
     //查询订单服务列表
-    List<ServiceList> selectServiceList(String ddbh);
+    List<ServiceList> selectServiceList(String ddbh,String xhbm,String ppbm);
     //查询单个订单服务
     Result selectService(int serviceId);
     //更新订单服务
     Result upDataService(ServiceList serviceList);
+    //根据商品查询订单服务
+    List<ServiceList> getDateServiceListByProduce(String ddbh,String xhbh ,String ppbh);
 
 }

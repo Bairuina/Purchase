@@ -69,9 +69,11 @@ public class ServiceListServiceImpl extends ServiceImpl<ServiceListMapper, Servi
     }
 
     @Override
-    public  List<ServiceList> selectServiceList(String ddbh) {
+    public  List<ServiceList> selectServiceList(String ddbh,String xhbm,String ppbm) {
         QueryWrapper<ServiceList> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("ddbh",ddbh);
+        queryWrapper.eq("xhbm",xhbm);
+        queryWrapper.eq("ppbm",ppbm);
         List<ServiceList> lists=baseMapper.selectList(queryWrapper);
         if(lists!=null&&lists.size()!=0) {
             logger.info("订单："+ddbh+" 查询状态：订单服务查询的成功！");
@@ -108,4 +110,16 @@ public class ServiceListServiceImpl extends ServiceImpl<ServiceListMapper, Servi
             return new Result(ResultCode.FAIL);
         }
     }
+
+    //根据商品查询订单服务
+    @Override
+    public List<ServiceList> getDateServiceListByProduce(String ddbh, String xhbh, String ppbh) {
+        QueryWrapper<ServiceList> queryWrapper=new QueryWrapper();
+        queryWrapper.eq("ddbh",ddbh);
+        queryWrapper.eq("XHBH",xhbh);
+        queryWrapper.eq("PPBH",ppbh);
+        return baseMapper.selectList(queryWrapper);
+    }
+
+
 }

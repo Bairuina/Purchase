@@ -1,10 +1,4 @@
-/*
-Bootstable
- @description  Javascript library to make HMTL tables editable, using Bootstrap
- @version 1.1
- @autor Tito Hinostroza
-*/
-  "use strict";
+ "use strict";
   //Global variables
   var params = null;  		//Parameters
   var colsEdi =null;

@@ -79,6 +79,12 @@ public class ProductList implements Serializable {
      */
     private String wybs;
 
+    /**
+     * 图片地址
+     */
+    private String imgpath;
+
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -103,10 +109,6 @@ public class ProductList implements Serializable {
 
     private List<AccessoryList> accessoryList;
 
-    /**
-     * 图片
-     */
-    private String imgpath;
 
     public Integer getProductlistId() {
         return productlistId;
