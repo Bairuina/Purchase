@@ -270,7 +270,7 @@ public class CheckAddress {
     public static List<String[]> allArea(){
         List<String[]> list=new ArrayList<>();
         for (String dataChack:allAddressData){
-            String[] s=dataChack.split(" ");
+            String[] s=dataChack.split("	");
             list.add(s);
         }
         return list;
@@ -278,7 +278,13 @@ public class CheckAddress {
 
 
     public static void main(String[] args) {
-        System.out.println(checkOneAddressNumberByWord("新蔡县"));
+
+//        System.out.println(checkOneAddressNumberByWord("新蔡县"));
+        List<String[]> list=new ArrayList<>();
+        for (String dataChack:allAddressData){
+            String[] s=dataChack.split("	");
+            list.add(s);
+        }
     }
 
 }

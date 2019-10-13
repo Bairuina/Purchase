@@ -83,6 +83,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
                 "\"productlink\":\""+productlink+"\"," +
                 "\"pjxxList\":"+ pjxxList +","+
                 "\"jgsfyy\":\""+text+"\"}";
+        System.out.println("传出的数据"+json);
         JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getExecute(),json);
         System.out.println(jsonObject);
         if(jsonObject.getString("resultFlag").equals("Y")){

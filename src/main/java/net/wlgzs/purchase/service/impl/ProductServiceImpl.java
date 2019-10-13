@@ -175,6 +175,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         modelAndView.addObject("serviceValueList",fulist);                   //返回全部服务及其报价
         List<String[]> areas=CheckAddress.allArea();
         modelAndView.addObject("areas",areas);
+        System.out.println(areas.get(0)[0]+areas.get(0)[1]);
         String json=product.getParametersList();
         List<Parameters> parametersList= JSON.parseArray(json,Parameters.class);
         modelAndView.addObject("parametersList",parametersList);

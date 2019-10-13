@@ -23,7 +23,7 @@ public class FilterConfiguration {
         registration.addUrlPatterns("/order-data/*");
         registration.addUrlPatterns("/parts/*");
         registration.addUrlPatterns("/parts-offer/*");
-//        registration.addUrlPatterns("/product/*");
+        registration.addUrlPatterns("/product/*");
         registration.addUrlPatterns("/product-list/*");
         registration.addUrlPatterns("/productoffer/*");
         registration.addUrlPatterns("/service/*");

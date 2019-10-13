@@ -40,6 +40,7 @@ $('.confirm').click(function () {
             },
             type:'PUT',
             success:function (data) {
+               console.log(addressname)
                if(data.code==0){
                   alert(data.msg);
                   window.location.reload();
