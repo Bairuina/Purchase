@@ -45,7 +45,8 @@ public class LoginFilter implements Filter {
         } else {
             System.out.println("前台未通过");
             // session不存在 准备跳转失败
-            httpResponse.sendRedirect("../login/toLogin");
+            System.out.println(httpRequest.getContextPath()+"/login/toLogin");
+            httpResponse.sendRedirect(httpRequest.getContextPath()+"/login/toLogin");
             return;
         }
     }
