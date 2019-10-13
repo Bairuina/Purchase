@@ -107,6 +107,13 @@ body {
 .collectionConfirm {
     background-color: #ec63ff;
 }
+.collection{
+    text-align: center;
+}
+.collection input{
+    display: inline-block;
+    margin: 10px auto;
+}
 
 .item .label {
     margin-right: 3%;
@@ -282,7 +289,7 @@ body {
 
 
 
-.modal {
+.bill_btns_box .modal {
     display: none;
     width: 500px;
     height: 200px;
@@ -301,4 +308,7 @@ body {
 .informInner {
     margin: 8% 0 0 8%;
     text-indent: 38px;
+}
+.AddIdentification{
+    cursor: pointer;
 }
