@@ -38,7 +38,7 @@
                 </div>
                 <div class="item">
                     <span class="label">订单编号</span>
-                    <span class="info" th:text="${allData.data[0].ddbh}"></span>
+                    <span class="info ddbh" th:text="${allData.data[0].ddbh}"></span>
                 </div>
                 <div class="item">
                     <span class="label" >采购人名称</span>
@@ -171,7 +171,7 @@
             <div class="commodities">
                 <div class="commodity">
                     <div class="item">
-                        <span class="label" th:data-xhbh="${product.xhbh}">型号名称</span>
+                        <span class="label xhbh" th:data-xhbh="${product.xhbh}">型号名称</span>
                         <span class="info" th:if="${product.xhmc==null}">暂无内容</span>
                         <span class="info" th:if="${product.xhmc!=null}" th:text="${product.xhmc}"></span>
                     </div>
@@ -252,13 +252,15 @@
 <!--推送标识码-->
 <div class="code_modal">
     <ul class="bill_startTimeBox">
+        <li style="display: none"><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="orderID" value="" readonly="readonly" /></li>
+        <li style="display: none"><span>商品编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_goodsID" id="QRcode_goodsID"  readonly="readonly" value="" /></li>
         <li><span>商品标识码：</span>&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_onlyCodeID" id="QRcode_onlyCodeID" value="" /></li>
         <li>
             <span>标识码图片：</span>&emsp;&emsp;&emsp;&emsp;
             <div class="picBox">
                 <div>
                     <img class="pic">
-                    <input class="upload QRcode" name="file" type="file" style="display: none"/>
+                    <input class="upload QRcode" id="image" name="file" type="file" multiple style="display: none"/>
                 </div>
             </div>
         </li>
