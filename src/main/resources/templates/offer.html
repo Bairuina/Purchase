@@ -80,7 +80,6 @@
                                 查看所有已报价商品
                             </p>
                         </a>
-
                     </div>
                 </div>
                 <div style="clear: both"></div>
@@ -140,15 +139,9 @@
                         <div style="height: 100%;">
                             <div class="offerFormLabel">地址:</div>
                             <div class="offerInputblock">
-                                <select style="    width: 150px;cursor: pointer;outline-style: none;">
-                                    <option>1</option>
-                                    <option>1</option>
-                                    <option>1</option>
-                                    <option>1</option>
-                                    <option>1</option>
-                                    <option>1</option>
-                                    <option>1</option>
-                                    <option>1</option>
+                                <select style="width: 150px;cursor: pointer;outline-style: none;" class="selectAddress">
+                                    <option th:each="area:${areas}" th:text="${area[1]}" th:data-addressnumber="${area[0]}"  ></option>
+                                    <span id="alertAddress"></span>
                                 </select>
                             </div>
                         </div>
