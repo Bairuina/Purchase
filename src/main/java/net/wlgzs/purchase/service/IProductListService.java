@@ -5,6 +5,7 @@ import net.wlgzs.purchase.entity.ProductList;
 import net.wlgzs.purchase.util.Result;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.MalformedURLException;
 import java.util.List;
 
@@ -31,6 +32,6 @@ public interface IProductListService extends IService<ProductList> {
     Result upDateProductList(ProductList productList);
 
     //添加商品唯一标识图片字段
-    Result upProductListJpg(String wybs, String xhbh, String ddbh, MultipartFile myFileName) throws MalformedURLException;
+    Result upProductListJpg(String wybs, String xhbh, String ddbh, MultipartFile myFileName, HttpServletRequest httpServletRequest) throws MalformedURLException;
 
 }

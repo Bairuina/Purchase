@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.util.Base64;
@@ -133,8 +134,10 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
 
     }
     @Override
-    public Result upProductListJpg(String wybs, String xhbh, String ddbh,MultipartFile myFileName) throws MalformedURLException {
+    public Result upProductListJpg(String wybs, String xhbh, String ddbh, MultipartFile myFileName, HttpServletRequest httpServletRequest) throws MalformedURLException {
         List<ProductList> list=baseMapper.findProductListByXhbhDdbh(xhbh, ddbh);
+
+        System.out.println(wybs+"****"+xhbh+"*****"+myFileName+"*****"+ddbh);
         //准备工作
         int n;
         String url=readProperties.getUrl();
@@ -145,10 +148,10 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
 
         System.out.println(myFileName.getOriginalFilename());
         System.out.println();
-        String pathname="src/main/resources/pictures/"+xhbh+ddbh+".jpg";
+        String pathname= httpServletRequest.getContextPath()+"pictures\\"+xhbh+ddbh+".jpg";
+        System.out.println(pathname);
         File file=new File(pathname);
         try(InputStream in =myFileName.getInputStream();OutputStream os=new FileOutputStream(file)){
-
             byte[] buffer=new byte[4096];
             while((n=in.read(buffer,0,4096))!=-1){
                 os.write(buffer,0,n);
@@ -159,17 +162,20 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
         }catch (IOException e){
             e.printStackTrace();
         }
+        //图片处理
         try {
             FileInputStream fis=new FileInputStream(file);
-            byte[] arr =new byte[1024*1024*5];
+            byte[] arr=new byte[1024*1024*5];
             byte[] arrByte=new byte[1024*1024*5];
             int read=fis.read(arr);
-            pic= Base64.getEncoder().encodeToString(arr);
-        }catch (IOException e){
-            System.out.println("数据异常");
-        } catch (Exception e) {
+            System.arraycopy(arr,0,arrByte,0,read);
+            pic=Base64.getEncoder().encodeToString(arrByte);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         //拼接Json
         String json="{\"username\":\""+username+"\"," +

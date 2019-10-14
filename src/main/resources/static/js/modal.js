@@ -94,19 +94,23 @@ function billEndSend(){
 
 //推送标识码
 function codeSend(){
+	var ddbh= $(".ddbh").text();
+	var xhbh= $(".xhbh").text();
+	console.log(xhbh);
+	console.log(ddbh);
 	var QR_orderID = $("#QRCode_orderID").val();
 	var QRcode_ModalID = $("#QRcode_ModalID").val();
 	var QRcode_onlyCodeID = $("#QRcode_onlyCodeID").val();
 	if((QRcode_onlyCodeID != '') && (url != '')){
 		$.ajax({
 			type:"post",
-			url:"",
+			url:"/productList/product",
 			dataType:"json",
 			data:{
 				"ddbh":QR_orderID,
 				"xhbh":QRcode_ModalID,
 				"wybs":QRcode_onlyCodeID,
-				"pic":url
+				"myFileName":url
 			},
 			success:function(data){
 				if(data.code == 1){

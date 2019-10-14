@@ -37,8 +37,8 @@
                         </span>
                 </div>
                 <div class="item">
-                    <span class="label">订单编号</span>
-                    <span class="info" th:text="${allData.data[0].ddbh}"></span>
+                    <span class="label ">订单编号</span>
+                    <span class="info" ddbh th:text="${allData.data[0].ddbh}"></span>
                 </div>
                 <div class="item">
                     <span class="label" >采购人名称</span>
@@ -171,7 +171,7 @@
             <div class="commodities">
                 <div class="commodity">
                     <div class="item">
-                        <span class="label" th:data-xhbh="${product.xhbh}">型号名称</span>
+                        <span class="label xhbh" th:data-xhbh="${product.xhbh}">型号名称</span>
                         <span class="info" th:if="${product.xhmc==null}">暂无内容</span>
                         <span class="info" th:if="${product.xhmc!=null}" th:text="${product.xhmc}"></span>
                     </div>
