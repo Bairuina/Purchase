@@ -122,6 +122,8 @@ body {
     vertical-align: top;
     color: #000;
     text-align: left;
+    font-weight: 400;
+    font-size: 12px;
 }
 
 .item {
