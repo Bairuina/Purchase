@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.Request;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.MalformedURLException;
 
 /**
@@ -41,13 +43,14 @@ public class ProductListController extends BaseController {
             @ApiImplicitParam(name = "wybs",value = "商品唯一标识"),
             @ApiImplicitParam(name = "xhbh",value = "商品编号"),
             @ApiImplicitParam(name = "ddbh",value = "订单编号"),
-            @ApiImplicitParam(name = "myFileName",value = "图片")
+            @ApiImplicitParam(name = "myFileName",value = "图片"),
     })
     public Result pushXhbhDdbh(@RequestParam("wybs") String wybs,
                                @RequestParam("xhbh") String xhbh,
                                @RequestParam("ddbh") String ddbh,
-                               @RequestParam("myFileName") MultipartFile myFileName) throws MalformedURLException {
-        return iProductListService.upProductListJpg(wybs, xhbh, ddbh,myFileName);
+                               @RequestParam("myFileName") MultipartFile myFileName,
+                               HttpServletRequest httpServletRequest) throws MalformedURLException {
+        return iProductListService.upProductListJpg(wybs, xhbh, ddbh,myFileName,httpServletRequest);
     }
 
 }
