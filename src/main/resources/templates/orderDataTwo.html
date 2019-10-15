@@ -38,7 +38,7 @@
                 </div>
                 <div class="item">
                     <span class="label">订单编号</span>
-                    <span class="info ddbh" th:text="${allData.data[0].ddbh}"></span>
+                    <span class="info" id="ddbhDataWord" th:text="${allData.data[0].ddbh}"></span>
                 </div>
                 <div class="item">
                     <span class="label" >采购人名称</span>
@@ -63,7 +63,7 @@
             </div>
             <div class="orderMessage2">
                 <div class="item">
-                    <span class="label">订单状态</span>
+                    <span class="label" id="ztDataWordLiWord" th:data-ztdata="${allData.data[0].zt}">订单状态</span>
                     <span class="info">  <span class="orderZtData" th:if="${allData.data[0].zt=='2'}">供应商待确认</span>
                         <span class="orderZtData" th:if="${allData.data[0].zt=='3'}">待验收</span>
                         <span class="orderZtData" th:if="${allData.data[0].zt=='4'}">订单已取消</span>
@@ -138,19 +138,19 @@
                     <h4 class="modal-title" id="myModalLabel">添加收款信息</h4>
                 </div>
                 <div class="modal-body collection" >
-                    收款标志：<input type="text" name="skbz" id="skbz" list="sexlist" autocomplete="off">
+                    收款标志：<input type="text" name="skbz" id="skbzDataSelect" list="sexlist" autocomplete="off">
                     <datalist id="sexlist">
                         <option>已收款</option>
                         <option>未收款</option>
                     </datalist>
                     <br>
-                    收款金额：<input name="skje" id="skje" >
+                    收款金额：<input name="skje" id="skjeDataSelect" >
                     <br>
-                    收款时间：<input name="sksj" id="sksj" >
+                    收款时间：<input name="sksj" id="sksjDataSelect" class="ui_timepicker" readonly="readonly" >
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" onclick="update()">提交更改</button>
+                    <button type="button" class="btn btn-primary" id="submitMoney">提交更改</button>
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
             <div class="commodities">
                 <div class="commodity">
                     <div class="item">
-                        <span class="label xhbh" th:data-xhbh="${product.xhbh}">型号名称</span>
+                        <span class="label" th:data-xhbh="${product.xhbh}">型号名称</span>
                         <span class="info" th:if="${product.xhmc==null}">暂无内容</span>
                         <span class="info" th:if="${product.xhmc!=null}" th:text="${product.xhmc}"></span>
                     </div>
@@ -182,14 +182,12 @@
                     </div>
                     <div class="item" th:data-xhbh="${product.xhbh}">
                         <span class="label">商品标识码</span>
-                        <span class="info AddIdentification">上传商品标识码信息</span>
+                        <span class="info AddIdentification" th:data-wybs="${product.wybs}">上传商品标识码信息</span>
                     </div>
                 </div>
                 <div class="price">
-                    <span class="concretePrice" th:if="${product.sjjg==null}">暂无内容</span>
-                    ¥<span class="concretePrice" th:if="${product.sjjg!=null}" th:text="${product.sjjg}"></span>
-<!--                    </br>-->
-<!--                    <span class="info" th:if="${product.xjjg==null}">暂无内容</span><span class="info" th:if="${product.xjjg!=null}" th:text="${product.xjjg}"></span>-->
+                    商品的实际价格:     ¥<span class="info" th:if="${product.sjjg==null}">暂无内容</span><span class="info" th:if="${product.sjjg!=null}" th:text="${product.sjjg}"></span></br>
+                    小计价格:           ¥<span class="info" th:if="${product.xjjg==null}">暂无内容</span><span class="info" th:if="${product.xjjg!=null}" th:text="${product.xjjg}"></span>
                 </div>
                 <div class="amount">
                     <span class="concreteAmount" th:if="${product.sl==null}" >暂无信息</span>
@@ -224,14 +222,14 @@
             </div>
         </div >
         <div class="total">
-            <span>总计:<span class="amountTo">¥1000</span></span>
+                <span>总计:<span class="amountTo" th:text="'¥'+${allData.data[0].ddze}"></span></span>
         </div>
     </div>
 </div>
 <!--开具发票时间模态框-->
 <div class="start_modal">
     <ul class="bill_startTimeBox">
-        <li><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="start_orderID" value="" /></li>
+        <li><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="start_orderID" th:value="${allData.data[0].ddbh}"  readonly="readonly" /></li>
         <li><span>发票开具时间：</span>&emsp;&emsp;&emsp;<input type="text" name="bill_StartTime" id="bill_StartTime" class="ui_timepicker" readonly="readonly" value="" placeholder=" 格式要求" /></li>
     </ul>
     <div class="bill_btns_box">
@@ -243,7 +241,7 @@
 <!--签收发票时间模态框-->
 <div class="end_modal">
     <ul class="bill_startTimeBox">
-        <li><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="sign_orderID" value="" /></li>
+        <li><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="sign_orderID" th:value="${allData.data[0].ddbh}" readonly="readonly" /></li>
         <li><span>发票签收时间：</span>&emsp;&emsp;&emsp;<input type="text" name="bill_SignTime" id="bill_SignTime" class="ui_timepicker" readonly="readonly" value="" placeholder=" 格式要求" /></li>
     </ul>
     <div class="bill_btns_box">
@@ -254,20 +252,22 @@
 <!--推送标识码-->
 <div class="code_modal">
     <ul class="bill_startTimeBox">
-        <li style="display: none"><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="orderID" value="" readonly="readonly" /></li>
-        <li style="display: none"><span>商品编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_goodsID" id="QRcode_goodsID"  readonly="readonly" value="" /></li>
+        <li><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="QRCode_orderID" readonly="readonly" value="" /></li>
+        <li><span>类型编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_goodsID" id="QRcode_ModalID" value="" /></li>
         <li><span>商品标识码：</span>&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_onlyCodeID" id="QRcode_onlyCodeID" value="" /></li>
         <li>
             <span>标识码图片：</span>&emsp;&emsp;&emsp;&emsp;
             <div class="picBox">
                 <div>
                     <img class="pic">
-                    <input class="upload QRcode" id="image" name="file" type="file" multiple style="display: none"/>
+                    <input class="upload QRcode" name="file" type="file" style="display: none"/>
                 </div>
             </div>
         </li>
     </ul>
-    <div class="code_btns_box" style="text-align: center;margin: 120px 20px 20px 50px;">
+    <div class="code_btns_box" style="text-align: right;
+    margin-right: 60px;
+    margin-top: 40px;">
         <button class="idenCode_return">返回</button>
         <button class="codeSubmit_btn">完成</button>
     </div>
@@ -278,8 +278,9 @@
     <h3 class="informTitle">未来工作室：</h3>
     <p class="informInner">消息已经推送成功！</p>
 </div>
-
-<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-1.7.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>-->
 <script type="text/javascript" th:src="@{/js/jquery-ui-1.8.17.custom.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery-ui-timepicker-addon.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery-ui-timepicker-zh-CN.js}"></script>

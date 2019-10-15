@@ -25,7 +25,7 @@
         </div>
             <div class="search">
                 <form action="/order-data/select/">
-                    <select class="selects" name="zt" >
+                    <select name="zt" style="color: #757575;width: 22%;height: 100%;outline: none;border: 0px;padding: 5px;float: left;font-size: 18px" >
                         <option  th:if="${zt==null || zt=='all'}" value="all">全部状态</option>
                         <option  th:if="${zt=='2'}" th:value="${zt}">待确定</option>
                         <option  th:if="${zt=='3'}" th:value="${zt}">待验收</option>
@@ -47,24 +47,17 @@
     <div class="oeder_list_nav" style="min-height: 970px;">
         <div class="order_list">
             <div class="order_list_left">
-<!--                <ul class="guider">-->
-<!--                    <li><a href="">全部订单</a></li>-->
-<!--                    <li><a href="">待确定订单</a></li>-->
-<!--                    <li><a href="">接受订单</a></li>-->
-<!--                    <li><a href="">拒绝订单</a></li>-->
-<!--                    <li><a href="">已签收订单</a></li>-->
-<!--                </ul>-->
-                <ul class="guider">
-                    <li style="margin-top: 0px" th:if="${zt!=null && zt!='all'}"><a th:href="@{'/order-data/select/'}">全部订单</a></li>
-                    <li th:if="${zt==null || zt=='all'}"><a th:href="@{'/order-data/select/'}">全部订单</a></li>
-                    <li th:if="${zt==null || zt!='2'}"><a th:href="@{'/order-data/select/?zt=2'}">待确定订单</a></li>
-                    <li th:if="${zt!=null and zt=='2'}"><a th:href="@{'/order-data/select/?zt=2'}">待确定订单</a></li>
-                    <li th:if="${zt==null || zt!='3'}"><a class="accept" th:href="@{'/order-data/select/?zt=3'}">接受订单</a></li>
-                    <li th:if="${zt!=null and zt=='3'}"><a class="accept" th:href="@{'/order-data/select/?zt=3'}">接受订单</a></li>
-                    <li th:if="${zt==null || zt!='4'}"><a th:href="@{'/order-data/select/?zt=4'}">拒绝订单</a></li>
-                    <li th:if="${zt!=null and zt=='4'}"><a th:href="@{'/order-data/select/?zt=4'}">拒绝订单</a></li>
-                    <li th:if="${zt==null || zt!='5'}"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
-                    <li th:if="${zt!=null and zt=='5'}"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
+                <ul>
+                    <li th:if="${zt!=null && zt!='all'}"><a style="transform: translateX(-10px);"class="excursion" th:href="@{'/order-data/select/'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--1" fill="#fff"></use></svg>全部订单</a></li>
+                    <li th:if="${zt==null || zt=='all'}" style="border-left: 10px solid #0984E0;"><a style="transform: translateX(-10px);" class="excursion" th:href="@{'/order-data/select/'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--1" fill="#fff"></use></svg>全部订单</a></li>
+                    <li th:if="${zt==null || zt!='2'}"><a style="transform: translateX(-10px);"  class="excursion" th:href="@{'/order-data/select/?zt=2'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--3" fill="#fff"></use></svg>待确定订单</a></li>
+                    <li th:if="${zt!=null and zt=='2'}" style="border-left: 10px solid #0984E0;"><a class="excursion" th:href="@{'/order-data/select/?zt=2'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--3" fill="#fff"></use></svg>待确定订单</a></li>
+                    <li th:if="${zt==null || zt!='3'}"><a style="transform: translateX(-10px);" class="accept excursion" th:href="@{'/order-data/select/?zt=3'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--2" fill="#fff"></use></svg>接受订单</a></li>
+                    <li th:if="${zt!=null and zt=='3'}" style="border-left: 10px solid #0984E0;"><a class="accept excursion" th:href="@{'/order-data/select/?zt=3'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--2" fill="#fff"></use></svg>接受订单</a></li>
+                    <li th:if="${zt==null || zt!='4'}"><a style="transform: translateX(-10px);" class="excursion" th:href="@{'/order-data/select/?zt=4'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--5" fill="#fff"></use></svg>拒绝订单</a></li>
+                    <li th:if="${zt!=null and zt=='4'}" style="border-left: 10px solid #0984E0;"><a class="excursion" th:href="@{'/order-data/select/?zt=4'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--5" fill="#fff"></use></svg>拒绝订单</a></li>
+                    <li th:if="${zt==null || zt!='5'}"><a style="transform: translateX(-10px);" class="excursion" th:href="@{'/order-data/select/?zt=5'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--4" fill="#fff"></use></svg>已签收订单</a></li>
+                    <li th:if="${zt!=null and zt=='5'}" style="border-left: 10px solid #0984E0;"><a class="excursion" th:href="@{'/order-data/select/?zt=5'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--4" fill="#fff"></use></svg>已签收订单</a></li>
                 </ul>
             </div>
             <div class="order_list_right">
@@ -88,7 +81,8 @@
                         <div class="order_details">
                             <ul>
                                 <li>
-                                    <div class="shangpin" style="text-align: left">
+                                    <div class="shangpin" style="text-alig
+                                    n: left">
                                         <table>
                                             <caption>总计: <span th:text="${ordeData.ddze}"></span>元</caption>
                                             <tr>
@@ -123,7 +117,15 @@
                                         <span th:if="${ordeData.zt=='4'}">订单已取消</span>
                                         <span th:if="${ordeData.zt=='5'}">验收通过</span>
                                     </div>
-                                    <div th:data-ddbhData="${ordeData}" data-toggle="modal" data-target="#myModal" style="cursor: pointer;">查看物流详情</div>
+                                    <div class="arriveData" data-toggle="modal" data-target="#myModal" style="cursor: pointer;"
+                                        th:data-sfcd="${ordeData.sfcd}"
+                                        th:data-fczddbh="${ordeData.fczddbh}"
+                                        th:data-kdgs="${ordeData.kdgs}"
+                                        th:data-kddh="${ordeData.kddh}"
+                                        th:data-ms="${ordeData.ms}"
+                                        th:data-kdsj="${ordeData.kdsj}"
+                                        th:data-ddbh="${ordeData.ddbh}"
+                                    >查看物流详情</div>
 
                                 </li>
                             </ul>
@@ -156,36 +158,33 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>是否拆单</td>
-                            <td th:if="${orderDara.sfcd!=null && orderDara.sfcd=='0'}">拆单</td>
-                            <td th:if="${orderDara.sfcd!=null && orderDara.sfcd=='1'}">不拆单</td>
-                            <td th:if="${orderDara.sfcd==null}">信息错误</td>
+                            <td>订单编号</td>
+                            <td id="ddbhData"></td>
+                        </tr>
+                        <tr>
+                            <td>是否拆单（0--是 1--否）</td>
+                            <td id="sfcdData"></td>
                         </tr>
                         <tr>
                             <td>分拆子订单编号</td>
-                            <td th:if="${orderDara.sfcd!=null && orderDara.sfcd=='0'}" th:text="${orderDara.fczddbh}">拆单</td>
-                            <td th:if="${orderDara.sfcd!=null && orderDara.sfcd=='1'}">无分拆子订单编号</td>
-                            <td th:if="${orderDara.sfcd==null}">信息错误</td>
+                            <td id="fczddbhData"></td>
                         </tr>
                         <tr>
                             <td>快递公司</td>
-                            <td th:if="${orderDara.kdgs==null}">信息异常</td>
-                            <td th:if="${orderDara.kdgs!=null}" th:text="${orderDara.kdgs}"></td>
+                            <td id="kdgsData"></td>
+
                         </tr>
                         <tr>
                             <td>快递单号</td>
-                            <td th:if="${orderDara.kddh==null}">信息异常</td>
-                            <td th:if="${orderDara.kddh!=null}" th:text="${orderDara.kddh}"></td>
+                            <td id="kddhData"></td>
                         </tr>
                         <tr>
                             <td>描述</td>
-                            <td th:if="${orderDara.ms==null}">无描述</td>
-                            <td th:if="${orderDara.ms!=null}" th:text="${orderDara.ms}"></td>
+                            <td id="msData"></td>
                         </tr>
                         <tr>
-                            <td>快递时间</td>
-                            <td th:if="${orderDara.kdsj==null}">无描述</td>
-                            <td th:if="${orderDara.kdsj!=null}" th:text="${orderDara.kdsj}"></td>
+                            <td>快递时间（14位 例：20191013000000）</td>
+                            <td id="kdsjData"></td>
                         </tr>
                         </tbody>
                     </table>
@@ -194,7 +193,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-success">
+                    <button id="sendArriveData" type="button" class="btn btn-success">
                         提交更改
                     </button>
                 </div>
