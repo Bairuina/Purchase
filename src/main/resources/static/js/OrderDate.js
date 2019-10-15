@@ -79,9 +79,10 @@ $(".no_order").on('click', function () {
 
 $(".lookContract").on('click', function () {
     var orderReference = $("#ddbhData").text();
+    console.log(123)
     console.log(orderReference);
     $.ajax({
-        type: "get",
+        type: "GET",
         url: "/contract/queryContract",
         data: {
             'ddbh': orderReference,
@@ -92,7 +93,7 @@ $(".lookContract").on('click', function () {
             console.log(data);
             if(data.code=='0'){
                 alert("查看合同成功！")
-                location.href="date";
+                window.location.href = data.data.contractUrl;
             }
             else{
                 alert("查看合同失败！")
