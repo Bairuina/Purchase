@@ -3,13 +3,23 @@ $(".same").on('click',function(){
     console.log(indexnumber);
     $(this).parent().next().children().children().eq(indexnumber).css('display','block').siblings().css('display','none');
 });
+//下架编号
 var num="";
 $('.md-trigger').on('click',function(){
     var modal = $(this).data('modal');
     num = $(this).data('number');
-    console.log(num)
+    console.log(num);
     $("#" + modal).niftyModal();
 });
+
+//上架编号
+var putnumber='';
+$(".Racking").on('click',function () {
+    putnumber = $(this).data("putawaynumber");
+    console.log(putnumber);
+});
+
+
 //撤销请求的ajax
 $(".repeal").on('click',function () {
     var number = $(this).data('number');
@@ -36,9 +46,14 @@ $(".present").on('click',function () {
     //下架原因
     var text= $(this).parent().prev().children().children().children().children().val();
     console.log(text);
-
+    //下架商品编号
     $.ajax({
         url:"/productoffer/offer/"+num+'/'+2+'/'+text,
+        // data:{
+        //     xhbh:num,
+        //     zt:2,
+        //     text:text,
+        // },
         type:"GET",
         success:function (data) {
             if(data.code==0){
@@ -61,11 +76,9 @@ $(".putaway").on('click',function () {
     //上架原因
     var text= $(this).parent().prev().children().children().children().children().val();
     console.log(text);
-//    商品编号
-//     var putawaynumber = $('.putAway').data('putawaynumber');
-//     console.log(putawaynumber);
     $.ajax({
-        url:"/productoffer/offer/"+num+'/'+1+'/'+text,
+        url:"/productoffer/offer/"+putnumber+'/'+1+'/'+text,
+
         type:"GET",
         success:function (data) {
             if(data.code==0){
