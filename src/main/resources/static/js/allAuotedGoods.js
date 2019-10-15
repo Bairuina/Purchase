@@ -3,21 +3,7 @@ $(".same").on('click',function(){
     console.log(indexnumber);
     $(this).parent().next().children().children().eq(indexnumber).css('display','block').siblings().css('display','none');
 });
-//下架编号
-var num="";
-$('.md-trigger').on('click',function(){
-    var modal = $(this).data('modal');
-    num = $(this).data('number');
-    console.log(num);
-    $("#" + modal).niftyModal();
-});
 
-//上架编号
-var putnumber='';
-$(".Racking").on('click',function () {
-    putnumber = $(this).data("putawaynumber");
-    console.log(putnumber);
-});
 
 
 //撤销请求的ajax
@@ -40,6 +26,16 @@ $(".repeal").on('click',function () {
             }
         }
     })
+});
+
+
+//下架编号
+var num="";
+$('.md-trigger').on('click',function(){
+    var modal = $(this).data('modal');
+    num = $(this).data('number');
+    // console.log(num);
+    $("#" + modal).niftyModal();
 });
 //下架请求的ajax
 $(".present").on('click',function () {
@@ -67,18 +63,28 @@ $(".present").on('click',function () {
         }
     })
 });
+
+
 //返回按钮
 $(".cancel").on('click',function () {
     $(this).parent().prev().children().children().children().children().val('');
+});
+
+
+//上架编号
+var putnumber='';
+$(".Racking").on('click',function () {
+    putnumber = $(this).data('putawaynumber');
+    console.log(putnumber);
 });
 //上架请求的ajax
 $(".putaway").on('click',function () {
     //上架原因
     var text= $(this).parent().prev().children().children().children().children().val();
+    console.log(putnumber +"===================");
     console.log(text);
     $.ajax({
         url:"/productoffer/offer/"+putnumber+'/'+1+'/'+text,
-
         type:"GET",
         success:function (data) {
             if(data.code==0){
