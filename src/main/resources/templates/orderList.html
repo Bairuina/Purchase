@@ -25,7 +25,7 @@
         </div>
             <div class="search">
                 <form action="/order-data/select/">
-                    <select name="zt" style="color: #757575;width: 22%;height: 100%;outline: none;border: 0px;padding: 5px;float: left;font-size: 18px" >
+                    <select class="selects" name="zt" >
                         <option  th:if="${zt==null || zt=='all'}" value="all">全部状态</option>
                         <option  th:if="${zt=='2'}" th:value="${zt}">待确定</option>
                         <option  th:if="${zt=='3'}" th:value="${zt}">待验收</option>
@@ -47,17 +47,24 @@
     <div class="oeder_list_nav" style="min-height: 970px;">
         <div class="order_list">
             <div class="order_list_left">
-                <ul>
-                    <li th:if="${zt!=null && zt!='all'}"><a style="transform: translateX(-10px);"class="excursion" th:href="@{'/order-data/select/'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--1" fill="#fff"></use></svg>全部订单</a></li>
-                    <li th:if="${zt==null || zt=='all'}" style="border-left: 10px solid #0984E0;"><a style="transform: translateX(-10px);" class="excursion" th:href="@{'/order-data/select/'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--1" fill="#fff"></use></svg>全部订单</a></li>
-                    <li th:if="${zt==null || zt!='2'}"><a style="transform: translateX(-10px);"  class="excursion" th:href="@{'/order-data/select/?zt=2'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--3" fill="#fff"></use></svg>待确定订单</a></li>
-                    <li th:if="${zt!=null and zt=='2'}" style="border-left: 10px solid #0984E0;"><a class="excursion" th:href="@{'/order-data/select/?zt=2'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--3" fill="#fff"></use></svg>待确定订单</a></li>
-                    <li th:if="${zt==null || zt!='3'}"><a style="transform: translateX(-10px);" class="accept excursion" th:href="@{'/order-data/select/?zt=3'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--2" fill="#fff"></use></svg>接受订单</a></li>
-                    <li th:if="${zt!=null and zt=='3'}" style="border-left: 10px solid #0984E0;"><a class="accept excursion" th:href="@{'/order-data/select/?zt=3'}" ><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--2" fill="#fff"></use></svg>接受订单</a></li>
-                    <li th:if="${zt==null || zt!='4'}"><a style="transform: translateX(-10px);" class="excursion" th:href="@{'/order-data/select/?zt=4'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--5" fill="#fff"></use></svg>拒绝订单</a></li>
-                    <li th:if="${zt!=null and zt=='4'}" style="border-left: 10px solid #0984E0;"><a class="excursion" th:href="@{'/order-data/select/?zt=4'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--5" fill="#fff"></use></svg>拒绝订单</a></li>
-                    <li th:if="${zt==null || zt!='5'}"><a style="transform: translateX(-10px);" class="excursion" th:href="@{'/order-data/select/?zt=5'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--4" fill="#fff"></use></svg>已签收订单</a></li>
-                    <li th:if="${zt!=null and zt=='5'}" style="border-left: 10px solid #0984E0;"><a class="excursion" th:href="@{'/order-data/select/?zt=5'}"><svg class="icon" aria-hidden="ture"><use xlink:href="#icon--4" fill="#fff"></use></svg>已签收订单</a></li>
+<!--                <ul class="guider">-->
+<!--                    <li><a href="">全部订单</a></li>-->
+<!--                    <li><a href="">待确定订单</a></li>-->
+<!--                    <li><a href="">接受订单</a></li>-->
+<!--                    <li><a href="">拒绝订单</a></li>-->
+<!--                    <li><a href="">已签收订单</a></li>-->
+<!--                </ul>-->
+                <ul class="guider">
+                    <li style="margin-top: 0px" th:if="${zt!=null && zt!='all'}"><a th:href="@{'/order-data/select/'}">全部订单</a></li>
+                    <li th:if="${zt==null || zt=='all'}"><a th:href="@{'/order-data/select/'}">全部订单</a></li>
+                    <li th:if="${zt==null || zt!='2'}"><a th:href="@{'/order-data/select/?zt=2'}">待确定订单</a></li>
+                    <li th:if="${zt!=null and zt=='2'}"><a th:href="@{'/order-data/select/?zt=2'}">待确定订单</a></li>
+                    <li th:if="${zt==null || zt!='3'}"><a class="accept" th:href="@{'/order-data/select/?zt=3'}">接受订单</a></li>
+                    <li th:if="${zt!=null and zt=='3'}"><a class="accept" th:href="@{'/order-data/select/?zt=3'}">接受订单</a></li>
+                    <li th:if="${zt==null || zt!='4'}"><a th:href="@{'/order-data/select/?zt=4'}">拒绝订单</a></li>
+                    <li th:if="${zt!=null and zt=='4'}"><a th:href="@{'/order-data/select/?zt=4'}">拒绝订单</a></li>
+                    <li th:if="${zt==null || zt!='5'}"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
+                    <li th:if="${zt!=null and zt=='5'}"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
                 </ul>
             </div>
             <div class="order_list_right">

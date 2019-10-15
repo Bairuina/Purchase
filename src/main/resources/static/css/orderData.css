@@ -16,17 +16,39 @@ body {
     background-color: #fff;
 }
 
+.orderInformation:hover {
+    -webkit-transform: translateY(-3px);
+    -ms-transform: translateY(-3px);
+    transform: translateY(-3px);
+    -webkit-box-shadow: 0 0 6px #999;
+    box-shadow: 0 0 6px #999;
+    -webkit-transition: all .5s ease-out;
+    transition: all .3s ease-out;
+}
+.commodityDetails:hover {
+    -webkit-transform: translateY(-3px);
+    -ms-transform: translateY(-3px);
+    transform: translateY(-3px);
+    -webkit-box-shadow: 0 0 6px #999;
+    box-shadow: 0 0 6px #999;
+    -webkit-transition: all .5s ease-out;
+    transition: all .3s ease-out;
+}
+
 .name {
     padding: 0 20px;
     border-radius: 10px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .name::before {
     content: "";
-    height: 25px;
+    height: 16px;
     width: 5px;
     position: relative;
-    top: 30px;
+    top: 16px;
     display: block;
     background-color: #0984e0;
     left: -10px;
@@ -35,7 +57,7 @@ body {
 .orderWrap,
 .commodityWrap {
     overflow: hidden;
-    font-size: 12px;
+    font-size: 14px;
     padding: 20px;
 }
 
@@ -116,14 +138,14 @@ body {
 }
 
 .item .label {
-    margin-right: 3%;
+    margin-right: 4%;
     display: inline-block;
-    width: 30%;
+    width: 33%;
     vertical-align: top;
     color: #000;
     text-align: left;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .item {
@@ -131,7 +153,7 @@ body {
 }
 
 .info {
-    width: 65%;
+    width: 60%;
     display: inline-block;
     vertical-align: top;
 }

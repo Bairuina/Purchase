@@ -186,8 +186,10 @@
                     </div>
                 </div>
                 <div class="price">
-                    商品的实际价格:     ¥<span class="info" th:if="${product.sjjg==null}">暂无内容</span><span class="info" th:if="${product.sjjg!=null}" th:text="${product.sjjg}"></span></br>
-                    小计价格:           ¥<span class="info" th:if="${product.xjjg==null}">暂无内容</span><span class="info" th:if="${product.xjjg!=null}" th:text="${product.xjjg}"></span>
+                    <span class="concretePrice" th:if="${product.sjjg==null}">暂无内容</span>
+                    ¥<span class="concretePrice" th:if="${product.sjjg!=null}" th:text="${product.sjjg}"></span>
+<!--                    </br>-->
+<!--                    <span class="info" th:if="${product.xjjg==null}">暂无内容</span><span class="info" th:if="${product.xjjg!=null}" th:text="${product.xjjg}"></span>-->
                 </div>
                 <div class="amount">
                     <span class="concreteAmount" th:if="${product.sl==null}" >暂无信息</span>
