@@ -259,7 +259,7 @@ a{
     width: 56px;
     height: 29px;
     text-align: center;
-    line-height: 28px;
+    line-height: 29px;
     border-radius: 1px;
     font-size: 14px;
     cursor: pointer;
@@ -386,4 +386,24 @@ a{
     top: 37%;
     font-size: 13px;
     color: red;
+}
+.button{
+    display: inline-block;
+    padding: 7px 10px;
+    border-radius: 2px;
+    font-size: 13px;
+}
+.button>a{
+    color: white;
+}
+.buttonone{
+    background-color: #1E9FFF;
+}
+.buttontwo{
+    background-color: #2f9c0a;
+    margin-left: 10px;
+}
+.buttonthree{
+    margin-left: 10px;
+    background-color: #F52F3E;
 }
