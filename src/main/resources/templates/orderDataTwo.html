@@ -17,6 +17,11 @@
 </head>
 
 <body>
+<div id="outerdiv">
+    <div id="innerdiv">
+        <img id="bigimg" src="">
+    </div>
+</div>
 <div class="orderInformation">
     <h2 class="name">订单信息</h2>
     <div class="orderWrap">
@@ -38,7 +43,7 @@
                 </div>
                 <div class="item">
                     <span class="label">订单编号</span>
-                    <span class="info" id="ddbhDataWord" th:text="${allData.data[0].ddbh}"></span>
+                    <span class="info ddbhDataWord" id="ddbhDataWord" th:text="${allData.data[0].ddbh}"></span>
                 </div>
                 <div class="item">
                     <span class="label" >采购人名称</span>
@@ -183,6 +188,9 @@
                     <div class="item" th:data-xhbh="${product.xhbh}">
                         <span class="label">商品标识码</span>
                         <span class="info AddIdentification" th:data-wybs="${product.wybs}">上传商品标识码信息</span>
+                        <span class="info">
+                            <img  class="pic" src="../static/img/noimage.png" alt="">
+                        </span>
                     </div>
                 </div>
                 <div class="price">
@@ -254,22 +262,20 @@
 <!--推送标识码-->
 <div class="code_modal">
     <ul class="bill_startTimeBox">
-        <li><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="QRCode_orderID" readonly="readonly" value="" /></li>
-        <li><span>类型编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_goodsID" id="QRcode_ModalID" value="" /></li>
+        <li style="display: none"><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="orderID" value="" readonly="readonly" /></li>
+        <li style="display: none"><span>商品编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_goodsID" id="QRcode_goodsID"  readonly="readonly" value="" /></li>
         <li><span>商品标识码：</span>&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_onlyCodeID" id="QRcode_onlyCodeID" value="" /></li>
         <li>
             <span>标识码图片：</span>&emsp;&emsp;&emsp;&emsp;
             <div class="picBox">
                 <div>
                     <img class="pic">
-                    <input class="upload QRcode" name="file" type="file" style="display: none"/>
+                    <input class="upload QRcode" id="image" name="file" type="file" multiple style="display: none"/>
                 </div>
             </div>
         </li>
     </ul>
-    <div class="code_btns_box" style="text-align: right;
-    margin-right: 60px;
-    margin-top: 40px;">
+    <div class="code_btns_box" style="text-align: center;margin: 120px 20px 20px 50px;">
         <button class="idenCode_return">返回</button>
         <button class="codeSubmit_btn">完成</button>
     </div>
@@ -291,5 +297,4 @@
 <script th:src="@{/js/OrderDate.js}"></script>
 <script th:src="@{/js/upLoadData.js}"></script>
 </body>
-
 </html>
