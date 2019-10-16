@@ -101,5 +101,4 @@ public class UserController extends BaseController {
         Result result = iUserService.modifyUser(user);
         return result;
     }
-
 }
