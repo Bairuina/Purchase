@@ -17,6 +17,11 @@
 </head>
 
 <body>
+<div id="outerdiv">
+    <div id="innerdiv">
+        <img id="bigimg" src="">
+    </div>
+</div>
 <div class="orderInformation">
     <h2 class="name">订单信息</h2>
     <div class="orderWrap">
@@ -184,7 +189,7 @@
                         <span class="label">商品标识码</span>
                         <span class="info AddIdentification" th:data-wybs="${product.wybs}">上传商品标识码信息</span>
                         <span class="info">
-                            <img src="../static/img/BackTop.png" alt="">
+                            <img  class="pic" src="../static/img/BackTop.png" alt="">
                         </span>
                     </div>
                 </div>
@@ -292,5 +297,4 @@
 <script th:src="@{/js/OrderDate.js}"></script>
 <script th:src="@{/js/upLoadData.js}"></script>
 </body>
-
 </html>
