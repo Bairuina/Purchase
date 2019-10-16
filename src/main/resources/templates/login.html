@@ -8,34 +8,31 @@
 </head>
 
 <body>
-    <div class="back_log">
-        <div class="enter">
-            <form>
-                <!--用户名-->
-                <div class="logonName">
-                    <small>用户名</small>
-                    <input type="text" class="in" id="userName" placeholder="请输入您的用户名">
-                </div>
-                <span></span>
-
-                <!--密码-->
-                <div class="logonPass">
-                    <small>密&nbsp;&nbsp;&nbsp;&nbsp;码</small>
-                    <input type="password" class="in" id="passWord" placeholder="请输入您的密码">
-                    <span></span>
-                </div>
-                <!--记住密码自动登录-->
-                <div class="logonRember">
-                    <input type="checkbox">记住密码
-                    <input type="checkbox" id="automatic">自动登录
-                </div>
-                <!--登录-->
-                <div class="entry">
-                    登&nbsp;&nbsp;&nbsp;&nbsp;录
-                </div>
-            </form>
+    <div class="all">
+        <div class="back_log">
+            <div class="feiluan"><img src="../static/img/logo.png" alt=""></div>
+            <div class="enter">
+                <form>
+                    <!--用户名-->
+                    <div class="logonName">
+                        <small>用户名</small>
+                        <input type="text" class="in" id="userName" placeholder="请输入您的用户名">
+                    </div>
+                    <!--密码-->
+                    <div class="logonPass">
+                        <small>密&nbsp;&nbsp;&nbsp;&nbsp;码</small>
+                        <input type="password" class="in" id="passWord" placeholder="请输入您的密码">
+                        <span></span>
+                    </div>
+                    <!--登录-->
+                    <div class="entry">
+                        登&nbsp;&nbsp;&nbsp;&nbsp;录
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+
 </body>
 <script th:src="@{/static/js/jquery-3.4.1.min.js}"></script>
 <script th:src="@{/static/js/backstage_logon.js}"></script>

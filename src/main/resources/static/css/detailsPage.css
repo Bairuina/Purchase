@@ -281,10 +281,21 @@ a{
     margin-top: 15px;
 }
 .messageDetail{
-    border: 1px solid #ededed;
-    padding: 10px;
+    border: 1px solid #ccc;
     position: relative;
     margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    overflow: hidden;
+}
+.messageDetail:hover {
+    -webkit-transform: translateY(-3px);
+    -ms-transform: translateY(-3px);
+    transform: translateY(-3px);
+    -webkit-box-shadow: 0 0 6px #999;
+    box-shadow: 0 0 6px #999;
+    -webkit-transition: all .5s ease-out;
+    transition: all .3s ease-out;
 }
 .messageDetail>h3{
     color: #103a86;
@@ -306,9 +317,7 @@ a{
     padding-bottom: 8px;
 }
 .offer{
-    position: absolute;
-    left: 85%;
-    top: 74%;
+    float: right;
     width: 130px;
     height: 31px;
     background-color: #0984E0;

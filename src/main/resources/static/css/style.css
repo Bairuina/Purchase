@@ -302,7 +302,7 @@ a{
     font-size: 20px;
     margin-bottom: 15px;
     text-align: left;
-    ;
+;
 }
 
 .links a {
@@ -318,7 +318,6 @@ a{
 .foot {
     width: 1200px;
     margin: 0 auto;
-    height: 135px;
     position: relative;
 }
 
