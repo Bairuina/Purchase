@@ -79,7 +79,7 @@ public class UserController extends BaseController {
         model.addAttribute("Number", result.getCurrent());
         model.addAttribute("userList", userList);
         model.addAttribute("findName", findName);
-        return new ModelAndView("userList");
+        return new ModelAndView("management");
     }
 
     /**
