@@ -26,7 +26,7 @@ function inform(informInner){
 
 //发票开具时间
 function billStartSend(){
-	var orderID = $("#orderID").val();
+	var start_orderID = $("#start_orderID").val();
 	var billStartTime = $("#bill_StartTime").val();
 	var firstStartTime = billStartTime.replace(/-/g,'');
 	var secStartTime = firstStartTime.replace(/:/g,'');
@@ -35,14 +35,14 @@ function billStartSend(){
 	if(startTimetest.test(thirdStartTime)){
 		$.ajax({
 			type:"post",
-			url:"",
+			url:"/order-data/invoiceStaTimeSubmit",
 			dataType:"json",
 			data:{
-				"ddbh":ope_orderID,
-				"fpkjsj":billStartTime
+				"ddbh":start_orderID,
+				"sj":thirdStartTime
 			},
 			success:function(data){
-				if(data.code == 1){
+				if(data.code =='0'){
 					inform("您好，发票开具时间已推送到商城！");
 				}else{
 					inform("您所填信息有误! 请检查后重新提交!");
@@ -59,23 +59,23 @@ function billStartSend(){
 
 //发票签收时间
 function billEndSend(){
-	var sign_orderID = $("#sign_OrderID").val();
+	var sign_orderID = $("#sign_orderID").val();
 	var bill_SignTime = $("#bill_SignTime").val();
-	var firstSignTime = billSignTime.replace(/-/g,'');
+	var firstSignTime = bill_SignTime.replace(/-/g,'');
 	var secSignTime = firstSignTime.replace(/:/g,'');
 	var thirdSignTime = secSignTime.replace(/\s+/g,'');
 	var endTimetest = /\d{14}/;    //正则验证
 	if(endTimetest.test(thirdSignTime)){
 		$.ajax({
 			type:"post",
-			url:"",
+			url:"/order-data/invoiceEndTimeSubmit",
 			dataType:"json",
 			data:{
 				"ddbh":sign_orderID,
-				"fpsdsj":bill_SignTime
+				"sj":thirdSignTime
 			},
 			success:function(data){
-				if(data.code == 1){
+				if(data.code =='0'){
 					inform("您好，发票签收时间已推送到商城！");
 				}else{
 					inform("您所填信息有误! 请检查后重新提交!");
@@ -90,22 +90,39 @@ function billEndSend(){
 	}
 }
 
-// 点击上传商品唯一标识码
-$(".AddIdentification").on('click',function () {
-	// // 获取订单编号和商品编号
-	var xhbh = $("this").parent().parent().children().eq(0).children().eq(0).text();
-	// var xhbh =123;
-	var ddbh = $(".ddbh").text();
-	// console.log($(".ddbh").text());
-	// 上传框显示并将ddbh和spbh值放到框内
-	$(".code_modal").slideUp(10);
-	$('#orderID').val(ddbh);
-	$('#QRcode_goodsID').val(xhbh);
-})
+
+
 //推送标识码
-// function codeSend() {
-//
-// }
+function codeSend(){
+	var QR_orderID = $("#QRCode_orderID").val();
+	var QRcode_ModalID = $("#QRcode_ModalID").val();
+	var QRcode_onlyCodeID = $("#QRcode_onlyCodeID").val();
+	if((QRcode_onlyCodeID != '') && (url != '')){
+		$.ajax({
+			type:"post",
+			url:"",
+			dataType:"json",
+			data:{
+				"ddbh":QR_orderID,
+				"xhbh":QRcode_ModalID,
+				"wybs":QRcode_onlyCodeID,
+				"pic":url
+			},
+			success:function(data){
+				if(data.code =='0'){
+					inform("您好，标识码已推送到商城！");
+				}else if(data.code != 1){
+					inform(data.msg);
+				}
+			},
+			error:function(){
+				inform("网络故障");
+			}
+		});
+	}else{
+		inform("您所填信息有误! 请检查后重新提交!");
+	}
+}
 
 //发票开具模块
 function billStartreturn(){
@@ -124,14 +141,13 @@ function billSignreturn(){
 }
 
 function billSignSubimt(){
-
 	billEndSend();
 	billSignreturn();
 }
 
 //标识码模块
 function codeSendReturn(){
-	// $(".code_modal").slideUp(10);
+	$(".code_modal").slideUp(10);
 }
 
 function codeSendSubmit(){
@@ -171,20 +187,17 @@ function getObjectURL(file) {
 //事件
 $(function(){
 	//模态框显示
-	$(".checkInvoice").click(function(){
+	$(".startBill").click(function(){
 		billSignreturn();
 		codeSendReturn();
 		$(".start_modal").slideDown(10);
 	})
-	$(".checkInvoice").click(function(){
+	$(".signBill").click(function(){
 		billStartreturn();
 		codeSendReturn();
 		$(".end_modal").slideDown(10);
 	})
 	$(".AddIdentification").click(function(){
-		var spxh = $("this").parent().parent().children().eq(0).children().eq(0).text();
-		var ddbh = $('.ddbh').text();
-		console.log(spxh);
 		billStartreturn();
 		billSignreturn();
 		$(".code_modal").slideDown(10);
@@ -209,30 +222,7 @@ $(function(){
 		billSignSubimt();
 	})
 	$(".codeSubmit_btn").click(function(){
-		var ddbh = $("#orderID").val();
-		var xhbh = $("#QRcode_onlyCodeID").val();
-		var wybs = $("#QRcode_goodsID").val();
-		var files = $("#image").prop('files');
-		console.log(ddbh,xhbh,wybs);
-		console.log(files[0]);
-		var formData = new FormData();
-		formData.append('myFileName', files[0]);
-		formData.append('ddbh', ddbh);
-		formData.append('xhbh', xhbh);
-		formData.append('wybs', wybs);
-		$.ajax({
-			url: '/productList/product',
-			type:'post',
-			data: formData,
-			contentType:false,
-			processData:false,
-			success:function (data) {
-				console.log(data.msg);
-			},
-			error:function(){
-				alert("信息上传失败！");
-			}
-		})
+		codeSendSubmit();
 	})
 
 })

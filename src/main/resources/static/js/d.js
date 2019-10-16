@@ -1,17 +1,18 @@
 $(".yes_order").on('click', function () {
-    var orderReference = $("#ddbhDataWord").text();
+    var orderReference = $("#ddbhData").text();
     console.log(orderReference);
     var inform = "您确定要接受订单号为" + orderReference + "的订单？";
     var r = confirm(inform);
     if (r) {
         $.ajax({
-            type: "post",
+            type: "put",
             url: "/order-data/ensureORefuseOrder",
-            dataType:"json",
             data: {
                 'ddbh':orderReference,
-                'qrzt':'0'
+                'qrzt':0
             },
+            contentType:"application/json",
+            dataType:"json",
             success: function (data) {
                 console.log(data);
                 if(data.code=='0'){
@@ -33,9 +34,9 @@ $(".yes_order").on('click', function () {
 });
 
 $(".no_order").on('click', function () {
-    var orderReference = $("#ddbhDataWord").text()
+    var orderReference = $("#ddbhData").text()
     var inform = "您确定要拒绝订单号为" + orderReference + "的订单？";
-    var ztDataWord=$("#ztDataWordLiWord").data('ztdata');
+    var ztDataWord=$("#ztDataWordLi").data('ztdata');
     var urlData;
     console.log(ztDataWord);
     if(ztDataWord=='2'){
@@ -47,13 +48,14 @@ $(".no_order").on('click', function () {
     var r = confirm(inform);
     if (r) {
         $.ajax({
-            type: "post",
+            type: "put",
             url: urlData,
-            dataType: "JSON",
             data: {
                 ddbh:orderReference,
-                qrzt:'1'
+                ddzt:1
             },
+            contentType:"application/json",
+            dataType: "JSON",
             success: function (data) {
                 console.log(data);
                 if(data.code=='0'){
@@ -76,10 +78,9 @@ $(".no_order").on('click', function () {
 
 $(".lookContract").on('click', function () {
     var orderReference = $("#ddbhData").text();
-    console.log(123)
     console.log(orderReference);
     $.ajax({
-        type: "GET",
+        type: "get",
         url: "/contract/queryContract",
         data: {
             'ddbh': orderReference,
@@ -90,7 +91,7 @@ $(".lookContract").on('click', function () {
             console.log(data);
             if(data.code=='0'){
                 alert("查看合同成功！")
-                window.location.href = data.data.contractUrl;
+                window.onload;
             }
             else{
                 alert("查看合同失败！")
@@ -102,55 +103,75 @@ $(".lookContract").on('click', function () {
     })
 });
 
+$(".checkInvoice").on('click', function () {
+    var orderReference = $("#ddbhData").text();
+    console.log(orderReference);
+    $.ajax({
+        type: "put",
+        url: "/order-data/invoiceEndTimeSubmit",
+        data: {
+            'ddbh': orderReference,
+        },
+        contentType:"application/json",
+        dataType:"json",
+        success: function (data) {
+            console.log(data);
+            if(data.code=='0'){
+                alert("开具发票成功！")
+                window.onload;
+            }
+            else{
+                alert("开具发票失败！")
+            }
+        },
+        error: function (msg) {
+            alert("开具发票失败！");
+        }
+    })
+});
 
 
 //提交更改
-$("#submitMoney").on('click',function update() {
+function update() {
     //获取模态框数据
-    var ddbh = $('#ddbhDataWord').text();
-    var skbz = $('#skbzDataSelect').val();
-    console.log(ddbh);
+    var ddbh = $('#ddbhData').text();
+    var skbz = $('#skbz').val();
     console.log(skbz);
-    var skje = $('#skjeDataSelect').val();
-    var sksj = $("#sksjDataSelect").val();
-    console.log(skje);
-    console.log(sksj);
+    var skje = $('#skje').val();
+    var sksj = $("#sksj").val();
+    console.log(skbz);
     var firstSignTime = sksj.replace(/-/g, '');
     var secSignTime = firstSignTime.replace(/:/g, '');
     var thirdSignTime = secSignTime.replace(/\s+/g, '');
     var endTimetest = /\d{14}/;
     var skbzNum;
-    if (skbz == "已收款") {
-        skbzNum = '1';
-    } else if (skbz == "未收款") {
-        skbzNum ='2';
-    }
-    console.log(thirdSignTime);
-    console.log(skbzNum);
     if (endTimetest.test(thirdSignTime)) {
-        console.log("信息接入成功")
+        if (skbz == "已收款") {
+            skbzNum = 1;
+        } else if (skbz == "未收款") {
+            skbzNum = 2;
+        } else {
+            alert("收款标志错误!");
+            window.onload;
+        }
         $.ajax({
-            type: "post",
-            url: "/order-data/selectDataNumberSubmit",
-            dataType: "json",
-            data: {
-                'ddbh': ddbh,
-                'skbz': skbzNum,
-                'skje': skje,
-                'sksj': thirdSignTime
-            },
-            success: function (data) {
+            type: "put",
+            url: "/order-data/getMoneyDataSubmit",
+            ddbh: ddbh,
+            skbz: skbzNum,
+            skje: skje,
+            sksj: sksj,
+            dataType: 'html',
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            success: function (result) {
                 console.log(data);
                 if (data.code == '0') {
-                    alert("发送信息成功！")
-                    location.href = "date";
+                    alert("推送物流消息成功！")
+                    window.onload;
                 } else {
-                    alert("发送信息失败！")
+                    alert("推送物流消息失败！")
                 }
-            },
-            error: function (data) {
-                alert("发送信息失败！");
             }
-        })
+        });
     }
-});
+}

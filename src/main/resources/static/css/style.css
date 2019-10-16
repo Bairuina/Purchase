@@ -3,7 +3,7 @@
     padding: 0;
 }
 body {
-    background-color: #F9F9F9;
+    background-color: #def4ff;
 }
 a{
     text-decoration: none;
@@ -149,7 +149,7 @@ a{
 }
 
 .search-con {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 50px;
     padding: 10px;
     box-sizing: border-box;
@@ -160,7 +160,7 @@ a{
 }
 
 .search-sub {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 50px;
     box-sizing: border-box;
     width: 20%;
@@ -243,7 +243,7 @@ a{
     text-align: left;
     border-bottom: 2px solid #ccc;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .show_right {
@@ -302,7 +302,7 @@ a{
     font-size: 20px;
     margin-bottom: 15px;
     text-align: left;
-    ;
+;
 }
 
 .links a {
@@ -318,7 +318,6 @@ a{
 .foot {
     width: 1200px;
     margin: 0 auto;
-    height: 135px;
     position: relative;
 }
 

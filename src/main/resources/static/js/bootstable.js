@@ -16,8 +16,65 @@
 '<span class="glyphicon glyphicon-remove" > </span>'+
 '</button>'+
     '</div>';
-  var colEdicHtml = '<td name="buttons">'+newColHtml+'</td>'; 
-    
+  var colEdicHtml = '<td name="buttons">'+newColHtml+'</td>';
+
+
+$(".arriveData").click(function () {
+    $("#sfcdData").text($(this).data("sfcd"));
+    console.log($(this).data("sfcd"));
+    $("#fczddbhData").text($(this).data("fczddbh"));
+    console.log($(this).data("fczddbh"));
+    $("#kdgsData").text($(this).data("kdgs"));
+    console.log($(this).data("kdgs"));
+    $("#kddhData").text($(this).data("kddh"));
+    console.log($(this).data("kddh"));
+    $("#msData").text($(this).data("ms"));
+    console.log($(this).data("ms"));
+    $("#kdsjData").text($(this).data("kdsj"))
+    console.log($(this).data("kdsjkdsj"));
+    $("#ddbhData").text($(this).data("ddbh"))
+    console.log($(this).data("ddbh"));
+});
+
+ $("#sendArriveData").click(function () {
+     var ddbhData=$("#ddbhData").text();
+     var sfcdData=$("#sfcdData").text();
+     var fczddbhData=$("#fczddbhData").text();
+     var kdgsData=$("#kdgsData").text();
+     var kddhData=$("#kddhData").text();
+     var msData=$("#msData").text();
+     var kdsjData=$("#kdsjData").text();
+     $.ajax({
+         type: "get",
+         url: "/order-data/ensureOrderArrive",
+         data: {
+             'ddbh':ddbhData,
+             'sfcd':sfcdData,
+             'fczddbh':fczddbhData,
+             'kdgs':kdgsData,
+             'kddh':kddhData,
+             'ms':msData,
+             'kdsj':kdsjData
+         },
+         contentType:"application/json",
+         dataType:"json",
+         success: function (data) {
+             console.log(data);
+             if(data.code=='0'){
+                 alert("物流信息推送成功！")
+                 window.onload;
+             }
+             else{
+                 alert("物流信息推送失败！")
+             }
+         },
+         error: function (msg) {
+             alert("物流信息推送失败！");
+         }
+     })
+ });
+
+
   $.fn.SetEditable = function (options) {
     var defaults = {
         columnsEd: null,         //Index to editable columns. If null all td editables. Ex.: "1,2,3,4,5"
