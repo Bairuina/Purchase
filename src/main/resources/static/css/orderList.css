@@ -661,6 +661,31 @@ li {
     top: 12px;
     border: 1px solid #def4ff;
 }
+.guider .active {
+    position: relative;
+    left: 16px;
+    margin: 22px 0;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.guider .active::before {
+    transform: skewX(55deg);
+    margin-left: 8px;
+    position: relative;
+    right: 17px;
+    top: -12px;
+    border: 1px solid #fff;
+}
+
+.guider .active::after {
+    transform: skewX(-55deg);
+    margin-left: 8px;
+    position: relative;
+    right: 17px;
+    top: 12px;
+    border: 1px solid #fff;
+}
 .selects{
     color: #757575;
     width: 22%;
