@@ -46,4 +46,11 @@ public interface PartsMapper extends BaseMapper<Parts> {
     @Select("SELECT * FROM parts where PJBH=#{pjbh}")
     public Parts findPartsByPjbh(String pjbh);
 
+    /**
+     *根据配件编号PJBH获取配件集合
+     *
+     */
+    @Select("SELECT * FROM parts where PJBH=#{pjbh}")
+    public List<Parts> findPartssByPjbh(String pjbh);
+
 }

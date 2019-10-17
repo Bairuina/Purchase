@@ -28,3 +28,29 @@ a{
     height: 180px;
     background: #404040;
 }
+/*分页*/
+.paging{
+    padding: 20px;
+    text-align: center;
+}
+
+.pagination>li{
+    display: inline;
+    cursor: pointer;
+}
+.pagination>li>.active{
+    background-color: #337ab7;
+    color: white;
+}
+
+.pagination>li>a:hover{
+    background-color: #337ab7;
+    color: white;
+}
+.pagination>li>a{
+    font-size: 13px;
+    padding: 6px 12px;
+    color: #337ab7;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}

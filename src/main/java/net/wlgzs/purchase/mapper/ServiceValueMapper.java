@@ -32,5 +32,12 @@ public interface ServiceValueMapper extends BaseMapper<ServiceValue> {
     @Select("SELECT * FROM service_value where pmbh=#{pmbh}")
     public List<ServiceValue> findServiceValueByPmbh(String pmbh);
 
+    /**
+     * 根据服务编号FWBH获取服务集合
+     */
+    @Select("SELECT * FROM service_value where FWBH=#{FWBH}")
+    public List<ServiceValue> findServiceValueByFubh(String FWBH);
+
+
 
 }

@@ -86,7 +86,7 @@
     border-bottom:1px solid #e5e5e5;
 }
 .delete{
-    background-color: #FF6600;
+    background-color: #F52F3E;
     font-size: 14px;
     color: white;
     /* width: 100px; */
@@ -94,6 +94,8 @@
     padding: 5px 21px;
     border-radius: 5px;
     cursor: pointer;
+    /* line-height: 22px; */
+    margin-top: 10px;
 }
 /*模态框内容*/
 .offerFormItem{
@@ -141,18 +143,34 @@
     color: #666;
 }
 .confirm{
-    background: cadetblue;
+    background-color: #F52F3E;
+    color: #fff;
+}
+.add{
+    background-color: #1E9FFF;
     color: #fff;
 }
 .submitBar>a{
     display: inline-block;
     margin: 0 7px;
-    width: 142px;
+    width: 100px;
     height: 36px;
     text-align: center;
     font: 16px/36px "Microsoft YaHei","\5FAE\8F6F\96C5\9ED1";
     border-radius: 4px;
     cursor: pointer;
+}
+.submitBar>input{
+    display: inline-block;
+    margin: 0 7px;
+    width: 100px;
+    height: 36px;
+    text-align: center;
+    font: 16px/36px "Microsoft YaHei","\5FAE\8F6F\96C5\9ED1";
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline-style: none;
 }
 .submitBar a:hover{
     opacity:0.8;
