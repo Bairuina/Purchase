@@ -19,7 +19,19 @@ a{
     height: 30px;
     line-height: 30px;
 }
-
+.top>p{
+    float: left;
+}
+.top>a{
+    float: right;
+}
+.top>a>img{
+    width: 21px;
+}
+.top>a>p{
+    display: inline-block;
+    font-size: 13px;
+}
 #btn {
     width: 80px;
     height: 30px;

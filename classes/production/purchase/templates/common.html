@@ -16,7 +16,12 @@
     <div th:fragment="commonTop">
         <div class="top_nav">
             <div class="top">
-                您好，欢迎来到河南飞鸾电子科技有限公司！
+                <p>您好，欢迎来到河南飞鸾电子科技有限公司！</p>
+                <a th:href="@{/product/0/0/0/1}">
+                    <img th:src="@{/static/img/tab_homepage.png}" align="absmiddle">
+                    <p>回到首页</p>
+                </a>
+                <div style="clear: both"></div>
 <!--                <button id="btn">登录</button>-->
             </div>
 
@@ -43,7 +48,7 @@
         <div class="head_nav">
             <div class="head">
                 <div class="logo">
-                    <a href="">
+                    <a th:href="@{/product/0/0/0/1}">
                         <img th:src="@{/img/logo.png}" alt="">
                     </a>
                 </div>
