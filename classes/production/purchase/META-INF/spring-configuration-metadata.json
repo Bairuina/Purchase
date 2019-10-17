@@ -1,0 +1,347 @@
+{
+  "groups": [
+    {
+      "name": "my",
+      "type": "net.wlgzs.purchase.util.ReadProperties",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "spring.redis",
+      "type": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory",
+      "sourceType": "net.wlgzs.purchase.config.RedisConfig",
+      "sourceMethod": "getConnectionFactory()"
+    },
+    {
+      "name": "spring.redis.jedis.pool",
+      "type": "redis.clients.jedis.JedisPoolConfig",
+      "sourceType": "net.wlgzs.purchase.config.RedisConfig",
+      "sourceMethod": "getRedisConfig()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "my.exe-logistics",
+      "type": "java.lang.String",
+      "description": "物流信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.exec-ds-zfdd",
+      "type": "java.lang.String",
+      "description": "取消订单信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.exec-fpkjsj-by-order",
+      "type": "java.lang.String",
+      "description": "订单发票开具信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.exec-gys-order-qr",
+      "type": "java.lang.String",
+      "description": "确认订单信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.exec-qssj",
+      "type": "java.lang.String",
+      "description": "订单签收信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.exec-skqk",
+      "type": "java.lang.String",
+      "description": "订单收款信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.exec-sp-down",
+      "type": "java.lang.String",
+      "description": "商品上\/下架",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.exec-ts-wybs",
+      "type": "java.lang.String",
+      "description": "推送商品唯一标识码",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.execfpsdsj-byorder",
+      "type": "java.lang.String",
+      "description": "收到订单发票时间",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.execute",
+      "type": "java.lang.String",
+      "description": "商品报价",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.find-ddxx-byddbh",
+      "type": "java.lang.String",
+      "description": "查询订单信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.find-fw-by-pmbh",
+      "type": "java.lang.String",
+      "description": "获取品目增值服务信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.find-order",
+      "type": "java.lang.String",
+      "description": "查询订单信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.find-order-ht",
+      "type": "java.lang.String",
+      "description": "订单合同获取",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.find-pj-by-pmbh",
+      "type": "java.lang.String",
+      "description": "获取品目配件信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.find-sp-by-xhbh",
+      "type": "java.lang.String",
+      "description": "获取商品型号信息以及相关报价",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.find-sp-sfbj",
+      "type": "java.lang.String",
+      "description": "获取商品报价",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.find-sprkand-param",
+      "type": "java.lang.String",
+      "description": "获取商品以及参数信息",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.find-ys-by-order",
+      "type": "java.lang.String",
+      "description": "获取验收时间及验收方式",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.pwd",
+      "type": "java.lang.String",
+      "description": "密码",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.quotedprice-fw-by-fwbh",
+      "type": "java.lang.String",
+      "description": "增值服务报价",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.quotedprice-pj-by-pjbh",
+      "type": "java.lang.String",
+      "description": "商品配件报价",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.qx-sh-by-xhbh",
+      "type": "java.lang.String",
+      "description": "撤消商品报价",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.url",
+      "type": "java.lang.String",
+      "description": "地址",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "my.username",
+      "type": "java.lang.String",
+      "description": "用户名",
+      "sourceType": "net.wlgzs.purchase.util.ReadProperties"
+    },
+    {
+      "name": "spring.redis.convert-pipeline-and-tx-results",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+    },
+    {
+      "name": "spring.redis.jedis.pool.block-when-exhausted",
+      "type": "java.lang.Boolean",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.eviction-policy",
+      "type": "org.apache.commons.pool2.impl.EvictionPolicy<T>",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.eviction-policy-class-name",
+      "type": "java.lang.String",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.evictor-shutdown-timeout-millis",
+      "type": "java.lang.Long",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.fairness",
+      "type": "java.lang.Boolean",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.jmx-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.jmx-name-base",
+      "type": "java.lang.String",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.jmx-name-prefix",
+      "type": "java.lang.String",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.lifo",
+      "type": "java.lang.Boolean",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.max-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.max-total",
+      "type": "java.lang.Integer",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.max-wait-millis",
+      "type": "java.lang.Long",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.min-evictable-idle-time-millis",
+      "type": "java.lang.Long",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.min-idle",
+      "type": "java.lang.Integer",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.num-tests-per-eviction-run",
+      "type": "java.lang.Integer",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.soft-min-evictable-idle-time-millis",
+      "type": "java.lang.Long",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.test-on-borrow",
+      "type": "java.lang.Boolean",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.test-on-create",
+      "type": "java.lang.Boolean",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.test-on-return",
+      "type": "java.lang.Boolean",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.test-while-idle",
+      "type": "java.lang.Boolean",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.jedis.pool.time-between-eviction-runs-millis",
+      "type": "java.lang.Long",
+      "sourceType": "redis.clients.jedis.JedisPoolConfig"
+    },
+    {
+      "name": "spring.redis.client-name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.redis.database",
+      "type": "java.lang.Integer",
+      "sourceType": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.redis.host-name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.redis.password",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.redis.port",
+      "type": "java.lang.Integer",
+      "sourceType": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.redis.shard-info",
+      "type": "redis.clients.jedis.JedisShardInfo",
+      "sourceType": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.redis.timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.redis.use-pool",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.redis.use-ssl",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.springframework.data.redis.connection.jedis.JedisConnectionFactory",
+      "deprecated": true,
+      "deprecation": {}
+    }
+  ],
+  "hints": []
+}

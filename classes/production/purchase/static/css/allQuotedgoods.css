@@ -1,0 +1,170 @@
+.submitBar{
+    margin: 20px 0 0;
+    padding: 15px 10px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 7px #f0f0f0;
+}
+.toAudit{
+    background-color: #F52F3E;
+}
+.toAudit:hover{
+    opacity: 0.8;
+}
+.hasBeenOn:hover{
+    opacity: 0.8;
+}
+.remove:hover{
+    opacity: 0.8;
+}
+.toAudit,.hasBeenOn,.remove{
+    width: 110px;
+    height: 36px;
+    border-radius: 3px;
+    line-height: 36px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+}
+.hasBeenOn{
+    background-color: #1E9FFF;
+}
+.remove{
+    background-color: #2f9c0a;
+}
+.commodityDetails{
+    padding: 10px;
+    width: 1180px;
+}
+.commodityBox{
+    position: relative;
+}
+.offerTitle{
+    padding-bottom: 5px;
+    font-weight: 600;
+    padding-top: 5px;
+}
+.offerTitle>p:before{
+    border-left: 2px solid #5f79a2;
+    padding-right: 8px;
+    content: '';
+}
+.title{
+    margin-left: 10px;
+}
+/*.message{*/
+/*    width: 100%;*/
+/*    position: absolute;*/
+/*    left: -11px;*/
+/*    top: 0;*/
+/*}*/
+
+.two{
+    display: none;
+}
+.three{
+    display: none;
+}
+.revocation{
+    left: 85%;
+}
+.productDetails,.revocation{
+    position: absolute;
+    top: 74%;
+    width: 130px;
+    height: 31px;
+    background-color: cadetblue;
+    text-align: center;
+    border-radius: 3px;
+    line-height: 31px;
+    cursor: pointer;
+}
+.productDetails>a>p{
+    color: white;
+}
+.revocation>a>p{
+    color: white;
+}
+.productDetails{
+    left: 75%;
+}
+.state>p>span:nth-child(2){
+    color: #FF0000;
+}
+.messageDetailTitle:before{
+    content: '';
+    border-left:2px solid  #5f79a2;
+    padding-top: 2px;
+    padding-right: 8px;
+}
+.messageDetailTitle>p{
+    display: inline-block;
+}
+.messageDetail>h3{
+    padding-top: 22px;
+    color: #103a86;
+    padding-bottom: 0px;
+}
+.messageDetail:after{
+    clear: both;
+}
+/*理由*/
+.offerFormItem{
+    padding-bottom: 26px;
+}
+.offerFormLabelLeft{
+    float: left;
+    /* position: relative; */
+    /* left: 10%; */
+    padding-left: 120px;
+    padding-right: 69px;
+    /* padding-bottom: 14px; */
+    /* margin-bottom: 15px; */
+}
+.offerInputblock{
+    display: inline-block;
+}
+
+.offerInput,.offerTextarea{
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fff;
+    border-radius: 2px;
+    padding-left: 13px;
+    border-color: #b7b7b7;
+}
+.offerTextarea{
+    height: 90px;
+    line-height: 40px;
+    width: 800px;
+    resize: none;
+}
+.submitBarT{
+    margin: 20px 0 0;
+    padding: 15px 10px;
+    text-align: center;
+    background: #f9f9f9;
+    box-shadow: 0 4px 7px #f0f0f0;
+}
+.cancel{
+    border: 1px solid #d6d6d6;
+    background: #f2f2f2;
+    color: #666;
+}
+.confirm{
+    background: cadetblue;
+    color: #fff;
+}
+.submitBarT a{
+    display: inline-block;
+    margin: 0 7px;
+    width: 142px;
+    height: 36px;
+    text-align: center;
+    font: 16px/36px "Microsoft YaHei","\5FAE\8F6F\96C5\9ED1";
+    border-radius: 4px;
+    cursor: pointer;
+}
+.submitBarT a:hover{
+    opacity:0.8;
+}

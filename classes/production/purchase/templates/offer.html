@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>报价页面</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/niftymodals.css}" />
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+    <link rel="stylesheet" th:href="@{static/css/htmleaf-demo.css}">
+    <link rel="stylesheet" th:href="@{/static/css/demo.css}">
+    <link rel="stylesheet" th:href="@{/static/css/same.css}">
+    <link rel="stylesheet" th:href="@{/static/css/normalize.css}" /><!--CSS RESET-->
+<!--    <link rel="stylesheet" th:href="@{/static/css/layer.css}">-->
+    <link rel="stylesheet" th:href="@{/static/css/offer.css}">
+</head>
+<body>
+<div class="contain">
+    <!-- 顶部 -->
+    <div th:include="common::commonTop"></div>
+    <!-- 头部 -->
+    <div class="head_nav">
+            <div class="head">
+                <div class="logo">
+                    <a href="">
+                        <img th:src="@{/img/logo.png}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    <div class="box">
+        <div class="mainPart">
+            <!--报价内容-->
+            <div class="offerContent">
+                <div class="offerTitle" >
+                    <h3 style="color: #103A86;">报价内容:</h3>
+                </div>
+                <div class="addition">
+                    <div class="parts md-trigger" data-modal="modal-1">
+                        <p>配件报价</p>
+                    </div>
+                    <div class="serve md-trigger" data-modal="modal-2">
+                        <p>增值服务</p>
+                    </div>
+                    <div class="view">
+                        <a th:href="@{/productoffer/offer/all/1/1/1}">
+                            <p>
+                                查看所有已报价商品
+                            </p>
+                        </a>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+                <div class="offerForm">
+                    <!--商品名称-->
+                    <div class="offerFormItem">
+                        <div style="height: 100%;">
+                            <div class="offerFormLabel">商品名称:</div>
+                                <div class="offerInputblock">
+                                    <a>
+                                        <p th:text="${product.xhmc}" th:data-number="${product.xhbh}" class="commodityNumber">123456789</p>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                    <!--商品原价-->
+                    <div class="offerFormItem">
+                        <div style="height: 100%;">
+                            <div class="offerFormLabel">商品曾报价:</div>
+                            <div class="offerInputblock">
+                                <a>
+                                    <p th:text="${product.price}"></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--类别名称-->
+                    <div class="offerFormItem">
+                        <div class="offerFormLabel">商品类别:</div>
+                        <div class="offerInputblock">
+                            <p th:text="${product.lbmc}">家电类</p>
+                        </div>
+                    </div>
+                    <!--品目-->
+                    <div class="offerFormItem">
+                        <div class="offerFormLabel">品目:</div>
+                        <div class="offerInputblock">
+                            <p th:text="${product.pmmc}">电视</p>
+                        </div>
+                    </div>
+<!--                    商品参数-->
+                    <div class="offerFormItem">
+                        <div style="height: 100%;">
+                            <div class=" paramaters">商品参数:</div>
+                            <div class="paramatersDetails" style="vertical-align: text-top;">
+                                    <p th:each="parameters:${parametersList}" class="parameter">
+                                        <span th:text="${parameters.cssm}"></span>
+                                        <span>：</span>
+                                        <span th:text="${parameters.csz}"></span>
+                                    </p>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                    <!--选地区-->
+                    <div class="offerFormItem">
+                        <div style="height: 100%;">
+                            <div class="offerFormLabel">地址:</div>
+                            <div class="offerInputblock">
+                                <select style="width: 150px;cursor: pointer;outline-style: none;" class="selectAddress" >
+                                    <option  th:each="area:${areas}"th:text="${area[1]}" th:data-addressnumber="${area[0]}"  ></option>
+                                    <span id="alertAddress"></span>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--报价-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel">商品价格:</label>
+                        <div class="offerInputblock">
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入价格" class="offerInput" style="width: 145px;" id="offerInputContent">
+                            <span id="priceHint"></span>
+                        </div>
+                    </div>
+                    <!--商品的地址-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel">商品地址:</label>
+                        <div class="offerInputblock">
+                            <input type="text" name="title" autocomplete="off" placeholder="请输入商品地址" class="offerInput" style="width: 700px;" id="address">
+                            <span class="address"></span>
+                        </div>
+                    </div>
+                    <!--更改报价原因-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel" style="vertical-align: top;">更改报价原因:</label>
+                        <div class="offerInputblock">
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请认真填写原因" class="offerTextarea" id="offerTextareaContent"></textarea>
+                            <span id="textHint"></span>
+                        </div>
+                    </div>
+                    <!--对该商品供货周期，以及售后服务简要描述-->
+                    <div class="offerFormItem">
+                        <label class="offerFormLabel" style="vertical-align: top;">服务承诺:</label>
+                        <div class="offerInputblock">
+                            <textarea type="text" name="title" autocomplete="off" placeholder="对该商品供货周期，以及售后服务简要描述
+" class="offerTextarea" id="attention"></textarea>
+                            <span class="attention"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="submitBar">
+        <a class="cancel">返回</a>
+        <a class="confirm">提交</a>
+    </div>
+<!--配件报价模态框-->
+    <div class="md-container md-effect-1" id="modal-1">
+        <div class="md-content">
+            <div class="md-contentTitle" style="padding: 4px 0px 4px;">
+                <p>配件报价:</p>
+            </div>
+                <table >
+                    <thead>
+                        <tr class="accessoriesTitle">
+                            <th>配件名称:</th>
+                            <th>原价格</th>
+                            <th>报价</th>
+                            <th>备注</th>
+                            <th>修改</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="parts:${partsList}">
+                        <td  th:data-accessories="${parts.PJBH}" class="accessoriesnumber">
+                            <p th:text="${parts.PJMC}">配件名字</p>
+                        </td>
+                        <td>
+                            <p th:text="${parts.price}">原价格</p>
+                        </td>
+                        <td class="pricing">
+                            <input type="text" name="title" autocomplete="off"  class="offerInput accessoriesText" placeholder="价格" style="width: 82px;">
+                            <span></span>
+                        </td>
+                        <td class="pricing">
+                            <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea accessoriesTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                            <span style="left: 71%;"></span>
+                        </td>
+                        <td class="submitPrice">
+                            <p>提交报价</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+    <!--增值服务-->
+    <div class="md-container md-effect-2" id="modal-2">
+        <div class="md-content">
+            <div class="md-contentTitle" style="padding: 4px 0px 4px;">
+                <p>增值服务报价:</p>
+            </div>
+            <table >
+                <thead>
+                <tr>
+                    <th>增值服务名称:</th>
+                    <th>原报价</th>
+                    <th>增值服务报价</th>
+                    <th>增值服务内容</th>
+                    <th>修改</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="service:${serviceValueList}">
+                    <td >
+                        <p th:text="${service.fwmc}" ></p>
+                    </td>
+                    <td>
+                        <p th:text="${service.fwjg}"></p>
+                    </td>
+                    <td class="pricing">
+                        <input type="text" name="title" autocomplete="off" placeholder="价格" class="offerInput addInput" style="width: 145px;">
+                        <span style="left: 62%;"></span>
+                    </td>
+                    <td class="pricing">
+                        <textarea type="text" name="title" autocomplete="off" placeholder="请填写备注" class="offerTextarea addTextarea" style="height: 50px;
+    line-height: 40px;width: 230px;"></textarea>
+                        <span style="left: 71%;"></span>
+                    </td>
+                    <td class="addServe" th:data-addnumber="${service.FWBH}">
+                        <p>提交报价</p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="md-overlay"></div>
+</div>
+
+<!-- 底部 -->
+<div th:include="common::commonFoot"></div>
+
+</body>
+<script th:src="@{/static/js/jquery-3.4.1.min.js}"></script>
+
+<script type="text/javascript" th:src="@{/static/js/jquery.multi-select.js}"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#people').multiSelect();
+        $('#line-wrap-example').multiSelect({
+            positionMenuWithin: $('.position-menu-within')
+        });
+        $('#categories').multiSelect({
+            noneText: 'All categories',
+            presets: [
+                {
+                    name: 'All categories',
+                    options: []
+                },
+                {
+                    name: 'My categories',
+                    options: ['a', 'c']
+                }
+            ]
+        });
+        $('#modal-example').multiSelect({
+            'modalHTML': '<div class="multi-select-modal">'
+        });
+
+    });
+</script>
+<script th:src="@{/static/js/offer.js}"></script>
+
+<script th:src="@{/static/js/niftymodals.js}"></script>
+<script>
+    $(document).ready(function() {
+
+        $('.md-trigger').on('click',function(){
+
+            var modal = $(this).data('modal');
+            $("#" + modal).niftyModal();
+        });
+
+    });
+</script>
+
+
+<script th:src="@{/static/js/cssParser.js}"></script>
+<script th:src="@{/static/js/css-filters-polyfill.js}"></script>
+
+
+</html>
+
+

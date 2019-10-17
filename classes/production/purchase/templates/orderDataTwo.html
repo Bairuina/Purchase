@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{../static/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{../static/css/bootstrap-fileinput.css}">
+    <link rel="stylesheet" th:href="@{../static/css/jquery-ui-1.8.17.custom.css}">
+    <link rel="stylesheet" th:href="@{../static/css/jquery-ui-timepicker-addon.css}">
+    <link rel="stylesheet" th:href="@{../static/css/orderData.css}">
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <title>订单</title>
+</head>
+
+<body>
+<div id="outerdiv">
+    <div id="innerdiv">
+        <img id="bigimg" src="">
+    </div>
+</div>
+<div class="orderInformation">
+    <h2 class="name">订单信息</h2>
+    <div class="orderWrap">
+        <div class="orderMessage_nav">
+            <div class="orderMessage1">
+                <div class="item">
+                    <span class="label">送货城市</span>
+                    <span class="info" th:text="${allData.data[2]}"></span>
+                </div>
+                <div class="item">
+                    <span class="label">送货区/县</span>
+                    <span class="info"  th:text="${allData.data[3]}"></span>
+                </div>
+                <div class="item">
+                    <span class="label">送货地址</span>
+                    <span class="info" th:text="${allData.data[0].shdd}">
+
+                        </span>
+                </div>
+                <div class="item">
+                    <span class="label">订单编号</span>
+                    <span class="info ddbhDataWord" id="ddbhDataWord" th:text="${allData.data[0].ddbh}"></span>
+                </div>
+                <div class="item">
+                    <span class="label" >采购人名称</span>
+                    <span class="info" th:text="${allData.data[0].cgrmc}"></span>
+                </div>
+                <div class="item">
+                    <span class="label">需方联系人</span>
+                    <span class="info" th:text="${allData.data[0].xflxrxm}">\</span>
+                </div>
+                <div class="item">
+                    <span class="label">需方电话</span>
+                    <span class="info" th:text="${allData.data[0].xfdh}"></span>
+                </div>
+                <div class="item">
+                    <span class="label">电商名称</span>
+                    <span class="info" th:text="${allData.data[0].ghsmc}"></span>
+                </div>
+                <div class="item">
+                    <span class="label">订单提交时间</span>
+                    <span class="info" th:text="${allData.data[0].cjrq}"></span>
+                </div>
+            </div>
+            <div class="orderMessage2">
+                <div class="item">
+                    <span class="label" id="ztDataWordLiWord" th:data-ztdata="${allData.data[0].zt}">订单状态</span>
+                    <span class="info">  <span class="orderZtData" th:if="${allData.data[0].zt=='2'}">供应商待确认</span>
+                        <span class="orderZtData" th:if="${allData.data[0].zt=='3'}">待验收</span>
+                        <span class="orderZtData" th:if="${allData.data[0].zt=='4'}">订单已取消</span>
+                        <span class="orderZtData" th:if="${allData.data[0].zt=='5'}">验收通过</span></span>
+                </div>
+                <div class="item">
+                    <span class="label">支付方式</span>
+                    <span class="info">  <span th:if="${allData.data[0].zffs=='70080001'}">现金</span>
+                        <span th:if="${allData.data[0].zffs=='70080002'}">公务卡结算 </span>
+                        <span th:if="${allData.data[0].zffs=='70080003'}">银行转账</span>
+                        <span th:if="${allData.data[0].zffs=='70080004'}">银行支票</span></span>
+                </div>
+                <div class="item">
+                    <span class="label">发票抬头</span>
+                    <span class="info" th:text="${allData.data[0].fptt}"></span>
+                </div>
+                <div class="item">
+                    <span class="label">纳税人识别号</span>
+                    <span class="info"><span th:if="${allData.data[0].nsrsbh==null}">暂无相关信息</span></li>
+                        <span  th:if="${allData.data[0].nsrsbh!=null}" th:text="${allData.data[0].nsrsbh}"></span></span>
+                </div>
+                <div class="item">
+                    <span class="label">是否需要安装服务</span>
+                    <span class="info">是</span>
+                </div>
+                <div class="item">
+                    <span class="label">订单备注说明</span>
+                    <span class="info"><span th:if="${allData.data[0].sfxyazfw=='0'}">需要安装服务</span>
+                        <span th:if="${allData.data[0].sfxyazfw=='1'}">不需要安装服务</span>
+                        <span th:if="${allData.data[0].sfxyazfw==null}">暂无相关信息</span></span>
+                </div>
+                <div class="item">
+                    <span class="label">收货时间</span>
+                    <span class="info"> <span th:if="${allData.data[0].shsj!=null}" th:text="${allData.data[0].shsj}"></span>
+                        <span th:if="${allData.data[0].shsj==null}">暂无相关信息</span></span>
+                </div>
+                <div class="item">
+                    <span class="label">收货期限</span>
+                    <span class="info">  <span th:if="${allData.data[0].shqx=='0'}">不限</span>
+                        <span th:if="${allData.data[0].shqx=='1'}">一天内</span>
+                        <span th:if="${allData.data[0].shqx=='2'}">两天内</span>
+                        <span th:if="${allData.data[0].shqx=='3'}">三天内</span>
+                        <span th:if="${allData.data[0].shqx=='5'}">五天内</span>
+                        <span th:if="${allData.data[0].shqx=='7'}">七天内</span>
+                        <span th:if="${allData.data[0].shqx==null}">暂无相关信息</span></span>
+                </div>
+                <div class="item">
+                    <span class="label">发票内容</span>
+                    <span class="info">      <span th:if="${allData.data[0].fpnr=='70100001'}">商品明细</span>
+                        <span th:if="${allData.data[0].fpnr=='70100002'}">办公耗材</span>
+                        <span th:if="${allData.data[0].fpnr=='70100003'}">办公用品</span>
+                        <span th:if="${allData.data[0].fpnr==null}">暂无相关信息</span></span>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="orderOperation_nav">
+            <button class="lookContract"><a href="javascript:void(0)">查看合同</a></button>
+            <button class="yes_order">确定订单</button>
+            <button class="no_order">拒绝订单</button>
+            <button class="checkInvoice startBill" th:if="${allData.data[0].fpkjsj==0}">开具发票</button>
+            <button class="checkInvoice signBill" th:if="${allData.data[0].fpkjsj!=0}"> 收到发票</button>
+            <button class="collectionConfirm" data-toggle="modal" data-target="#collection_Confirm">确认收款</button>
+        </div>
+    </div>
+    <div class="modal fade" id="collection_Confirm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">添加收款信息</h4>
+                </div>
+                <div class="modal-body collection" >
+                    收款标志：<input type="text" name="skbz" id="skbzDataSelect" list="sexlist" autocomplete="off">
+                    <datalist id="sexlist">
+                        <option>已收款</option>
+                        <option>未收款</option>
+                    </datalist>
+                    <br>
+                    收款金额：<input name="skje" id="skjeDataSelect" >
+                    <br>
+                    收款时间：<input name="sksj" id="sksjDataSelect" class="ui_timepicker" readonly="readonly" >
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="submitMoney">提交更改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="commodityDetails">
+    <h2 class="name">商品详情</h2>
+    <div class="commodityWrap">
+        <div class="title">
+            <ul>
+                <li>商品</li>
+                <li>价格</li>
+                <li>数量</li>
+            </ul>
+        </div>
+        <div class="detail" th:each="product:${allData.data[1]}">
+            <div class="commodities">
+                <div class="commodity">
+                    <div class="item">
+                        <span class="label" th:data-xhbh="${product.xhbh}">型号名称</span>
+                        <span class="info" th:if="${product.xhmc==null}">暂无内容</span>
+                        <span class="info" th:if="${product.xhmc!=null}" th:text="${product.xhmc}"></span>
+                    </div>
+                    <div class="item">
+                        <span class="label">品牌名称</span>
+                        <span class="info" th:if="${product.ppmc==null}">暂无内容</span>
+                        <span class="info" th:if="${product.ppmc!=null}" th:text="${product.ppmc}"></span>
+                    </div>
+                    <div class="item" th:data-xhbh="${product.xhbh}">
+                        <span class="label">商品标识码</span>
+                        <span class="info AddIdentification" th:data-wybs="${product.wybs}">上传商品标识码信息</span>
+                        <span class="info">
+                            <img  class="pic" src="../static/img/noimage.png" alt="">
+                        </span>
+                    </div>
+                </div>
+                <div class="price">
+                    <span class="concretePrice" th:if="${product.sjjg==null}">暂无内容</span>
+                    ¥<span class="concretePrice" th:if="${product.sjjg!=null}" th:text="${product.sjjg}"></span>
+                    <!--                    </br>-->
+                    <!--                    <span class="info" th:if="${product.xjjg==null}">暂无内容</span><span class="info" th:if="${product.xjjg!=null}" th:text="${product.xjjg}"></span>-->
+                </div>
+                <div class="amount">
+                    <span class="concreteAmount" th:if="${product.sl==null}" >暂无信息</span>
+                    <span class="concreteAmount" th:if="${product.sl!=null}" th:text="${product.sl}">10</span>
+                </div>
+            </div>
+            <div class="mountings">
+                <div class="mounting"  th:each="accessory:${product.accessoryList}">
+                    <div class="commodity">
+                        <span th:text="${accessory.pjmc}"></span>
+                    </div>
+                    <div class="price">
+                        ¥<span class="concretePrice" th:text="${accessory.pjjg}"></span>
+                    </div>
+                    <div class="amount ">
+                        <span class="concreteAmount" th:text="${accessory.sl}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="services" th:each="service:${product.serviceList}">
+                <div class="service">
+                    <div class="commodity">
+                        <span th:text="${service.fwMC}"></span>
+                    </div>
+                    <div class="price">
+                        ¥<span class="concretePrice" th:text="${service.fwjg}"></span>
+                    </div>
+                    <div class="amount ">
+                        <span class="concreteAmount" th:text="${service.sl}"></span>
+                    </div>
+                </div>
+            </div>
+        </div >
+        <div class="total">
+                <span>总计:<span class="amountTo" th:text="'¥'+${allData.data[0].ddze}"></span></span>
+        </div>
+    </div>
+</div>
+<!--开具发票时间模态框-->
+<div class="start_modal">
+    <ul class="bill_startTimeBox">
+        <li><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="start_orderID" th:value="${allData.data[0].ddbh}"  readonly="readonly" /></li>
+        <li><span>发票开具时间：</span>&emsp;&emsp;&emsp;<input type="text" name="bill_StartTime" id="bill_StartTime" class="ui_timepicker" readonly="readonly" value="" placeholder=" 格式要求" /></li>
+    </ul>
+    <div class="bill_btns_box">
+        <button class="startTime_return">返回</button>
+        <button class="startSubmit_btn">提交</button>
+    </div>
+</div>
+
+<!--签收发票时间模态框-->
+<div class="end_modal">
+    <ul class="bill_startTimeBox">
+        <li><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="sign_orderID" th:value="${allData.data[0].ddbh}" readonly="readonly" /></li>
+        <li><span>发票签收时间：</span>&emsp;&emsp;&emsp;<input type="text" name="bill_SignTime" id="bill_SignTime" class="ui_timepicker" readonly="readonly" value="" placeholder=" 格式要求" /></li>
+    </ul>
+    <div class="bill_btns_box">
+        <button class="signTime_return">返回</button>
+        <button class="signSubmit_btn">提交</button>
+    </div>
+</div>
+<!--推送标识码-->
+<div class="code_modal">
+    <ul class="bill_startTimeBox">
+        <li style="display: none"><span>订单编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="orderID" id="orderID" value="" readonly="readonly" /></li>
+        <li style="display: none"><span>商品编号：</span>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_goodsID" id="QRcode_goodsID"  readonly="readonly" value="" /></li>
+        <li><span>商品标识码：</span>&emsp;&emsp;&emsp;&emsp;<input type="text" name="QRcode_onlyCodeID" id="QRcode_onlyCodeID" value="" /></li>
+        <li>
+            <span>标识码图片：</span>&emsp;&emsp;&emsp;&emsp;
+            <div class="picBox">
+                <div>
+                    <img class="pic">
+                    <input class="upload QRcode" id="image" name="file" type="file" multiple style="display: none"/>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="code_btns_box" style="text-align: center;margin: 120px 20px 20px 50px;">
+        <button class="idenCode_return">返回</button>
+        <button class="codeSubmit_btn">完成</button>
+    </div>
+</div>
+
+<!--提示模态框-->
+<div class="modal">
+    <h3 class="informTitle">未来工作室：</h3>
+    <p class="informInner">消息已经推送成功！</p>
+</div>
+<script type="text/javascript" th:src="@{/js/jquery-1.7.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>-->
+<script type="text/javascript" th:src="@{/js/jquery-ui-1.8.17.custom.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-ui-timepicker-addon.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-ui-timepicker-zh-CN.js}"></script>
+<script type="text/javascript" th:src="@{/js/modal.js}"></script>
+<script th:src="@{/js/websocket.js}"></script>
+<script th:src="@{/js/OrderDate.js}"></script>
+<script th:src="@{/js/upLoadData.js}"></script>
+</body>
+</html>

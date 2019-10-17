@@ -1,0 +1,138 @@
+.logisticsContainer{
+    height: 800px;
+    background-color: rgba(0,0,0,0.1);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    padding-top: 60px;
+    display: none;
+}
+.logisticsContent{
+    display: table;
+    background-color:#F3F3F3;
+    width: 800px;
+    height: 600px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    margin:0 auto;
+}
+/*标题*/
+.logisticsTitle{
+    padding: 14px 20px 14px 20px;
+    border-bottom: 1px solid #d3d3d3;
+}
+.LogisticsAddress{
+    padding: 20px;
+}
+.LogisticsAddress>ul{
+    margin:0 auto;
+    width: 100%;
+    height: 100%;
+}
+.LogisticsAddress>ul>li{
+    list-style-type: none;
+    font-size: 13px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.logisticsTitle>p:nth-child(1){
+    float: left;
+}
+.logisticsImg{
+    float: right;
+}
+.logisticsImg>img{
+    width: 18px;
+    cursor: pointer;
+}
+
+
+.timeline-small {
+    /* max-width: 350px; */
+    max-height: 630px;
+    overflow: hidden;
+    /* margin: 30px auto 0; */
+    /* box-shadow: 0 0 40px #a0a0a0; */
+    font-family: 'Open Sans', sans-serif;
+}
+.timeline-small-body ul {
+    padding: 1em 0 0 2em;
+    margin: 0;
+    list-style: none;
+    position: relative;
+}
+.timeline-small-body ul::before {
+    content: ' ';
+    height: 100%;
+    width: 5px;
+    background-color: #d9d9d9;
+    position: absolute;
+    top: 0;
+    left: 2.4em;
+    z-index: -1;
+}
+.timeline-small-body li div {
+    display: inline-block;
+    margin: 1em 0;
+    vertical-align: top;
+}
+.timeline-small-body .bullet {
+    width: 1rem;
+    height: 1rem;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: #fff;
+    z-index: 1;
+    margin-right: 1rem;
+    margin-top: 3%;
+
+}
+.timeline-small-body .bullet.pink {
+    background-color: #9af0ff;
+    border: 3px solid #d3ecf9;
+}
+/*.timeline-small-body .bullet.green {*/
+    /*background-color: lightseagreen;*/
+    /*border: 3px solid #B0E8E2;*/
+/*}*/
+/*.timeline-small-body .bullet.blue {*/
+    /*background-color: aquamarine;*/
+    /*border: 3px solid cadetblue;*/
+/*}*/
+/*.timeline-small-body .bullet.orange {*/
+    /*background-color: salmon;*/
+    /*border: 3px solid #EB8B6E;*/
+/*}*/
+.timeline-small-body .date {
+    width: 23%;
+    font-size: 0.75em;
+    padding-top: 0.40rem;
+    padding-right: 2rem;
+}
+.timeline-small-body .desc {
+    width: 50%;
+}
+.timeline-small-body h3 {
+    font-size: 0.9em;
+    font-weight: 400;
+    margin: 0;
+}
+.timeline-small-body h4 {
+    margin: 0;
+    font-size: 0.7em;
+    font-weight: 400;
+    color: #808080;
+}
+
+.desc>h4{
+    display: inline-block;
+}
+
+.desc>h4:nth-child(1){
+    padding-right: 14px;
+}
