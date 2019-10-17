@@ -1,4 +1,4 @@
-//时间JQ
+//时间J
 $(function () {
 	$(".ui_timepicker").datetimepicker({
 		//showOn: "button",
