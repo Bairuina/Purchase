@@ -147,7 +147,7 @@ function billSignSubimt(){
 
 //标识码模块
 function codeSendReturn(){
-	// $(".code_modal").slideUp(10);
+	$(".code_modal").slideUp(10);
 }
 
 function codeSendSubmit(){
