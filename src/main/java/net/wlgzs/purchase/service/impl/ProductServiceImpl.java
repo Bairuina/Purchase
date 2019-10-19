@@ -102,6 +102,18 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             }
 
+            System.out.println(productList);
+            System.out.println("***");
+            System.out.println(lbbh);
+            System.out.println(lbbhlist);
+            System.out.println("******");
+            System.out.println(pmbh);
+            System.out.println(pmbhlist);
+            System.out.println("*****");
+            System.out.println(ppbh);
+            System.out.println(ppbhlist);
+
+
             Page<Product> page =new Page<Product>();
             page.setDate(productList);   //传入数据
             page.setLength(5);          //设置每页数量
@@ -114,13 +126,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             //返回当前条件的商品
             modelAndView.addObject("productList", productList);
 
+
             //类别集合
             modelAndView.addObject("lbbhlist", lbbhlist);
             //品目集合
             modelAndView.addObject("pmbhlist", pmbhlist);
             //品牌集合
             modelAndView.addObject("ppbhlist", ppbhlist);
-    
+
             //类别编号
             modelAndView.addObject("lbbh",lbbh);
             //品目编号
@@ -129,6 +142,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             modelAndView.addObject("ppbh",ppbh);
             //内容
             modelAndView.addObject("nr",nr);
+
+
+
+
+
+
+
 
 
         } catch (Exception e) {
