@@ -63,26 +63,25 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         }
         modelAndView.setViewName("detailsPage");
         try {
+            List<Product> lbbhlist;
+            List<Product> pmbhlist;
+            List<Product> ppbhlist;
             QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
             queryWrapper.select("lbbh", "lbmc");
-            List<Product> lbbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper)));
-            QueryWrapper<Product> queryWrapper1 = new QueryWrapper<>();
-            if (lbbh.equals("0")) {
-                lbbh = lbbhlist.get(0).getLbbh();
-            }
-            queryWrapper1.eq("lbbh", lbbh).select("pmbh", "pmmc");
-            List<Product> pmbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper1)));
-            QueryWrapper<Product> queryWrapper2 = new QueryWrapper<>();
-            if (pmbh.equals("0")) {
-                pmbh = pmbhlist.get(0).getPmbh();
-            }
-            queryWrapper2.eq("pmbh", pmbh).select("ppbh", "ppmc");
-            List<Product> ppbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
-            QueryWrapper<Product> queryWrapper3 = new QueryWrapper<>();
-            if (ppbh.equals("0")){
-                ppbh = ppbhlist.get(0).getPpbh();
-            }
+            lbbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper)));
 
+            QueryWrapper<Product> queryWrapper1=new QueryWrapper<>();
+            queryWrapper1.select("pmbh","pmmc");
+            queryWrapper1.eq("lbbh","0".equals(lbbh)? lbbhlist.get(0).getLbbh():lbbh);
+            pmbhlist =new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper1)));
+
+            QueryWrapper<Product> queryWrapper2=new QueryWrapper<>();
+            queryWrapper2.select("ppbh","ppmc");
+            queryWrapper2.eq("pmbh","0".equals(pmbh)? pmbhlist.get(0).getPmbh():pmbh);
+            ppbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
+
+
+            QueryWrapper<Product> queryWrapper3 = new QueryWrapper<>();
             List<Product> productList;
             if (lbbh.equals("0")) {
                 queryWrapper3.like("xhmc", nr.equals("0") ? "" : nr)
@@ -102,37 +101,54 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                         .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
                 productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             }
-            modelAndView.addObject("lbbhlist", lbbhlist);//第一大类
-            modelAndView.addObject("pmbhlist", pmbhlist);//第二大类
-            modelAndView.addObject("ppbhlist", ppbhlist);//第三大类
+
+            System.out.println(productList);
+            System.out.println("***");
+            System.out.println(lbbh);
+            System.out.println(lbbhlist);
+            System.out.println("******");
+            System.out.println(pmbh);
+            System.out.println(pmbhlist);
+            System.out.println("*****");
+            System.out.println(ppbh);
+            System.out.println(ppbhlist);
+
+
             Page<Product> page =new Page<Product>();
             page.setDate(productList);   //传入数据
             page.setLength(5);          //设置每页数量
             page.setSize();              //获取总页数
+            productList=page.getDateByYs(nowPage);
+            //总页数
             modelAndView.addObject("pagesize",page.getSize());
-            productList=page.getDateByYs(nowPage);          //获取该页数list
-            modelAndView.addObject("pagenumber",nowPage);   //返回页码
+            //当前页码
+            modelAndView.addObject("pagenumber",nowPage);
+            //返回当前条件的商品
             modelAndView.addObject("productList", productList);
-            for (Product product:lbbhlist){
-                if (product.getLbbh().equals(lbbh)){
-                    modelAndView.addObject("productlbbh",product);
-                    System.out.println(product);
-                    break;
-                }
-            }
 
-            for (Product product:pmbhlist){
-                if (product.getPmbh().equals(pmbh)){
-                    modelAndView.addObject("productpmbh",product);
-                }
-            }
-            for (Product product:ppbhlist){
-                if (product.getPpbh().equals(ppbh)){
-                    modelAndView.addObject("productppbh",product);
-                }
-            }
 
+            //类别集合
+            modelAndView.addObject("lbbhlist", lbbhlist);
+            //品目集合
+            modelAndView.addObject("pmbhlist", pmbhlist);
+            //品牌集合
+            modelAndView.addObject("ppbhlist", ppbhlist);
+
+            //类别编号
+            modelAndView.addObject("lbbh",lbbh);
+            //品目编号
+            modelAndView.addObject("pmbh",pmbh);
+            //品牌编号
+            modelAndView.addObject("ppbh",ppbh);
+            //内容
             modelAndView.addObject("nr",nr);
+
+
+
+
+
+
+
 
 
         } catch (Exception e) {
