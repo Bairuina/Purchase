@@ -83,27 +83,17 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
             QueryWrapper<Product> queryWrapper3 = new QueryWrapper<>();
             List<Product> productList;
-            if (lbbh.equals("0")) {
-                queryWrapper3.like("xhmc", nr.equals("0") ? "" : nr)
-                        .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
-                System.out.println(nr);
-                productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-            } else if (!lbbh.equals("0") && pmbh.equals("0")) {
-                queryWrapper3.eq("lbbh", lbbh).like("xhmc", nr.equals("0") ? "" : nr)
-                        .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
-                productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-            } else if (!lbbh.equals("0") && !pmbh.equals("0") && ppbh.equals("0")) {
-                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).like("xhmc", nr.equals("0") ? "" : nr)
-                        .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
-                productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-            } else {
-                queryWrapper3.eq("lbbh", lbbh).eq("pmbh", pmbh).eq("ppbh", ppbh).like("xhmc", nr.equals("0") ? "" : nr)
-                        .select("product_id", "xhbh", "xhmc", "pmbh", "pmmc", "ppbh", "ppmc", "lbbh", "lbmc", "zt");
-                productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
+            if (!"0".equals(lbbh)){
+                queryWrapper3.eq("lbbh",lbbh);
             }
-
+            if (!"0".equals(pmbh)){
+                queryWrapper3.eq("pmbh",pmbh);
+            }
+            if (!"0".equals(ppbh)){
+                queryWrapper3.eq("ppbh",ppbh);
+            }
+            productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
             System.out.println(productList);
-            System.out.println("***");
             System.out.println(lbbh);
             System.out.println(lbbhlist);
             System.out.println("******");
@@ -123,21 +113,21 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             Product pmbhProduct=new Product();
             pmbhProduct.setPmbh(pmbh);
             for(Product pmbh1:pmbhlist){
-                if (lbbh.equals(pmbh1.getLbbh())) {
+                if (pmbh.equals(pmbh1.getPmbh())) {
                     pmbhProduct = pmbh1;
                 }
             }
             Product ppbhProduct=new Product();
             ppbhProduct.setPpbh(ppbh);
             for(Product ppbh1:ppbhlist){
-                if (lbbh.equals(ppbh1.getLbbh())) {
+                if (ppbh.equals(ppbh1.getPpbh())) {
                     ppbhProduct = ppbh1;
                 }
             }
 
             Page<Product> page =new Page<Product>();
             page.setDate(productList);   //传入数据
-            page.setLength(5);          //设置每页数量
+            page.setLength(9);          //设置每页数量
             page.setSize();              //获取总页数
             productList=page.getDateByYs(nowPage);
             //总页数
@@ -164,6 +154,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             modelAndView.addObject("ppbhProduct",ppbhProduct);
             //内容
             modelAndView.addObject("nr",nr);
+
+            System.out.println("当前品牌"+ppbhProduct);
+            System.out.println("当前类别"+lbbhProduct);
+            System.out.println("当前品目"+pmbhProduct);
+
+            System.out.println(productList);
+
 
 
 
