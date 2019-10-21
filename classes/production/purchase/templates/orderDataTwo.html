@@ -135,32 +135,31 @@
             <button class="collectionConfirm" data-toggle="modal" data-target="#collection_Confirm">确认收款</button>
         </div>
     </div>
-    <div class="modal fade" id="collection_Confirm">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">添加收款信息</h4>
-                </div>
-                <div class="modal-body collection" >
-                    收款标志：<input type="text" name="skbz" id="skbzDataSelect" list="sexlist" autocomplete="off">
-                    <datalist id="sexlist">
-                        <option>已收款</option>
-                        <option>未收款</option>
-                    </datalist>
-                    <br>
-                    收款金额：<input name="skje" id="skjeDataSelect" >
-                    <br>
-                    收款时间：<input name="sksj" id="sksjDataSelect" class="ui_timepicker" readonly="readonly" >
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="submitMoney">提交更改</button>
-                </div>
+</div>
+<div class="modal fade" id="collection_Confirm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">添加收款信息</h4>
+            </div>
+            <div class="modal-body collection" >
+                收款标志：<input type="text" name="skbz" id="skbzDataSelect" list="sexlist" autocomplete="off">
+                <datalist id="sexlist">
+                    <option>已收款</option>
+                    <option>未收款</option>
+                </datalist>
+                <br>
+                收款金额：<input name="skje" id="skjeDataSelect" >
+                <br>
+                收款时间：<input name="sksj" id="sksjDataSelect" class="ui_timepicker" readonly="readonly" >
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="submitMoney">提交更改</button>
             </div>
         </div>
     </div>
-
 </div>
 <div class="commodityDetails">
     <h2 class="name">商品详情</h2>
@@ -187,7 +186,7 @@
                     </div>
                     <div class="item" th:data-xhbh="${product.xhbh}">
                         <span class="label">商品标识码</span>
-                        <span class="info AddIdentification" th:data-wybs="${product.wybs}">上传商品标识码信息</span>
+                        <span class="info AddIdentification" th:data-wybs="${product.wybs}">点击上传商品标识码信息</span>
                         <span class="info">
                             <img  class="pic" src="../static/img/noimage.png" alt="">
                         </span>
@@ -232,7 +231,7 @@
             </div>
         </div >
         <div class="total">
-                <span>总计:<span class="amountTo" th:text="'¥'+${allData.data[0].ddze}"></span></span>
+            <span>总计:<span class="amountTo" th:text="'¥'+${allData.data[0].ddze}"></span></span>
         </div>
     </div>
 </div>
@@ -247,7 +246,6 @@
         <button class="startSubmit_btn">提交</button>
     </div>
 </div>
-
 <!--签收发票时间模态框-->
 <div class="end_modal">
     <ul class="bill_startTimeBox">
@@ -281,14 +279,8 @@
     </div>
 </div>
 
-<!--提示模态框-->
-<div class="modal">
-    <h3 class="informTitle">未来工作室：</h3>
-    <p class="informInner">消息已经推送成功！</p>
-</div>
-<script type="text/javascript" th:src="@{/js/jquery-1.7.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-<!--<script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>-->
 <script type="text/javascript" th:src="@{/js/jquery-ui-1.8.17.custom.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery-ui-timepicker-addon.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery-ui-timepicker-zh-CN.js}"></script>

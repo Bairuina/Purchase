@@ -90,18 +90,39 @@ function billEndSend(){
 	}
 }
 
-// 点击上传商品唯一标识码
-$(".AddIdentification").on('click',function () {
-	// // 获取订单编号和商品编号
-	// var xhbh = $("this").parent().parent().children().eq(0).children().eq(0).text();
-	var xhbh =123;
-	var ddbh = $(".ddbhDataWord").text();
-	// console.log($(".ddbhDataWord").text());
-	// 上传框显示并将ddbh和spbh值放到框内
-	$(".code_modal").slideUp(10);
-	$('#orderID').val(ddbh);
-	$('#QRcode_goodsID').val(xhbh);
-})
+
+
+//推送标识码
+function codeSend(){
+	var QR_orderID = $("#QRCode_orderID").val();
+	var QRcode_ModalID = $("#QRcode_ModalID").val();
+	var QRcode_onlyCodeID = $("#QRcode_onlyCodeID").val();
+	if((QRcode_onlyCodeID != '') && (url != '')){
+		$.ajax({
+			type:"post",
+			url:"",
+			dataType:"json",
+			data:{
+				"ddbh":QR_orderID,
+				"xhbh":QRcode_ModalID,
+				"wybs":QRcode_onlyCodeID,
+				"pic":url
+			},
+			success:function(data){
+				if(data.code =='0'){
+					inform("您好，标识码已推送到商城！");
+				}else if(data.code != 1){
+					inform(data.msg);
+				}
+			},
+			error:function(){
+				inform("网络故障");
+			}
+		});
+	}else{
+		inform("您所填信息有误! 请检查后重新提交!");
+	}
+}
 
 //发票开具模块
 function billStartreturn(){
@@ -126,7 +147,7 @@ function billSignSubimt(){
 
 //标识码模块
 function codeSendReturn(){
-	// $(".code_modal").slideUp(10);
+	$(".code_modal").slideUp(10);
 }
 
 function codeSendSubmit(){

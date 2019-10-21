@@ -374,7 +374,7 @@ body {
     display: inline-block;
     width: 166px;
     height: 166px;
-    background-image: url(../img/addMark.jpg);
+    background-image: url(/img/addMark.jpg);
     background-size: cover;
     border: 1px solid lightgray;
     border-radius: 3px;
@@ -387,7 +387,7 @@ body {
     height: 150px;
     margin-top: 8px;
     border-radius: 2px;
-    background-image: url(../img/addMark.jpg);
+    background-image: url(/img/addMark.jpg);
     background-size: cover;
 }
  #outerdiv {

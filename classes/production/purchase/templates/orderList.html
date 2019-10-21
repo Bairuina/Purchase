@@ -37,7 +37,7 @@
                         <option  th:if="${zt!='4'}" value="4">拒绝</option>
                         <option  th:if="${zt!='5'}" value="5">已验收</option>
                     </select>
-                    <input name="data" class="search-con" type="text" placeholder="输入关键字，搜索相关信息" style="width: 58%;float: left">
+                    <input name="data" class="search-con" type="text" placeholder="输入关键字，搜索相关信息" style="width: 58%;float: left" th:value="${data}">
                     <input class="search-sub" type="submit" value="搜 索">
                 </form>
             </div>
@@ -49,15 +49,15 @@
             <div class="order_list_left">
                 <ul class="guider">
                     <li style="margin-top: 0px" th:if="${zt!=null && zt!='all'}"><a th:href="@{'/order-data/select/'}">全部订单</a></li>
-                    <li th:if="${zt==null || zt=='all'}"><a th:href="@{'/order-data/select/'}">全部订单</a></li>
+                    <li class="active" th:if="${zt==null || zt=='all'}"><a th:href="@{'/order-data/select/'}">全部订单</a></li>
                     <li th:if="${zt==null || zt!='2'}"><a th:href="@{'/order-data/select/?zt=2'}">待确定订单</a></li>
-                    <li th:if="${zt!=null and zt=='2'}"><a th:href="@{'/order-data/select/?zt=2'}">待确定订单</a></li>
-                    <li th:if="${zt==null || zt!='3'}"><a class="accept" th:href="@{'/order-data/select/?zt=3'}">接受订单</a></li>
-                    <li th:if="${zt!=null and zt=='3'}"><a class="accept" th:href="@{'/order-data/select/?zt=3'}">接受订单</a></li>
+                    <li class="active" th:if="${zt!=null and zt=='2'}"><a th:href="@{'/order-data/select/?zt=2'}">待确定订单</a></li>
+                    <li  th:if="${zt==null || zt!='3'}"><a class="accept" th:href="@{'/order-data/select/?zt=3'}">接受订单</a></li>
+                    <li class="active"th:if="${zt!=null and zt=='3'}"><a class="accept" th:href="@{'/order-data/select/?zt=3'}">接受订单</a></li>
                     <li th:if="${zt==null || zt!='4'}"><a th:href="@{'/order-data/select/?zt=4'}">拒绝订单</a></li>
-                    <li th:if="${zt!=null and zt=='4'}"><a th:href="@{'/order-data/select/?zt=4'}">拒绝订单</a></li>
+                    <li class="active" th:if="${zt!=null and zt=='4'}"><a th:href="@{'/order-data/select/?zt=4'}">拒绝订单</a></li>
                     <li th:if="${zt==null || zt!='5'}"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
-                    <li th:if="${zt!=null and zt=='5'}"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
+                    <li class="active" th:if="${zt!=null and zt=='5'}"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
                 </ul>
             </div>
             <div class="order_list_right">

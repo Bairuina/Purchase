@@ -31,9 +31,29 @@ $(".arriveData").click(function () {
     $("#msData").text($(this).data("ms"));
     console.log($(this).data("ms"));
     $("#kdsjData").text($(this).data("kdsj"))
-    console.log($(this).data("kdsjkdsj"));
+    console.log($(this).data("kdsj"));
     $("#ddbhData").text($(this).data("ddbh"))
     console.log($(this).data("ddbh"));
+    if($(this).data("sfcd")==null){
+        $("#sfcdData").text("")
+    }
+    if($(this).data("fczddbh")==null){
+        $("#fczddbhData").text("")
+    }
+    if($(this).data("kdgs")==null){
+        $("#kdgsData").text("")
+    }
+    if($(this).data("ms")==null){
+        $("#msData").text("")
+    }
+    if($(this).data("kdsj")==null){
+        $("#kdsjData").text("")
+    }
+    if($(this).data("kddh")==null){
+        $("#kddhData").text("")
+    }
+
+
 });
 
  $("#sendArriveData").click(function () {

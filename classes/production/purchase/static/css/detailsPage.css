@@ -279,6 +279,9 @@ a{
 }
 .message{
     margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .messageDetail{
     border: 1px solid #ccc;
@@ -287,6 +290,8 @@ a{
     background-color: #fff;
     padding: 20px;
     overflow: hidden;
+    width: 31%;
+    margin-left: 18px;
 }
 .messageDetail:hover {
     -webkit-transform: translateY(-3px);
@@ -310,14 +315,14 @@ a{
     font-size: 13px;
     padding-top: 10px;
     letter-spacing: 1px;
-    width: 385px;
+    width: 297px;
 }
 .items>p:nth-child(1){
     padding-right: 15px;
     padding-bottom: 8px;
 }
 .offer{
-    float: right;
+    /* float: right; */
     width: 130px;
     height: 31px;
     background-color: #0984E0;
@@ -326,6 +331,9 @@ a{
     line-height: 31px;
     cursor: pointer;
     transition: all 2s;
+    position: absolute;
+    top: 80%;
+    left: 60%;
 }
 
 .offer:hover p{
@@ -381,4 +389,12 @@ a{
 .buttonthree{
     margin-left: 10px;
     background-color: #F52F3E;
+}
+/*商品参数*/
+.parameter{
+    width: 165px;
+    padding: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

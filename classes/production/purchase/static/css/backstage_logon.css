@@ -95,6 +95,7 @@
     color: #000;
     background-color: #fff;
     border: 1px solid #2196F3;
+    cursor: pointer;
 }
 
 .entry>p {
