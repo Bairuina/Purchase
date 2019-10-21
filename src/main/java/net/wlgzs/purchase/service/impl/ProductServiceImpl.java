@@ -113,6 +113,27 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             System.out.println(ppbh);
             System.out.println(ppbhlist);
 
+            Product lbbhProduct=new Product();
+            lbbhProduct.setLbbh(lbbh);
+            for(Product lbbh1:lbbhlist){
+                if (lbbh.equals(lbbh1.getLbbh())) {
+                    lbbhProduct = lbbh1;
+                }
+            }
+            Product pmbhProduct=new Product();
+            pmbhProduct.setPmbh(pmbh);
+            for(Product lbbh1:pmbhlist){
+                if (lbbh.equals(lbbh1.getLbbh())) {
+                    pmbhProduct = lbbh1;
+                }
+            }
+            Product ppbhProduct=new Product();
+            ppbhProduct.setPpbh(ppbh);
+            for(Product lbbh1:ppbhlist){
+                if (lbbh.equals(lbbh1.getLbbh())) {
+                    ppbhProduct = lbbh1;
+                }
+            }
 
             Page<Product> page =new Page<Product>();
             page.setDate(productList);   //传入数据
@@ -134,12 +155,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             //品牌集合
             modelAndView.addObject("ppbhlist", ppbhlist);
 
-            //类别编号
-            modelAndView.addObject("lbbh",lbbh);
+
+            //类别编号及名称
+            modelAndView.addObject("lbbhProduct",lbbhProduct);
             //品目编号
-            modelAndView.addObject("pmbh",pmbh);
+            modelAndView.addObject("pmbhProduct",pmbhProduct);
             //品牌编号
-            modelAndView.addObject("ppbh",ppbh);
+            modelAndView.addObject("ppbhProduct",ppbhProduct);
             //内容
             modelAndView.addObject("nr",nr);
 
