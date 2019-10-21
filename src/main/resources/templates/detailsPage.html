@@ -167,7 +167,7 @@
                             <dd class="select-no"></dd>
                             <p class="eliminateCriteria">清除</p>
 <!--                            品牌-->
-                            <dd class="selected" id="selectA" th:brandnumber="${ppbhProduct.ppbh}">
+                            <dd class="selected" id="selectA" th:data-brandnumber="${ppbhProduct.ppbh}">
                                 <a  class="clone closeOne" href="#" th:if="${ppbhProduct.ppbh}!='0'" th:text="${ppbhProduct.ppmc}">
 
                                 </a>
@@ -177,7 +177,7 @@
                                 <a  class="clone closeTwo" href="#" th:if="${lbbhProduct.lbbh}!='0'" th:text="${lbbhProduct.zlmc}"></a>
                             </dd>
 <!--                            品目-->
-                            <dd class="selected" id="selectC" th:data-itemsnumber="${pmbhProduct.pmbh}">
+                            <dd class="selected" id="selectC" th:data-itemnumber="${pmbhProduct.pmbh}">
                                 <a  class="close closeThree" href="#" th:if="${pmbhProduct.pmbh}!='0'" th:text="${pmbhProduct.pmmc}"></a>
                             </dd>
                         </dl>
@@ -188,7 +188,9 @@
                         <dl id="select1">
                             <dt class="am-badge am-round">品牌</dt>
                             <div class="dd-conent">
-                                <dd class="select-all selected"><a href="#" class="allA">全部</a></dd>
+                                <dd class="select-all selected">
+                                    <a  class="allA">全部</a>
+                                </dd>
                                 <dd  th:each="ppbhlist:${ppbhlist}">
                                     <a  class="Item1"  th:data-brandnumber="${ppbhlist.ppbh}">
                                         <p th:text="${ppbhlist.ppmc}">品牌</p>
@@ -204,7 +206,7 @@
                             <div class="dd-conent">
                                 <dd class="select-all selected"><a href="#" class="all">全部</a></dd>
                                 <dd th:each="lbbhlist:${lbbhlist}">
-                                    <a  class="Item2" >
+                                    <a  class="Item2" th:data-listsnumber="${lbbhlist.lbbh}">
                                         <p th:text="${lbbhlist.lbmc}"></p>
                                     </a>
                                 </dd>
@@ -218,7 +220,7 @@
                             <div class="dd-conent">
                                 <dd class="select-all selected"><a href="#" class="allC">全部</a></dd>
                                 <dd th:each="pmbhlist:${pmbhlist}">
-                                    <a class="Item3" >
+                                    <a class="Item3" th:data-itemsnumber="${pmbhlist.pmbh}">
                                         <p th:text="${pmbhlist.pmmc}"></p>
                                     </a>
                                 </dd>

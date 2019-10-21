@@ -38,48 +38,67 @@ $(function() {
 
 	}
 
-
 	$("span.love").click(function() {
 		$(this).toggleClass("active");
 	});
 	//点击下边列表时的值
-	//搜索框的值
-	var inputText = $("#productSearch").val();
-	//品牌
-	$(".Item1").click(function() {
+	//	标签种类的编号
+	var listNumber = $("#selectB").data("listnumber");
+	console.log(listNumber);
+	//	标签品目的编号
+	var itemNumner = $("#selectC").data("itemnumber");
+	console.log(itemNumner);
+	//标签品牌的编号
+	var brandNumber = $("#selectA").data("brandnumber");
+	// var
+		//品牌
+	$(".Item1").on("click",function(){
 		//被选择品牌的编号
 		var brandnumber = $(this).data("brandnumber");
 		//被选择的品牌
 		console.log(brandnumber);
 		var text = $(this).children().text();
 		console.log(text);
-	//	种类的编号
-		var listNumber = $("#selectB").data("listnumber");
-		console.log(listNumber);
-	//	品目的编号
-		var itemsNumner = $("#selectC").data("itemsnumber");
-		console.log(itemsNumner);
 		$.ajax({
-			url:"/product/"+listNumber+'/'+itemsNumner+'/'+brandnumber+'/'+1,
+			url:"/product/"+listNumber+'/'+itemNumner+'/'+brandnumber+'/1',
 			type:"GET",
 			success:function(data){
-				if(data.code==0){
-					alert(data.msg);
-					window.location.reload();
-				}else{
-					alert(data.msg);
-				}
+				window.location.reload();
+			}
+		})
+	});
+	//类别
+	$(".Item2").on("click",function(){
+	//选择的类别编号
+		var listsNumber = $(this).data("listsnumber");
+		console.log(listsNumber);
+	//	类别名称
+		var contentLists = $(this).children().text();
+		console.log(contentLists);
+		$.ajax({
+			url:"/product/"+listsNumber+'/'+itemNumner+'/'+brandNumber+'/1',
+			type:"GET",
+			success:function(data){
+				window.location.reload();
 			}
 		})
 
 	});
-
-	$(".Item2").click(function() {
-
-	});
-
-	$(".Item3").click(function() {
-
+	//品目
+	$(".Item3").on('click',function(){
+	//	被选择品目的编号
+		var itemsnumber = $(this).data("itemsnumber");
+		console.log(itemsnumber);
+	//被选择品目的名字
+		var itemsText = $(this).children().text();
+		console.log(itemsText);
+		$.ajax({
+			url:"/product/"+itemsnumber+'/'+itemNumner+'/'+brandNumber+'/1',
+			type:"GET",
+			success:function(data){
+				window.location.reload();
+			}
+		})
 	});
 
 
@@ -214,6 +233,17 @@ $(function() {
 			console.log(URL)
 		}
 		location.href = URL;
+	})
+//	高度改变
+	$(".select-all").on('click',function () {
+		var allText = $(this).children().text();
+		if(allText=="全部"){
+			$(this).parent().css("height","auto");
+			$(this).children().text("收起");
+		}else{
+			$(this).parent().css("height","62px");
+			$(this).children().text("全部");
+		}
 	})
 });
 

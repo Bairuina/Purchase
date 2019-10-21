@@ -291,7 +291,6 @@ a{
     padding: 20px;
     overflow: hidden;
     width: 31%;
-    margin-left: 18px;
 }
 .messageDetail:hover {
     -webkit-transform: translateY(-3px);
