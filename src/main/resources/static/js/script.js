@@ -42,53 +42,35 @@ $(function() {
 	$("span.love").click(function() {
 		$(this).toggleClass("active");
 	});
-
-	function getQueryVariable(variable) {
-		var query = window.location.search.substring(1);
-		var vars = query.split("&");
-		for (var i=0;i<vars.length;i++) {
-			var pair = vars[i].split("=");
-			if(pair[0] == variable){return pair[1];}
-		}
-		return(false);
-	}
+	//点击下边列表时的值
+	// function getQueryVariable(variable) {
+	// 	var query = window.location.search.substring(1);
+	// 	var vars = query.split("&");
+	// 	for (var i=0;i<vars.length;i++) {
+	// 		var pair = vars[i].split("=");
+	// 		if(pair[0] == variable){return pair[1];}
+	// 	}
+	// 	return(false);
+	// }
 	$(".Item1").click(function() {
-		var text = $(this).text();
-		var content = getQueryVariable('pmmc');
-		if(content){
-			var URL = location.pathname + '?';
-			URL += ('pmmc='+text);
-			const ppmc = getQueryVariable('ppmc');
-			if(ppmc){
-				URL += ('&ppmc='+ppmc)
-			}
-			const lbmc = getQueryVariable('lbmc');
-			if(lbmc){
-				URL += ('&lbmc='+lbmc)
-			}
-			location.href = URL;
-		}else {
-			if(location.search===""){
-				location.href = (location.href + '?pmmc=' + text)
-			}else {
-				location.href = location.href + '&pmmc=' + text
-			}
-		}
+		var brandnumber = $(this).data("brandnumber");
+
 	});
 
 	$(".Item2").click(function() {
 		var text = $(this).text();
-		var content = getQueryVariable('ppmc');
+		var content = getQueryVariab
+		le('ppmc');
 		if(content){
 			var URL = location.pathname + '?';
 			console.log(URL);
 			URL += ('ppmc='+text);
-			const pmmc = getQueryVariable('pmmc');
+			var pmmc = getQueryVariable('pmmc');
 			if(pmmc){
 				URL += ('&pmmc='+pmmc)
 			}
 			console.log(URL);
-			const lbmc = getQueryVariable('lbmc');
+			var lbmc = getQueryVariable('lbmc');
 			if(lbmc){
 				URL += ('&lbmc='+lbmc)
 			}
@@ -109,11 +91,11 @@ $(function() {
 		if(content){
 			var URL = location.pathname + '?';
 			URL += 'lbmc=' + text;
-			const ppmc = getQueryVariable('ppmc');
+			var ppmc = getQueryVariable('ppmc');
 			if(ppmc){
 				URL += ('&ppmc='+ppmc)
 			}
-			const pmmc = getQueryVariable('pmmc');
+			var pmmc = getQueryVariable('pmmc');
 			if(pmmc){
 				URL += ('&pmmc=' + pmmc)
 			}
@@ -128,7 +110,7 @@ $(function() {
 	});
 
 
-
+	//自带样式效果
 	$(document).on("click","#selectA", function() {
 		$(this).remove();
 		$("#select1 .select-all").addClass("selected").siblings().removeClass("selected");
@@ -156,7 +138,7 @@ $(function() {
 		}
 	});
 
-
+	//清除按钮
 	$(".eliminateCriteria").on("click", function() {
 		$("#selectA").remove();
 		$("#selectB").remove();
@@ -167,6 +149,7 @@ $(function() {
 		$(".select-result").hide();
 	});
 
+	//品目品牌关闭时按钮
 	$('.closeOne').click(function () {
 		var URL = location.pathname;
 		const ppmc = getQueryVariable('ppmc');
@@ -212,6 +195,8 @@ $(function() {
 		}
 		location.href = URL;
 	})
+
+	//每一个点击全部时刷新页面
 	$('.allA').click(function () {
 		var URL = location.pathname;
 		const ppmc = getQueryVariable('ppmc');

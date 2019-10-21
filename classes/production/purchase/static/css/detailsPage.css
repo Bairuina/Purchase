@@ -398,3 +398,6 @@ a{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.clone {
+    background: url(../img/close.png) right 9px no-repeat;
+}
