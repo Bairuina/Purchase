@@ -43,70 +43,43 @@ $(function() {
 		$(this).toggleClass("active");
 	});
 	//点击下边列表时的值
-	// function getQueryVariable(variable) {
-	// 	var query = window.location.search.substring(1);
-	// 	var vars = query.split("&");
-	// 	for (var i=0;i<vars.length;i++) {
-	// 		var pair = vars[i].split("=");
-	// 		if(pair[0] == variable){return pair[1];}
-	// 	}
-	// 	return(false);
-	// }
+	//搜索框的值
+	var inputText = $("#productSearch").val();
+	//品牌
 	$(".Item1").click(function() {
+		//被选择品牌的编号
 		var brandnumber = $(this).data("brandnumber");
+		//被选择的品牌
+		console.log(brandnumber);
+		var text = $(this).children().text();
+		console.log(text);
+	//	种类的编号
+		var listNumber = $("#selectB").data("listnumber");
+		console.log(listNumber);
+	//	品目的编号
+		var itemsNumner = $("#selectC").data("itemsnumber");
+		console.log(itemsNumner);
+		$.ajax({
+			url:"/product/"+listNumber+'/'+itemsNumner+'/'+brandnumber+'/'+1,
+			type:"GET",
+			success:function(data){
+				if(data.code==0){
+					alert(data.msg);
+					window.location.reload();
+				}else{
+					alert(data.msg);
+				}
+			}
+		})
 
 	});
 
 	$(".Item2").click(function() {
-		var text = $(this).text();
-		var content = getQueryVariab
-		le('ppmc');
-		if(content){
-			var URL = location.pathname + '?';
-			console.log(URL);
-			URL += ('ppmc='+text);
-			var pmmc = getQueryVariable('pmmc');
-			if(pmmc){
-				URL += ('&pmmc='+pmmc)
-			}
-			console.log(URL);
-			var lbmc = getQueryVariable('lbmc');
-			if(lbmc){
-				URL += ('&lbmc='+lbmc)
-			}
-			console.log(URL);
-			location.href = URL;
-		}else {
-			if(location.search===""){
-				location.href = (location.href + '?ppmc=' + text)
-			}else {
-				location.href = location.href + '&ppmc=' + text
-			}
-		}
+
 	});
 
 	$(".Item3").click(function() {
-		var text = $(this).text();
-		var content = getQueryVariable('lbmc');
-		if(content){
-			var URL = location.pathname + '?';
-			URL += 'lbmc=' + text;
-			var ppmc = getQueryVariable('ppmc');
-			if(ppmc){
-				URL += ('&ppmc='+ppmc)
-			}
-			var pmmc = getQueryVariable('pmmc');
-			if(pmmc){
-				URL += ('&pmmc=' + pmmc)
-			}
-			location.href = URL;
-		}else {
-			if(location.search===""){
-				location.href = (location.href + '?lbmc=' + text)
-			}else {
-				location.href = location.href + '&lbmc=' + text
-			}
-		}
+
 	});
 
 

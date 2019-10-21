@@ -167,30 +167,31 @@
                             <dd class="select-no"></dd>
                             <p class="eliminateCriteria">清除</p>
 <!--                            品牌-->
-                            <dd class="selected" id="selectA">
-                                <a  class="clone closeOne" href="#" >
+                            <dd class="selected" id="selectA" th:brandnumber="${ppbhProduct.ppbh}">
+                                <a  class="clone closeOne" href="#" th:if="${ppbhProduct.ppbh}!='0'" th:text="${ppbhProduct.ppmc}">
 
                                 </a>
                             </dd>
-<!--                            -->
-                            <dd class="selected" id="selectB">
-                                <a  class="clone closeTwo" href="#"></a>
+<!--                        种类    -->
+                            <dd class="selected" id="selectB" th:data-listnumber="${lbbhProduct.lbbh}">
+                                <a  class="clone closeTwo" href="#" th:if="${lbbhProduct.lbbh}!='0'" th:text="${lbbhProduct.zlmc}"></a>
                             </dd>
-                            <dd class="selected" id="selectC">
-                                <a  class="close closeThree" href="#"></a>
+<!--                            品目-->
+                            <dd class="selected" id="selectC" th:data-itemsnumber="${pmbhProduct.pmbh}">
+                                <a  class="close closeThree" href="#" th:if="${pmbhProduct.pmbh}!='0'" th:text="${pmbhProduct.pmmc}"></a>
                             </dd>
                         </dl>
                     </li>
                     <div class="clear"></div>
-                    <li class="select-list">
 <!--                        品牌-->
+                    <li class="select-list">
                         <dl id="select1">
                             <dt class="am-badge am-round">品牌</dt>
                             <div class="dd-conent">
                                 <dd class="select-all selected"><a href="#" class="allA">全部</a></dd>
                                 <dd  th:each="ppbhlist:${ppbhlist}">
-                                    <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}+'/1'}" class="Item1">
-                                        <p th:text="${ppbhlist.ppmc}" th:data-brandnumber="${ppbhlist.ppbh}">品牌</p>
+                                    <a  class="Item1"  th:data-brandnumber="${ppbhlist.ppbh}">
+                                        <p th:text="${ppbhlist.ppmc}">品牌</p>
                                     </a>
                                 </dd>
                             </div>
@@ -203,7 +204,7 @@
                             <div class="dd-conent">
                                 <dd class="select-all selected"><a href="#" class="all">全部</a></dd>
                                 <dd th:each="lbbhlist:${lbbhlist}">
-                                    <a  class="Item2" th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/1'}">
+                                    <a  class="Item2" >
                                         <p th:text="${lbbhlist.lbmc}"></p>
                                     </a>
                                 </dd>
@@ -217,7 +218,7 @@
                             <div class="dd-conent">
                                 <dd class="select-all selected"><a href="#" class="allC">全部</a></dd>
                                 <dd th:each="pmbhlist:${pmbhlist}">
-                                    <a class="Item3" th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0/1'}">
+                                    <a class="Item3" >
                                         <p th:text="${pmbhlist.pmmc}"></p>
                                     </a>
                                 </dd>
@@ -229,9 +230,9 @@
                 <div class="clear"></div>
             </div>
 
-            <!--            商品选择-->
+<!--                        商品选择-->
 <!--            <div class="brandRegion">-->
-                <!--                类名-->
+<!--                                类名-->
 <!--                <div class="brand">-->
 <!--                    <div class="brandDetail">-->
 <!--                        <div class="brandDetailLeft">-->
@@ -261,7 +262,7 @@
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
-                <!--                品目-->
+<!--&lt;!&ndash;                                品目&ndash;&gt;-->
 <!--                <div class="brand">-->
 <!--                    <div class="brandDetail">-->
 <!--                        <div class="brandDetailLeft">-->
@@ -286,114 +287,114 @@
 <!--                            </div>-->
 <!--                        </div>-->
 
-<!--&lt;!&ndash;                        <div style="clear: both">&ndash;&gt;-->
+<!--                        <div style="clear: both">-->
 
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--                &lt;!&ndash;品牌&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="brand">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <div class="brandDetail">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div class="brandDetailLeft">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <p>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <img th:src="@{/static/img/arrowLeft.png}" align="absmiddle">&ndash;&gt;-->
-<!--&lt;!&ndash;                                品牌</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div class="key">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <a class="moreThan">&ndash;&gt;-->
-<!--&lt;!&ndash;                                <span>更多</span>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </a>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div class="brandDetailRight">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <div class="brandDetailRightContent">&ndash;&gt;-->
-<!--&lt;!&ndash;                                <ul>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <li th:each="ppbhlist:${ppbhlist}">&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}+'/1'}">&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <p th:text="${ppbhlist.ppmc}" class="brankName"></p>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        </a>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    </li>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </ul>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                        <div style="clear: both">&ndash;&gt;-->
-
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--            &lt;!&ndash;获取商品&ndash;&gt;-->
-<!--            <div class="message">-->
-<!--                <div class="messageDetail" th:each="productList:${productList}">-->
-<!--                    &lt;!&ndash;商品名称&ndash;&gt;-->
-<!--                    <h3 th:text="${productList.xhmc}"></h3>-->
-<!--                    &lt;!&ndash;类别&ndash;&gt;-->
-<!--                    <div class="items">-->
-<!--                        <p>-->
-<!--                            <span>类别名称:</span>-->
-<!--                            <span th:text="${productList.lbmc}" th:data-listnametwo="${productList.lbbh}">-->
-<!--                                电子类-->
-<!--                            </span>-->
-<!--                        </p>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash;品目&ndash;&gt;-->
-<!--                    <div class="items">-->
-<!--                        <p>-->
-<!--                            <span>-->
-<!--                                品目名称:-->
-<!--                            </span>-->
-<!--                            <span th:text="${productList.pmmc}" th:data-itemsnametwo="${productList.ppbh}">-->
-<!--                                电脑-->
-<!--                            </span>-->
-<!--                        </p>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash;品牌&ndash;&gt;-->
-<!--                    <div class="items">-->
-<!--                        <p>-->
-<!--                            <span>-->
-<!--                                品牌名称:-->
-<!--                            </span>-->
-<!--                            <span th:text="${productList.ppmc}" th:data-branknumberTwo="${productList.ppbh}">-->
-<!--                                联想-->
-<!--                            </span>-->
-<!--                        </p>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash;品牌&ndash;&gt;-->
-<!--                    <div class="items">-->
-<!--                        <p>参数:</p>-->
-<!--                        <p th:text="${productList.parametersList}" class="parameter"></p>-->
-<!--                    </div>-->
-<!--&lt;!&ndash;                    报价&ndash;&gt;-->
-<!--                    <div class="offer">-->
-<!--                        <a th:href="@{'/product/product/'+${productList.xhbh}}">-->
-<!--                            <p>我要报价-->
-<!--                                <img th:src="@{/static/img/right.png}" align="absmiddle">-->
-<!--                            </p>-->
-<!--                        </a>-->
+<!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
-<!--                <div style="clear: both;"></div>-->
+                <!--品牌-->
+<!--                <div class="brand">-->
+<!--                    <div class="brandDetail">-->
+<!--                        <div class="brandDetailLeft">-->
+<!--                            <p>-->
+<!--                                <img th:src="@{/static/img/arrowLeft.png}" align="absmiddle">-->
+<!--                                品牌</p>-->
+<!--                        </div>-->
+<!--                        <div class="key">-->
+<!--                            <a class="moreThan">-->
+<!--                                <span>更多</span>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="brandDetailRight">-->
+<!--                            <div class="brandDetailRightContent">-->
+<!--                                <ul>-->
+<!--                                    <li th:each="ppbhlist:${ppbhlist}">-->
+<!--                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}+'/1'}">-->
+<!--                                            <p th:text="${ppbhlist.ppmc}" class="brankName"></p>-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div style="clear: both">-->
+
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 <!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; 分页&ndash;&gt;-->
-<!--        <div class="paging" th:if="${pagesize > 0 and zt==null and data==null}">-->
-<!--            <ul class="pagination" id="pagination1" th:if=" ${pagesize> 1}">-->
-<!--                &lt;!&ndash;//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页&ndash;&gt;-->
-<!--                <li id="first"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/1'}">首页</a></li>-->
-<!--                <li th:if="${pagenumber>1}"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${pagenumber-1}}">上一页</a></li>-->
-<!--                <li  th:each="i:${#numbers.sequence(1,pagesize)}">-->
-<!--                    &lt;!&ndash;//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数&ndash;&gt;-->
-<!--                    <a class="active" th:if="${i > pagenumber-3} and ${i <pagenumber+3} and ${i == pagenumber}" href="javascript:void(0);" th:text="${i}">#</a>-->
-<!--                    &lt;!&ndash;//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击&ndash;&gt;-->
-<!--                    <a th:if="${i > pagenumber -3} and ${i < pagenumber+3} and ${i != pagenumber}"-->
-<!--                       th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${i}}" th:text="${i}">#</a>&lt;!&ndash;//限制显示页数的条数  4到6个页数&ndash;&gt;-->
-<!--                </li>-->
-<!--                <li th:if="${pagenumber<pagesize}"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${pagenumber+1}}">下一页</a></li>-->
-<!--                <li id="last"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${pagesize}}">尾页</a></li>&lt;!&ndash;//跳转至第orderDara.current页&ndash;&gt;-->
-<!--                <li><a href="" th:text="'共'+${pagesize}+'页'"></a></li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
+            <!--获取商品-->
+            <div class="message">
+                <div class="messageDetail" th:each="productList:${productList}">
+                    <!--商品名称-->
+                    <h3 th:text="${productList.xhmc}"></h3>
+                    <!--类别-->
+                    <div class="items">
+                        <p>
+                            <span>类别名称:</span>
+                            <span th:text="${productList.lbmc}" th:data-listnametwo="${productList.lbbh}">
+                                电子类
+                            </span>
+                        </p>
+                    </div>
+                    <!--品目-->
+                    <div class="items">
+                        <p>
+                            <span>
+                                品目名称:
+                            </span>
+                            <span th:text="${productList.pmmc}" th:data-itemsnametwo="${productList.ppbh}">
+                                电脑
+                            </span>
+                        </p>
+                    </div>
+                    <!--品牌-->
+                    <div class="items">
+                        <p>
+                            <span>
+                                品牌名称:
+                            </span>
+                            <span th:text="${productList.ppmc}" th:data-branknumberTwo="${productList.ppbh}">
+                                联想
+                            </span>
+                        </p>
+                    </div>
+                    <!--品牌-->
+                    <div class="items">
+                        <p>参数:</p>
+                        <p th:text="${productList.parametersList}" class="parameter"></p>
+                    </div>
+<!--                    报价-->
+                    <div class="offer">
+                        <a th:href="@{'/product/product/'+${productList.xhbh}}">
+                            <p>我要报价
+                                <img th:src="@{/static/img/right.png}" align="absmiddle">
+                            </p>
+                        </a>
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+        <!-- 分页-->
+        <div class="paging" th:if="${pagesize > 0 and zt==null and data==null}">
+            <ul class="pagination" id="pagination1" th:if=" ${pagesize> 1}">
+                <!--//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页-->
+                <li id="first"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/1'}">首页</a></li>
+                <li th:if="${pagenumber>1}"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${pagenumber-1}}">上一页</a></li>
+                <li  th:each="i:${#numbers.sequence(1,pagesize)}">
+                    <!--//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数-->
+                    <a class="active" th:if="${i > pagenumber-3} and ${i <pagenumber+3} and ${i == pagenumber}" href="javascript:void(0);" th:text="${i}">#</a>
+                    <!--//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击-->
+                    <a th:if="${i > pagenumber -3} and ${i < pagenumber+3} and ${i != pagenumber}"
+                       th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${i}}" th:text="${i}">#</a><!--//限制显示页数的条数  4到6个页数-->
+                </li>
+                <li th:if="${pagenumber<pagesize}"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${pagenumber+1}}">下一页</a></li>
+                <li id="last"><a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbh}+'/'+${pagesize}}">尾页</a></li><!--//跳转至第orderDara.current页-->
+                <li><a href="" th:text="'共'+${pagesize}+'页'"></a></li>
+            </ul>
+        </div>
+    </div>
 </div>
 <!-- 底部 -->
 <div th:include="common::commonFoot"></div>
