@@ -122,16 +122,16 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             }
             Product pmbhProduct=new Product();
             pmbhProduct.setPmbh(pmbh);
-            for(Product lbbh1:pmbhlist){
-                if (lbbh.equals(lbbh1.getLbbh())) {
-                    pmbhProduct = lbbh1;
+            for(Product pmbh1:pmbhlist){
+                if (lbbh.equals(pmbh1.getLbbh())) {
+                    pmbhProduct = pmbh1;
                 }
             }
             Product ppbhProduct=new Product();
             ppbhProduct.setPpbh(ppbh);
-            for(Product lbbh1:ppbhlist){
-                if (lbbh.equals(lbbh1.getLbbh())) {
-                    ppbhProduct = lbbh1;
+            for(Product ppbh1:ppbhlist){
+                if (lbbh.equals(ppbh1.getLbbh())) {
+                    ppbhProduct = ppbh1;
                 }
             }
 
