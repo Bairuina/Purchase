@@ -62,8 +62,8 @@ $(function() {
 		$.ajax({
 			url:"/product/"+listNumber+'/'+itemNumner+'/'+brandnumber+'/1',
 			type:"GET",
-			success:function(data){
-				window.location.reload();
+			success : function(data){
+				window.location.href="/product/"+listNumber+'/'+itemNumner+'/'+brandnumber+'/1';
 			}
 		})
 	});
@@ -79,7 +79,7 @@ $(function() {
 			url:"/product/"+listsNumber+'/'+itemNumner+'/'+brandNumber+'/1',
 			type:"GET",
 			success:function(data){
-				window.location.reload();
+				window.location.href="/product/"+listsNumber+'/'+itemNumner+'/'+brandNumber+'/1';
 			}
 		})
 
@@ -93,10 +93,10 @@ $(function() {
 		var itemsText = $(this).children().text();
 		console.log(itemsText);
 		$.ajax({
-			url:"/product/"+itemsnumber+'/'+itemNumner+'/'+brandNumber+'/1',
+			url:"/product/"+listsNumber+'/'+itemsnumber+'/'+brandNumber+'/1',
 			type:"GET",
 			success:function(data){
-				window.location.reload();
+				window.location.href="/product/"+listsNumber+'/'+itemsnumber+'/'+brandNumber+'/1';
 			}
 		})
 	});
