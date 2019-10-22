@@ -43,21 +43,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public ModelAndView findallProduct(HttpServletRequest request, String lbbh, String pmbh, String ppbh, String nr,int nowPage){
         ModelAndView modelAndView=new ModelAndView();
-        HttpSession session=request.getSession(true);
-        if (lbbh.equals("0") && pmbh.equals("0") &&ppbh.equals("0") && nr.equals("0")){
-            session.setAttribute("lbbh",0);
-            session.setAttribute("pmbh",0);
-            session.setAttribute("ppbh",0);
-            session.setAttribute("nr",null);
-        }
-        else{
-            session.setAttribute("lbbh",lbbh);
-            session.setAttribute("pmbh",pmbh);
-            session.setAttribute("ppbh",ppbh);
-            if (!nr.equals("0")){
-                session.setAttribute("nr",nr);
-            }
-        }
         modelAndView.setViewName("detailsPage");
         try {
             List<Product> lbbhlist;
@@ -84,7 +69,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             queryWrapper2.select("ppbh","ppmc");
             ppbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
 
-
             QueryWrapper<Product> queryWrapper3 = new QueryWrapper<>();
             List<Product> productList;
             if (!"0".equals(lbbh)){
@@ -103,25 +87,15 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
             Product lbbhProduct=new Product();
             lbbhProduct.setLbbh(lbbh);
-            for(Product lbbh1:lbbhlist){
-                if (lbbh.equals(lbbh1.getLbbh())) {
-                    lbbhProduct = lbbh1;
-                }
-            }
+            lbbhProduct.setLbmc(baseMapper.findLbmcByLbbh(lbbh));
+
             Product pmbhProduct=new Product();
             pmbhProduct.setPmbh(pmbh);
-            for(Product pmbh1:pmbhlist){
-                if (pmbh.equals(pmbh1.getPmbh())) {
-                    pmbhProduct = pmbh1;
-                }
-            }
+            pmbhProduct.setPmmc(baseMapper.findPmmcByPmbh(pmbh));
+
             Product ppbhProduct=new Product();
             ppbhProduct.setPpbh(ppbh);
-            for(Product ppbh1:ppbhlist){
-                if (ppbh.equals(ppbh1.getPpbh())) {
-                    ppbhProduct = ppbh1;
-                }
-            }
+            ppbhProduct.setPpmc(baseMapper.findPpmcByPpbh(ppbh));
 
             //总页数
             modelAndView.addObject("pagesize",iPage.getPages());

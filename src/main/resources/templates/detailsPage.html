@@ -210,7 +210,7 @@
                                     <a  class="allA">全部</a>
                                 </dd>
                                 <dd  th:each="ppbhlist:${ppbhlist}">
-                                    <a  class="Item1"  th:data-brandnumber="${ppbhlist.ppbh}">
+                                    <a  class="Item1"  th:data-brandnumber="${ppbhlist.ppbh}" th:href="@{'/product/'+${lbbhProduct.lbbh}+'/'+${pmbhProduct.pmbh}+'/'+${ppbhlist.ppbh}+'/1'}">
                                         <p th:text="${ppbhlist.ppmc}">品牌</p>
                                     </a>
                                 </dd>
@@ -224,7 +224,7 @@
                             <div class="dd-conent">
                                 <dd class="select-all selected"><a href="#" class="all">全部</a></dd>
                                 <dd th:each="lbbhlist:${lbbhlist}">
-                                    <a  class="Item2" th:data-listsnumber="${lbbhlist.lbbh}">
+                                    <a  class="Item2" th:data-listsnumber="${lbbhlist.lbbh}" th:href="@{'/product/'+${lbbhlist.lbbh}+'/'+${pmbhProduct.pmbh}+'/'+${ppbhProduct.ppbh}+'/1'}">
                                         <p th:text="${lbbhlist.lbmc}"></p>
                                     </a>
                                 </dd>
@@ -238,7 +238,7 @@
                             <div class="dd-conent">
                                 <dd class="select-all selected"><a href="#" class="allC">全部</a></dd>
                                 <dd th:each="pmbhlist:${pmbhlist}">
-                                    <a class="Item3" th:data-itemnumber="${pmbhlist.pmbh}">
+                                    <a class="Item3" th:data-itemnumber="${pmbhlist.pmbh}" th:href="@{'/product/'+${lbbhProduct.lbbh}+'/'+${pmbhlist.pmbh}+'/'+${ppbhProduct.ppbh}+'/1'}">
                                         <p th:text="${pmbhlist.pmmc}"></p>
                                     </a>
                                 </dd>
