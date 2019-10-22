@@ -133,8 +133,8 @@
 
 .submitBar{
     margin: 20px 0 0;
-    padding: 15px 10px;
-    /*text-align: center;*/
+    padding: 15px 10px 60px 10px;
+    /* text-align: center; */
     box-shadow: 0 4px 7px #f0f0f0;
 }
 .cancel{

@@ -15,31 +15,47 @@
 <body>
 <div class="contain">
     <!-- 顶部 -->
-    <div th:fragment="commonTop">
-        <div class="top_nav">
-            <div class="top">
-                您好，欢迎访问河南省政府采购网上电商！
-                <button id="btn">登录</button>
-            </div>
-        </div>
-    </div>
+    <div th:include="common::commonTop"></div>
     <!-- 头部 -->
-    <div th:fragment="commonHead">
-        <div class="head_nav">
-            <div class="head">
-                <div class="logo">
-                    <a href="">
-                        <img th:src="@{/static/img/logo.png}" alt="">
-                    </a>
-                </div>
-                <div class="search">
-                    <form action="">
-                        <input class="search-con" type="text" placeholder="输入关键字，搜索相关信息">
-                        <input class="search-sub" type="submit" value="搜 索">
-                    </form>
+    <div class="head_nav">
+        <div class="head">
+            <div class="logo" >
+                <a th:href="@{/product/0/0/0/1}">
+                    <img th:src="@{/img/logo.png}" alt="">
+                </a>
+            </div>
+            <!--                按钮-->
+            <div style="    position: absolute;
+    /* right: -10px; */
+    top: 80%;">
+                <div class="brandDetail">
+                    <!--     1111111                   -->
+                    <div class="button buttonone">
+                        <a th:href="@{/order-data/select}">
+                            订单管理
+                        </a>
+                    </div>
+                    <!--                        222222222-->
+                    <div class="button buttontwo">
+                        <a th:href="@{/productoffer/offer/all/1/1/1}">
+                            我的报价
+                        </a>
+                    </div>
+
+                    <!--                        33333333333333333-->
+                    <div class="button buttonthree">
+                        <a th:href="@{/user/userList/1}">
+                            用户管理
+                        </a>
+                    </div>
+
+                    <div>
+
+                    </div>
+                    <div style="clear: both">
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="box">
@@ -356,20 +372,9 @@
     <div class="md-overlay"></div>
 </div>
 <!-- 底部 -->
-<div th:fragment="commonFoot">
-    <div class="foot_nav">
-        <div class="foot">
-            <img th:src="@{/static/img/logo.png}" alt="">
-            <p>版权所有 ©2019 河南省政府采购网上电商</p>
-        </div>
-    </div>
-</div>
+<div th:include="common::commonFoot"></div>
 <!-- 返回顶部 -->
-<div th:fragment="commonFoot">
-    <div class="BackTop">
-        <img class="footer" id="BackTop" th:src="@{/static/img/BackTop.png}" alt="">
-    </div>
-</div>
+<div th:include="common::commonBackTop"></div>
 <script th:src="@{/static/js/jquery.min.js}"></script>
 
 <script th:src="@{/static/js/niftymodals.js}"></script>
