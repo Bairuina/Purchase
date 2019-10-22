@@ -80,6 +80,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             if (!"0".equals(ppbh)){
                 queryWrapper3.eq("ppbh",ppbh);
             }
+            queryWrapper3.select("xhbh","xhmc","lbmc","ppmc","pmmc","parametersList");
             Page page = new Page(nowPage, 9);
             IPage<Product> iPage = null;
             iPage=baseMapper.selectPage(page,queryWrapper3);
