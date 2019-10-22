@@ -159,22 +159,24 @@
             <div class="theme-popover">
                 <ul class="select">
                     <div class="clear"></div>
-
+                    <div th:text="${ppbhProduct.ppbh}"></div>
+                    <div th:text="${lbbhProduct.lbbh}"></div>
+                    <div th:text="${pmbhProduct.pmbh}"></div>
                     <!--已选择的商品-->
                     <li class="select-result">
                         <dl>
                             <dt>已选</dt>
                             <dd class="select-no"></dd>
                             <p class="eliminateCriteria">清除</p>
+
 <!--                            品牌-->
                             <dd class="selected" id="selectA" th:data-brandnumber="${ppbhProduct.ppbh}">
                                 <a  class="clone closeOne" href="#" th:if="${ppbhProduct.ppbh}!='0'" th:text="${ppbhProduct.ppmc}">
-
-                                </a>
+                            </a>
                             </dd>
 <!--                        种类    -->
                             <dd class="selected" id="selectB" th:data-listnumber="${lbbhProduct.lbbh}">
-                                <a  class="clone closeTwo" href="#" th:if="${lbbhProduct.lbbh}!='0'" th:text="${lbbhProduct.zlmc}"></a>
+                                <a  class="clone closeTwo" href="#" th:if="${lbbhProduct.lbbh}!='0'" th:text="${lbbhProduct.lbmc}"></a>
                             </dd>
 <!--                            品目-->
                             <dd class="selected" id="selectC" th:data-itemnumber="${pmbhProduct.pmbh}">

@@ -1,15 +1,12 @@
 package net.wlgzs.purchase.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import net.wlgzs.purchase.entity.Parameters;
-import net.wlgzs.purchase.entity.Parts;
-import net.wlgzs.purchase.entity.Product;
-import net.wlgzs.purchase.entity.ServiceValue;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import net.wlgzs.purchase.entity.*;
 import net.wlgzs.purchase.mapper.*;
 import net.wlgzs.purchase.service.IProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import net.wlgzs.purchase.util.CheckAddress;
-import net.wlgzs.purchase.util.Page;
 import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
 import org.springframework.stereotype.Service;
@@ -20,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 /**
  * <p>
  *  服务实现类
@@ -71,13 +68,20 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             lbbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper)));
 
             QueryWrapper<Product> queryWrapper1=new QueryWrapper<>();
+            if (!"0".equals(lbbh)){
+                queryWrapper1.eq("lbbh",lbbh);
+            }
             queryWrapper1.select("pmbh","pmmc");
-            queryWrapper1.eq("lbbh","0".equals(lbbh)? lbbhlist.get(0).getLbbh():lbbh);
             pmbhlist =new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper1)));
 
             QueryWrapper<Product> queryWrapper2=new QueryWrapper<>();
+            if (!"0".equals(lbbh)){
+                queryWrapper2.eq("lbbh",lbbh);
+            }
+            if (!"0".equals(pmbh)){
+                queryWrapper2.eq("pmbh",pmbh);
+            }
             queryWrapper2.select("ppbh","ppmc");
-            queryWrapper2.eq("pmbh","0".equals(pmbh)? pmbhlist.get(0).getPmbh():pmbh);
             ppbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
 
 
@@ -92,16 +96,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             if (!"0".equals(ppbh)){
                 queryWrapper3.eq("ppbh",ppbh);
             }
-            productList = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper3)));
-            System.out.println(productList);
-            System.out.println(lbbh);
-            System.out.println(lbbhlist);
-            System.out.println("******");
-            System.out.println(pmbh);
-            System.out.println(pmbhlist);
-            System.out.println("*****");
-            System.out.println(ppbh);
-            System.out.println(ppbhlist);
+            Page page = new Page(nowPage, 9);
+            IPage<Product> iPage = null;
+            iPage=baseMapper.selectPage(page,queryWrapper3);
+            productList = iPage.getRecords();
 
             Product lbbhProduct=new Product();
             lbbhProduct.setLbbh(lbbh);
@@ -125,15 +123,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 }
             }
 
-            Page<Product> page =new Page<Product>();
-            page.setDate(productList);   //传入数据
-            page.setLength(9);          //设置每页数量
-            page.setSize();              //获取总页数
-            productList=page.getDateByYs(nowPage);
             //总页数
-            modelAndView.addObject("pagesize",page.getSize());
+            modelAndView.addObject("pagesize",iPage.getPages());
             //当前页码
-            modelAndView.addObject("pagenumber",nowPage);
+            modelAndView.addObject("pagenumber",iPage.getCurrent());
             //返回当前条件的商品
             modelAndView.addObject("productList", productList);
 
@@ -158,17 +151,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             System.out.println("当前品牌"+ppbhProduct);
             System.out.println("当前类别"+lbbhProduct);
             System.out.println("当前品目"+pmbhProduct);
-
-            System.out.println(productList);
-
-
-
-
-
-
-
-
-
 
         } catch (Exception e) {
             //返回报错页面
