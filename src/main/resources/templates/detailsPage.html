@@ -15,15 +15,15 @@
     <!-- 头部 -->
     <div class="head_nav">
         <div class="head">
-            <div class="logo">
+            <div class="logo" style="top: 30%;">
                 <a th:href="@{/product/0/0/0/1}">
                     <img th:src="@{/img/logo.png}" alt="">
                 </a>
             </div>
             <!--                按钮-->
             <div style="    position: absolute;
-    right: -10px;
-    top: 37%;">
+    /* right: -10px; */
+    top: 80%;">
                 <div class="brandDetail">
                     <!--     1111111                   -->
                     <div class="button buttonone">
@@ -154,30 +154,49 @@
                 </div>
                 <div style="clear: both"></div>
             </div>
-
 <!--商品选择框-->
             <div class="theme-popover">
                 <ul class="select">
                     <div class="clear"></div>
                     <!--已选择的商品-->
-                    <li class="select-result" th:if="${ppbhProduct.ppbh}!='0'and ${lbbhProduct.lbbh}!='0' and ${pmbhProduct.pmbh}!='0'">
+                    <li class="select-result" th:if="${ppbhProduct.ppbh}!='0'or ${lbbhProduct.lbbh}!='0' or ${pmbhProduct.pmbh}!='0'">
+                        <dl>
+                            <dt>已选</dt>
+                            <dd class="select-no"></dd>
+                            <p class="eliminateCriteria">清除</p>
+                            <!--                        种类    -->
+                            <dd class="selected" id="selectB" th:data-listnumber="${lbbhProduct.lbbh}">
+                                <a  class="clone closeTwo" th:href="@{'/product/'+'0/'+${pmbhProduct.pmbh}+'/'+${ppbhProduct.ppbh}+'/1'}" th:if="${lbbhProduct.lbbh}!='0'" th:text="${lbbhProduct.lbmc}"></a>
+                            </dd>
+                            <!--                            品目-->
+                            <dd class="selected" id="selectC" th:data-itemnumber="${pmbhProduct.pmbh}">
+                                <a  class="close closeThree" th:href="@{'/product/'+${lbbhProduct.lbbh}+'/0/'+${ppbhProduct.ppbh}+'/1'}" th:if="${pmbhProduct.pmbh}!='0'" th:text="${pmbhProduct.pmmc}"></a>
+                            </dd>
+                            <!--                            品牌-->
+                            <dd class="selected" id="selectA" th:data-brandnumber="${ppbhProduct.ppbh}">
+                                <a  class="clone closeOne" th:href="@{'/product/'+${lbbhProduct.lbbh}+'/'+${pmbhProduct.pmbh}+'/0/1'}" th:if="${ppbhProduct.ppbh}!='0'" th:text="${ppbhProduct.ppmc}">
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="select-result" style="display: none" th:if="${ppbhProduct.ppbh}=='0'and ${lbbhProduct.lbbh}=='0' and ${pmbhProduct.pmbh}=='0'">
                         <dl>
                             <dt>已选</dt>
                             <dd class="select-no"></dd>
                             <p class="eliminateCriteria">清除</p>
 
-<!--                            品牌-->
+                            <!--                            品牌-->
                             <dd class="selected" id="selectA" th:data-brandnumber="${ppbhProduct.ppbh}">
-                                <a  class="clone closeOne" href="#" th:if="${ppbhProduct.ppbh}!='0'" th:text="${ppbhProduct.ppmc}">
-                            </a>
+                                <a  class="clone closeOne" th:href="@{'/product/'+${lbbhProduct.lbbh}+'/'+${pmbhProduct.pmbh}+'/0/1'}" th:if="${ppbhProduct.ppbh}!='0'" th:text="${ppbhProduct.ppmc}">
+                                </a>
                             </dd>
-<!--                        种类    -->
+                            <!--                        种类    -->
                             <dd class="selected" id="selectB" th:data-listnumber="${lbbhProduct.lbbh}">
-                                <a  class="clone closeTwo" href="#" th:if="${lbbhProduct.lbbh}!='0'" th:text="${lbbhProduct.lbmc}"></a>
+                                <a  class="clone closeTwo" th:href="@{'/product/'+'0/'+${pmbhProduct.pmbh}+'/'+${ppbhProduct.ppbh}+'/1'}" th:if="${lbbhProduct.lbbh}!='0'" th:text="${lbbhProduct.lbmc}"></a>
                             </dd>
-<!--                            品目-->
+                            <!--                            品目-->
                             <dd class="selected" id="selectC" th:data-itemnumber="${pmbhProduct.pmbh}">
-                                <a  class="close closeThree" href="#" th:if="${pmbhProduct.pmbh}!='0'" th:text="${pmbhProduct.pmmc}"></a>
+                                <a  class="close closeThree" th:href="@{'/product/'+${lbbhProduct.lbbh}+'/0/'+${ppbhProduct.ppbh}+'/1'}" th:if="${pmbhProduct.pmbh}!='0'" th:text="${pmbhProduct.pmmc}"></a>
                             </dd>
                         </dl>
                     </li>
@@ -363,7 +382,7 @@
                     <!--品牌-->
                     <div class="items">
                         <p>参数:</p>
-                        <p th:text="${productList.parametersList}" class="parameter"></p>
+                        <p th:text="${productList.parametersList}" class="parameter" style="    width: 165px;"></p>
                     </div>
 <!--                    报价-->
                     <div class="offer">

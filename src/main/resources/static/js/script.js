@@ -45,12 +45,20 @@ $(function() {
 	//	标签种类的编号
 	var listNumber = $("#selectB").data("listnumber");
 	console.log(listNumber);
+	if(listNumber=='null'){
+        listNumber='0';
+    }
 	//	标签品目的编号
 	var itemNumner = $("#selectC").data("itemnumber");
 	console.log(itemNumner);
+    if(itemNumner=='null'){
+        itemNumner='0';
+    }
 	//标签品牌的编号
 	var brandNumber = $("#selectA").data("brandnumber");
-	// var
+    if(brandNumber=='null'){
+        brandNumber='0';
+    }
 		//品牌
 	$(".Item1").on("click",function(){
 		//被选择品牌的编号
@@ -59,7 +67,10 @@ $(function() {
 		console.log(brandnumber);
 		var text = $(this).children().text();
 		console.log(text);
-		$.ajax({
+
+        console.log(itemNumner);
+        console.log(brandnumber);
+        $.ajax({
 			url:"/product/"+listNumber+'/'+itemNumner+'/'+brandnumber+'/1',
 			type:"GET",
 			success : function(data){
@@ -92,7 +103,7 @@ $(function() {
 	//被选择品目的名字
 		var itemsText = $(this).children().text();
 		console.log(itemsText);
-		$.ajax({
+        $.ajax({
 			url:"/product/"+listNumber+'/'+itemsnumber+'/'+brandNumber+'/1',
 			type:"GET",
 			success:function(data){

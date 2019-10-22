@@ -272,16 +272,13 @@ a{
     background-color: #F52F3E;
     cursor: pointer;
     color: white;
-    /*background-color: ;*/
+    border-radius: 2px;
 }
 .submitProduct:hover{
     opacity:0.8;
 }
 .message{
     margin-top: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }
 .messageDetail{
     border: 1px solid #ccc;
@@ -290,7 +287,8 @@ a{
     background-color: #fff;
     padding: 20px;
     overflow: hidden;
-    width: 31%;
+    width: 33%;
+    display: inline-block;
 }
 .messageDetail:hover {
     -webkit-transform: translateY(-3px);
@@ -391,7 +389,7 @@ a{
 }
 /*商品参数*/
 .parameter{
-    width: 165px;
+
     padding: 10px;
     white-space: nowrap;
     overflow: hidden;

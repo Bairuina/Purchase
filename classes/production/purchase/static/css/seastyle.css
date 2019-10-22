@@ -6,7 +6,8 @@
 /*任何标签、包括它前面、后面生成的内容都不要影响盒子的边框*/
 ul, li, ol {list-style: none;}
 dl,dt,dd{ margin:0px auto; padding:0px;}
-p {margin: 0 0 .3rem 0; font-size:14px; }
+p {    margin: 0 0 .3rem 0;
+	font-size: 12px; }
 [class*="am-u-"] {padding-left:0rem;padding-right:0rem;}
 .am-thumbnails {margin-left: 0rem;margin-right: 0rem;}
 .am-thumbnail {margin-bottom:0;}
@@ -27,8 +28,12 @@ p {margin: 0 0 .3rem 0; font-size:14px; }
 .select dt{width:80%;margin-left:10%;margin-bottom:5px;position:absolute;cursor: pointer;height:24px;line-height:24px;}
 .select dd{float:left;display:inline;margin:0 0 5px 5px;}
 .select a{display:inline-block;white-space:nowrap;height:24px; line-height:24px;padding:0 10px;text-decoration:none;color:#000;border-radius:2px;}
-.select a:hover{color:#f60;background-color:#f3edc2}
-.select .selected a{color:#F00; border:#999 solid 1px;}
+.select a:hover{    color: #F00;
+	/*border: #999 solid 1px;*/
+	}
+.select .selected a{    color: #F00;
+	border: #999 solid 1px;
+	font-size: 14px;}
 ul.pagination{display:none;}
 /*搜索显示*/
 .select-result{display: none;}
@@ -60,7 +65,7 @@ li.select-result dt {left:-30px; top:10px;font-weight:bold;width:50px;}
 .dd-conent{
 	height: 62px;
 }
-.select-list .dd-conent dd{width:33.33% ;text-align: center;margin-left: 0px;height:25px ;}
+.select-list .dd-conent dd{width:33.33% ;text-align: center;margin-left: 0px;height:25px ;cursor: pointer}
 dl#select2 .dd-conent{ left:-100%; right:-100%;}
 dl#select3 .dd-conent{ left:-200%; right:0px;}
 	   
@@ -86,7 +91,7 @@ dl#select3 .dd-conent{ left:-200%; right:0px;}
 
 @media only screen and (min-width: 640px) {	
 .search-content{margin:0px 0px ;}
-.theme-popover {margin-left: 10px;margin-right: 10px;width: auto;}
+
 
 /* select */
 .select-list .dd-conent dd{width:auto;text-align: center;margin-left:5px;}
@@ -97,7 +102,7 @@ dl#select3 .dd-conent{ left:-200%; right:0px;}
 .searchAbout{padding:10px;}
 
 .select-list{width:100%;padding:0px 0px;}
-.select li{list-style:none;padding:0px 0px 0px 100px;border-top:#eee 1px dashed;float: none;display: block;height: auto;}
+.select li{list-style:none;padding:0px 0px 0px 100px;border-bottom:#eee 1px dashed;float: none;display: block;height: auto;}
 
 .select-result dl dt{width:100px;}
 

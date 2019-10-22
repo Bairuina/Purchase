@@ -92,7 +92,7 @@
                     <div class="offerFormItem">
                         <div style="height: 100%;">
                             <div class=" paramaters">商品参数:</div>
-                            <div class="paramatersDetails" style="vertical-align: text-top;">
+                            <div class="paramatersDetails">
                                     <p th:each="parameters:${parametersList}" class="parameter">
                                         <span th:text="${parameters.cssm}"></span>
                                         <span>：</span>
@@ -107,7 +107,7 @@
                         <div style="height: 100%;">
                             <div class="offerFormLabel">地址:</div>
                             <div class="offerInputblock">
-                                <select style="width: 150px;cursor: pointer;outline-style: none;" class="selectAddress" >
+                                <select class="selectAddress" >
                                     <option  th:each="area:${areas}"th:text="${area[1]}" th:data-addressnumber="${area[0]}"  ></option>
                                     <span id="alertAddress"></span>
                                 </select>

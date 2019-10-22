@@ -14,8 +14,8 @@ a{
 }
 
 .mainPart{
-    padding-top: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 16px;
+    position: relative;
 }
 
 .header{
@@ -33,7 +33,7 @@ a{
 }
 /*分页*/
 .paging{
-    padding: 20px;
+    padding: 100px 0 50px 0;
     text-align: center;
 }
 
