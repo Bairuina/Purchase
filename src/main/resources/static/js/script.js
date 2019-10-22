@@ -87,16 +87,16 @@ $(function() {
 	//品目
 	$(".Item3").on('click',function(){
 	//	被选择品目的编号
-		var itemsnumber = $(this).data("itemsnumber");
+		var itemsnumber = $(this).data("itemnumber");
 		console.log(itemsnumber);
 	//被选择品目的名字
 		var itemsText = $(this).children().text();
 		console.log(itemsText);
 		$.ajax({
-			url:"/product/"+listsNumber+'/'+itemsnumber+'/'+brandNumber+'/1',
+			url:"/product/"+listNumber+'/'+itemsnumber+'/'+brandNumber+'/1',
 			type:"GET",
 			success:function(data){
-				window.location.href="/product/"+listsNumber+'/'+itemsnumber+'/'+brandNumber+'/1';
+				window.location.href="/product/"+listNumber+'/'+itemsnumber+'/'+brandNumber+'/1';
 			}
 		})
 	});
