@@ -159,11 +159,8 @@
             <div class="theme-popover">
                 <ul class="select">
                     <div class="clear"></div>
-                    <div th:text="${ppbhProduct.ppbh}"></div>
-                    <div th:text="${lbbhProduct.lbbh}"></div>
-                    <div th:text="${pmbhProduct.pmbh}"></div>
                     <!--已选择的商品-->
-                    <li class="select-result">
+                    <li class="select-result" th:if="${ppbhProduct.ppbh}!='0'and ${lbbhProduct.lbbh}!='0' and ${pmbhProduct.pmbh}!='0'">
                         <dl>
                             <dt>已选</dt>
                             <dd class="select-no"></dd>
