@@ -498,22 +498,22 @@ public class ProductController extends BaseController {
      * 查询页
      * 需要遍历lbmc，pmmc，ppmc
      * 还有全部商品列表
-     * @param lbbh 类别编号
-     * @param pmbh 品目编号
-     * @param ppbh 品牌编号
+     * @param lbmc 类别名称
+     * @param pmmc 品目名称
+     * @param ppmc 品牌名称
      * @param nowPage 当前页
      * @param  nr  搜索内容
      */
-    @RequestMapping(value = "/{lbbh}/{pmbh}/{ppbh}/{page}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{lbmc}/{pmmc}/{ppmc}/{page}",method = RequestMethod.GET)
     @ApiOperation(value = "多条件查询",httpMethod = "GET")
     @ApiImplicitParam(name = "nr",dataType = "内容")
     public ModelAndView findallProduct(HttpServletRequest request,
-                                       @PathVariable("lbbh") String lbbh,
-                                       @PathVariable("pmbh") String pmbh,
-                                       @PathVariable("ppbh") String ppbh,
+                                       @PathVariable("lbmc") String lbmc,
+                                       @PathVariable("pmmc") String pmmc,
+                                       @PathVariable("ppmc") String ppmc,
                                        @RequestParam(name = "nr",defaultValue = "0")String nr,
                                        @PathVariable("page") int nowPage){
-        return productService.findallProduct(request,lbbh,pmbh,ppbh,nr,nowPage);
+        return productService.findallProduct(request,lbmc,pmmc,ppmc,nr,nowPage);
     }
 
     /**

@@ -90,4 +90,5 @@ public interface ProductMapper extends BaseMapper<Product> {
     @Select("SELECT distinct lbmc FROM `product` where lbbh=#{lbbh}")
     public String findLbmcByLbbh(String lbbh);
 
+
 }
