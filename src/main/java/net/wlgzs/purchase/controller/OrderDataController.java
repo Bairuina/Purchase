@@ -43,7 +43,7 @@ public class OrderDataController extends BaseController {
     @ApiOperation("更新订单")
     @GetMapping("/upDataOrder")
     @ResponseBody
-//    @Scheduled(cron = "0 0 0,3,6,9,12,15,18,21 * * ?")
+    @Scheduled(cron = "0 0 0,3,6,9,12,15,18,21 * * ?")
     public Result upDataOrder() throws IOException {
         Result result=iOrderService.updateOrderDate(1);
         return  result;

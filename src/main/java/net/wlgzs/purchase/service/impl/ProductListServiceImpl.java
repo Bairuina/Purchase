@@ -190,7 +190,7 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
         if ("Y".equals(jsonObject.getString("resultFlag"))&&"推送唯一标识成功".equals(jsonObject.getString("resultMessage"))){
             ProductList productList=list.get(0);
             productList.setWybs(wybs);
-            productList.setImgpath(pathname);
+            productList.setImgpath(xhbh+ddbh+".jpg");
             if(baseMapper.updateById(productList)>0){
                 return new Result(ResultCode.SUCCESS,"推送商品唯一标识成功");
             }else{
