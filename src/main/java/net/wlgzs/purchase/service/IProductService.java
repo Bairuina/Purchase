@@ -25,7 +25,7 @@ public interface IProductService extends IService<Product> {
      * 需要遍历lbmc，pmmc，ppmc
      * 还有全部商品列表
      */
-    public ModelAndView findallProduct(HttpServletRequest request,String lbbh, String pmbh, String ppbh, String nr,int nowPage);
+    public ModelAndView findallProduct(HttpServletRequest request,String lbmc, String pmmc, String ppmc, String nr,int nowPage);
 
     public ModelAndView getProductByXhbh(String xhbh);
 }

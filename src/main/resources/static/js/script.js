@@ -43,74 +43,73 @@ $(function() {
 	});
 	//点击下边列表时的值
 	//	标签种类的编号
-	var listNumber = $("#selectB").data("listnumber");
-	console.log(listNumber);
-	if(listNumber=='null'){
-        listNumber='0';
-    }
-	//	标签品目的编号
-	var itemNumner = $("#selectC").data("itemnumber");
-	console.log(itemNumner);
-    if(itemNumner=='null'){
-        itemNumner='0';
-    }
-	//标签品牌的编号
-	var brandNumber = $("#selectA").data("brandnumber");
-    if(brandNumber=='null'){
-        brandNumber='0';
-    }
-		//品牌
-	$(".Item1").on("click",function(){
-		//被选择品牌的编号
-		var brandnumber = $(this).data("brandnumber");
-		//被选择的品牌
-		console.log(brandnumber);
-		var text = $(this).children().text();
-		console.log(text);
-
-        console.log(itemNumner);
-        console.log(brandnumber);
-        $.ajax({
-			url:"/product/"+listNumber+'/'+itemNumner+'/'+brandnumber+'/1',
-			type:"GET",
-			success : function(data){
-				window.location.href="/product/"+listNumber+'/'+itemNumner+'/'+brandnumber+'/1';
-			}
-		})
-	});
-	//类别
-	$(".Item2").on("click",function(){
-	//选择的类别编号
-		var listsNumber = $(this).data("listsnumber");
-		console.log(listsNumber);
-	//	类别名称
-		var contentLists = $(this).children().text();
-		console.log(contentLists);
-		$.ajax({
-			url:"/product/"+listsNumber+'/'+itemNumner+'/'+brandNumber+'/1',
-			type:"GET",
-			success:function(data){
-				window.location.href="/product/"+listsNumber+'/'+itemNumner+'/'+brandNumber+'/1';
-			}
-		})
-
-	});
-	//品目
-	$(".Item3").on('click',function(){
-	//	被选择品目的编号
-		var itemsnumber = $(this).data("itemnumber");
-		console.log(itemsnumber);
-	//被选择品目的名字
-		var itemsText = $(this).children().text();
-		console.log(itemsText);
-        $.ajax({
-			url:"/product/"+listNumber+'/'+itemsnumber+'/'+brandNumber+'/1',
-			type:"GET",
-			success:function(data){
-				window.location.href="/product/"+listNumber+'/'+itemsnumber+'/'+brandNumber+'/1';
-			}
-		})
-	});
+	// var listNumber = $("#selectB").data("listnumber");
+	// console.log(listNumber);
+	// if(listNumber=='null'){
+    //     listNumber='0';
+    // }
+	// //	标签品目的编号
+	// var itemNumner = $("#selectC").data("itemnumber");
+	// console.log(itemNumner);
+    // if(itemNumner=='null'){
+    //     itemNumner='0';
+    // }
+	// //标签品牌的编号
+	// var brandNumber = $("#selectA").data("brandnumber");
+    // if(brandNumber=='null'){
+    //     brandNumber='0';
+    // }
+	// 	//品牌
+	// $(".Item1").on("click",function(){
+	// 	//被选择品牌的编号
+	// 	var brandnumber = $(this).data("brandnumber");
+	// 	//被选择的品牌
+	// 	console.log(brandnumber);
+	// 	var text = $(this).children().text();
+	// 	console.log(text);
+	//
+    //     console.log(itemNumner);
+    //     console.log(brandnumber);
+    //     $.ajax({
+	// 		url:"/product/"+listNumber+'/'+itemNumner+'/'+brandnumber+'/1',
+	// 		type:"GET",
+	// 		success : function(data){
+	// 			window.location.href="/product/"+listNumber+'/'+itemNumner+'/'+brandnumber+'/1';
+	// 		}
+	// 	})
+	// });
+	// //类别
+	// $(".Item2").on("click",function(){
+	// //选择的类别编号
+	// 	var listsNumber = $(this).data("listsnumber");
+	// 	console.log(listsNumber);
+	// //	类别名称
+	// 	var contentLists = $(this).children().text();
+	// 	console.log(contentLists);
+	// 	$.ajax({
+	// 		url:"/product/"+listsNumber+'/'+itemNumner+'/'+brandNumber+'/1',
+	// 		type:"GET",
+	// 		success:function(data){
+	// 			window.location.href="/product/"+listsNumber+'/'+itemNumner+'/'+brandNumber+'/1';
+	// 		}
+	// 	})
+	// });
+	// //品目
+	// $(".Item3").on('click',function(){
+	// //	被选择品目的编号
+	// 	var itemsnumber = $(this).data("itemnumber");
+	// 	console.log(itemsnumber);
+	// //被选择品目的名字
+	// 	var itemsText = $(this).children().text();
+	// 	console.log(itemsText);
+    //     $.ajax({
+	// 		url:"/product/"+listNumber+'/'+itemsnumber+'/'+brandNumber+'/1',
+	// 		type:"GET",
+	// 		success:function(data){
+	// 			window.location.href="/product/"+listNumber+'/'+itemsnumber+'/'+brandNumber+'/1';
+	// 		}
+	// 	})
+	// });
 
 
 	//自带样式效果

@@ -21,7 +21,7 @@ $('.confirm').click(function () {
    //获取省份
    var addressname =  $(".selectAddress").find("option:selected").text();
 
-   if(price!='' && content!=''){
+   if(price!=''){
       if(aa.test(price)){
          $("#priceHint").text("");
          $("#textHint").text("");
@@ -57,7 +57,7 @@ $('.confirm').click(function () {
       $("#priceHint").text("请输入价格");
    }else if(addressname==""){
       $("#alertAddress").text("请输入省份");
-   }else if(address==''){
+   }else if(addressText==''){
       $(".address").text("请输入商品地址");
    }else if(content==''){
       $("#textHint").text("请输入备注");

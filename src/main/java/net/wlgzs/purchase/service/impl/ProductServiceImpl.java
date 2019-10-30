@@ -41,121 +41,92 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private ProductOfferMapper productOfferMapper;
 
     @Override
-    public ModelAndView findallProduct(HttpServletRequest request, String lbbh, String pmbh, String ppbh, String nr,int nowPage){
+    public ModelAndView findallProduct(HttpServletRequest request, String lbmc, String pmmc, String ppmc, String nr,int nowPage){
         ModelAndView modelAndView=new ModelAndView();
-        HttpSession session=request.getSession(true);
-        if (lbbh.equals("0") && pmbh.equals("0") &&ppbh.equals("0") && nr.equals("0")){
-            session.setAttribute("lbbh",0);
-            session.setAttribute("pmbh",0);
-            session.setAttribute("ppbh",0);
-            session.setAttribute("nr",null);
-        }
-        else{
-            session.setAttribute("lbbh",lbbh);
-            session.setAttribute("pmbh",pmbh);
-            session.setAttribute("ppbh",ppbh);
-            if (!nr.equals("0")){
-                session.setAttribute("nr",nr);
-            }
-        }
         modelAndView.setViewName("detailsPage");
-        try {
-            List<Product> lbbhlist;
-            List<Product> pmbhlist;
-            List<Product> ppbhlist;
-            QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
-            queryWrapper.select("lbbh", "lbmc");
-            lbbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper)));
+        List<Product> lbbhlist;
+        List<Product> pmbhlist;
+        List<Product> ppbhlist;
+        QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("lbmc");
+        lbbhlist = new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper)));
 
-            QueryWrapper<Product> queryWrapper1=new QueryWrapper<>();
-            if (!"0".equals(lbbh)){
-                queryWrapper1.eq("lbbh",lbbh);
-            }
-            queryWrapper1.select("pmbh","pmmc");
-            pmbhlist =new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper1)));
-
-            QueryWrapper<Product> queryWrapper2=new QueryWrapper<>();
-            if (!"0".equals(lbbh)){
-                queryWrapper2.eq("lbbh",lbbh);
-            }
-            if (!"0".equals(pmbh)){
-                queryWrapper2.eq("pmbh",pmbh);
-            }
-            queryWrapper2.select("ppbh","ppmc");
-            ppbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
-
-
-            QueryWrapper<Product> queryWrapper3 = new QueryWrapper<>();
-            List<Product> productList;
-            if (!"0".equals(lbbh)){
-                queryWrapper3.eq("lbbh",lbbh);
-            }
-            if (!"0".equals(pmbh)){
-                queryWrapper3.eq("pmbh",pmbh);
-            }
-            if (!"0".equals(ppbh)){
-                queryWrapper3.eq("ppbh",ppbh);
-            }
-            Page page = new Page(nowPage, 9);
-            IPage<Product> iPage = null;
-            iPage=baseMapper.selectPage(page,queryWrapper3);
-            productList = iPage.getRecords();
-
-            Product lbbhProduct=new Product();
-            lbbhProduct.setLbbh(lbbh);
-            for(Product lbbh1:lbbhlist){
-                if (lbbh.equals(lbbh1.getLbbh())) {
-                    lbbhProduct = lbbh1;
-                }
-            }
-            Product pmbhProduct=new Product();
-            pmbhProduct.setPmbh(pmbh);
-            for(Product pmbh1:pmbhlist){
-                if (pmbh.equals(pmbh1.getPmbh())) {
-                    pmbhProduct = pmbh1;
-                }
-            }
-            Product ppbhProduct=new Product();
-            ppbhProduct.setPpbh(ppbh);
-            for(Product ppbh1:ppbhlist){
-                if (ppbh.equals(ppbh1.getPpbh())) {
-                    ppbhProduct = ppbh1;
-                }
-            }
-
-            //总页数
-            modelAndView.addObject("pagesize",iPage.getPages());
-            //当前页码
-            modelAndView.addObject("pagenumber",iPage.getCurrent());
-            //返回当前条件的商品
-            modelAndView.addObject("productList", productList);
-
-
-            //类别集合
-            modelAndView.addObject("lbbhlist", lbbhlist);
-            //品目集合
-            modelAndView.addObject("pmbhlist", pmbhlist);
-            //品牌集合
-            modelAndView.addObject("ppbhlist", ppbhlist);
-
-
-            //类别编号及名称
-            modelAndView.addObject("lbbhProduct",lbbhProduct);
-            //品目编号
-            modelAndView.addObject("pmbhProduct",pmbhProduct);
-            //品牌编号
-            modelAndView.addObject("ppbhProduct",ppbhProduct);
-            //内容
-            modelAndView.addObject("nr",nr);
-
-            System.out.println("当前品牌"+ppbhProduct);
-            System.out.println("当前类别"+lbbhProduct);
-            System.out.println("当前品目"+pmbhProduct);
-
-        } catch (Exception e) {
-            //返回报错页面
-            modelAndView.addObject("msg", new Result(ResultCode.FAIL));
+        QueryWrapper<Product> queryWrapper1=new QueryWrapper<>();
+        if (!"0".equals(lbmc)){
+            queryWrapper1.eq("lbmc",lbmc);
         }
+        queryWrapper1.select("pmmc");
+        pmbhlist =new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper1)));
+
+        QueryWrapper<Product> queryWrapper2=new QueryWrapper<>();
+        if (!"0".equals(lbmc)){
+            queryWrapper2.eq("lbmc",lbmc);
+        }
+        if (!"0".equals(pmmc)){
+            queryWrapper2.eq("pmmc",pmmc);
+        }
+        queryWrapper2.select("ppmc");
+        ppbhlist=new ArrayList<>(new HashSet<>(baseMapper.selectList(queryWrapper2)));
+
+
+
+        QueryWrapper<Product> queryWrapper3 = new QueryWrapper<>();
+        List<Product> productList;
+        if (!"0".equals(lbmc)){
+            queryWrapper3.eq("lbmc",lbmc);
+        }
+        if (!"0".equals(pmmc)){
+            queryWrapper3.eq("pmmc",pmmc);
+        }
+        if (!"0".equals(ppmc)){
+            queryWrapper3.eq("ppmc",ppmc);
+        }
+        queryWrapper3.select("xhbh","xhmc","lbmc","ppmc","pmmc","parametersList");
+        Page page = new Page(nowPage, 9);
+        IPage<Product> iPage = null;
+        iPage=baseMapper.selectPage(page,queryWrapper3);
+        productList = iPage.getRecords();
+
+//        Product lbbhProduct=new Product();
+//        lbbhProduct.setLbbh(lbbh);
+//        lbbhProduct.setLbmc(baseMapper.findLbmcByLbbh(lbbh));
+//
+//        Product pmbhProduct=new Product();
+//        pmbhProduct.setPmbh(pmbh);
+//        pmbhProduct.setPmmc(baseMapper.findPmmcByPmbh(pmbh));
+//
+//        Product ppbhProduct=new Product();
+//        ppbhProduct.setPpbh(ppbh);
+//        ppbhProduct.setPpmc(baseMapper.findPpmcByPpbh(ppbh));
+
+        //总页数
+        modelAndView.addObject("pagesize",iPage.getPages());
+        //当前页码
+        modelAndView.addObject("pagenumber",iPage.getCurrent());
+        //返回当前条件的商品
+        modelAndView.addObject("productList", productList);
+
+
+        //类别集合
+        modelAndView.addObject("lbbhlist", lbbhlist);
+        //品目集合
+        modelAndView.addObject("pmbhlist", pmbhlist);
+        //品牌集合
+        modelAndView.addObject("ppbhlist", ppbhlist);
+
+
+        //类别编号及名称
+        modelAndView.addObject("lbmc",lbmc);
+        //品目编号
+        modelAndView.addObject("pmmc",pmmc);
+        //品牌编号
+        modelAndView.addObject("ppmc",ppmc);
+        //内容
+        modelAndView.addObject("nr",nr);
+
+        System.out.println("当前品牌"+ppmc);
+        System.out.println("当前类别"+lbmc);
+        System.out.println("当前品目"+pmmc);
         modelAndView.addObject("msg", new Result(ResultCode.SUCCESS));
         return modelAndView;
     }
