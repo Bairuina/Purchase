@@ -27,5 +27,4 @@ public class PurchaseApplication extends WebMvcConfigurerAdapter {
         urlPathHelper.setUrlDecode(false);
         configurer.setUrlPathHelper(urlPathHelper);
     }
-
 }
