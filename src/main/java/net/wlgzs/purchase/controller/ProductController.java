@@ -236,14 +236,14 @@ public class ProductController extends BaseController {
      * @param nowPage 当前页
      * @param  nr  搜索内容
      */
-    @RequestMapping(value = "/{lbmc}/{pmmc}/{ppmc}/{page}/{nr}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{lbmc}/{pmmc}/{ppmc}/{page}",method = RequestMethod.GET)
     @ApiOperation(value = "多条件查询",httpMethod = "GET")
     @ApiImplicitParam(name = "nr",dataType = "内容")
     public ModelAndView findallProduct(HttpServletRequest request,
                                        @PathVariable("lbmc") String lbmc,
                                        @PathVariable("pmmc") String pmmc,
                                        @PathVariable("ppmc") String ppmc,
-                                       @PathVariable("nr") String nr,
+                                       @RequestParam(name = "nr",defaultValue = "0")String nr,
                                        @PathVariable("page") int nowPage){
         return productService.findallProduct(request,lbmc,pmmc,ppmc,nr,nowPage);
     }

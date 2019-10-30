@@ -127,8 +127,6 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         System.out.println("当前品牌"+ppmc);
         System.out.println("当前类别"+lbmc);
         System.out.println("当前品目"+pmmc);
-
-
         modelAndView.addObject("msg", new Result(ResultCode.SUCCESS));
         return modelAndView;
     }
