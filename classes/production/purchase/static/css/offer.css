@@ -274,3 +274,24 @@ input[type='checkbox']{
     border: 1px solid #b7b7b7;
     padding: 4px;
 }
+
+.button{
+    display: inline-block;
+    padding: 7px 10px;
+    border-radius: 2px;
+    font-size: 13px;
+}
+.button>a{
+    color: white;
+}
+.buttonone{
+    background-color: #1E9FFF;
+}
+.buttontwo{
+    background-color: #2f9c0a;
+    margin-left: 10px;
+}
+.buttonthree{
+    margin-left: 10px;
+    background-color: #F52F3E;
+}
