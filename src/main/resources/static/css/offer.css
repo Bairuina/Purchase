@@ -251,7 +251,7 @@ input[type='checkbox']{
 .paramatersDetails{
     vertical-align: text-top;
     float: left;
-    /* width: 86%; */
+     width: 86%;
     padding-left: 17px;
 }
 .paramatersDetails>p>span{

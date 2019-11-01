@@ -115,6 +115,34 @@
                         </dl>
                     </li>
                     <div class="clear"></div>
+                    <!--                    种类-->
+                    <li class="select-list">
+                        <dl id="select2">
+                            <dt class="am-badge am-round">种类</dt>
+                            <div class="dd-conent">
+                                <dd class="select-all selected"><a href="#" class="all">全部</a></dd>
+                                <dd th:each="lbbhlist:${lbbhlist}">
+                                    <a  class="Item2" th:data-listsnumber="${lbbhlist.lbmc}" th:href="@{'/product/'+${#strings.replace(lbbhlist.lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}">
+                                        <p th:text="${lbbhlist.lbmc}"></p>
+                                    </a>
+                                </dd>
+                            </div>
+                        </dl>
+                    </li>
+                    <!--                    品目-->
+                    <li class="select-list">
+                        <dl id="select3">
+                            <dt class="am-badge am-round">品目</dt>
+                            <div class="dd-conent">
+                                <dd class="select-all selected"><a href="#" class="allC">全部</a></dd>
+                                <dd th:each="pmbhlist:${pmbhlist}">
+                                    <a class="Item3" th:data-itemnumber="${pmbhlist.pmmc}" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmbhlist.pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}">
+                                        <p th:text="${pmbhlist.pmmc}"></p>
+                                    </a>
+                                </dd>
+                            </div>
+                        </dl>
+                    </li>
 <!--                        品牌-->
                     <li class="select-list">
                         <dl id="select1">
@@ -131,35 +159,6 @@
                             </div>
                         </dl>
                     </li>
-<!--                    种类-->
-                    <li class="select-list">
-                        <dl id="select2">
-                            <dt class="am-badge am-round">种类</dt>
-                            <div class="dd-conent">
-                                <dd class="select-all selected"><a href="#" class="all">全部</a></dd>
-                                <dd th:each="lbbhlist:${lbbhlist}">
-                                    <a  class="Item2" th:data-listsnumber="${lbbhlist.lbmc}" th:href="@{'/product/'+${#strings.replace(lbbhlist.lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}">
-                                        <p th:text="${lbbhlist.lbmc}"></p>
-                                    </a>
-                                </dd>
-                            </div>
-                        </dl>
-                    </li>
-<!--                    品目-->
-                    <li class="select-list">
-                        <dl id="select3">
-                            <dt class="am-badge am-round">品目</dt>
-                            <div class="dd-conent">
-                                <dd class="select-all selected"><a href="#" class="allC">全部</a></dd>
-                                <dd th:each="pmbhlist:${pmbhlist}">
-                                    <a class="Item3" th:data-itemnumber="${pmbhlist.pmmc}" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmbhlist.pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}">
-                                        <p th:text="${pmbhlist.pmmc}"></p>
-                                    </a>
-                                </dd>
-                            </div>
-                        </dl>
-                    </li>
-
                 </ul>
                 <div class="clear"></div>
             </div>

@@ -84,6 +84,34 @@
                 </div>
                 <div style="clear: both"></div>
                 <div class="offerForm">
+                    <div class="offerFormItem">
+                        <div style="height: 100%;">
+                            <div class="offerFormLabel">
+                                选择报价时间
+                            </div>
+                            <div class="input-group input-append date datapick BeginTimeDiv">
+                                <input type="text" class="form-control input-sm" id="BeginTime" name="BeginTime" placeholder="请输入日期" data-format="yyyy-MM-dd">
+                                <span class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+      </span>
+                            </div>
+                            <script>
+                                // ①默认成当天的日期
+                                $('.BeginTimeDiv').datepicker("setDate", "-1d");//增加时间控件,-1d减少一天，-1m减少一个月，-1y减少一年
+                                $(".BeginTimeDiv").datepicker("setDate", "null"); // null 代表着当天
+                                $('.BeginTimeDiv').datepicker("setDate", "-1y,-1m,-1d");// 代表这个 年，月，日，各减少一个数字
+                                // ②选择小于当天的日期
+                                $('#BeginTime').datepicker({
+                                    autoclose:true,//选中日期后日期框自动消失
+                                    clearBtn:true,//提供清除按钮，可以清除input框中日期
+                                    language:"zh",//日期框显示语言
+                                    orientation:"top",//日期框显示位置
+                                    todayBtn:false,//是否显示今天按钮
+                                    endDate:"-1d" //小于当天的日期的设置  endDate: new Date() 今天的日期和以前的能选择
+                                });
+                            </script>
+                        </div>
+                    </div>
                     <!--商品名称-->
                     <div class="offerFormItem">
                         <div style="height: 100%;">
@@ -183,7 +211,7 @@
         </div>
     </div>
     <div class="submitBar"  >
-        <a class="cancel">返回</a>
+        <a class="cancel" th:href="@{/product/0/0/0/1}">返回</a>
         <a class="confirm">提交</a>
     </div>
 <!--配件报价模态框-->

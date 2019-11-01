@@ -66,19 +66,6 @@ $('.confirm').click(function () {
    }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //配件报价
 $('.submitPrice').on('click',function () {
     //原价格
