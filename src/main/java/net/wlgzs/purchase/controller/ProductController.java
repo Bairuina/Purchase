@@ -51,6 +51,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/product")
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class ProductController extends BaseController {
 
     @Resource
@@ -75,6 +77,7 @@ public class ProductController extends BaseController {
 
     //配件入库
     @Scheduled(cron = "0 0 1 * * ?")
+    @Test
     public void pppp(){
         List<String> pmbh=productMapper.findpmbh();
         System.out.println(pmbh);
@@ -84,31 +87,36 @@ public class ProductController extends BaseController {
             String enPwd1= Enxi.enPwd(username,pwd);
             String url=readProperties.getUrl();
             for (int i = 0; i < pmbh.size(); i++) {
-                String json="{\"username\":\""+username+"\",\"pwd\":\""+enPwd1+"\",\"pmbh\":\""+pmbh.get(i)+"\",\"pageNum\":\"1\",\"pageSize\":\"10\"}";
-                System.out.println(json);
-                JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getFindPjByPmbh(),json);
-
-                System.out.println(jsonObject);
-                if (jsonObject.getString("resultFlag").equals("Y")&&jsonObject.getString("resultMessage").equals("返回品目配件信息成功")){
-                    String jsonString=jsonObject.getString("accessoryList");
-                    System.out.println(jsonString);
-                    String pmbh1=jsonObject.getString("pmbh");
-                    String pmmc=jsonObject.getString("pmmc");
-                    logger.info(jsonString);
-                    List<Parts> parts1=JSON.parseArray(jsonString,Parts.class);
-                    for(Parts parts2:parts1){
-                        parts2.setPmbh(pmbh1);
-                        parts2.setPmmc(pmmc);
-                        List<Parts> parts=partsMapper.findPartssByPjbh(parts2.getPJBH());
-                        if(parts.size()==0){
-                            partsService.save(parts2);
-                        }else{
-                            parts2.setPartsId(parts.get(0).getPartsId());
-                            partsService.updateById(parts2);
+                int nowpage=1;
+                int pagesize=1;
+                do{
+                    String json="{\"username\":\""+username+"\",\"pwd\":\""+enPwd1+"\",\"pmbh\":\""+pmbh.get(i)+"\",\"pageNum\":\""+nowpage+"\",\"pageSize\":\"10\"}";
+                    System.out.println(json);
+                    JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getFindPjByPmbh(),json);
+                    System.out.println(jsonObject);
+                    if (jsonObject.getString("resultFlag").equals("Y")&&jsonObject.getString("resultMessage").equals("返回品目配件信息成功")) {
+                        String jsonString = jsonObject.getString("accessoryList");
+                        System.out.println(jsonString);
+                        pagesize=Integer.valueOf(jsonObject.getString("pagecount"));
+                        String pmbh1 = jsonObject.getString("pmbh");
+                        String pmmc = jsonObject.getString("pmmc");
+                        logger.info(jsonString);
+                        List<Parts> parts1 = JSON.parseArray(jsonString, Parts.class);
+                        for (Parts parts2 : parts1) {
+                            parts2.setPmbh(pmbh1);
+                            parts2.setPmmc(pmmc);
+                            List<Parts> parts = partsMapper.findPartssByPjbh(parts2.getPJBH());
+                            if (parts.size() == 0) {
+                                partsService.save(parts2);
+                            } else {
+                                parts2.setPartsId(parts.get(0).getPartsId());
+                                partsService.updateById(parts2);
+                            }
                         }
+                        logger.info(parts1 + "****************************");
                     }
-                    logger.info(parts1+"****************************");
-                }
+                    nowpage++;
+                }while(nowpage<=pagesize);
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -118,6 +126,7 @@ public class ProductController extends BaseController {
 
     //获取商品春入数据库
     @Scheduled(cron = "0 0 23 * * ?")
+    @Test
     public void getProductList(){
         //商品表更新
         String url=readProperties.getUrl();
@@ -129,7 +138,7 @@ public class ProductController extends BaseController {
         //总页数
         int pagecount=1;
         //当前页
-        int nowpage=305;
+        int nowpage=1;
         String sprkJssj=dateTime.toString("yyyyMMddHHmmss");
         String sprkkssj=dateTime.minusDays(1).toString("yyyyMMddHHmmss");
         do {
@@ -172,13 +181,13 @@ public class ProductController extends BaseController {
             }
             System.out.println("当前页"+nowpage+",总页数"+pagecount);
             nowpage++;
-
-        }while(nowpage<pagecount);
+        }while(nowpage<=pagecount);
     }
 
 
     //根据品目获取增值服务
     @Scheduled(cron = "0 0 2 * * ?")
+    @Test
     public void getService(){
         List<String> pmbh1=productMapper.findpmbh();
         String username=readProperties.getUsername();
@@ -223,6 +232,19 @@ public class ProductController extends BaseController {
             }
         }
     }
+
+//    /**
+//     * 更新商品信息
+//     * @param time 在前时间
+//     */
+//    @RequestMapping(value = "/update/{time}",method = RequestMethod.POST)
+//    @ApiOperation(value = "更新本地库",httpMethod = "POST")
+//    public Result update(@PathVariable("time")String time){
+//        //商品区
+//
+//
+//
+//    }
 
 
 
