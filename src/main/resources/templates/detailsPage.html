@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>商品详情页面</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" th:href="@{/static/css/detailsPage.css}">
     <link rel="stylesheet" th:href="@{/static/css/same.css}">
     <link rel="stylesheet" th:href="@{/static/css/style.css}">
@@ -19,6 +21,22 @@
                 <a th:href="@{/product/0/0/0/1}">
                     <img th:src="@{/img/logo.png}" alt="">
                 </a>
+            </div>
+<!--            时间插件-->
+            <div class="offerFormItem">
+                <div style="height: 100%;">
+                    <div class="input-group input-append date datapick BeginTimeDiv" style="display: inline-block">
+                        <input type="text" class="form-control input-sm" id="BeginTime" name="BeginTime" placeholder="请输入日期" data-format="yyyy-MM-dd" style="    padding: 7px;
+    border-radius: 2px;
+    border: 1px solid gainsboro;">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                    <div class="offerFormLabel" id="new">
+                        产品更新
+                    </div>
+                </div>
             </div>
             <!--                按钮-->
             <div style="    position: absolute;
@@ -162,100 +180,6 @@
                 </ul>
                 <div class="clear"></div>
             </div>
-
-<!--                        商品选择-->
-<!--            <div class="brandRegion">-->
-<!--                                类名-->
-<!--                <div class="brand">-->
-<!--                    <div class="brandDetail">-->
-<!--                        <div class="brandDetailLeft">-->
-<!--                            <p>-->
-<!--                                <img th:src="@{/static/img/arrowLeft.png}" align="absmiddle">-->
-<!--                                类名</p>-->
-<!--                        </div>-->
-<!--                        <div class="key">-->
-<!--                            <a class="moreThan">-->
-<!--                                <span>更多</span>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <div class="brandDetailRight">-->
-<!--                            <div class="brandDetailRightContent">-->
-<!--                                <ul>-->
-<!--                                    <li th:each="lbbhlist:${lbbhlist}">-->
-<!--                                        <a th:href="@{'/product/'+${lbbhlist.lbbh}+'/0/0/1'}">-->
-<!--                                            <p th:text="${lbbhlist.lbmc}">类名</p>-->
-<!--                                        </a>-->
-<!--                                    </li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <div style="clear: both">-->
-
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--&lt;!&ndash;                                品目&ndash;&gt;-->
-<!--                <div class="brand">-->
-<!--                    <div class="brandDetail">-->
-<!--                        <div class="brandDetailLeft">-->
-<!--                            <p>-->
-<!--                                <img th:src="@{/static/img/arrowLeft.png}" align="absmiddle">-->
-<!--                                品目</p>-->
-<!--                        </div>-->
-<!--                        <div class="key">-->
-<!--                            <a class="moreThan">-->
-<!--                                <span>更多</span>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <div class="brandDetailRight">-->
-<!--                            <div class="brandDetailRightContent">-->
-<!--                                <ul>-->
-<!--                                    <li th:each="pmbhlist:${pmbhlist}">-->
-<!--                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbhlist.pmbh}+'/0/1'}">-->
-<!--                                            <p th:text="${pmbhlist.pmmc}"></p>-->
-<!--                                        </a>-->
-<!--                                    </li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <div style="clear: both">-->
-
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-                <!--品牌-->
-<!--                <div class="brand">-->
-<!--                    <div class="brandDetail">-->
-<!--                        <div class="brandDetailLeft">-->
-<!--                            <p>-->
-<!--                                <img th:src="@{/static/img/arrowLeft.png}" align="absmiddle">-->
-<!--                                品牌</p>-->
-<!--                        </div>-->
-<!--                        <div class="key">-->
-<!--                            <a class="moreThan">-->
-<!--                                <span>更多</span>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <div class="brandDetailRight">-->
-<!--                            <div class="brandDetailRightContent">-->
-<!--                                <ul>-->
-<!--                                    <li th:each="ppbhlist:${ppbhlist}">-->
-<!--                                        <a th:href="@{'/product/'+${lbbh}+'/'+${pmbh}+'/'+${ppbhlist.ppbh}+'/1'}">-->
-<!--                                            <p th:text="${ppbhlist.ppmc}" class="brankName"></p>-->
-<!--                                        </a>-->
-<!--                                    </li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <div style="clear: both">-->
-
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
             <!--获取商品-->
             <div class="message">
                 <div class="messageDetail" th:each="productList:${productList}">
@@ -333,8 +257,9 @@
 <div th:include="common::commonFoot"></div>
 <!-- 返回顶部 -->
 <div th:include="common::commonBackTop"></div>
-
 <script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:href="@{/static/js/Chinese.js}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script th:src="@{/static/js/detailsPage.js}"></script>
 <script th:src="@{/static/js/BackTop.js}"></script>
 <script th:src="@{/static/js/script.js}"></script>
