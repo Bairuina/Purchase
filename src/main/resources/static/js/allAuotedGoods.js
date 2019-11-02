@@ -60,7 +60,7 @@ $(".present").on('click',function () {
 });
 
 
-//返回按钮
+//重置按钮
 $(".cancel").on('click',function () {
     $(this).parent().prev().children().val('');
 });
