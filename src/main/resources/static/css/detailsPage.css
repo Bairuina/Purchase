@@ -407,11 +407,12 @@ a{
 .offerFormLabel{
     display: inline-block;
     /* width: 80px; */
-    background-color: #F52F3E;
+    background-color: #2f9cf5;
     padding: 6px;
     border-radius: 4px;
     font-size: 13px;
     text-align: center;
     line-height: 20px;
     color: white;
+    cursor: pointer;
 }
