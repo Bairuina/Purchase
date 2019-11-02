@@ -20,6 +20,8 @@ import net.wlgzs.purchase.service.IServiceValueService;
 import net.wlgzs.purchase.service.impl.OrderDataServiceImpl;
 import net.wlgzs.purchase.util.ClientUtil;
 import net.wlgzs.purchase.util.ReadProperties;
+import net.wlgzs.purchase.util.Result;
+import net.wlgzs.purchase.util.ResultCode;
 import org.codehaus.xfire.client.Client;
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -76,8 +78,7 @@ public class ProductController extends BaseController {
 
 
     //配件入库
-    @Scheduled(cron = "0 0 1 * * ?")
-    @Test
+    @Scheduled(cron = "0 0 11 * * ?")
     public void pppp(){
         List<String> pmbh=productMapper.findpmbh();
         System.out.println(pmbh);
@@ -123,10 +124,8 @@ public class ProductController extends BaseController {
         }
     }
 
-
     //获取商品春入数据库
-    @Scheduled(cron = "0 0 23 * * ?")
-    @Test
+    @Scheduled(cron = "0 0 23 * * ?")    //记得删
     public void getProductList(){
         //商品表更新
         String url=readProperties.getUrl();
@@ -184,10 +183,8 @@ public class ProductController extends BaseController {
         }while(nowpage<=pagecount);
     }
 
-
     //根据品目获取增值服务
-    @Scheduled(cron = "0 0 2 * * ?")
-    @Test
+    @Scheduled(cron = "0 30 11 * * ?")
     public void getService(){
         List<String> pmbh1=productMapper.findpmbh();
         String username=readProperties.getUsername();
@@ -233,20 +230,69 @@ public class ProductController extends BaseController {
         }
     }
 
-//    /**
-//     * 更新商品信息
-//     * @param time 在前时间
-//     */
-//    @RequestMapping(value = "/update/{time}",method = RequestMethod.POST)
-//    @ApiOperation(value = "更新本地库",httpMethod = "POST")
-//    public Result update(@PathVariable("time")String time){
-//        //商品区
-//
-//
-//
-//    }
-
-
+    /**
+     * 更新商品信息
+     * @param time 在前时间
+     */
+    @RequestMapping(value = "/update/{time}",method = RequestMethod.POST)
+    @ApiOperation(value = "更新本地库",httpMethod = "POST")
+    public Result update(@PathVariable("time")String time){
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+        String result =null;
+        DateTime dateTime=new DateTime();
+        //总页数
+        int pagecount=1;
+        //当前页
+        int nowpage=1;
+        String sprkJssj=dateTime.toString("yyyyMMddHHmmss");
+        String sprkkssj=time;
+        System.out.println(sprkkssj);
+        do {
+            try {
+                Client client = new Client(new URL(url));
+                String jsonStr = "{\n\"username\":\"" + username + "\",\n" +
+                        "\"pwd\":\"" + enPwd1 + "\",\n" +
+                        "\"sprkkssj\":\"" + sprkkssj + "\",\n" +
+                        "\"sprkJssj\":\"" + sprkJssj + "\",\n" +
+                        "\"pageNum\":\"" + nowpage + "\",\n" +
+                        "\"pageSize\":\"50\"\n}";
+                Object[] rets = client.invoke("findSprkandParam", new Object[]{jsonStr});
+                result = (String) rets[0];
+            } catch (Exception e) {
+                return new Result(ResultCode.FAIL,"更新失败");
+            }
+            JSONObject jso1 = JSONObject.fromObject(result);
+            String s = jso1.getString("resultFlag");
+            if ("N".equals(s)) {
+                System.out.println(jso1.getString("resultMessage"));
+            } else {
+                pagecount = Integer.valueOf(jso1.getString("pagecount"));
+                String jsonString = jso1.getString("spList");
+                System.out.println(jsonString);//记得删
+                List<Product> product = JSON.parseArray(jsonString, Product.class);
+                for (Product product1 : product) {
+                    String Xhbh = product1.getXhbh();
+                    List<Product> productList = productMapper.findProductsByXhbh(Xhbh);
+                    if (productList.size() == 0) {
+                        if (productService.save(product1)) {
+                            System.out.println("存入新商品");
+                        }
+                    } else {
+                        product1.setProductId(productList.get(0).getProductId());
+                        if (productMapper.updateById(product1) > 0) {
+                            System.out.println(product1.getPmmc()+"更新信息");
+                        }
+                    }
+                }
+            }
+            System.out.println("当前页"+nowpage+",总页数"+pagecount);
+            nowpage++;
+        }while(nowpage<=pagecount);
+        return new Result(ResultCode.SUCCESS,"成功更新");
+    }
 
     /**
      * 查询页
@@ -270,14 +316,6 @@ public class ProductController extends BaseController {
         return productService.findallProduct(request,lbmc,pmmc,ppmc,nr,nowPage);
     }
 
-
-//    /**
-//     * 传入一个lbmc,返回pmmc 和 lbmc的全部商品
-//     */
-//    @RequestMapping(value = "/1")
-//    public ModelAndView findallProduct1(@RequestParam(value = "lbbh") String lbbh){
-//        return productService.findallProduct1(lbbh);
-//    }
 
     /**
      * 传入pmbh 返回商品信息

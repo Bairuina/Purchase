@@ -73,12 +73,13 @@ $(".inputProduct").focus(function(){
 //更新时间
 $("#new").click(function () {
    var time = $("#BeginTime").val();
-   alert(time);
+   var times= time.substring(6,10)+time.substring(0,2)+time.substring(3,5)+"000000";
    $.ajax({
-       url:'/product/update/'+time+'/000000',
+       url:'/product/update/'+times,
        type:'POST',
        success:function (data) {
            if(data==0){
+               alert(data.msg)
                window.location.reload();
            }else{
                alert(data.msg);

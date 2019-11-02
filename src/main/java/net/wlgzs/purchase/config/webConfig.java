@@ -14,7 +14,6 @@ public class webConfig implements WebMvcConfigurer  {
         String photoPath=System.getProperty("user.dir");
 //        photoPath=photoPath.replace('\\','/');
         registry.addResourceHandler("/photoData/**") .addResourceLocations("file:"+photoPath+"/pictures/");
-
     }
 
     @Test

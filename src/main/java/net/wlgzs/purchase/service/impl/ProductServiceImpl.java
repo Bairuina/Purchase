@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -81,23 +80,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         if (!"0".equals(ppmc)){
             queryWrapper3.eq("ppmc",ppmc);
         }
+        if(!"0".equals(nr)){
+            queryWrapper3.like("xhmc",nr);
+        }
         queryWrapper3.select("xhbh","xhmc","lbmc","ppmc","pmmc","parametersList");
         Page page = new Page(nowPage, 9);
         IPage<Product> iPage = null;
         iPage=baseMapper.selectPage(page,queryWrapper3);
         productList = iPage.getRecords();
-
-//        Product lbbhProduct=new Product();
-//        lbbhProduct.setLbbh(lbbh);
-//        lbbhProduct.setLbmc(baseMapper.findLbmcByLbbh(lbbh));
-//
-//        Product pmbhProduct=new Product();
-//        pmbhProduct.setPmbh(pmbh);
-//        pmbhProduct.setPmmc(baseMapper.findPmmcByPmbh(pmbh));
-//
-//        Product ppbhProduct=new Product();
-//        ppbhProduct.setPpbh(ppbh);
-//        ppbhProduct.setPpmc(baseMapper.findPpmcByPpbh(ppbh));
 
         //总页数
         modelAndView.addObject("pagesize",iPage.getPages());
@@ -123,10 +113,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         modelAndView.addObject("ppmc",ppmc);
         //内容
         modelAndView.addObject("nr",nr);
-
-        System.out.println("当前品牌"+ppmc);
         System.out.println("当前类别"+lbmc);
         System.out.println("当前品目"+pmmc);
+        System.out.println("当前品牌"+ppmc);
+        System.out.println("当前内容"+nr);
         modelAndView.addObject("msg", new Result(ResultCode.SUCCESS));
         return modelAndView;
     }

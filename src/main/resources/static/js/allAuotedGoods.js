@@ -45,11 +45,6 @@ $(".present").on('click',function () {
     //下架商品编号
     $.ajax({
         url:"/productoffer/offer/"+num+'/'+2+'/'+text,
-        // data:{
-        //     xhbh:num,
-        //     zt:2,
-        //     text:text,
-        // },
         type:"GET",
         success:function (data) {
             if(data.code==0){

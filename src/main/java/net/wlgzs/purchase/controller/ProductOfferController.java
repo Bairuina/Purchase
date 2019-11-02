@@ -49,7 +49,7 @@ public class ProductOfferController extends BaseController {
                                @RequestParam(name = "text") String text,
                                @RequestParam(name = "fwcn") String fwcn,
                                @RequestParam(name = "productlink") String productlink,
-                               @RequestParam(name = "area")String area){
+                               @RequestParam(name = "area") String area){
         return iProductOfferService.productOffer(xhbh,price,text,fwcn,productlink,area);
     }
 

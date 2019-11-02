@@ -78,11 +78,13 @@
                 <!--搜索框-->
                 <div class="inputProduct">
                     <form th:action="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}"  type="GET">
-                        <input type="search" id="productSearch" placeholder="请输入商品信息" name="nr">
-                    </form>
-                    <div class="submitProduct">
+                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:if="${nr}=='0'">
+                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:value="${nr}" th:if="${nr}!='0'">
+                        <div class="submitProduct">
                             <input type="submit">
-                    </div>
+                        </div>
+                    </form>
+
                 </div>
                 <div style="clear: both"></div>
             </div>
@@ -98,15 +100,15 @@
                             <p class="eliminateCriteria">清除</p>
                             <!--                        种类    -->
                             <dd class="selected" id="selectB" th:data-listnumber="${lbmc}">
-                                <a  class="clone closeTwo" th:href="@{'/product/'+'0/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}" th:if="${lbmc}!='0'" th:text="${lbmc}"></a>
+                                <a  class="clone closeTwo" th:href="@{'/product/'+'0/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'(nr=${nr})}" th:if="${lbmc}!='0'" th:text="${lbmc}"></a>
                             </dd>
                             <!--                            品目-->
                             <dd class="selected" id="selectC" th:data-itemnumber="${pmmc}">
-                                <a  class="close closeThree" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/0/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}" th:if="${pmmc}!='0'" th:text="${pmmc}"></a>
+                                <a  class="close closeThree" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/0/'+${#strings.replace(ppmc,'/','%2F')}+'/1'(nr=${nr})}" th:if="${pmmc}!='0'" th:text="${pmmc}"></a>
                             </dd>
                             <!--                            品牌-->
                             <dd class="selected" id="selectA" th:data-brandnumber="${ppmc}">
-                                <a  class="clone closeOne" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/0/1'}" th:if="${ppmc}!='0'" th:text="${ppmc}">
+                                <a  class="clone closeOne" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/0/1'(nr=${nr})}" th:if="${ppmc}!='0'" th:text="${ppmc}">
                                 </a>
                             </dd>
                         </dl>
@@ -119,16 +121,16 @@
 
                             <!--                            品牌-->
                             <dd class="selected" id="selectA" th:data-brandnumber="${ppmc}">
-                                <a  class="clone closeOne" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/0/1'}" th:if="${ppmc}!='0'" th:text="${ppmc}">
+                                <a  class="clone closeOne" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/0/1'(nr=${nr})}" th:if="${ppmc}!='0'" th:text="${ppmc}">
                                 </a>
                             </dd>
                             <!--                        种类    -->
                             <dd class="selected" id="selectB" th:data-listnumber="${lbmc}">
-                                <a  class="clone closeTwo" th:href="@{'/product/'+'0/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}" th:if="${lbmc}!='0'" th:text="${lbmc}"></a>
+                                <a  class="clone closeTwo" th:href="@{'/product/'+'0/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'(nr=${nr})}" th:if="${lbmc}!='0'" th:text="${lbmc}"></a>
                             </dd>
                             <!--                            品目-->
                             <dd class="selected" id="selectC" th:data-itemnumber="${pmmc}">
-                                <a  class="close closeThree" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/0/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}" th:if="${pmmc}!='0'" th:text="${pmmc}"></a>
+                                <a  class="close closeThree" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/0/'+${#strings.replace(ppmc,'/','%2F')}+'/1'(nr=${nr})}" th:if="${pmmc}!='0'" th:text="${pmmc}"></a>
                             </dd>
                         </dl>
                     </li>
@@ -140,7 +142,7 @@
                             <div class="dd-conent">
                                 <dd class="select-all selected"><a href="#" class="all">全部</a></dd>
                                 <dd th:each="lbbhlist:${lbbhlist}">
-                                    <a  class="Item2" th:data-listsnumber="${lbbhlist.lbmc}" th:href="@{'/product/'+${#strings.replace(lbbhlist.lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}">
+                                    <a  class="Item2" th:data-listsnumber="${lbbhlist.lbmc}" th:href="@{'/product/'+${#strings.replace(lbbhlist.lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'(nr=${nr})}">
                                         <p th:text="${lbbhlist.lbmc}"></p>
                                     </a>
                                 </dd>
@@ -154,7 +156,7 @@
                             <div class="dd-conent">
                                 <dd class="select-all selected"><a href="#" class="allC">全部</a></dd>
                                 <dd th:each="pmbhlist:${pmbhlist}">
-                                    <a class="Item3" th:data-itemnumber="${pmbhlist.pmmc}" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmbhlist.pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}">
+                                    <a class="Item3" th:data-itemnumber="${pmbhlist.pmmc}" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmbhlist.pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'(nr=${nr})}">
                                         <p th:text="${pmbhlist.pmmc}"></p>
                                     </a>
                                 </dd>
@@ -170,7 +172,7 @@
                                     <a  class="allA">全部</a>
                                 </dd>
                                 <dd  th:each="ppbhlist:${ppbhlist}">
-                                    <a  class="Item1"  th:data-brandnumber="${ppbhlist.ppmc}" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppbhlist.ppmc,'/','%2F')}+'/1'}">
+                                    <a  class="Item1"  th:data-brandnumber="${ppbhlist.ppmc}" th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppbhlist.ppmc,'/','%2F')}+'/1'(nr=${nr})}">
                                         <p th:text="${ppbhlist.ppmc}">品牌</p>
                                     </a>
                                 </dd>
@@ -237,17 +239,17 @@
         <div class="paging" th:if="${pagesize > 0 and zt==null and data==null}">
             <ul class="pagination" id="pagination1" th:if=" ${pagesize> 1}">
                 <!--//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页-->
-                <li id="first"><a th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'}">首页</a></li>
-                <li th:if="${pagenumber>1}"><a th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/'+${pagenumber-1}}">上一页</a></li>
+                <li id="first"><a th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/1'(nr=${nr})}">首页</a></li>
+                <li th:if="${pagenumber>1}"><a th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/'+${pagenumber-1}(nr=${nr})}">上一页</a></li>
                 <li  th:each="i:${#numbers.sequence(1,pagesize)}">
                     <!--//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数-->
                     <a class="active" th:if="${i > pagenumber-3} and ${i <pagenumber+3} and ${i == pagenumber}" href="javascript:void(0);" th:text="${i}">#</a>
                     <!--//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击-->
                     <a th:if="${i > pagenumber -3} and ${i < pagenumber+3} and ${i != pagenumber}"
-                       th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/'+${i}}" th:text="${i}">#</a><!--//限制显示页数的条数  4到6个页数-->
+                       th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/'+${i}(nr=${nr})}" th:text="${i}">#</a><!--//限制显示页数的条数  4到6个页数-->
                 </li>
-                <li th:if="${pagenumber<pagesize}"><a th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/'+${pagenumber+1}}">下一页</a></li>
-                <li id="last"><a th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/'+${pagesize}}">尾页</a></li><!--//跳转至第orderDara.current页-->
+                <li th:if="${pagenumber<pagesize}"><a th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/'+${pagenumber+1}(nr=${nr})}">下一页</a></li>
+                <li id="last"><a th:href="@{'/product/'+${#strings.replace(lbmc,'/','%2F')}+'/'+${#strings.replace(pmmc,'/','%2F')}+'/'+${#strings.replace(ppmc,'/','%2F')}+'/'+${pagesize}(nr=${nr})}">尾页</a></li><!--//跳转至第orderDara.current页-->
                 <li><a href="" th:text="'共'+${pagesize}+'页'"></a></li>
             </ul>
         </div>
