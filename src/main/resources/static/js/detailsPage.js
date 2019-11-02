@@ -74,18 +74,23 @@ $(".inputProduct").focus(function(){
 $("#new").click(function () {
    var time = $("#BeginTime").val();
    var times= time.substring(6,10)+time.substring(0,2)+time.substring(3,5)+"000000";
-   $.ajax({
-       url:'/product/update/'+times,
-       type:'POST',
-       success:function (data) {
-           if(data==0){
-               alert(data.msg)
-               window.location.reload();
-           }else{
-               alert(data.msg);
+   var isbeauty=confirm("是否更新？");
+   if(isbeauty==true) {
+       $.ajax({
+           url: '/product/update/' + times,
+           type: 'POST',
+           success: function (data) {
+               if (data == 0) {
+                   alert(data.msg)
+                   window.location.reload();
+               } else {
+                   alert(data.msg);
+               }
            }
-       }
-   })
+       })
+   }else {
+       window.location.reload();
+   }
 });
 
 
