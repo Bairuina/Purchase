@@ -138,16 +138,16 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
                 "xhbh\":\""+xhbh+"\"}";
         System.out.println(json);
         JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getQxShByXhbh(),json);
-        if(jsonObject.getString("resultMessage").equals("取消审核成功")){
+        if(jsonObject.getString("resultFlag").equals("Y")){
             QueryWrapper<ProductOffer> queryWrapper=new QueryWrapper<>();
             queryWrapper.eq("xhbh",xhbh);
             ProductOffer productOffer=baseMapper.selectOne(queryWrapper);
             productOffer.setShjg(new BigDecimal("-1"));
             productOffer.setZt("2");
             if (baseMapper.updateById(productOffer)>0){
-                return new Result(ResultCode.SUCCESS,"撤销成功，商品待上架");
+                return new Result(ResultCode.SUCCESS,"撤销成功，请稍后查询");
             }
-        }else if (jsonObject.getString("resultMessage").equals("没有对应的审核记录")){
+        }else if (jsonObject.getString("resultFlag").equals("N")){
             return new Result(ResultCode.FAIL,"没有审核记录");
         }
         return new Result(ResultCode.FAIL,"撤销失败");
@@ -184,7 +184,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         }
         ModelAndView modelAndView=new ModelAndView();
         Page<Product> page=new Page<Product>();
-        page.setLength(5);
+        page.setLength(12);
         page.setDate(productList1);
         page.setSize();
         productList1=page.getDateByYs(nowPage1);

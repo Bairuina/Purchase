@@ -53,8 +53,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/product")
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class ProductController extends BaseController {
 
     @Resource
@@ -122,65 +120,6 @@ public class ProductController extends BaseController {
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    //获取商品春入数据库
-    @Scheduled(cron = "0 0 23 * * ?")    //记得删
-    public void getProductList(){
-        //商品表更新
-        String url=readProperties.getUrl();
-        String username=readProperties.getUsername();
-        String pwd=readProperties.getPwd();
-        String enPwd1= Enxi.enPwd(username,pwd);
-        String result =null;
-        DateTime dateTime=new DateTime();
-        //总页数
-        int pagecount=1;
-        //当前页
-        int nowpage=1;
-        String sprkJssj=dateTime.toString("yyyyMMddHHmmss");
-        String sprkkssj=dateTime.minusDays(1).toString("yyyyMMddHHmmss");
-        do {
-            try {
-                Client client = new Client(new URL(url));
-                String jsonStr = "{\n\"username\":\"" + username + "\",\n" +
-                        "\"pwd\":\"" + enPwd1 + "\",\n" +
-                        "\"sprkkssj\":\"" + sprkkssj + "\",\n" +
-                        "\"sprkJssj\":\"" + sprkJssj + "\",\n" +
-                        "\"pageNum\":\"" + nowpage + "\",\n" +
-                        "\"pageSize\":\"50\"\n}";
-                Object[] rets = client.invoke("findSprkandParam", new Object[]{jsonStr});
-                result = (String) rets[0];
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            JSONObject jso1 = JSONObject.fromObject(result);
-            String s = jso1.getString("resultFlag");
-            if ("N".equals(s)) {
-                System.out.println(jso1.getString("resultMessage"));
-            } else {
-                pagecount = Integer.valueOf(jso1.getString("pagecount"));
-                String jsonString = jso1.getString("spList");
-                System.out.println(jsonString);//记得删
-                List<Product> product = JSON.parseArray(jsonString, Product.class);
-                for (Product product1 : product) {
-                    String Xhbh = product1.getXhbh();
-                    List<Product> productList = productMapper.findProductsByXhbh(Xhbh);
-                    if (productList.size() == 0) {
-                        if (productService.save(product1)) {
-                            System.out.println("存入新商品");
-                        }
-                    } else {
-                        product1.setProductId(productList.get(0).getProductId());
-                        if (productMapper.updateById(product1) > 0) {
-                            System.out.println(product1.getPmmc()+"更新信息");
-                        }
-                    }
-                }
-            }
-            System.out.println("当前页"+nowpage+",总页数"+pagecount);
-            nowpage++;
-        }while(nowpage<=pagecount);
     }
 
     //根据品目获取增值服务
