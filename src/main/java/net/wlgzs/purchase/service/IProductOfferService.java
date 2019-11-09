@@ -22,9 +22,17 @@ public interface IProductOfferService extends IService<ProductOffer> {
     //撤销报价
     public Result delProductOfferXhbh(String xhbh);
 
-    //查看所有已报价 按照 报价状态区分
-    public ModelAndView findAllOffer(int nowPage1,int nowPage2,int nowPage3);
 
     //修改已报价商品状态
     public Result changeProductOfferZt(String xhbh,String zt,String text);
+
+    /**
+     * 根据第一个类别返回全部品目
+     *
+     */
+    public Result SelectLbmc(String lbmc);
+
+    public Result SelectPmmc(String pmmc);
+
+    public ModelAndView findZt(String zt,String lbmc,String pmmc,String ppmc,String nr,String nowpage);
 }

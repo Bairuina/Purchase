@@ -1,6 +1,7 @@
 package net.wlgzs.purchase.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -60,17 +61,50 @@ public class ProductOfferController extends BaseController {
         return iProductOfferService.delProductOfferXhbh(xhbh);
     }
 
-    @RequestMapping(value = "/offer/all/{nowPage1}/{nowPage2}/{nowPage3}",method = RequestMethod.GET)
-    @ApiOperation(value = "查看已报价商品",httpMethod = "GET")
-    public ModelAndView findAllOffer(@PathVariable("nowPage1")int nowPage1,
-                                     @PathVariable("nowPage2")int nowPage2,
-                                     @PathVariable("nowPage3")int nowPage3){
-        return iProductOfferService.findAllOffer(nowPage1,nowPage2,nowPage3);
-    }
 
     @RequestMapping(value = "/offer/{xhbh}/{zt}/{text}",method = RequestMethod.GET)
     @ApiOperation(value = "修改报价过商品的状态",httpMethod = "GET")
     public Result changeProductOfferZt(@PathVariable("xhbh") String xhbh,@PathVariable("zt")String zt,@PathVariable("text")String text){
         return iProductOfferService.changeProductOfferZt(xhbh,zt,text);
+    }
+
+    /**
+     *
+     * @param lbmc
+     * @return
+     */
+    @RequestMapping(value = "/offer/lbmc",method = RequestMethod.GET)
+    @ApiOperation(value = "选择完类别，显示全部品目")
+    @ApiImplicitParam(name = "lbmc",value = "类别名称")
+    public Result SelectLbmc(@RequestParam(value = "lbmc") String lbmc){
+        return iProductOfferService.SelectLbmc(lbmc);
+    }
+
+    @RequestMapping(value = "/offer/pmmc",method = RequestMethod.GET)
+    @ApiOperation(value = "选择完品目，获取其下的品牌名称")
+    @ApiImplicitParam(name = "pmmc",value = "选择的品目名称")
+    public Result SelectPmmc(@RequestParam(value = "pmmc")String pmmc){
+        return iProductOfferService.SelectPmmc(pmmc);
+    }
+
+    /**
+     * 管理报价
+     * @param zt
+     * @param lbmc
+     * @param pmmc
+     * @param ppmc
+     * @param nr
+     * @param nowpage
+     * @return
+     */
+    @RequestMapping(value = "/offer/select/{zt}/{lbmc}/{pmmc}/{ppmc}/{nr}/{nowpage}",method = RequestMethod.GET)
+    @ApiOperation(value = "管理报价",httpMethod = "GET")
+    public ModelAndView findZt(@PathVariable("zt")String zt,
+                               @PathVariable("lbmc")String lbmc,
+                               @PathVariable("pmmc")String pmmc,
+                               @PathVariable("ppmc")String ppmc,
+                               @PathVariable("nr")String nr,
+                               @PathVariable("nowpage")String nowpage){
+        return iProductOfferService.findZt(zt, lbmc, pmmc, ppmc, nr, nowpage);
     }
 }

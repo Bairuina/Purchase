@@ -2,9 +2,10 @@ package net.wlgzs.purchase.service.impl;
 
 import com.Enxi;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Parts;
-import net.wlgzs.purchase.entity.PartsOffer;
 import net.wlgzs.purchase.entity.Product;
 import net.wlgzs.purchase.entity.ProductOffer;
 import net.wlgzs.purchase.mapper.PartsMapper;
@@ -13,6 +14,7 @@ import net.wlgzs.purchase.mapper.ProductMapper;
 import net.wlgzs.purchase.mapper.ProductOfferMapper;
 import net.wlgzs.purchase.service.IProductOfferService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
 import net.wlgzs.purchase.util.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,7 +45,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
 
     //报价一个商品
     @Override
-    public Result productOffer(String xhbh, BigDecimal price, String text,String fwcn,String productlink,String area){
+    public Result productOffer(String xhbh, BigDecimal price, String text, String fwcn, String productlink, String area){
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -94,6 +96,10 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
             if (jsonObject.getString("resultMessage").equals("商品上架成功,商品详细信息已返回")){
                 productOffer.setZt("1");
                 productOffer.setArea(area);
+                productOffer.setXhmc(product.getXhmc());
+                productOffer.setLbmc(product.getLbmc());
+                productOffer.setPmmc(product.getPmmc());
+                productOffer.setPpmc(product.getPpmc());
                 if (jg.size()==0){
                     if(baseMapper.insert(productOffer)>0){
                         return new Result(ResultCode.SUCCESS,"报价成功");
@@ -104,7 +110,6 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
                         return new Result(ResultCode.SUCCESS,"更改价格成功");
                     }
                 }
-
             }else if(jsonObject.getString("resultMessage").equals("维护的价格高于原价格，请等待进行审核")){
                 ProductOffer productOffer1=jg.get(0);
                 productOffer1.setShjg(price);
@@ -153,59 +158,6 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         return new Result(ResultCode.FAIL,"撤销失败");
     }
 
-    //查看所有已报价
-
-    @Override
-    public ModelAndView findAllOffer(int nowPage1,int nowPage2,int nowPage3){
-        List<ProductOffer> productOfferList1= baseMapper.findProductOffersByZt("1");
-        List<ProductOffer> productOfferList2= baseMapper.findProductOffersByZt("2");
-        List<ProductOffer> productOfferList3= baseMapper.findProductOffersByZt("3");
-        List<Product> productList1=new ArrayList<>();
-        for (ProductOffer productOffer:productOfferList1){
-            Product product=productMapper.findProductByXhbh(productOffer.getXhbh());
-            product.setPrice(productOffer.getPrice());
-            product.setZt("1");
-            productList1.add(product);
-        }
-        List<Product> productList2=new ArrayList<>();
-        for (ProductOffer productOffer:productOfferList2){
-            Product product=productMapper.findProductByXhbh(productOffer.getXhbh());
-            product.setPrice(productOffer.getPrice());
-            product.setZt("2");
-            productList2.add(product);
-        }
-        List<Product> productList3=new ArrayList<>();
-        for (ProductOffer productOffer:productOfferList3){
-            Product product=productMapper.findProductByXhbh(productOffer.getXhbh());
-            product.setPrice(productOffer.getPrice());
-            product.setShjg(productOffer.getShjg());
-            product.setZt("3");
-            productList3.add(product);
-        }
-        ModelAndView modelAndView=new ModelAndView();
-        Page<Product> page=new Page<Product>();
-        page.setLength(12);
-        page.setDate(productList1);
-        page.setSize();
-        productList1=page.getDateByYs(nowPage1);
-        modelAndView.addObject("length1",page.getSize());  //返回上架总页数
-        page.setDate(productList2);
-        page.setSize();
-        productList2=page.getDateByYs(nowPage2);
-        modelAndView.addObject("length2",page.getSize());  //返回下架总页数
-        page.setDate(productList3);
-        page.setSize();
-        productList3=page.getDateByYs(nowPage3);
-        modelAndView.addObject("length3",page.getSize());  //返回待审核总页数
-        modelAndView.addObject("productList1",productList1);
-        modelAndView.addObject("productList2",productList2);
-        modelAndView.addObject("productList3",productList3);
-        modelAndView.setViewName("Allquotedgoods");
-        modelAndView.addObject("nowPage1",nowPage1);    //上架当前页
-        modelAndView.addObject("nowPage2",nowPage2);    //下架当前页
-        modelAndView.addObject("nowPage3",nowPage3);    //待审核当前页
-        return modelAndView;
-    }
 
     //商品上下架
     @Override
@@ -236,5 +188,61 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
             }
         }
         return new Result(ResultCode.FAIL,"失败");
+    }
+
+    //查询类别下的所有品目
+    @Override
+    public Result SelectLbmc(String lbmc){
+        List<String> list=baseMapper.findPmmcByLbmc(lbmc);
+        if (list.size()>0) {
+            return new Result(ResultCode.SUCCESS, "查询成功", list);
+        }
+        else {
+            return new Result(ResultCode.FAIL, "获取失败");
+        }
+    }
+
+    //查询品目下的所有品牌
+    @Override
+    public Result SelectPmmc(String pmmc){
+        List<String> list1=baseMapper.findPpmcByPmmc(pmmc);
+        if (list1.size()>0){
+            return new Result(ResultCode.SUCCESS,"获取成功",list1);
+        }else{
+            return new Result(ResultCode.FAIL,"获取失败");
+        }
+    }
+    //管理报价页面
+    @Override
+    public ModelAndView findZt(String zt,String lbmc,String pmmc,String ppmc,String nr,String nowpage){
+        ModelAndView modelAndView=new ModelAndView();
+        List<ProductOffer> productofferList=new ArrayList<>();
+        QueryWrapper<ProductOffer> queryWrapper=new QueryWrapper<>();
+        if (!lbmc.equals("0")){
+            queryWrapper.eq("lbmc",lbmc);
+        }
+        if(!pmmc.equals("0")){
+            queryWrapper.eq("pmmc",pmmc);
+        }
+        if (!ppmc.equals("0")){
+            queryWrapper.eq("ppmc",ppmc);
+        }
+        if (!nr.equals("0")){
+            queryWrapper.like("xhmc",nr);
+        }
+        queryWrapper.select("xhbh","xhmc","shjg","price","zt","xhmc","lbmc","pmmc","ppmc");
+        Page page =new Page(Integer.valueOf(nowpage),12);
+        IPage<ProductOffer> iPage=null;
+        iPage=baseMapper.selectPage(page,queryWrapper);
+        productofferList=iPage.getRecords();
+
+        modelAndView.addObject("productofferList",productofferList);
+        modelAndView.addObject("lbmc",lbmc);
+        modelAndView.addObject("pmmc",pmmc);
+        modelAndView.addObject("ppmc",ppmc);
+        modelAndView.addObject("nr",nr);
+        modelAndView.addObject("nowpage",iPage.getCurrent());
+        modelAndView.addObject("pagesize",iPage.getPages());
+        return modelAndView;
     }
 }

@@ -90,5 +90,15 @@ public interface ProductMapper extends BaseMapper<Product> {
     @Select("SELECT distinct lbmc FROM `product` where lbbh=#{lbbh}")
     public String findLbmcByLbbh(String lbbh);
 
+    /**
+     * 根据类别名称获取该类别下所有品目名称
+     */
+    @Select("Select distinct pmmc FROM 'product' where lbmc=#{lbmc}")
+    public List<String> findPmmcByLbmc(String lbmc);
 
+    /**
+     * 根据品目名称获取其下品牌
+     */
+    @Select("Select distinct ppmc FROM 'product' where pmmc=#{pmmc}")
+    public List<String> findPpmcByPmmc(String pmmc);
 }

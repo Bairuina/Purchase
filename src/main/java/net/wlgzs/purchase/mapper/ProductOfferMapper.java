@@ -30,4 +30,22 @@ public interface ProductOfferMapper extends BaseMapper<ProductOffer> {
     @Select("SELECT * FROM product_offer WHERE zt=#{zt}")
     public List<ProductOffer> findProductOffersByZt(String zt);
 
+    /**
+     * 获取全部类别名称
+     */
+    @Select("SELECT distinct lbmc FROM product_offer")
+    public List<String> findAllLbmc();
+
+    /**
+     * 获取该类别下的全部品目名称
+     */
+    @Select("SELECT distinct pmmc FROM product_offer WHERE lbmc=#{lbmc}")
+    public List<String> findPmmcByLbmc(String lbmc);
+
+    /**
+     * 获取该品目下的所有品牌名称
+     */
+    @Select("SELECT distinct ppmc FROM product_offer WHERE pmmc=#{pmmc}")
+    public List<String> findPpmcByPmmc(String pmmc);
+
 }
