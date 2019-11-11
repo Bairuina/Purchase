@@ -68,8 +68,7 @@
                 <div class=" toSelectList">
                     <p>种类</p>
                     <select>
-                        <option>
-                            家具类
+                        <option th:each="lbmcList:${lbmcList}" th:text="${lbmcList}">
                         </option>
                     </select>
                 </div>
