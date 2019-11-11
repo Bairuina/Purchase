@@ -168,3 +168,20 @@
 .submitBarT a:hover{
     opacity:0.8;
 }
+.toSelect{
+    width: 100%;
+    padding: 12px;
+}
+.toSelectList{
+    display: inline-block;
+    margin-right: 35px;
+}
+.toSelectList>p{
+    display: inline-block;
+    padding-right: 10px;
+}
+.toSelectList>select{
+    display: inline-block;
+    cursor: pointer;
+    outline-style: none;
+}

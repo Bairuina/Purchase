@@ -216,6 +216,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
     @Override
     public ModelAndView findZt(String zt,String lbmc,String pmmc,String ppmc,String nr,String nowpage){
         ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("Allquotedgoods");
         List<ProductOffer> productofferList=new ArrayList<>();
         QueryWrapper<ProductOffer> queryWrapper=new QueryWrapper<>();
         if (!lbmc.equals("0")){
