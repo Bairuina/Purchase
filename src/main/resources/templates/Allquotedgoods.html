@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/htmleaf-demo.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/niftymodals.css}" />
     <link rel="stylesheet" th:href="@{/static/css/allQuotedgoods.css}">
+    <script th:src="@{/static/js/jquery.min.js}"></script>
 </head>
 <body>
 <div class="contain">
@@ -65,40 +66,26 @@
             </div>
 <!--            搜索-->
             <div class="toSelect">
-<<<<<<< HEAD
                 <div class="toSelectContent">
                     <div class=" toSelectList">
-                        <p>种类</p>
-                        <select>
-                            <option>
-                                家具类
-                            </option>
+                        <p>种类：</p>
+                        <select class="selectList">
+                            <option>--选择类--</option>
+                            <option th:each="lbmcList:${lbmcList}" th:text="${lbmcList}" th:data-text="${lbmcList}"></option>
                         </select>
                     </div>
                     <div class=" toSelectList">
-                        <p>种类</p>
-                        <select>
-                            <option>
-                                家具类
-                            </option>
+                        <p>品目：</p>
+                        <select id="select1">
+                            <option>--品目--</option>
                         </select>
                     </div>
                     <div class=" toSelectList">
-                        <p>种类</p>
-                        <select>
-                            <option>
-                                家具类
-                            </option>
+                        <p>品牌：</p>
+                        <select id="select2">
+                            <option>--品牌类--</option>
                         </select>
                     </div>
-=======
-                <div class=" toSelectList">
-                    <p>种类</p>
-                    <select>
-                        <option th:each="lbmcList:${lbmcList}" th:text="${lbmcList}">
-                        </option>
-                    </select>
->>>>>>> 2bcae6418777dd8cae17610f8279b271a2cc0b56
                 </div>
                 <!--搜索框-->
                 <div class="inputProduct">
@@ -110,9 +97,7 @@
                         </div>
                     </form>
                 </div>
-                <div style="clear: both">
-
-                </div>
+                <div style="clear: both"></div>
             </div>
             <div style="padding: 12px;">
                 <div class="toAudit same">
@@ -413,11 +398,12 @@
 <div th:include="common::commonFoot"></div>
 <!-- 返回顶部 -->
 <div th:include="common::commonBackTop"></div>
-<script th:src="@{/static/js/jquery.min.js}"></script>
+
 
 <script th:src="@{/static/js/niftymodals.js}"></script>
 <script th:src="@{/static/js/allAuotedGoods.js}"></script>
 <script th:src="@{/static/js/cssParser.js}"></script>
+<script th:src="@{/static/js/BackTop.js}"></script>
 <script th:src="@{/static/js/css-filters-polyfill.js}"></script>
 </body>
 </html>

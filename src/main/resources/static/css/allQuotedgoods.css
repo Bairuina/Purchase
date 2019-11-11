@@ -99,6 +99,7 @@
 }
 .messageDetailTitle>p{
     display: inline-block;
+    font-weight: 600;
 }
 .messageDetail>h3{
     padding-top: 22px;
@@ -180,11 +181,13 @@
 .toSelectList>p{
     display: inline-block;
     padding-right: 10px;
+    font-size: 14px;
 }
 .toSelectList>select{
     display: inline-block;
     cursor: pointer;
     outline-style: none;
+    font-size: 13px;
 }
 /*搜索*/
 
@@ -225,4 +228,7 @@
 .toSelectContent{
     float: left;
     height: 100%;
+}
+.same{
+    font-size: 14px;
 }

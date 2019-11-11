@@ -1,11 +1,53 @@
+var Data = '';
+//类的选择
+$(".selectList").change(function () {
+    var text = $("option:selected",this).data("text");//需求主键
+    // console.log(text);
+    $.ajax({
+        url:'/productoffer/offer/lbmc',
+        data:{
+            lbmc:text,
+        },
+        type:"GET",
+        success:function (data) {
+             Data = data.data;
+            $('#select1').empty();
+            $.each(Data,function (i,val) {
+                $("#select1").append("<option>"+val+"</option>\n");
+            })
+        }
+    })
+});
+//品目的选择
+$("#select1").change(function () {
+    var PMtext = $("option:selected",this).val();
+    $.ajax({
+        url:'/productoffer/offer/pmmc',
+        data:{
+            pmmc: PMtext,
+        },
+        type:'GET',
+        success:function (data) {
+             Data = data.data;
+            console.log(Data);
+            $("#select2").empty();
+            $.each(Data,function (i,val) {
+                $("#select2").append("<option>"+val+"</option>\n");
+            })
+        }
+    })
+});
+//
+
+
+
+
+
 $(".same").on('click',function(){
     var indexnumber = $(this).index();
     console.log(indexnumber);
     $(this).parent().next().children().children().eq(indexnumber).css('display','block').siblings().css('display','none');
 });
-
-
-
 //撤销请求的ajax
 $(".repeal").on('click',function () {
     var number = $(this).data('number');
@@ -27,8 +69,6 @@ $(".repeal").on('click',function () {
         }
     })
 });
-
-
 //下架编号
 var num="";
 $('.md-trigger').on('click',function(){
@@ -58,14 +98,10 @@ $(".present").on('click',function () {
         }
     })
 });
-
-
 //重置按钮
 $(".cancel").on('click',function () {
     $(this).parent().prev().children().val('');
 });
-
-
 //上架编号
 var putnumber='';
 $(".Racking").on('click',function () {
@@ -93,3 +129,4 @@ $(".putaway").on('click',function () {
         }
     })
 });
+
