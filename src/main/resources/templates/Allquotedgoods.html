@@ -88,9 +88,9 @@
                 </div>
                 <!--搜索框-->
                 <div class="inputProduct">
-                    <form>
-                        <input type="text" id="productSearch" placeholder="请输入商品信息" th:if="${nr}=='0'" class="productSearch">
-                        <input type="text" id="productSearch" placeholder="请输入商品信息"  th:value="${nr}" th:if="${nr}!='0'" class="productSearch">
+                    <form  type="GET" action="">
+                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:if="${nr}=='0'" class="productSearch">
+                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:value="${nr}" th:if="${nr}!='0'" class="productSearch">
                         <div class="submitProduct">
                             <input type="submit" id="submit" data-zt="${zt}">
                         </div>
