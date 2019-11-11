@@ -72,7 +72,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         String json = "{\"username\":\"" + username + "\"," +
                 "\"pwd\":\"" + enPwd1 + "\"," +
                 "\"xhbh\":\"" + xhbh + "\"," +
-                "\"xhmc\":\"" + product.getXhmc() + "\"," +
+                "\"xhmc\":\"" + product.getXhmc().replace("\"","\\\"") + "\"," +
                 "\"pmbh\":\"" + product.getPmbh() + "\"," +
                 "\"pmmc\":\"" + product.getPmmc() + "\"," +
                 "\"ppbh\":\"" + product.getPpbh() + "\"," +
@@ -194,6 +194,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
     @Override
     public Result SelectLbmc(String lbmc){
         List<String> list=baseMapper.findPmmcByLbmc(lbmc);
+        System.out.println(list.toString());
         if (list.size()>0) {
             return new Result(ResultCode.SUCCESS, "查询成功", list);
         }
@@ -235,8 +236,19 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         Page page =new Page(Integer.valueOf(nowpage),12);
         IPage<ProductOffer> iPage=null;
         iPage=baseMapper.selectPage(page,queryWrapper);
+        List<String> lbmcList=baseMapper.findAllLbmc();
         productofferList=iPage.getRecords();
+        System.out.println(lbmcList);
+        System.out.println(productofferList);
+        System.out.println(lbmc);
+        System.out.println(pmmc);
+        System.out.println(ppmc);
+        System.out.println(nr);
+        System.out.println(nowpage);
+        System.out.println(iPage.getCurrent());
+        System.out.println(iPage.getPages());
 
+        modelAndView.addObject("lbmcList",lbmcList);
         modelAndView.addObject("productofferList",productofferList);
         modelAndView.addObject("lbmc",lbmc);
         modelAndView.addObject("pmmc",pmmc);
@@ -244,6 +256,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         modelAndView.addObject("nr",nr);
         modelAndView.addObject("nowpage",iPage.getCurrent());
         modelAndView.addObject("pagesize",iPage.getPages());
+        modelAndView.setViewName("Allquotedgoods");
         return modelAndView;
     }
 }

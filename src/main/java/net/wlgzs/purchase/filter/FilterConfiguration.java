@@ -22,13 +22,13 @@ public class FilterConfiguration {
         registration.addUrlPatterns("/contract/*");
         registration.addUrlPatterns("/order-data/*");
         registration.addUrlPatterns("/parts/*");
-        registration.addUrlPatterns("/parts-offer/*");
+//        registration.addUrlPatterns("/parts-offer/*");
         registration.addUrlPatterns("/product/*");
         registration.addUrlPatterns("/product-list/*");
-        registration.addUrlPatterns("/productoffer/*");
+//        registration.addUrlPatterns("/productoffer/*");
         registration.addUrlPatterns("/service/*");
         registration.addUrlPatterns("/service-list/*");
-        registration.addUrlPatterns("/service-offer/*");
+//        registration.addUrlPatterns("/service-offer/*");
         registration.addUrlPatterns("/service-value/*");
         registration.addUrlPatterns("/user/*");
 
