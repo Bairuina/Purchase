@@ -65,29 +65,44 @@
             </div>
 <!--            搜索-->
             <div class="toSelect">
-                <div class=" toSelectList">
-                    <p>种类</p>
-                    <select>
-                        <option>
-                            家具类
-                        </option>
-                    </select>
+                <div class="toSelectContent">
+                    <div class=" toSelectList">
+                        <p>种类</p>
+                        <select>
+                            <option>
+                                家具类
+                            </option>
+                        </select>
+                    </div>
+                    <div class=" toSelectList">
+                        <p>种类</p>
+                        <select>
+                            <option>
+                                家具类
+                            </option>
+                        </select>
+                    </div>
+                    <div class=" toSelectList">
+                        <p>种类</p>
+                        <select>
+                            <option>
+                                家具类
+                            </option>
+                        </select>
+                    </div>
                 </div>
-                <div class=" toSelectList">
-                    <p>种类</p>
-                    <select>
-                        <option>
-                            家具类
-                        </option>
-                    </select>
+                <!--搜索框-->
+                <div class="inputProduct">
+                    <form  type="GET">
+                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:if="${nr}=='0'">
+                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:value="${nr}" th:if="${nr}!='0'">
+                        <div class="submitProduct">
+                            <input type="submit">
+                        </div>
+                    </form>
                 </div>
-                <div class=" toSelectList">
-                    <p>种类</p>
-                    <select>
-                        <option>
-                            家具类
-                        </option>
-                    </select>
+                <div style="clear: both">
+
                 </div>
             </div>
             <div style="padding: 12px;">
