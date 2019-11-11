@@ -247,7 +247,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         System.out.println(nowpage);
         System.out.println(iPage.getCurrent());
         System.out.println(iPage.getPages());
-
+        modelAndView.addObject("zt",zt);
         modelAndView.addObject("lbmcList",lbmcList);
         modelAndView.addObject("productofferList",productofferList);
         modelAndView.addObject("lbmc",lbmc);
