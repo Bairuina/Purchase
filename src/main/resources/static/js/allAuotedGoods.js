@@ -60,7 +60,7 @@ $('#submit').click(function () {
         type:'GET',
         success:function (data) {
             if (data.code==0){
-                console.log("成功");
+                Window.local.href();
             }
         }
 
