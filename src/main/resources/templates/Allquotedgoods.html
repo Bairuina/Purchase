@@ -64,7 +64,6 @@
             <div class="offerTitle" style="padding-bottom: 20px;">
                 <p>商品报价查询:</p>
             </div>
-<!--            搜索-->
             <div class="toSelect">
                 <div class="toSelectContent">
                     <div class=" toSelectList">
@@ -89,11 +88,11 @@
                 </div>
                 <!--搜索框-->
                 <div class="inputProduct">
-                    <form  type="GET">
-                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:if="${nr}=='0'">
-                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:value="${nr}" th:if="${nr}!='0'">
+                    <form  type="GET" action="">
+                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:if="${nr}=='0'" class="productSearch">
+                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:value="${nr}" th:if="${nr}!='0'" class="productSearch">
                         <div class="submitProduct">
-                            <input type="submit">
+                            <input type="submit" id="submit" data-zt="${zt}">
                         </div>
                     </form>
                 </div>

@@ -1,8 +1,12 @@
 var Data = '';
 //类的选择
+var lbmc;
+var pmmc;
+var ppmc;
 $(".selectList").change(function () {
     var text = $("option:selected",this).data("text");//需求主键
-    // console.log(text);
+    lbmc = text;
+    console.log(text);
     $.ajax({
         url:'/productoffer/offer/lbmc',
         data:{
@@ -12,8 +16,9 @@ $(".selectList").change(function () {
         success:function (data) {
              Data = data.data;
             $('#select1').empty();
+            $("#select1").append("<option>"+'--请选择--'+"</option>\n");
             $.each(Data,function (i,val) {
-                $("#select1").append("<option>"+val+"</option>\n");
+                $("#select1").append("<option data-listval='"+val+"'>"+val+"</option>\n");
             })
         }
     })
@@ -21,6 +26,7 @@ $(".selectList").change(function () {
 //品目的选择
 $("#select1").change(function () {
     var PMtext = $("option:selected",this).val();
+    pmmc = PMtext;
     $.ajax({
         url:'/productoffer/offer/pmmc',
         data:{
@@ -31,13 +37,36 @@ $("#select1").change(function () {
              Data = data.data;
             console.log(Data);
             $("#select2").empty();
+            $("#select2").append("<option>"+'--请选择--'+"</option>\n");
             $.each(Data,function (i,val) {
-                $("#select2").append("<option>"+val+"</option>\n");
+                $("#select2").append("<option data-Puval='"+val+"'>"+val+"</option>\n");
             })
         }
     })
 });
-//
+//品牌的选择
+$("#select2").change(function () {
+    var Pptext = $("option:selected",this).val();
+    ppmc = Pptext;
+});
+//选择的ajax
+$('#submit').click(function () {
+    var inputText = $('.productSearch').val();
+    console.log(inputText);
+    var zt = $(this).data('zt');
+    console.log(zt);
+    $.ajax({
+        url:'/productoffer/offer/select/'+zt+'/'+lbmc+"/"+pmmc+"/"+ppmc+"/"+inputText+'/'+1,
+        type:'GET',
+        success:function (data) {
+            if (data.code==0){
+                console.log("成功");
+            }
+        }
+
+    })
+
+});
 
 
 
