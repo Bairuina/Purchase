@@ -232,6 +232,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         if (!nr.equals("0")){
             queryWrapper.like("xhmc",nr);
         }
+        queryWrapper.eq("zt",zt);
         queryWrapper.select("xhbh","xhmc","shjg","price","zt","xhmc","lbmc","pmmc","ppmc");
         Page page =new Page(Integer.valueOf(nowpage),12);
         IPage<ProductOffer> iPage=null;
@@ -244,7 +245,6 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         System.out.println(pmmc);
         System.out.println(ppmc);
         System.out.println(nr);
-        System.out.println(nowpage);
         System.out.println(iPage.getCurrent());
         System.out.println(iPage.getPages());
         modelAndView.addObject("zt",zt);

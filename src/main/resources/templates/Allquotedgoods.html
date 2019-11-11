@@ -68,56 +68,72 @@
                 <div class="toSelectContent">
                     <div class=" toSelectList">
                         <p>种类：</p>
-                        <select class="selectList">
+                        <select class="selectList" th:if="${lbmc}=='0'">
                             <option>--选择类--</option>
+                            <option th:each="lbmcList:${lbmcList}" th:text="${lbmcList}" th:data-text="${lbmcList}"></option>
+                        </select>
+                        <select class="selectList" th:if="${lbmc}!='0'">
+                            <option th:text="${lbmc}"></option>
                             <option th:each="lbmcList:${lbmcList}" th:text="${lbmcList}" th:data-text="${lbmcList}"></option>
                         </select>
                     </div>
                     <div class=" toSelectList">
                         <p>品目：</p>
-                        <select id="select1">
+                        <select id="select1" th:if="${pmmc}=='0'">
                             <option>--品目--</option>
+                        </select>
+                        <select id="select1" th:if="${pmmc}!='0'">
+                            <option th:text="${pmmc}"></option>
                         </select>
                     </div>
                     <div class=" toSelectList">
                         <p>品牌：</p>
-                        <select id="select2">
+                        <select id="select2" th:if="${ppmc}=='0'">
                             <option>--品牌类--</option>
                         </select>
+                        <select id="select2" th:if="${ppmc}!='0'">
+                            <option th:text="${ppmc}">--品牌类--</option>
+                        </select>
                     </div>
+
+                </div>
+                <!--清除按钮-->
+                <div style="float: right;">
+                    <a th:href="@{'/productoffer/offer/select/3/0/0/0/1'(nr=${nr})}">清除</a>
                 </div>
                 <!--搜索框-->
                 <div class="inputProduct">
-                    <form  type="GET" action="">
-                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:if="${nr}=='0'" class="productSearch">
-                        <input type="text" id="productSearch" placeholder="请输入商品信息" name="nr" th:value="${nr}" th:if="${nr}!='0'" class="productSearch">
-                        <div class="submitProduct">
-                            <input type="submit" id="submit" data-zt="${zt}">
-                        </div>
-                    </form>
-                </div>
-                <div style="clear: both"></div>
-            </div>
-            <div style="padding: 12px;">
-                <div class="toAudit same">
-                    <span>待审核</span>
-                </div>
-                <div class="hasBeenOn same">
-                    <span>已上架</span>
+                    <input type="text" id="productSearch" placeholder="请输入商品信息" th:if="${nr}=='0'" class="productSearch">
+                    <input type="text" id="productSearch" placeholder="请输入商品信息" th:value="${nr}" th:if="${nr}!='0'" class="productSearch">
+                    <div class="submitProduct">
+                        <input type="submit" id="submit" th:data-zt="${zt}">
+                    </div>
                 </div>
 
-                <div class="remove same">
-                    <span>已下架</span>
-                </div>
+                <div style="clear: both"></div>
             </div>
+
+
+
+            <div style="padding: 12px;">
+                    <a class="toAudit same" th:href="@{'/productoffer/offer/select/3/'+${lbmc}+'/'+${pmmc}+'/'+${ppmc}+'/1'(nr=${nr})}"><span>待审核</span> </a>
+                    <a class="hasBeenOn same" th:href="@{'/productoffer/offer/select/1/'+${lbmc}+'/'+${pmmc}+'/'+${ppmc}+'/1'(nr=${nr})}"><span>已上架</span></a>
+                    <a class="remove same" th:href="@{'/productoffer/offer/select/2/'+${lbmc}+'/'+${pmmc}+'/'+${ppmc}+'/1'(nr=${nr})}"><span >已下架</span></a>
+
+            </div>
+
+
+
+
             <div class="commodityDetails">
                 <div class="commodityBox">
 <!--                    待审核-->
-                    <div class="message one">
-                        <div class="messageDetailTitle">
-                            <p>待审核商品:</p>
-                        </div>
-                        <div class="messageDetail" th:each="product3:${productList3}">
+                    <div class="messageDetailTitle">
+                        <p th:if="${zt}=='1'">已上架商品:</p>
+                        <p th:if="${zt}=='2'">已下架商品:</p>
+                        <p th:if="${zt}=='3'">待审核商品:</p>
+                    </div>
+                    <div class="messageDetail" th:each="product3:${productofferList}" th:if="${zt}==3">
                             <!--商品名称-->
                             <h3 th:text="${product3.xhmc }">电脑</h3>
                             <!--价格-->
@@ -179,31 +195,8 @@
                                 </a>
                             </div>
                         </div>
-                        <!-- 分页-->
-                        <div class="paging" th:if="${length3 > 0 and zt==null and data==null}">
-                            <ul class="pagination" id="pagination1" th:if=" ${length3> 1}">
-                                <!--//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页-->
-                                <li id="first"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${nowPage2}+'/1'}">首页</a></li>
-                                <li th:if="${nowPage3>1}"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${nowPage2}+'/'+${nowPage3-1}}">上一页</a></li>
-                                <li  th:each="i:${#numbers.sequence(1,length3)}">
-                                    <!--//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数-->
-                                    <a class="active" th:if="${i > nowPage3 -3} and ${i <nowPage3 +3} and ${i == nowPage3}" href="javascript:void(0);" th:text="${i}">#</a>
-                                    <!--//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击-->
-                                    <a th:if="${i > nowPage3 -3} and ${i < nowPage3+3} and ${i != nowPage3}"
-                                       th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${nowPage2}+'/'+${i}}" th:text="${i}">#</a><!--//限制显示页数的条数  4到6个页数-->
-                                </li>
-                                <li th:if="${nowPage3<length3}"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${nowPage2}+'/'+${nowPage3+1}}">下一页</a></li>
-                                <li id="last"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${nowPage2}+'/'+${length3}}">尾页</a></li><!--//跳转至第orderDara.current页-->
-                                <li><a href="" th:text="'共'+${length3}+'页'"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-<!--                    已上架-->
-                    <div class="message two">
-                        <div class="messageDetailTitle">
-                            <p>已上架商品:</p>
-                        </div>
-                        <div class="messageDetail" style="width: 40%" th:each="product1:${productList1}">
+<!--                已上架-->
+                    <div class="messageDetail" style="width: 40%" th:each="product1:${productofferList}" th:if="${zt}==1">
                             <!--商品名称-->
                             <h3 th:text="${product1.xhmc}" class="outNumber">电脑</h3>
                             <!--价格-->
@@ -258,31 +251,8 @@
                                 </a>
                             </div>
                         </div>
-                        <!-- 分页-->
-                        <div class="paging" th:if="${length1 > 0 and zt==null and data==null}">
-                            <ul class="pagination" id="pagination1" th:if=" ${length1> 1}">
-                                <!--//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页-->
-                                <li class="first"><a th:href="@{'/productoffer/offer/all/1'+'/'+${nowPage2}+'/'+${nowPage3}}">首页</a></li>
-                                <li th:if="${nowPage1>1}"><a th:href="@{'/productoffer/offer/all/'+${nowPage1-1}+'/'+${nowPage2}+'/'+${nowPage3}}">上一页</a></li>
-                                <li  th:each="i:${#numbers.sequence(1,length1)}">
-                                    <!--//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数-->
-                                    <a class="active" th:if="${i > nowPage1-3} and ${i <nowPage1+3} and ${i == nowPage1}" href="javascript:void(0);" th:text="${i}">#</a>
-                                    <!--//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击-->
-                                    <a th:if="${i > nowPage1-3} and ${i < nowPage1+3} and ${i != nowPage1}"
-                                       th:href="@{'/productoffer/offer/all/'+${i}+'/'+${nowPage2}+'/'+${nowPage3}}" th:text="${i}">#</a><!--//限制显示页数的条数  4到6个页数-->
-                                </li>
-                                <li th:if="${nowPage1<length1}"><a th:href="@{'/productoffer/offer/all/'+${nowPage1+1}+'/'+${nowPage2}+'/'+${nowPage3}}">下一页</a></li>
-                                <li class="last"><a th:href="@{'/productoffer/offer/all/'+${length1}+'/'+${nowPage2}+'/'+${nowPage3}}">尾页</a></li><!--//跳转至第orderDara.current页-->
-                                <li><a href="" th:text="'共'+${length1}+'页'"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-<!--                    已下架-->
-                    <div class="message three">
-                        <div class="messageDetailTitle">
-                            <p>已下架商品:</p>
-                        </div>
-                        <div class="messageDetail" th:each="product2:${productList2}">
+<!--                  已下架-->
+                    <div class="messageDetail" th:each="product2:${productofferList}" th:if="${zt}==2">
                             <!--商品名称-->
                             <h3 th:text="${product2.xhmc}" class="putAway">电脑</h3>
                             <!--价格-->
@@ -337,25 +307,25 @@
                                 </a>
                             </div>
                         </div>
-                        <!-- 分页-->
-                        <div class="paging" th:if="${length2 > 0 and zt==null and data==null}">
-                            <ul class="pagination" id="pagination1" th:if=" ${length2> 1}">
-                                <!--//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页-->
-                                <li class="first"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/1/'+${nowPage3}}">首页</a></li>
-                                <li th:if="${nowPage2>1}"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${nowPage2-1}+'/'+${nowPage3}}">上一页</a></li>
-                                <li  th:each="i:${#numbers.sequence(1,length2)}">
-                                    <!--//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数-->
-                                    <a class="active" th:if="${i > nowPage2-3} and ${i <nowPage2+3} and ${i == nowPage2}" href="javascript:void(0);" th:text="${i}">#</a>
-                                    <!--//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击-->
-                                    <a th:if="${i > nowPage2-3} and ${i < nowPage2+3} and ${i != nowPage2}"
-                                       th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${i}+'/'+${nowPage3}}" th:text="${i}">#</a><!--//限制显示页数的条数  4到6个页数-->
-                                </li>
-                                <li th:if="${nowPage2<length2}"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${nowPage2+1}+'/'+${nowPage3}}">下一页</a></li>
-                                <li class="last"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${length2}+'/'+${nowPage3}}">尾页</a></li><!--//跳转至第orderDara.current页-->
-                                <li><a href="" th:text="'共'+${length2}+'页'"></a></li>
-                            </ul>
-                        </div>
+                    <!-- 分页-->
+                    <div class="paging" th:if="${pagesize > 0  and data==null}">
+                        <ul class="pagination" id="pagination1" th:if=" ${pagesize> 1}">
+                            <!--//如果当前页等于1，总页数大于1（不显示上一页）   orderDara.current&ndash;&gt;当前页-->
+                            <li class="first"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/1/'+${nowPage3}}">首页</a></li>
+                            <li th:if="${nowpage>1}"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${nowPage2-1}+'/'+${nowPage3}}">上一页</a></li>
+                            <li  th:each="i:${#numbers.sequence(1,pagesize)}">
+                                <!--//从1到总页数遍历，并赋值给i    orderDara.pages&ndash;&gt;总页数-->
+                                <a class="active" th:if="${i > nowpage-3} and ${i <nowpage+3} and ${i == nowpage}" href="javascript:void(0);" th:text="${i}">#</a>
+                                <!--//限制显示页数的条数  4到6个页数   而且等于当前页，不能点击-->
+                                <a th:if="${i > nowpage-3} and ${i < nowpage+3} and ${i != nowpage}"
+                                   th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${i}+'/'+${nowPage3}}" th:text="${i}">#</a><!--//限制显示页数的条数  4到6个页数-->
+                            </li>
+                            <li th:if="${nowpage<pagesize}"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${nowPage2+1}+'/'+${nowPage3}}">下一页</a></li>
+                            <li class="last"><a th:href="@{'/productoffer/offer/all/'+${nowPage1}+'/'+${length2}+'/'+${nowPage3}}">尾页</a></li><!--//跳转至第orderDara.current页-->
+                            <li><a href="" th:text="'共'+${pagesize}+'页'"></a></li>
+                        </ul>
                     </div>
+
                 </div>
             </div>
         </div>
