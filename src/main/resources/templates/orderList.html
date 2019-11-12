@@ -8,12 +8,17 @@
     <title>订单列表页</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet"  th:href="@{/css/orderList.css}">
+    <link rel="stylesheet" th:href="@{/css/jeDate-test.css}">
+    <link rel="stylesheet" th:href="@{/css/jedate.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/paging.css}">
     <link rel="stylesheet" th:href="@{/css/iconfont.css}">
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jedate.js}"></script>
+
+
 </head>
 
 <body>
@@ -22,7 +27,12 @@
         <div class="head">
             <div class="logo">
                 <a th:href="@{/order-data/select/}"><img th:src="@{/img/logo.png}" alt=""></a>
-        </div>
+            </div>
+            <div class="jeitem" style="position: absolute;top: 145px;">
+                <label class="jelabel" style="width: auto;">选择查询时间</label>
+                <div class="jeinpbox" style="width: auto;"><input type="text" class="jeinput time" id="test04" placeholder=" "></div>
+                <div class="check">查询</div>
+            </div>
             <div class="search">
                 <form action="/order-data/select/">
                     <select class="selects" name="zt" >
@@ -241,6 +251,8 @@
 
 
 </body>
+
+<script th:src="@{/js/demo.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstable.js}"></script>
 <script th:src="@{/js/websocket.js}"></script>
 <script th:src="@{/js/login.js}" type="text/javascript" charset="utf-8"></script>
@@ -250,5 +262,21 @@
     $('#mytable').SetEditable({
         $addButton: $('#add')
     });
+    // 按时间查询
+    $(".check").on('click',function () {
+        var time = $(".time").val();
+        console.log(time);
+        $.ajax({
+            url: "",
+            data: {
+                time: time
+            },
+            success: function (msg) {
+                window.location.href =
+            },
+            error: function (msg) {
+            }
+        })
+    })
 </script>
 </html>
