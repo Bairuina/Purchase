@@ -1,8 +1,8 @@
 var Data = '';
 //类的选择
-var lbmc;
-var pmmc;
-var ppmc;
+var lbmc ='0';
+var pmmc ='0';
+var ppmc ='0';
 $(".selectList").change(function () {
     var text = $("option:selected",this).data("text");//需求主键
     lbmc = text;
@@ -55,28 +55,30 @@ $('#submit').click(function () {
     console.log(inputText);
     var zt = $(this).data('zt');
     console.log(zt);
+    console.log(lbmc);
+    console.log(pmmc);
+    console.log(ppmc);
     $.ajax({
-        url:'/productoffer/offer/select/'+zt+'/'+lbmc+"/"+pmmc+"/"+ppmc+"/"+inputText+'/'+1,
+        url:'/productoffer/offer/select/'+zt+'/'+lbmc+"/"+pmmc+"/"+ppmc+"/"+1,
+        data:{
+            nr:inputText,
+        },
         type:'GET',
         success:function (data) {
-            if (data.code==0){
-                Window.local.href();
-            }
+            window.location.href = '/productoffer/offer/select/'+zt+'/'+lbmc+"/"+pmmc+"/"+ppmc+"/"+1+"?nr="+inputText;
         }
-
     })
-
 });
 
 
 
 
 
-$(".same").on('click',function(){
-    var indexnumber = $(this).index();
-    console.log(indexnumber);
-    $(this).parent().next().children().children().eq(indexnumber).css('display','block').siblings().css('display','none');
-});
+// $(".same").on('click',function(){
+//     var indexnumber = $(this).index();
+//     console.log(indexnumber);
+//     $(this).parent().next().children().children().eq(indexnumber).css('display','block').siblings().css('display','none');
+// });
 //撤销请求的ajax
 $(".repeal").on('click',function () {
     var number = $(this).data('number');

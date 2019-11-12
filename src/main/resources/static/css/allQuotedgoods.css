@@ -52,18 +52,13 @@
 .title{
     margin-left: 10px;
 }
-/*.message{*/
-/*    width: 100%;*/
-/*    position: absolute;*/
-/*    left: -11px;*/
-/*    top: 0;*/
-/*}*/
+
 
 .two{
-    display: none;
+
 }
 .three{
-    display: none;
+
 }
 .revocation{
     left: 70%;

@@ -1,18 +1,17 @@
 package net.wlgzs.purchase.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.swagger.annotations.Api;
+
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import net.wlgzs.purchase.util.Result;
 import org.springframework.web.bind.annotation.*;
 
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.websocket.server.PathParam;
 import java.math.BigDecimal;
 
 /**
@@ -97,14 +96,15 @@ public class ProductOfferController extends BaseController {
      * @param nowpage
      * @return
      */
-    @RequestMapping(value = "/offer/select/{zt}/{lbmc}/{pmmc}/{ppmc}/{nr}/{nowpage}",method = RequestMethod.GET)
+    @RequestMapping(value = "/offer/select/{zt}/{lbmc}/{pmmc}/{ppmc}/{nowpage}",method = RequestMethod.GET)
+    @ApiParam(value = "内容")
     @ApiOperation(value = "管理报价",httpMethod = "GET")
     public ModelAndView findZt(@PathVariable("zt")String zt,
                                @PathVariable("lbmc")String lbmc,
                                @PathVariable("pmmc")String pmmc,
                                @PathVariable("ppmc")String ppmc,
-                               @PathVariable("nr")String nr,
-                               @PathVariable("nowpage")String nowpage){
+                               @PathVariable("nowpage")String nowpage,
+                               @RequestParam(name = "nr",defaultValue = "0")String nr){
         return iProductOfferService.findZt(zt, lbmc, pmmc, ppmc, nr, nowpage);
     }
 }
