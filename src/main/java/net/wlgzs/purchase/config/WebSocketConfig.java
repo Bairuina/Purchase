@@ -15,7 +15,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         return new ServerEndpointExporter();
     }
 
-
     /**
      * 注册webSocket端点
      */
@@ -24,7 +23,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // 添加一个/WebSocketServer端点，客户端就可以通过这个端点来进行连接；withSockJS作用是添加SockJS支持
         registry.addEndpoint("/WebSocketServer").setAllowedOrigins("*").withSockJS();
     }
-
-
-
 }

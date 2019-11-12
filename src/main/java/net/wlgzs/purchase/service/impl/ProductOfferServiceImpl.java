@@ -72,7 +72,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
         String json = "{\"username\":\"" + username + "\"," +
                 "\"pwd\":\"" + enPwd1 + "\"," +
                 "\"xhbh\":\"" + xhbh + "\"," +
-                "\"xhmc\":\"" + product.getXhmc().replace("\"","\\\"") + "\"," +
+                "\"xhmc\":\"" + product.getXhmc().replace("\"","\\\"").replace("&quot;","\\\"") + "\"," +
                 "\"pmbh\":\"" + product.getPmbh() + "\"," +
                 "\"pmmc\":\"" + product.getPmmc() + "\"," +
                 "\"ppbh\":\"" + product.getPpbh() + "\"," +

@@ -24,7 +24,7 @@ import java.math.BigDecimal;
  */
 @RestController
 @RequestMapping("/productoffer")
-public class ProductOfferController extends BaseController {
+public class    ProductOfferController extends BaseController {
 
     /**
      * 报价商品
