@@ -98,7 +98,7 @@
 
                 </div>
                 <!--清除按钮-->
-                <div style="float: right;">
+                <div class="deleteData">
                     <a th:href="@{'/productoffer/offer/select/3/0/0/0/1'(nr=${nr})}">清除</a>
                 </div>
                 <!--搜索框-->
@@ -196,7 +196,7 @@
                             </div>
                         </div>
 <!--                已上架-->
-                    <div class="messageDetail" style="width: 40%" th:each="product1:${productofferList}" th:if="${zt}==1">
+                    <div class="messageDetail onTheLine"  th:each="product1:${productofferList}" th:if="${zt}==1">
                             <!--商品名称-->
                             <h3 th:text="${product1.xhmc}" class="outNumber">电脑</h3>
                             <!--价格-->
