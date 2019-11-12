@@ -217,12 +217,12 @@ public class ProductController extends BaseController {
                     List<Product> productList = productMapper.findProductsByXhbh(Xhbh);
                     if (productList.size() == 0) {
                         if (productService.save(product1)) {
-                            System.out.println("存入新商品");
+                            System.out.println("存入新商品"+product1.getXhmc());
                         }
                     } else {
                         product1.setProductId(productList.get(0).getProductId());
                         if (productMapper.updateById(product1) > 0) {
-                            System.out.println(product1.getPmmc()+"更新信息");
+                            System.out.println(product1.getXhmc()+"更新信息");
                         }
                     }
                 }
