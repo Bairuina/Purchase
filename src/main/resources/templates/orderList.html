@@ -29,23 +29,23 @@
                 <a th:href="@{/order-data/select/}"><img th:src="@{/img/logo.png}" alt=""></a>
             </div>
             <div class="jeitem" style="position: absolute;top: 145px;">
-                <label class="jelabel" style="width: auto;">选择查询时间</label>
-                <div class="jeinpbox" style="width: auto;"><input type="text" class="jeinput time" id="test04" placeholder=" "></div>
-                <div class="check">查询</div>
+                <label class="jelabel" style="width: auto;">选择起始时间</label>
+                <div class="jeinpbox" style="width: auto;"><input type="text" class="jeinput time" readonly="readonly" id="test04" placeholder=" "></div>
+                <div class="check">更新</div>
             </div>
             <div class="search">
                 <form action="/order-data/select/">
                     <select class="selects" name="zt" >
-                        <option  th:if="${zt==null || zt=='all'}" value="all">全部状态</option>
-                        <option  th:if="${zt=='2'}" th:value="${zt}">待确定</option>
-                        <option  th:if="${zt=='3'}" th:value="${zt}">待验收</option>
-                        <option  th:if="${zt=='4'}" th:value="${zt}">拒绝</option>
-                        <option  th:if="${zt=='5'}" th:value="${zt}">已验收</option>
-                        <option  th:if="${zt!=null && zt!='all'}" value="all">全部状态</option>
-                        <option  th:if="${zt!='2'}" value="2">待确定</option>
-                        <option  th:if="${zt!='3'}" value="3">待验收</option>
-                        <option  th:if="${zt!='4'}" value="4">拒绝</option>
-                        <option  th:if="${zt!='5'}" value="5">已验收</option>
+                        <option  style="display: none" th:if="${zt==null || zt=='all'}" value="all">全部状态</option>
+                        <option  style="display: none" th:if="${zt=='2'}" th:value="${zt}">待确定</option>
+                        <option  style="display: none" th:if="${zt=='3'}" th:value="${zt}">待验收</option>
+                        <option  style="display: none" th:if="${zt=='4'}" th:value="${zt}">拒绝</option>
+                        <option  style="display: none" th:if="${zt=='5'}" th:value="${zt}">已验收</option>
+                        <option  value="all">全部状态</option>
+                        <option  value="2">待确定</option>
+                        <option  value="3">待验收</option>
+                        <option  value="4">拒绝</option>
+                        <option  value="5">已验收</option>
                     </select>
                     <input name="data" class="search-con" type="text" placeholder="输入关键字，搜索相关信息" style="width: 58%;float: left" th:value="${data}">
                     <input class="search-sub" type="submit" value="搜 索">
@@ -267,14 +267,23 @@
         var time = $(".time").val();
         console.log(time);
         $.ajax({
-            url: "",
+            type: "post",
+            url: "/order-data/upDataOrder",
             data: {
-                time: time
+                kssjData: time
             },
-            success: function (msg) {
-                window.location.href =
+            success: function (data) {
+                if(data.code=='0'){
+                    alert("更新成功！")
+                    window.onload
+                }
+                else {
+                    alert("更新失败！")
+                    window.onload
+                }
             },
             error: function (msg) {
+                alert("出现异常!")
             }
         })
     })

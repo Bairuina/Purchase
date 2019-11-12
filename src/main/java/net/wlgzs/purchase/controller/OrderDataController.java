@@ -3,9 +3,11 @@ package net.wlgzs.purchase.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import net.wlgzs.purchase.service.IRedis;
 import net.wlgzs.purchase.util.ReadProperties;
 import net.wlgzs.purchase.util.Result;
+import net.wlgzs.purchase.util.ResultCode;
 import net.wlgzs.purchase.util.WebSocketServer;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ import java.math.BigInteger;
  */
 @Api("订单模块")
 @RestController
+@Slf4j
 @RequestMapping("/order-data")
 public class OrderDataController extends BaseController {
     @Autowired
@@ -41,11 +44,13 @@ public class OrderDataController extends BaseController {
     ReadProperties readProperties;
 
     @ApiOperation("更新订单")
-    @GetMapping("/upDataOrder")
+    @PostMapping("/upDataOrder")
     @ResponseBody
-    @Scheduled(cron = "0 0 0,3,6,9,12,15,18,21 * * ?")
-    public Result upDataOrder() throws IOException {
-        Result result=iOrderService.updateOrderDate(1);
+//    @Scheduled(cron = "0 0 0,3,6,9,12,15,18,21 * * ?")
+    public Result upDataOrder(@Param("kssjData")String kssjData) throws IOException {
+        log.info(kssjData);
+        kssjData=kssjData.replace("-","").replace(" ","").replace(":","");
+        Result result=iOrderService.updateOrderDate(1,kssjData);
         return  result;
     }
 
@@ -64,7 +69,7 @@ public class OrderDataController extends BaseController {
     @PostMapping("/ensureORefuseOrder")
     @ResponseBody
     public Result ensureORefuseOrder(@Param("ddbh") String ddbh, @Param("qrzt")Integer qrzt){
-        System.out.println(ddbh+"===="+qrzt);
+        log.info(ddbh+"===="+qrzt);
         return iOrderService.ensureORefuseOrder(ddbh,qrzt);
     }
 
@@ -72,7 +77,7 @@ public class OrderDataController extends BaseController {
     @PostMapping("/deletEnsureOrder")
     @ResponseBody
     public Result deletEnsureOrder(@Param("ddbh") String ddbh, @Param("qxyy")String qxyy){
-        System.out.println(ddbh+"===="+qxyy);
+        log.info(ddbh+"===="+qxyy);
         return iOrderService.deletEnsureOrder(ddbh,qxyy);
     }
 
@@ -84,7 +89,7 @@ public class OrderDataController extends BaseController {
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("orderDataTwo");
         modelAndView.addObject("allData",iOrderService.selectOneOrder(ddbh));
-        System.out.println(modelAndView);
+        log.info(modelAndView+"");
         return modelAndView;
     }
 
@@ -92,7 +97,7 @@ public class OrderDataController extends BaseController {
     @PostMapping("/selectDataNumberSubmit")
     @ResponseBody
     public Result getMoneyDataSubmit(@Param("ddbh") String ddbh, @Param("skbz")Integer skbz, @Param("skje") BigDecimal skje, @Param("sksj")BigInteger sksj){
-        System.out.println(ddbh+"=="+skbz+"=="+skje+"=="+sksj);
+        log.info(ddbh+"=="+skbz+"=="+skje+"=="+sksj);
         return iOrderService.getMoneyDataSubmit(ddbh,skbz,skje,sksj);
     }
 
@@ -117,7 +122,7 @@ public class OrderDataController extends BaseController {
     @ResponseBody
     @PostMapping("/invoiceStaTimeSubmit")
     public Result invoiceStaTimeSubmit(@Param("ddbh")String ddbh,@Param("sj")String sj){
-        System.out.println(ddbh+"============="+sj);
+        log.info(ddbh+"============="+sj);
         return iOrderService.invoiceStaTimeSubmit(ddbh,new BigInteger(sj));
     }
 
@@ -125,7 +130,7 @@ public class OrderDataController extends BaseController {
     @ResponseBody
     @PostMapping("/invoiceEndTimeSubmit")
     public Result invoiceEndTimeSubmit(@Param("ddbh")String ddbh,@Param("sj")String sj){
-        System.out.println(ddbh+"============="+sj);
+        log.info(ddbh+"============="+sj);
         return iOrderService.invoiceEndTimeSubmit(ddbh,new BigInteger(sj));
     }
 
@@ -133,7 +138,7 @@ public class OrderDataController extends BaseController {
     @ResponseBody
     @GetMapping("/ensureOrderArrive")
     public Result ensureOrderArrive(@Param("ddbh") String ddbh,@Param("sfcd")Integer sfcd,@Param("fczddbh")String fczddbh,@Param("kdgs")String kdgs,@Param("kddh")String kddh,@Param("ms")String ms,@Param("kdsj")String kdsj){
-        System.out.println(ddbh+"=="+sfcd+"=="+fczddbh+"=="+kdgs+"=="+kddh+"=="+ms+"=="+kdsj);
+        log.info(ddbh+"=="+sfcd+"=="+fczddbh+"=="+kdgs+"=="+kddh+"=="+ms+"=="+kdsj);
         return iOrderService.ensureOrderArrive(ddbh,sfcd,fczddbh,kdgs,kddh,ms,new BigInteger(kdsj));
     }
 

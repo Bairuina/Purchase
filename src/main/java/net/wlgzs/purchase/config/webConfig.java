@@ -10,9 +10,9 @@ public class webConfig implements WebMvcConfigurer  {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+
         //配置图片显示路径
         String photoPath=System.getProperty("user.dir");
-//        photoPath=photoPath.replace('\\','/');
         registry.addResourceHandler("/photoData/**") .addResourceLocations("file:"+photoPath+"/pictures/");
     }
 

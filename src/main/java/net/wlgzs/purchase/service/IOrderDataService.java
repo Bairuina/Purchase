@@ -18,7 +18,7 @@ import java.math.BigInteger;
  */
 public interface IOrderDataService extends IService<OrderData> {
     //定时更新接口
-    Result updateOrderDate(Integer pageNum);
+    Result updateOrderDate(Integer pageNum,String kssjData);
 
     //查询订单
     Result selectAllOrder(Integer pageSize,Integer pageNum);
