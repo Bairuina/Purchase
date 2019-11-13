@@ -75,14 +75,14 @@ $(".no_order").on('click', function () {
 
 
 $(".lookContract").on('click', function () {
-    var orderReference = $("#ddbhData").text();
+    var orderReference = $("#ddbhDataWord").text()
     console.log(123)
     console.log(orderReference);
     $.ajax({
         type: "GET",
         url: "/contract/queryContract",
         data: {
-            'ddbh': orderReference,
+            ddbh: orderReference,
         },
         contentType:"application/json",
         dataType:"json",

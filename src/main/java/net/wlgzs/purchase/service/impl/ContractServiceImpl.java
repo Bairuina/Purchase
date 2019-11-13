@@ -45,7 +45,11 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         if ("Y".equals(jsonObject.getString("resultFlag"))) {
             String url = jsonObject.getString("url");
             //存入本地数据库
-            Contract contractOne = new Contract(ddbh, url);
+            System.out.println(url);
+            Contract contractOne = new Contract();
+            contract.setContractUrl(url);
+            contract.setDdbh(ddbh);
+            System.out.println(contractOne);
             baseMapper.insert(contractOne);
             return new Result(ResultCode.SUCCESS, "查询成功！", contractOne);
         } else {
