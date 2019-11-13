@@ -50,4 +50,6 @@ spring:
         max-active: 100
         max-wait:
         max-idle: 10
-
+logging:
+  path:
+  file:
