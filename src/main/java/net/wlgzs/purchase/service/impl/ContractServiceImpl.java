@@ -47,8 +47,8 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
             //存入本地数据库
             System.out.println(url);
             Contract contractOne = new Contract();
-            contract.setContractUrl(url);
-            contract.setDdbh(ddbh);
+            contractOne.setContractUrl(url);
+            contractOne.setDdbh(ddbh);
             System.out.println(contractOne);
             baseMapper.insert(contractOne);
             return new Result(ResultCode.SUCCESS, "查询成功！", contractOne);
