@@ -295,3 +295,38 @@ input[type='checkbox']{
     margin-left: 10px;
     background-color: #F52F3E;
 }
+.search{
+    float: right;
+}
+
+.inputProduct{
+    border-bottom: 1px solid #F52F3E;
+    float: right;
+}
+.inputProduct>form{
+    display: inline-block;
+}
+.submitProduct{
+    display: inline-block;
+    /* padding: 6px; */
+    width: 65px;
+    height: 29px;
+    text-align: center;
+    line-height: 29px;
+    border-radius: 1px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.submitProduct>input{
+    outline-style: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: #F52F3E;
+    cursor: pointer;
+    color: white;
+    border-radius: 2px;
+}
+.submitProduct:hover{
+    opacity:0.8;
+}
