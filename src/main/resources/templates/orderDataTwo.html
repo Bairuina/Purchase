@@ -17,11 +17,12 @@
 </head>
 
 <body>
-<div id="outerdiv">
-    <div id="innerdiv">
-        <img id="bigimg" src="">
-    </div>
-</div>
+<!--<div id="outerdiv">-->
+<!--    <div id="innerdiv">-->
+<!--        <img id="bigimg" src="">-->
+<!--    </div>-->
+<!--</div>-->
+<a  class="backDdgl" th:href="@{/order-data/select}">返回订单管理</a>
 <div class="orderInformation">
     <h2 class="name">订单信息</h2>
     <div class="orderWrap">
@@ -133,6 +134,7 @@
             <button class="checkInvoice startBill" th:if="${allData.data[0].fpkjsj==0}">开具发票</button>
             <button class="checkInvoice signBill" th:if="${allData.data[0].fpkjsj!=0}"> 收到发票</button>
             <button class="collectionConfirm" data-toggle="modal" data-target="#collection_Confirm">确认收款</button>
+            <button class="receipt"> 验 收 单 </button>
         </div>
     </div>
 </div>
