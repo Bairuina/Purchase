@@ -7,16 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 import net.wlgzs.purchase.service.IRedis;
 import net.wlgzs.purchase.util.ReadProperties;
 import net.wlgzs.purchase.util.Result;
-import net.wlgzs.purchase.util.ResultCode;
 import net.wlgzs.purchase.util.WebSocketServer;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -175,6 +174,15 @@ public class OrderDataController extends BaseController {
     @PostMapping("upOrderData")
     public Result upOrderData(@Param("ddbh")String ddbh){
         return iOrderService.upDataOneData(ddbh);
+    }
+
+
+    @ApiOperation("查看验收单")
+    @GetMapping("/checkShowPage")
+    @ResponseBody
+    public Result checkShowPage(@Param("ddbh")String ddbh){
+        log.info("订单编号："+ddbh);
+        return iOrderService.checkShowPage(ddbh);
     }
 
 }

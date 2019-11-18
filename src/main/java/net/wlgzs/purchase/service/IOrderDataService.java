@@ -68,4 +68,7 @@ public interface IOrderDataService extends IService<OrderData> {
     //更新
     Result upDataOneData(String ddbh);
 
+    //查看验收单
+    Result checkShowPage(String ddbh);
+
 }

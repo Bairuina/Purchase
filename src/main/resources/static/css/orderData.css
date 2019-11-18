@@ -93,6 +93,7 @@ body {
 }
 
 .orderOperation_nav button {
+    width: 100px;
     box-sizing: border-box;
     color: #fff;
     padding: 10px 15px;
@@ -103,6 +104,7 @@ body {
     outline: none;
     cursor: pointer;
     box-shadow: 0 0 20px #fff inset;
+    color: #fff;
 }
 
 .yes_order {
@@ -407,6 +409,29 @@ body {
 
 #bigimg {
     border: 5px solid #fff;
+}
+
+.backDdgl{
+    background: #2196F3;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    position: relative;
+    top: 20px;
+    left: 165px;
+    display: inline-block;
+    text-decoration: none;
+        
+}
+.backDdgl:hover{
+    text-decoration: none;
+    color: #fff;
+}
+.receipt{
+    background: #6d1ee7;
 }
 
 
