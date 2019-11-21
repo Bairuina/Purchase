@@ -4,10 +4,10 @@ $('#showPDFData').on('click',function () {
         console.log(ddbh);
         $.ajax({
             url:"/order-data/checkShowPage",
+            type:'get',
             data:{
                 ddbh:ddbh
             },
-            type:'get',
             success:function (data) {
                 if(data.code==0){
                     alert(data.msg)

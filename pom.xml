@@ -184,6 +184,26 @@
             <version>1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.Spire</groupId>
+            <artifactId>Spire.Doc</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <type>jar</type>
+            <systemPath>${basedir}/lib/Spire.Doc.jar</systemPath>
+        </dependency>
+
+
+
+        <dependency>
+            <groupId>com.words</groupId>
+            <artifactId>words</artifactId>
+            <scope>system</scope>
+            <type>jar</type>
+            <systemPath>${basedir}/lib/words.jar</systemPath>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
