@@ -16,7 +16,6 @@ public class SetWordData {
         new BuildHeader().setTableHeader(doc);
         //设置页脚
         new BuildBotton().setTableBotton(doc);
-
         Section sec = doc.getSections().get(0);
         Table tableOne = sec.getTables().get(1);
 //        tableOne.autoFit(AutoFitBehaviorType.Auto_Fit_To_Contents);
