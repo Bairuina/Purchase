@@ -18,6 +18,7 @@ public class webConfig implements WebMvcConfigurer  {
         //配置验收单PDF路径
         String PDFPath=System.getProperty("user.dir");
         registry.addResourceHandler("/PDFData/**") .addResourceLocations("file:"+PDFPath+"/PDFData/");
+
     }
 
     @Test
