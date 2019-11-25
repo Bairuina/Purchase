@@ -22,13 +22,7 @@ public class webConfig implements WebMvcConfigurer  {
         //配置验收单word路径
         String WordDataPath=System.getProperty("user.dir");
         registry.addResourceHandler("/WordData/**") .addResourceLocations("file:"+WordDataPath+"/WordData/");
-    }
 
-    @Test
-    public void kl(){
-        String photoPath=System.getProperty("user.dir");
-        photoPath=photoPath.replace('\\','/');
-        System.out.println(photoPath);
     }
 
 }

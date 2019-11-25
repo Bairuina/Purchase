@@ -43,7 +43,6 @@ spring:
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
 
-
   redis:
     host: 127.0.0.1
     port: 6379
@@ -55,3 +54,5 @@ spring:
         max-active: 100
         max-wait:
         max-idle: 10
+
+

@@ -13,7 +13,10 @@ public class SetWordData {
     public boolean makeWord(String ddbh, OrderData orderData) {
         Document doc = new Document(System.getProperty("user.dir") + "\\wordData" + "\\example.docx");
         //设置页眉
-        new BuildHeader().setTableHeader(doc);
+//        new BuildHeader().setTableHeader(doc);
+
+
+
         //设置页脚
         new BuildBotton().setTableBotton(doc);
         Section sec = doc.getSections().get(0);
