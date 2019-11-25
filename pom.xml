@@ -190,7 +190,7 @@
             <version>1.0</version>
             <scope>system</scope>
             <type>jar</type>
-            <systemPath>${basedir}/lib/Spire.Doc.jar</systemPath>
+            <systemPath>${pom.basedir}/lib/Spire.Doc.jar</systemPath>
         </dependency>
 
 
@@ -200,7 +200,7 @@
             <artifactId>words</artifactId>
             <scope>system</scope>
             <type>jar</type>
-            <systemPath>${basedir}/lib/words.jar</systemPath>
+            <systemPath>${pom.basedir}/lib/words.jar</systemPath>
             <version>1.0</version>
         </dependency>
 
