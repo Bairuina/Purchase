@@ -11,7 +11,7 @@ $('#showPDFData').on('click',function () {
             success:function (data) {
                 if(data.code==0){
                     alert(data.msg)
-                    window.location.href="/PDFData/"+ddbh+".pdf"
+                    window.open("/PDFData/"+ddbh+".pdf");
                 }else{
                     alert(data.msg);
                 }

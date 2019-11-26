@@ -24,7 +24,7 @@ public class Swagger2Config {
                 .apiInfo(apiInfo())
                 .select()
                 // 自行修改为自己的包路径
-                .apis(RequestHandlerSelectors.basePackage("net.wlgzs.purchase"))
+                .apis(RequestHandlerSelectors.basePackage("net.wlgzs.purchase."))
                 .paths(PathSelectors.any())
                 .build();
     }
