@@ -1,12 +1,9 @@
 package net.wlgzs.purchase.service;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import net.wlgzs.purchase.entity.Product;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**

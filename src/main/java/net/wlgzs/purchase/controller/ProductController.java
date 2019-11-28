@@ -7,6 +7,7 @@ import com.Enxi;
 import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+
 import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Parts;
 import net.wlgzs.purchase.entity.Product;
@@ -24,18 +25,13 @@ import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
 import org.codehaus.xfire.client.Client;
 import org.joda.time.DateTime;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.annotation.*;
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
