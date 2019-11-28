@@ -13,15 +13,16 @@ public class SetWordData {
     public boolean makeWord(String ddbh, OrderData orderData) {
         Document doc = new Document(System.getProperty("user.dir") + "\\wordData" + "\\example.docx");
         //设置页眉
-//        new BuildHeader().setTableHeader(doc);
+        //new BuildHeader().setTableHeader(doc);
 
 
 
         //设置页脚
-        new BuildBotton().setTableBotton(doc);
+        //new BuildBotton().setTableBotton(doc);
+
         Section sec = doc.getSections().get(0);
         Table tableOne = sec.getTables().get(1);
-//        tableOne.autoFit(AutoFitBehaviorType.Auto_Fit_To_Contents);
+        //tableOne.autoFit(AutoFitBehaviorType.Auto_Fit_To_Contents);
         List<ProductList> productListData = orderData.getProductList();
         //添加行数
         for (int i = 0; i <productListData.size()-1; i++) {
