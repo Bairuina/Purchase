@@ -42,7 +42,7 @@ public class SetWordData {
         new SetSectionParagraph().setParagraph(sec.getParagraphs().get(2), ddbh);
         //设置表二的单元格信息
         Table tableTwo=sec.getTables().get(2);
-//        tableTwo.autoFit(AutoFitBehaviorType.Auto_Fit_To_Contents);
+        //tableTwo.autoFit(AutoFitBehaviorType.Auto_Fit_To_Contents);
         new SetTableTwoCell().setTableTwo(sec.getTables().get(2), orderData.getCgrmc(), orderData.getXflxrxm(), orderData.getXfdh(), "河南科技学院");
 
         //保存文件

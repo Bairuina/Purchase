@@ -121,7 +121,7 @@ public class OrderDataController extends BaseController {
     @ResponseBody
     @PostMapping("/invoiceStaTimeSubmit")
     public Result invoiceStaTimeSubmit(@Param("ddbh")String ddbh,@Param("sj")String sj){
-        log.info(ddbh+"============="+sj);
+        log.info(ddbh+"======11======="+sj);
         return iOrderService.invoiceStaTimeSubmit(ddbh,new BigInteger(sj));
     }
 
@@ -129,7 +129,7 @@ public class OrderDataController extends BaseController {
     @ResponseBody
     @PostMapping("/invoiceEndTimeSubmit")
     public Result invoiceEndTimeSubmit(@Param("ddbh")String ddbh,@Param("sj")String sj){
-        log.info(ddbh+"============="+sj);
+        log.info(ddbh+"======22======="+sj);
         return iOrderService.invoiceEndTimeSubmit(ddbh,new BigInteger(sj));
     }
 

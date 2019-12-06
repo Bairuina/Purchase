@@ -32,6 +32,7 @@ function billStartSend(){
 	var secStartTime = firstStartTime.replace(/:/g,'');
 	var thirdStartTime = secStartTime.replace(/\s+/g,'');
 	var startTimetest = /\d{14}/;
+	console.log("start");
 	if(startTimetest.test(thirdStartTime)){
 		$.ajax({
 			type:"post",
@@ -43,17 +44,19 @@ function billStartSend(){
 			},
 			success:function(data){
 				if(data.code =='0'){
-					inform("您好，发票开具时间已推送到商城！");
+					alert("您好，发票开具时间已推送到商城！");
+					window.onload;
 				}else{
-					inform("您所填信息有误! 请检查后重新提交!");
+					alert("您所填信息有误! 请检查后重新提交!");
+					window.onload;
 				}
 			},
 			error:function(){
-				inform("网络故障");
+				alert("网络故障");
 			}
 		});
 	}else{
-		inform("您所填信息有误! 请检查后重新提交!");
+		alert("您所填信息有误! 请检查后重新提交!");
 	}
 }
 
@@ -65,6 +68,7 @@ function billEndSend(){
 	var secSignTime = firstSignTime.replace(/:/g,'');
 	var thirdSignTime = secSignTime.replace(/\s+/g,'');
 	var endTimetest = /\d{14}/;    //正则验证
+	console.log("end");
 	if(endTimetest.test(thirdSignTime)){
 		$.ajax({
 			type:"post",
@@ -76,17 +80,19 @@ function billEndSend(){
 			},
 			success:function(data){
 				if(data.code =='0'){
-					inform("您好，发票签收时间已推送到商城！");
+					alert("您好，发票签收时间已推送到商城！");
+					window.onload;
 				}else{
-					inform("您所填信息有误! 请检查后重新提交!");
+					alert("您所填信息有误! 请检查后重新提交!");
+					window.onload;
 				}
 			},
 			error:function(){
-				inform("网络故障");
+				alert("网络故障");
 			}
 		});
 	}else{
-		inform("您所填信息有误! 请检查后重新提交!");
+		alert("您所填信息有误! 请检查后重新提交!");
 	}
 }
 
@@ -187,12 +193,12 @@ function getObjectURL(file) {
 //事件
 $(function(){
 	//模态框显示
-	$(".checkInvoice").click(function(){
+	$(".startBill").click(function(){
 		billSignreturn();
 		codeSendReturn();
 		$(".start_modal").slideDown(10);
 	})
-	$(".checkInvoice").click(function(){
+	$(".signBill").click(function(){
 		billStartreturn();
 		codeSendReturn();
 		$(".end_modal").slideDown(10);
@@ -217,13 +223,14 @@ $(function(){
 		codeSendReturn();
 	})
 
-	//提交
-	$(".startSubmit_btn").click(function(){
-		billStartSubimt();
-	})
-	$(".signSubmit_btn").click(function(){
-		billSignSubimt();
-	})
+		$(".startSubmit_btn").click(function () {
+			billStartSubimt();
+		});
+		$(".signSubmit_btn").click(function () {
+			billSignSubimt();
+		});
+
+
 	$(".codeSubmit_btn").click(function(){
 		var ddbh = $("#orderID").val();
 		var xhbh = $("#QRcode_onlyCodeID").val();
@@ -251,4 +258,4 @@ $(function(){
 		})
 	})
 
-})
+});

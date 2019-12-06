@@ -32,6 +32,16 @@ $(".yes_order").on('click', function () {
     }
 });
 
+
+$(".fin_bill").on('click', function () {
+    alert("发票已送达！！")
+});
+
+$(".fin_money").on('click', function () {
+    alert("订单已付款！！")
+});
+
+
 $(".no_order").on('click', function () {
     var orderReference = $("#ddbhDataWord").text()
     var inform = "您确定要拒绝订单号为" + orderReference + "的订单？";
@@ -142,10 +152,11 @@ $("#submitMoney").on('click',function update() {
             success: function (data) {
                 console.log(data);
                 if (data.code == '0') {
-                    alert("发送信息成功！")
-                    location.href = "date";
+                    alert("发送信息成功！");
+                    window.onload;
                 } else {
-                    alert("发送信息失败！")
+                    alert("发送信息失败！");
+                    window.onload;
                 }
             },
             error: function (data) {

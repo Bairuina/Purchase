@@ -175,7 +175,7 @@
                     <span>2500元</span>
                 </div>
             </div>
-            <div class="order_submit">
+            <div class="order_submit" id="all_order_submit" th:data-fp="${allData.data[0].fpkjsj}">
                 <a style="text-decoration: none" class="lookContract" href="javascript:void(0)">查看合同</a>
                 <button class="yes_order">确定订单</button>
                 <button  class="no_order">拒绝订单</button>
@@ -183,7 +183,6 @@
                 <button class="checkInvoice" th:if="${allData.data[0].fpkjsj!=0}"> 收到发票</button>
                 <button class="collectionConfirm" data-toggle="modal" data-target="#collection_Confirm" >确认收款</button>
             </div>
-
         </div>
     </div>
 
