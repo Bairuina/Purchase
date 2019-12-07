@@ -68,7 +68,7 @@ $(".no_order").on('click', function () {
                 console.log(data);
                 if(data.code=='0'){
                     alert("拒绝订单成功！")
-                    window.onload;
+                    window.location.reload();
                 }
                 else{
                     alert("拒绝订单失败！")
@@ -114,17 +114,13 @@ $(".lookContract").on('click', function () {
 
 
 
-//提交更改
+// /确认收款
 $("#submitMoney").on('click',function update() {
     //获取模态框数据
     var ddbh = $('#ddbhDataWord').text();
     var skbz = $('#skbzDataSelect').val();
-    console.log(ddbh);
-    console.log(skbz);
     var skje = $('#skjeDataSelect').val();
     var sksj = $("#sksjDataSelect").val();
-    console.log(skje);
-    console.log(sksj);
     var firstSignTime = sksj.replace(/-/g, '');
     var secSignTime = firstSignTime.replace(/:/g, '');
     var thirdSignTime = secSignTime.replace(/\s+/g, '');
@@ -135,8 +131,6 @@ $("#submitMoney").on('click',function update() {
     } else if (skbz == "未收款") {
         skbzNum ='2';
     }
-    console.log(thirdSignTime);
-    console.log(skbzNum);
     if (endTimetest.test(thirdSignTime)) {
         console.log("信息接入成功")
         $.ajax({
@@ -153,10 +147,10 @@ $("#submitMoney").on('click',function update() {
                 console.log(data);
                 if (data.code == '0') {
                     alert("发送信息成功！");
-                    window.onload;
+                    window.location.reload();
                 } else {
                     alert("发送信息失败！");
-                    window.onload;
+                    window.location.reload();
                 }
             },
             error: function (data) {

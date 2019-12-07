@@ -45,10 +45,10 @@ function billStartSend(){
 			success:function(data){
 				if(data.code =='0'){
 					alert("您好，发票开具时间已推送到商城！");
-					window.onload;
+					window.location.reload();
 				}else{
 					alert("您所填信息有误! 请检查后重新提交!");
-					window.onload;
+					window.location.reload();
 				}
 			},
 			error:function(){
@@ -81,10 +81,10 @@ function billEndSend(){
 			success:function(data){
 				if(data.code =='0'){
 					alert("您好，发票签收时间已推送到商城！");
-					window.onload;
+					window.location.reload();
 				}else{
 					alert("您所填信息有误! 请检查后重新提交!");
-					window.onload;
+					window.location.reload();
 				}
 			},
 			error:function(){
