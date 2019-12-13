@@ -43,7 +43,7 @@ public class SetWordData {
         //设置表二的单元格信息
         Table tableTwo=sec.getTables().get(2);
         //tableTwo.autoFit(AutoFitBehaviorType.Auto_Fit_To_Contents);
-        new SetTableTwoCell().setTableTwo(sec.getTables().get(2), orderData.getCgrmc(), orderData.getXflxrxm(), orderData.getXfdh(), "河南科技学院");
+        new SetTableTwoCell().setTableTwo(sec.getTables().get(2), orderData.getCgrmc(), orderData.getXflxrxm(), orderData.getXfdh(), orderData.getShdd());
 
         //保存文件
         doc.saveToFile(System.getProperty("user.dir") + "\\wordData\\" + ddbh + ".docx", FileFormat.Docx_2013);

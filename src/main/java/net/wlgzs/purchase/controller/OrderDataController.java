@@ -19,6 +19,8 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * <p>
@@ -103,8 +105,13 @@ public class OrderDataController extends BaseController {
 
     @ApiOperation("订单签收时间信息推送")
     @ResponseBody
-    @GetMapping("/ensureOrderTimeSubmit")
-    public Result ensureOrderTimeSubmit(@Param("ddbh") String ddbh,@Param("sfcd")Integer sfcd,@Param("fczddbh")String fczddbh,@Param("sj")String sj){
+    @PostMapping("/ensureOrderTimeSubmit")
+    public Result ensureOrderTimeSubmit(@Param("ddbh") String ddbh){
+        int sfcd=1;
+        String fczddbh="";
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
+        String sj=simpleDateFormat.format(Calendar.getInstance().getTime());
+        System.out.println(ddbh+"=="+sfcd+"=="+fczddbh+"=="+sj);
         return iOrderService.ensureOrderTimeSubmit(ddbh,sfcd,fczddbh,new BigInteger(sj));
     }
 

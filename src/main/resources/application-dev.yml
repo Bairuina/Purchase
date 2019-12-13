@@ -21,9 +21,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       filter: stat
-      url: jdbc:mysql://127.0.0.1:3306/Purchase?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+      url: jdbc:mysql://39.106.116.74:3306/Purchase?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
       username: root
-      password: 123456
+      password: wyxnb
       driver-class-name: com.mysql.cj.jdbc.Driver
       #配置初始化大小/最小/最大
       initial-size: 1

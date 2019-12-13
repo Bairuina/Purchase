@@ -40,6 +40,14 @@ $(".fin_money").on('click', function () {
     alert("订单已付款！！")
 });
 
+$(".fin_true").on('click', function () {
+    alert("订单已确认！！")
+});
+
+$(".fin_order").on('click', function () {
+    alert("订单已经收货！！")
+});
+
 
 $(".no_order").on('click', function () {
     var orderReference = $("#ddbhDataWord").text()
@@ -81,6 +89,8 @@ $(".no_order").on('click', function () {
     else {
     }
 });
+
+
 // 确认收货
 $(".confirmReceipt").on('click',function () {
     var orderReference = $("#ddbhDataWord").text();
@@ -89,15 +99,15 @@ $(".confirmReceipt").on('click',function () {
     if (r) {
         $.ajax({
             type: "post",
-            url: "",
+            url: "/order-data/ensureOrderTimeSubmit",
             dataType:"json",
             data: {
-                'ddbh':orderReference,
+                ddbh:orderReference,
             },
             success: function (data) {
                 if(data.code=='0'){
                     alert("确认收货成功！")
-                    window.onload;
+                    window.location.reload();
                 }
                 else{
                     alert("确认收货失败！")
