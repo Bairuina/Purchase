@@ -108,11 +108,11 @@ body {
 }
 
 .yes_order {
-    background-color: rgb(255, 0, 0);
+    background-color: #1ab394;
 }
 
 .no_order {
-    background-color: rgb(29, 183, 255);
+    background-color: #ef3f52;
 }
 
 .lookContract {
@@ -126,6 +126,9 @@ body {
 
 .checkInvoice {
     background-color: #ff9800;
+}
+.confirmReceipt{
+    background-color: #00B0F0;
 }
 
 .collectionConfirm {

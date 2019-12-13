@@ -1,6 +1,5 @@
 $(".yes_order").on('click', function () {
     var orderReference = $("#ddbhDataWord").text();
-    console.log(orderReference);
     var inform = "您确定要接受订单号为" + orderReference + "的订单？";
     var r = confirm(inform);
     if (r) {
@@ -82,12 +81,40 @@ $(".no_order").on('click', function () {
     else {
     }
 });
-
+// 确认收货
+$(".confirmReceipt").on('click',function () {
+    var orderReference = $("#ddbhDataWord").text();
+    var inform = "您确定要提交订单号为" + orderReference + "的收货信息？";
+    var r = confirm(inform);
+    if (r) {
+        $.ajax({
+            type: "post",
+            url: "",
+            dataType:"json",
+            data: {
+                'ddbh':orderReference,
+            },
+            success: function (data) {
+                if(data.code=='0'){
+                    alert("确认收货成功！")
+                    window.onload;
+                }
+                else{
+                    alert("确认收货失败！")
+                }
+            },
+            error: function (msg) {
+                alert("确认收货失败");
+            }
+        })
+    }
+    else {
+        location.reload(true);
+    }
+});
 
 $(".lookContract").on('click', function () {
     var orderReference = $("#ddbhDataWord").text()
-    console.log(123)
-    console.log(orderReference);
     $.ajax({
         type: "GET",
         url: "/contract/queryContract",
