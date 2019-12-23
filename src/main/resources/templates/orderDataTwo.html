@@ -126,13 +126,16 @@
 
             </div>
         </div>
-        <div class="orderOperation_nav">
+        <div class="orderOperation_nav" id="all_order_submit" th:data-fp="${allData.data[0].fpkjsj}">
             <button class="lookContract"><a href="javascript:void(0)">查看合同</a></button>
             <button class="yes_order">确定订单</button>
             <button class="no_order">拒绝订单</button>
-            <button class="checkInvoice startBill" th:if="${allData.data[0].fpkjsj==0}">开具发票</button>
-            <button class="checkInvoice signBill" th:if="${allData.data[0].fpkjsj!=0}"> 收到发票</button>
-            <button class="collectionConfirm" data-toggle="modal" data-target="#collection_Confirm">确认收款</button>
+            <button class="checkInvoice startBill" th:if="${allData.data[0].fpkjsj==0 }">开具发票</button>
+            <button class="checkInvoice signBill" th:if="${allData.data[0].fpkjsj!=0 && allData.data[0].fpsdsj==0}"> 收到发票</button>
+            <button class="fin_bill" th:if="${allData.data[0].fpsdsj!=0}" >收到发票</button>
+            <button class="collectionConfirm" data-toggle="modal" data-target="#collection_Confirm" th:if="${allData.data[0].sksj==0}">确认收款</button>
+            <button class="fin_money" th:if="${allData.data[0].sksj!=0}">已经收款</button>
+            <button class="receipt" id="showPDFData"> 验 收 单 </button>
         </div>
     </div>
 </div>
