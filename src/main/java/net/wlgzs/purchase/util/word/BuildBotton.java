@@ -16,6 +16,7 @@ public class BuildBotton {
         int allPage=document.getSections().getCount();
         for (int i = 0; i < allPage; i++) {
             Section section=document.getSections().get(i);
+            //获取页脚
             HeaderFooter footer= section.getHeadersFooters().getFooter();
             Paragraph fpara= footer.addParagraph();
             fpara.appendField("页码", FIELD_PAGE);

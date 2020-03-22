@@ -7,6 +7,7 @@ import net.wlgzs.purchase.util.Result;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Map;
 
 /**
  * <p>
@@ -57,7 +58,7 @@ public interface IOrderDataService extends IService<OrderData> {
     Result selectStatusDataOrder(Integer pageNum,Integer PageSize,String status);
 
     //根据条件查询订单信息
-    Result selectOrderListByData(String data,String zt,Integer pageSize,Integer pageNum);
+    Result selectOrderListByData(String data, String zt, Integer pageSize, Integer pageNum, Map<String,String> mapData);
 
     //删除已经取消的订单
     Result delOrderByData(String ddbh);

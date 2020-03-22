@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Map;
 
 /**
  * <p>
@@ -150,12 +151,12 @@ public class OrderDataController extends BaseController {
 
     @ApiOperation("根据信息搜索")
     @GetMapping("/select")
-    public ModelAndView selectOrderByData(@Param("zt")String zt,@Param("data")String data,@RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum){
+    public ModelAndView selectOrderByData(@Param("zt")String zt, @Param("mapData") Map mapData, @Param("data")String data, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize, @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum){
         ModelAndView modelAndView=new ModelAndView();
-        if(data!=null&&data.equals("null")){
+        if(data!=null&& "null".equals(data)){
             data=null;
         }
-        modelAndView.addObject("orderDara",iOrderService.selectOrderListByData(data,zt,pageSize,pageNum));
+        modelAndView.addObject("orderDara",iOrderService.selectOrderListByData(data,zt,pageSize,pageNum,mapData));
         modelAndView.addObject("zt",zt);
         modelAndView.addObject("data",data);
         modelAndView.setViewName("orderList");

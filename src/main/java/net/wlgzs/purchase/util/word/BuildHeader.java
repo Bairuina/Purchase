@@ -20,6 +20,7 @@ public class BuildHeader {
         int allPage=document.getSections().getCount();
         for (int i = 0; i < allPage; i++) {
             Section section=document.getSections().get(i);
+            //获取页眉
             HeaderFooter header = section.getHeadersFooters().getHeader();
             Paragraph hpara= header.addParagraph();
             TextRange dateString = hpara.appendText(date);
