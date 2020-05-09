@@ -2,16 +2,21 @@ package net.wlgzs.purchase.controller;
 
 
 
+import com.Enxi;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import net.wlgzs.purchase.util.ReadProperties;
 import net.wlgzs.purchase.util.Result;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 /**
@@ -25,6 +30,7 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/productoffer")
 public class    ProductOfferController extends BaseController {
+
 
     /**
      * 报价商品

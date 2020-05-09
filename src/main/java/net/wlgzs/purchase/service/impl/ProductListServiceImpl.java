@@ -151,7 +151,8 @@ public class ProductListServiceImpl extends ServiceImpl<ProductListMapper, Produ
         String pathname= httpServletRequest.getContextPath()+"pictures\\"+xhbh+ddbh+".jpg";
         System.out.println(pathname);
         File file=new File(pathname);
-        try(InputStream in =myFileName.getInputStream();OutputStream os=new FileOutputStream(file)){
+        try(InputStream in =myFileName.getInputStream();
+            OutputStream os=new FileOutputStream(file)){
             byte[] buffer=new byte[4096];
             while((n=in.read(buffer,0,4096))!=-1){
                 os.write(buffer,0,n);

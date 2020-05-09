@@ -81,11 +81,7 @@
         </dependency>
         <!-- mybatis-plus end -->
 
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-java8time</artifactId>
-            <version>3.0.0.RELEASE</version>
-        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
@@ -99,6 +95,17 @@
             <version>1.9.3</version>
         </dependency>
 
+        <!-- thymself-->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-java8time</artifactId>
+            <version>3.0.0.RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -162,12 +169,7 @@
             <artifactId>xfire-java5</artifactId>
             <version>1.0</version>
         </dependency>
-        <!-- thymself-->
-        <dependency>
-            <groupId>net.sourceforge.nekohtml</groupId>
-            <artifactId>nekohtml</artifactId>
-            <version>1.9.22</version>
-        </dependency>
+
         <!--下载相关的依赖-->
         <dependency>
             <groupId>commons-io</groupId>

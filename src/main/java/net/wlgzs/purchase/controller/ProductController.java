@@ -53,7 +53,6 @@ public class ProductController extends BaseController {
 
     @Resource
     private IProductService productService;
-
     @Resource
     private ProductMapper productMapper;
     @Resource
@@ -118,6 +117,9 @@ public class ProductController extends BaseController {
         }
     }
 
+
+
+    //待测试
     //根据品目获取增值服务
     @Scheduled(cron = "0 30 11 * * ?")
     public void getService(){
@@ -127,40 +129,48 @@ public class ProductController extends BaseController {
         String enPwd1= Enxi.enPwd(username,pwd);
         System.out.println(pmbh1);
         for (String pmbh:pmbh1){
-            String jsonstr ="{\"username\":\""+username+"\"," +
-                                "\"pwd\":\""+enPwd1+"\"," +
-                                "\"pmbh\":\""+pmbh+"\"}";
-            JSONObject jsonObject=ClientUtil.getJSONObject(readProperties.getUrl(),readProperties.getFindFwByPmbh(),jsonstr);
-            System.out.println(jsonObject.toString());
-            if (jsonObject.getString("resultMessage").equals("返回品目增值服务信息成功")&&jsonObject.getString("resultFlag").equals("Y")) {
-                String jsonString = jsonObject.getString("serviceList");
-                List<ServiceValue> serviceValues = JSON.parseArray(jsonString, ServiceValue.class);
-                for (ServiceValue serviceValue : serviceValues) {
-                    String fwbg=serviceValue.getFWBH();
-                    List<ServiceValue> serviceValues1=serviceValueMapper.findServiceValueByFubh(fwbg);
-                    if (serviceValues1.size()==0){
-                        serviceValue.setPmbh(pmbh);
-                        serviceValue.setPmmc(jsonObject.getString("pmmc"));
-                        if (serviceValueService.save(serviceValue)){
-                            System.out.println("添加新服务");
-                        }else {
-                            System.out.println("添加失败");
-                        }
+            int pageNum = 1;
+            int pageSize = 10;
+            int pagecount=1;
+            for ( ;pageNum <= pagecount; pageNum++) {
+                String jsonstr ="{\"username\":\""+username+"\"," +
+                        "\"pwd\":\""+enPwd1+"\"," +
+                        "\"pageSize\""+pageSize+"\","+
+                        "\"pageNum\""+pageNum+"\","+
+                        "\"pmbh\":\""+pmbh+"\"}";
+                JSONObject jsonObject=ClientUtil.getJSONObject(readProperties.getUrl(),readProperties.getFindFwByPmbh(),jsonstr);
+                System.out.println(jsonObject.toString());
+                if (jsonObject.getString("resultMessage").equals("返回品目增值服务信息成功")&&jsonObject.getString("resultFlag").equals("Y")) {
+                    String jsonString = jsonObject.getString("serviceList");
+                    pagecount=Integer.valueOf(jsonObject.getString("pagecount"));
+                    List<ServiceValue> serviceValues = JSON.parseArray(jsonString, ServiceValue.class);
+                    for (ServiceValue serviceValue : serviceValues) {
+                        String fwbg=serviceValue.getFWBH();
+                        List<ServiceValue> serviceValues1=serviceValueMapper.findServiceValueByFubh(fwbg);
+                        if (serviceValues1.size()==0){
+                            serviceValue.setPmbh(pmbh);
+                            serviceValue.setPmmc(jsonObject.getString("pmmc"));
+                            if (serviceValueService.save(serviceValue)){
+                                System.out.println("添加新服务");
+                            }else {
+                                System.out.println("添加失败");
+                            }
 
-                    }else{
-                        serviceValue.setPmbh(pmbh);
-                        serviceValue.setPmmc(jsonObject.getString("pmmc"));
-                        serviceValue.setServiceId(serviceValues1.get(0).getServiceId());
-                        if(serviceValueService.updateById(serviceValue)){
-                            System.out.println("更新服务");
                         }else{
-                            System.out.println("更新失败");
+                            serviceValue.setPmbh(pmbh);
+                            serviceValue.setPmmc(jsonObject.getString("pmmc"));
+                            serviceValue.setServiceId(serviceValues1.get(0).getServiceId());
+                            if(serviceValueService.updateById(serviceValue)){
+                                System.out.println("更新服务");
+                            }else{
+                                System.out.println("更新失败");
+                            }
+
                         }
 
                     }
-
+                    System.out.println(serviceValues);
                 }
-                System.out.println(serviceValues);
             }
         }
     }

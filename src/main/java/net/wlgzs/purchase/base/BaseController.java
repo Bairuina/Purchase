@@ -22,7 +22,7 @@ public class BaseController {
     protected IPartsService iPartsService;
 
     @Autowired
-    protected IProductListService iProductListService;
+    protected IProductListService   iProductListService;
 
     @Autowired
     protected IProductService iProductService;
