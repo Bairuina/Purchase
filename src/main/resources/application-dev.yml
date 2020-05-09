@@ -3,7 +3,7 @@ server:
 logging:
   config: classpath:logback-spring.xml
   level:
-    dao: debug
+
     org:
       mybatis: debug
 spring:
@@ -43,16 +43,5 @@ spring:
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
 
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password:
-    pool:
-    timeout: 0
-    jedis:
-      pool:
-        max-active: 100
-        max-wait:
-        max-idle: 10
 
 

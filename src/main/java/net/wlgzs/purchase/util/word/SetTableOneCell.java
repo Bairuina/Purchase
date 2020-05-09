@@ -37,8 +37,11 @@ public class SetTableOneCell {
 
 
     public void setRange(TextRange range) {
+        //设置字体的样式的
         range.getCharacterFormat().setFontName("微软雅黑");
+        //设置字体的大小
         range.getCharacterFormat().setFontSize(13f);
+        //设置文字居中
         range.getOwnerParagraph().getFormat().setHorizontalAlignment(HorizontalAlignment.Center);
     }
 

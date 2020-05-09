@@ -41,11 +41,15 @@
                         <option  style="display: none" th:if="${zt=='3'}" th:value="${zt}">待验收</option>
                         <option  style="display: none" th:if="${zt=='4'}" th:value="${zt}">拒绝</option>
                         <option  style="display: none" th:if="${zt=='5'}" th:value="${zt}">已验收</option>
+                        <option  style="display: none" th:if="${zt=='6'}" th:value="${zt}">已支付</option>
+                        <option  style="display: none" th:if="${zt=='7'}" th:value="${zt}">未支付</option>
                         <option  value="all">全部状态</option>
                         <option  value="2">待确定</option>
                         <option  value="3">待验收</option>
                         <option  value="4">拒绝</option>
                         <option  value="5">已验收</option>
+                        <option  value="6">已支付</option>
+                        <option  value="7">未支付</option>
                     </select>
                     <input name="data" class="search-con" type="text" placeholder="输入关键字，搜索相关信息" style="width: 58%;float: left" th:value="${data}">
                     <input class="search-sub" type="submit" value="搜 索">
@@ -68,6 +72,10 @@
                     <li class="active" th:if="${zt!=null and zt=='4'}"><a th:href="@{'/order-data/select/?zt=4'}">拒绝订单</a></li>
                     <li th:if="${zt==null || zt!='5'}"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
                     <li class="active" th:if="${zt!=null and zt=='5'}"><a th:href="@{'/order-data/select/?zt=5'}">已签收订单</a></li>
+                    <li th:if="${zt==null || zt!='6'}"><a th:href="@{'/order-data/select/?zt=6'}">已支付</a></li>
+                    <li class="active" th:if="${zt!=null and zt=='6'}"><a th:href="@{'/order-data/select/?zt=6'}">已支付</a></li>
+                    <li th:if="${zt==null || zt!='7'}"><a th:href="@{'/order-data/select/?zt=7'}">未支付</a></li>
+                    <li class="active" th:if="${zt!=null and zt=='7'}"><a th:href="@{'/order-data/select/?zt=7'}">未支付</a></li>
                 </ul>
             </div>
             <div class="order_list_right">
@@ -91,8 +99,7 @@
                         <div class="order_details">
                             <ul>
                                 <li>
-                                    <div class="shangpin" style="text-alig
-                                    n: left">
+                                    <div class="shangpin" style="text-align: left">
                                         <table>
                                             <caption>总计: <span th:text="${ordeData.ddze}"></span>元</caption>
                                             <tr>
