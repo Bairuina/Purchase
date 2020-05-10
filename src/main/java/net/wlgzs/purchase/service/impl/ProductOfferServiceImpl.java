@@ -45,7 +45,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
 
     //报价一个商品
     @Override
-    public Result productOffer(String xhbh, BigDecimal price, String text, String fwcn, String productlink, String area){
+    public Result productOffer(String xhbh, BigDecimal price, String text, String fwcn, String productlink,String zyjg, String area){
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -82,6 +82,7 @@ public class ProductOfferServiceImpl extends ServiceImpl<ProductOfferMapper, Pro
                 "\"area\":\""+area+"\"," +
                 "\"fwcn\":\""+fwcn+"\"," +
                 "\"sjjg\": \""+price+"\"," +
+                "\"zyjg\": \""+zyjg+"\"," +
                 "\"productlink\":\""+productlink+"\"," +
                 "\"pjxxList\":"+ pjxxList +","+
                 "\"jgsfyy\":\""+text+"\"}";

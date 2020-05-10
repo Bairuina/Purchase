@@ -130,13 +130,13 @@ public class ProductController extends BaseController {
         System.out.println(pmbh1);
         for (String pmbh:pmbh1){
             int pageNum = 1;
-            int pageSize = 10;
+            int pageSize = 50;
             int pagecount=1;
             for ( ;pageNum <= pagecount; pageNum++) {
                 String jsonstr ="{\"username\":\""+username+"\"," +
                         "\"pwd\":\""+enPwd1+"\"," +
-                        "\"pageSize\""+pageSize+"\","+
-                        "\"pageNum\""+pageNum+"\","+
+                        "\"pageSize\":\""+pageSize+"\","+
+                        "\"pageNum\":\""+pageNum+"\","+
                         "\"pmbh\":\""+pmbh+"\"}";
                 JSONObject jsonObject=ClientUtil.getJSONObject(readProperties.getUrl(),readProperties.getFindFwByPmbh(),jsonstr);
                 System.out.println(jsonObject.toString());

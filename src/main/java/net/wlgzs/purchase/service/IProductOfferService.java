@@ -17,7 +17,7 @@ import java.math.BigDecimal;
  */
 public interface IProductOfferService extends IService<ProductOffer> {
     //报价
-    public Result productOffer(String xhbh, BigDecimal price, String text,String fwcn,String productlink,String area);
+    public Result productOffer(String xhbh, BigDecimal price, String text,String fwcn,String productlink,String zyjg,String area);
 
     //撤销报价
     public Result delProductOfferXhbh(String xhbh);
