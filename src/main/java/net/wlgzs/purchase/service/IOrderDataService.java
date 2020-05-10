@@ -43,7 +43,7 @@ public interface IOrderDataService extends IService<OrderData> {
     Result invoiceEndTimeSubmit(String ddbh,BigInteger fpsdsj);
 
     //电商已经收到采购单位的付款,将收款标志、收款金额、收款时间提交
-    Result getMoneyDataSubmit(String ddbh, Integer skbz, BigDecimal skje, BigInteger sksj);
+    Result getMoneyDataSubmit(String ddbh, String bz,Integer skbz, BigDecimal skje, BigInteger sksj);
 
     //取消订单(已经对进行订单确认)
     Result deletEnsureOrder(String ddbh,String qxyy);

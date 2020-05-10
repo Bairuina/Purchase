@@ -153,11 +153,13 @@ $(".lookContract").on('click', function () {
 
 // /确认收款
 $("#submitMoney").on('click',function update() {
+    console.log("开始提交")
     //获取模态框数据
     var ddbh = $('#ddbhDataWord').text();
     var skbz = $('#skbzDataSelect').val();
     var skje = $('#skjeDataSelect').val();
     var sksj = $("#sksjDataSelect").val();
+    var bz = $("#bzDataSelect").val();
     var firstSignTime = sksj.replace(/-/g, '');
     var secSignTime = firstSignTime.replace(/:/g, '');
     var thirdSignTime = secSignTime.replace(/\s+/g, '');
@@ -178,7 +180,8 @@ $("#submitMoney").on('click',function update() {
                 'ddbh': ddbh,
                 'skbz': skbzNum,
                 'skje': skje,
-                'sksj': thirdSignTime
+                'sksj': thirdSignTime,
+                'bz': bz
             },
             success: function (data) {
                 console.log(data);

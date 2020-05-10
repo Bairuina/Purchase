@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import net.wlgzs.purchase.base.BaseController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -98,9 +97,9 @@ public class OrderDataController extends BaseController {
     @ApiOperation("电商已经收到采购单位的付款,将收款标志、收款金额、收款时间提交")
     @PostMapping("/selectDataNumberSubmit")
     @ResponseBody
-    public Result getMoneyDataSubmit(@Param("ddbh") String ddbh, @Param("skbz")Integer skbz, @Param("skje") BigDecimal skje, @Param("sksj")BigInteger sksj){
-        log.info(ddbh+"=="+skbz+"=="+skje+"=="+sksj);
-        return iOrderService.getMoneyDataSubmit(ddbh,skbz,skje,sksj);
+    public Result getMoneyDataSubmit(@Param("ddbh") String ddbh,@Param("bz") String bz ,@Param("skbz")Integer skbz, @Param("skje") BigDecimal skje, @Param("sksj")BigInteger sksj){
+        log.info(bz+"=="+ddbh+"=="+skbz+"=="+skje+"=="+sksj);
+        return iOrderService.getMoneyDataSubmit(ddbh,bz,skbz,skje,sksj);
     }
 
 
