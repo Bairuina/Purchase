@@ -13,7 +13,7 @@ import java.util.List;
 
 public class SetWordData {
     public boolean makeWord(String ddbh, OrderData orderData) {
-        Document doc = new Document(System.getProperty("user.dir") + "\\wordData" + "\\example2.docx");
+        Document doc = new Document(System.getProperty("user.dir") + "\\wordData" + "\\example.docx");
         //设置页眉
         //new BuildHeader().setTableHeader(doc);
 
