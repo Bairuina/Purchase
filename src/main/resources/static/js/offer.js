@@ -4,6 +4,9 @@ $('.confirm').click(function () {
    console.log(number);
    var price = $('#offerInputContent').val();
    console.log(price);
+   //自有价格
+   var ownPrice = $('#oneselfPrice').val();
+   console.log(ownPrice);
    var content = $("#offerTextareaContent").val();
    console.log(content);
    var addressText = $("#address").val();
@@ -37,6 +40,7 @@ $('.confirm').click(function () {
                fwcn:attentionText,
                productlink:addressText,
                area:addressnumber,
+               zyjg:ownPrice
             },
             type:'PUT',
             success:function (data) {
