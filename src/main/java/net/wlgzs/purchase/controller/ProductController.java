@@ -25,6 +25,7 @@ import net.wlgzs.purchase.util.Result;
 import net.wlgzs.purchase.util.ResultCode;
 import org.codehaus.xfire.client.Client;
 import org.joda.time.DateTime;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,11 +178,12 @@ public class ProductController extends BaseController {
 
     /**
      * 更新商品信息
-     * @param time 在前时间
+     * @param StartTime 起始时间，
+     * @Param EndTime 终止时间
      */
-    @RequestMapping(value = "/update/{time}",method = RequestMethod.POST)
+    @RequestMapping(value = "/update/{StartTime}/{EndTime}",method = RequestMethod.POST)
     @ApiOperation(value = "更新本地库",httpMethod = "POST")
-    public Result update(@PathVariable("time")String time){
+    public Result update(@PathVariable("StartTime")String StartTime,@PathVariable("EndTime")String EndTime){
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -192,8 +194,8 @@ public class ProductController extends BaseController {
         int pagecount=1;
         //当前页
         int nowpage=1;
-        String sprkJssj=dateTime.toString("yyyyMMddHHmmss");
-        String sprkkssj=time;
+        String sprkJssj=EndTime;
+        String sprkkssj=StartTime;
         System.out.println(sprkkssj);
         do {
             try {
@@ -216,7 +218,6 @@ public class ProductController extends BaseController {
             } else {
                 pagecount = Integer.valueOf(jso1.getString("pagecount"));
                 String jsonString = jso1.getString("spList");
-                System.out.println(jsonString);//记得删
                 List<Product> product = JSON.parseArray(jsonString, Product.class);
                 for (Product product1 : product) {
                     String Xhbh = product1.getXhbh();
@@ -275,10 +276,13 @@ public class ProductController extends BaseController {
 
 
     /**
-     * 获取审核商品信息 查看是否审核成功
+     * 更新商品信息（审核，等等）
      * @param xhbh 商品编号
      *
      */
-//    @Test
-//    public void
+//    @RequestMapping(value = "/product/update/{xhbh}",method = RequestMethod.POST)
+//    @ApiOperation(value = "更新一个商品的相关信息",httpMethod = "POST")
+//    public Result updateProduct(String xhbh){
+//
+//    }
 }

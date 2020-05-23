@@ -1,8 +1,10 @@
 package net.wlgzs.purchase.service;
 
 
+import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.Product;
 import com.baomidou.mybatisplus.extension.service.IService;
+import net.wlgzs.purchase.util.Result;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,4 +27,8 @@ public interface IProductService extends IService<Product> {
     public ModelAndView findallProduct(HttpServletRequest request,String lbmc, String pmmc, String ppmc, String nr,int nowPage);
 
     public ModelAndView getProductByXhbh(String xhbh);
+
+//    public JSONObject FindSpByXhbh(String xhbh);
+//
+//    public Result updateByFindSpByXhbh(JSONObject jsonObject);
 }

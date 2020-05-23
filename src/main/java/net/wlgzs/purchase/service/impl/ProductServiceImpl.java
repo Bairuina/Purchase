@@ -1,14 +1,14 @@
 package net.wlgzs.purchase.service.impl;
+import com.Enxi;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import net.sf.json.JSONObject;
 import net.wlgzs.purchase.entity.*;
 import net.wlgzs.purchase.mapper.*;
 import net.wlgzs.purchase.service.IProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import net.wlgzs.purchase.util.CheckAddress;
-import net.wlgzs.purchase.util.Result;
-import net.wlgzs.purchase.util.ResultCode;
+import net.wlgzs.purchase.util.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
@@ -38,6 +38,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private ServiceOfferMapper serviceOfferMapper;
     @Resource
     private ProductOfferMapper productOfferMapper;
+
+    @Resource
+    private ReadProperties readProperties;
 
     @Override
     public ModelAndView findallProduct(HttpServletRequest request, String lbmc, String pmmc, String ppmc, String nr,int nowPage){
@@ -160,4 +163,21 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         modelAndView.setViewName("offer");
         return modelAndView;
     }
+
+//    @Override
+//    public JSONObject FindSpByXhbh(String xhbh){
+//        String url=readProperties.getUrl();
+//        String username=readProperties.getUsername();
+//        String pwd=readProperties.getPwd();
+//        String enPwd1= Enxi.enPwd(username,pwd);
+//        String json="{\"username\":\""+username+"\","+
+//                "\"pwd\":\""+enPwd1+"\","+
+//                "\"xhbh\":\""+xhbh+"\"}";
+//        JSONObject jsonObject= ClientUtil.getJSONObject(url,readProperties.getFindSpByXhbh(),json);
+//        return jsonObject;
+//    }
+//    @Override
+//    public Result updateByFindSpByXhbh(JSONObject jsonObject){
+//
+//    }
 }

@@ -73,11 +73,13 @@ $(".inputProduct").focus(function(){
 //更新时间
 $("#new").click(function () {
    var time = $("#BeginTime").val();
-   var times= time.substring(0,4)+time.substring(5,7)+time.substring(8,10)+"000000";
+   var time1=$("#EndTime").val();
+   var startTime= time.substring(0,4)+time.substring(5,7)+time.substring(8,10)+"000000";
+   var endTime=time1.substring(0,4)+time1.substring(5,7)+time1.substring(8,10)+"000000";
    var isbeauty=confirm("是否更新？");
    if(isbeauty==true) {
        $.ajax({
-           url: '/product/update/' + times,
+           url: '/product/update/' + startTime +'/'+endTime,
            type: 'POST',
            success: function (data) {
                if (data == 0) {

@@ -4,6 +4,7 @@ package net.wlgzs.purchase;
 import com.Enxi;
 import com.alibaba.fastjson.JSON;
 import net.sf.json.JSONObject;
+import net.wlgzs.purchase.entity.Product;
 import net.wlgzs.purchase.entity.ServiceValue;
 import net.wlgzs.purchase.mapper.PartsMapper;
 import net.wlgzs.purchase.mapper.ProductMapper;
@@ -13,14 +14,20 @@ import net.wlgzs.purchase.service.IProductService;
 import net.wlgzs.purchase.service.IServiceValueService;
 import net.wlgzs.purchase.util.ClientUtil;
 import net.wlgzs.purchase.util.ReadProperties;
+import net.wlgzs.purchase.util.Result;
+import net.wlgzs.purchase.util.ResultCode;
+import org.codehaus.xfire.client.Client;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.annotation.Resource;
+import java.net.URL;
 import java.util.List;
 
 
@@ -64,7 +71,7 @@ public class Demo {
     //查看某商品信息3.21  findSpByXhbh  3.22  findSpSfbj
     @Test
     public void findSpByXhbh(){
-        String xhbh="asdasdasdas";
+        String xhbh="ff8080815991eea90159aa058d767e4c";
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -72,8 +79,34 @@ public class Demo {
         String json="{\"username\":\""+username+"\","+
                 "\"pwd\":\""+enPwd1+"\","+
                 "\"xhbh\":\""+xhbh+"\"}";
-        System.out.println("输出的json"+json);
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getFindSpByXhbh(),json);
+        System.out.println("得到"+jsonObject);
+        if("N".equals(jsonObject.getString("resultFlag"))){
+            System.out.println(jsonObject.getString("resultMessage"));
+        }else{
+
+        }
     }
+
+    @Test
+    public void findSprkandParam(){
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+        String sprkkssj = "20200502120000";
+        String sprkJssj = "20200503120000";
+        int nowpage=1;
+        String jsonStr = "{\n\"username\":\"" + username + "\",\n" +
+                "\"pwd\":\"" + enPwd1 + "\",\n" +
+                "\"sprkkssj\":\"" + sprkkssj + "\",\n" +
+                "\"sprkJssj\":\"" + sprkJssj + "\",\n" +
+                "\"pageNum\":\"" + nowpage + "\",\n" +
+                "\"pageSize\":\"50\"\n}";
+        JSONObject jsonObject=ClientUtil.getJSONObject(readProperties.getUrl(),readProperties.getFindSprkandParam(),jsonStr);
+        System.out.println(jsonObject);
+    }
+
 
     //配件上下架3.24  delPjbjByPjbh
     @Test
@@ -115,6 +148,8 @@ public class Demo {
                 "\"zt\":\""+zt+"\","+
                 "\"xjyy\":\""+xjyy+"\"}";
         System.out.println(json);
+
+
     }
 
 
@@ -172,5 +207,64 @@ public class Demo {
             }
         }
     }
+
+
+
+    @Test
+    public void update(){
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+        String result =null;
+        //总页数
+        int pagecount=1;
+        //当前页
+        int nowpage=1;
+        String sprkkssj="20200103170000";
+        String sprkJssj="20200103180000";
+        do {
+            try {
+                Client client = new Client(new URL(url));
+                String jsonStr = "{\n\"username\":\"" + username + "\",\n" +
+                        "\"pwd\":\"" + enPwd1 + "\",\n" +
+                        "\"sprkkssj\":\"" + sprkkssj + "\",\n" +
+                        "\"sprkJssj\":\"" + sprkJssj + "\",\n" +
+                        "\"pageNum\":\"" + nowpage + "\",\n" +
+                        "\"pageSize\":\"50\"\n}";
+                Object[] rets = client.invoke("findSprkandParam", new Object[]{jsonStr});
+                result = (String) rets[0];
+            } catch (Exception e) {
+                System.out.println("更新失败");
+            }
+            JSONObject jso1 = JSONObject.fromObject(result);
+            String s = jso1.getString("resultFlag");
+            if ("N".equals(s)) {
+                System.out.println(jso1.getString("resultMessage"));
+            } else {
+                pagecount = Integer.valueOf(jso1.getString("pagecount"));
+                String jsonString = jso1.getString("spList");
+                List<Product> product = JSON.parseArray(jsonString, Product.class);
+                for (Product product1 : product) {
+                    String Xhbh = product1.getXhbh();
+                    List<Product> productList = productMapper.findProductsByXhbh(Xhbh);
+                    if (productList.size() == 0) {
+                        if (productService.save(product1)) {
+                            System.out.println("存入新商品"+product1.getXhmc());
+                        }
+                    } else {
+                        product1.setProductId(productList.get(0).getProductId());
+                        if (productMapper.updateById(product1) > 0) {
+                            System.out.println(product1.getXhmc()+"更新信息");
+                        }
+                    }
+                }
+            }
+            System.out.println("当前页"+nowpage+",总页数"+pagecount);
+            nowpage++;
+        }while(nowpage<=pagecount);
+        System.out.println("更新成功");
+    }
+
 
 }
