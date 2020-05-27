@@ -280,12 +280,13 @@
                 kssjData: time
             },
             success: function (data) {
+                console.data;
                 if(data.code=='0'){
                     alert("更新成功！")
                     window.onload
                 }
                 else {
-                    alert("更新失败！")
+                    alert(data.msg);
                     window.onload
                 }
             },
