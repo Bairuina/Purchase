@@ -31,7 +31,7 @@ public class SetTableOneCell {
         //设置字体样式
         setRange(rangeOne);
         setRange(rangeTwo);
-        setRange(rangeThree);
+        setRangeTwo(rangeThree,7f);
         setRange(rangeFour);
     }
 
@@ -45,5 +45,12 @@ public class SetTableOneCell {
         range.getOwnerParagraph().getFormat().setHorizontalAlignment(HorizontalAlignment.Center);
     }
 
-
+    public void setRangeTwo(TextRange range,float sizeNumber) {
+        //设置字体的样式的
+        range.getCharacterFormat().setFontName("微软雅黑");
+        //设置字体的大小
+        range.getCharacterFormat().setFontSize(sizeNumber);
+        //设置文字居中
+        range.getOwnerParagraph().getFormat().setHorizontalAlignment(HorizontalAlignment.Center);
+    }
 }
