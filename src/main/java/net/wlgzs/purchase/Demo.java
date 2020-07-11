@@ -87,6 +87,8 @@ public class Demo {
             product.setProductId(product1.getProductId());
             product.setPrice(product1.getPrice());
             product.setShjg(product1.getShjg());
+            System.out.println(product);
+            System.out.println(product1);
             if (product.equals(product1)){
                 System.out.println("无变更");
             }else{

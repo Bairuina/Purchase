@@ -69,6 +69,26 @@ $('.confirm').click(function () {
       $(".attention").text("请输入该商品售后问题");
    }
 });
+var xhbh=''
+//单个商品更新ajax
+$('#updateone').click(function () {
+   xhbh=$(this).data("number")
+   $.ajax({
+      url:'/product/product/update/',
+      data:{xhbh:xhbh},
+      type:'GET',
+      success:function (data) {
+         if(data.code==0){
+            alert(data.msg);
+            window.location.reload();
+         }else{
+            alert(data.msg);
+            window.location.reload();
+         }
+      }
+   })
+})
+
 
 //配件报价
 $('.submitPrice').on('click',function () {

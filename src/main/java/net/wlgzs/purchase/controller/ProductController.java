@@ -280,9 +280,35 @@ public class ProductController extends BaseController {
      * @param xhbh 商品编号
      *
      */
-//    @RequestMapping(value = "/product/update/{xhbh}",method = RequestMethod.POST)
-//    @ApiOperation(value = "更新一个商品的相关信息",httpMethod = "POST")
-//    public Result updateProduct(String xhbh){
-//
-//    }
+    @RequestMapping(value = "/product/update",method = RequestMethod.GET)
+    @ApiOperation(value = "更新一个商品的相关信息",httpMethod = "GET")
+    public Result updateProduct(@RequestParam("xhbh")String xhbh){
+        String url=readProperties.getUrl();
+        String username=readProperties.getUsername();
+        String pwd=readProperties.getPwd();
+        String enPwd1= Enxi.enPwd(username,pwd);
+        String json="{\"username\":\""+username+"\","+
+                "\"pwd\":\""+enPwd1+"\","+
+                "\"xhbh\":\""+xhbh+"\"}";
+        JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getFindSpByXhbh(),json);
+//        System.out.println("得到"+jsonObject);
+        String message=jsonObject.getString("resultMessage");
+        if("N".equals(jsonObject.getString("resultFlag"))){
+            return new Result(ResultCode.FAIL,message);
+        }else{
+            Product product = com.alibaba.fastjson.JSONObject.parseObject(String.valueOf(jsonObject),Product.class);
+            Product product1 = productMapper.findProductByXhbh(xhbh);
+            product.setProductId(product1.getProductId());
+            product.setPrice(product1.getPrice());
+            product.setShjg(product1.getShjg());
+            if (product.equals(product1)){
+                return new Result(ResultCode.SUCCESS,"无变更");
+            }else{
+                if(productMapper.updateById(product)>0){
+                    return new Result(ResultCode.SUCCESS,"更新成功");
+                }
+                return new Result(ResultCode.FAIL,"更新失败,稍后重试");
+            }
+        }
+    }
 }
