@@ -14,21 +14,18 @@ import net.wlgzs.purchase.service.IProductService;
 import net.wlgzs.purchase.service.IServiceValueService;
 import net.wlgzs.purchase.util.ClientUtil;
 import net.wlgzs.purchase.util.ReadProperties;
-import net.wlgzs.purchase.util.Result;
-import net.wlgzs.purchase.util.ResultCode;
 import org.codehaus.xfire.client.Client;
-import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 import javax.annotation.Resource;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -71,7 +68,7 @@ public class Demo {
     //查看某商品信息3.21  findSpByXhbh  3.22  findSpSfbj
     @Test
     public void findSpByXhbh(){
-        String xhbh="ff8080815991eea90159aa058d767e4c";
+        String xhbh="166771abd62048d0a19711a058ee0170";
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -80,11 +77,23 @@ public class Demo {
                 "\"pwd\":\""+enPwd1+"\","+
                 "\"xhbh\":\""+xhbh+"\"}";
         JSONObject jsonObject=ClientUtil.getJSONObject(url,readProperties.getFindSpByXhbh(),json);
-        System.out.println("得到"+jsonObject);
+//        System.out.println("得到"+jsonObject);
         if("N".equals(jsonObject.getString("resultFlag"))){
             System.out.println(jsonObject.getString("resultMessage"));
         }else{
-
+            System.out.println(jsonObject.getString("resultMessage"));
+            Product product = com.alibaba.fastjson.JSONObject.parseObject(String.valueOf(jsonObject),Product.class);
+            Product product1 = productMapper.findProductByXhbh(xhbh);
+            product.setProductId(product1.getProductId());
+            product.setPrice(product1.getPrice());
+            product.setShjg(product1.getShjg());
+            if (product.equals(product1)){
+                System.out.println("无变更");
+            }else{
+                if(productMapper.updateById(product)>0){
+                    System.out.println("更新成功");
+                }
+            }
         }
     }
 
@@ -211,7 +220,7 @@ public class Demo {
 
 
     @Test
-    public void update(){
+    public void update() throws InterruptedException {
         String url=readProperties.getUrl();
         String username=readProperties.getUsername();
         String pwd=readProperties.getPwd();
@@ -221,15 +230,15 @@ public class Demo {
         int pagecount=1;
         //当前页
         int nowpage=1;
-        String sprkkssj="20200103170000";
-        String sprkJssj="20200103180000";
+        String sprkkssj="20200523000000";
+        String sprkJssj="20200711000000";
         do {
             try {
                 Client client = new Client(new URL(url));
                 String jsonStr = "{\n\"username\":\"" + username + "\",\n" +
                         "\"pwd\":\"" + enPwd1 + "\",\n" +
                         "\"sprkkssj\":\"" + sprkkssj + "\",\n" +
-                        "\"sprkJssj\":\"" + sprkJssj + "\",\n" +
+                        "\"sprkjssj\":\"" + sprkJssj + "\",\n" +
                         "\"pageNum\":\"" + nowpage + "\",\n" +
                         "\"pageSize\":\"50\"\n}";
                 Object[] rets = client.invoke("findSprkandParam", new Object[]{jsonStr});
@@ -261,6 +270,7 @@ public class Demo {
                 }
             }
             System.out.println("当前页"+nowpage+",总页数"+pagecount);
+            TimeUnit.SECONDS.sleep(60);//秒
             nowpage++;
         }while(nowpage<=pagecount);
         System.out.println("更新成功");

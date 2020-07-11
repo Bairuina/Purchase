@@ -399,9 +399,8 @@ a{
     background: url(../img/close.png) right 9px no-repeat;
 }
 .offerFormItem{
-    width: 400px;
     position: absolute;
-    left: 71%;
+    left: 48%;
     top: 20%;
 }
 .offerFormLabel{
